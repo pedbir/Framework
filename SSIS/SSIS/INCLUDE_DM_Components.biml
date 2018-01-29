@@ -1,0 +1,105 @@
+<# 
+	// Get Package Details for DM table
+	string sMetaData_GetPackageDMDetails = sMetaData_GetPackageDMDetails = "Exec ssis.GetPackageInfoDMDetails '" +sSrcServer+"','"+sSrcTblCatalog+"','"+sSrcSchemaName+"','"+sSrcTblName+"','"+sDstTblCatalog+"'";
+	DataTable dtPkgDMDetails = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageDMDetails);
+	DataRow drPkgDMDetails = dtPkgDMDetails.Rows[0];
+	string sDfOutputComponent = "";
+	
+    byte bDfFactScdType = Convert.ToByte(drPkgDMDetails["FactScdType"]);
+#>
+<# if (bUseIncrementalLoad == false) { 
+#>
+<#@ include file="INCLUDE_TruncateTable.biml" #>
+<# } #>
+<# if (!String.IsNullOrEmpty(sDstDeleteCondition)) { #>
+	<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="EST Delete Rows" ResultSet="SingleRow">
+		<DirectInput>DECLARE @tabVar AS table (SysModifiedUTC datetime2(0));
+			DELETE dst OUTPUT DELETED.SysModifiedUTC INTO @tabVar (SysModifiedUTC)
+			FROM <#=sDstName#> as dst WHERE <#=sDstDeleteCondition#>;
+			SELECT COUNT(SysModifiedUTC) as DeleteCount FROM @tabVar;
+		</DirectInput>
+		<Parameters>
+			<Parameter DataType="DateTime" Name="0" Direction="Input" VariableName="User.PackageLastExecutedNew"></Parameter>
+		</Parameters>
+		<Results>
+			<Result Name="DeleteCount" VariableName="User.RowsDeleted"></Result>
+		</Results>
+		<# if (bUseIncrementalLoad == false) { 
+        #>
+        <PrecedenceConstraints LogicalType="And">
+			<Inputs>
+				<Input OutputPathName="TruncateTable.Output" />
+            </Inputs>
+        </PrecedenceConstraints>
+        <# } #>
+	</ExecuteSQL>	
+<# } #>
+
+<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="EST Merge DW to DM" ResultSet="SingleRow">
+<# if (!String.IsNullOrEmpty(sDstDeleteCondition)) { #>
+	<PrecedenceConstraints LogicalType="And">
+		<Inputs>
+			<Input OutputPathName="EST Delete Rows.Output"/>
+		</Inputs>
+	</PrecedenceConstraints>
+<# }  
+else if (bUseIncrementalLoad == false) { 
+        #>
+        <PrecedenceConstraints LogicalType="And">
+			<Inputs>
+				<Input OutputPathName="TruncateTable.Output" />
+            </Inputs>
+        </PrecedenceConstraints>
+        <# } #>
+	<Parameters>
+		<#=drPkgDMDetails["SqlTaskMergeParameters"]#>
+	</Parameters>				
+	<DirectInput>DECLARE @tab as table ([action] varchar(25));
+		<# if (bUseIncrementalLoad == true) { #> DECLARE @ModifiedUTC datetime2(0) = CAST(? as datetime2(0));
+		<# } #>
+		MERGE <#=sDstName#> as dst USING (SELECT * FROM <#=sSrcTblCatalog#>.<#=sSrcName#> WHERE 1=1 <# if (bUseIncrementalLoad == true) { #> AND SysModifiedUTC > @ModifiedUTC <# } #> <# if (bUseIncrementalLoad == false && bDfFactScdType == 1) { #> AND SysDatetimeDeletedUTC is null <# } #>) as src ON <#=drPkgDMDetails["SqlTaskMergeKeyCondition"]#>
+		WHEN NOT MATCHED BY TARGET <#=(String.IsNullOrEmpty(sSrcFilterCondition) ? "" : "AND (" + sSrcFilterCondition + ")")#> <#=(bDfFactScdType == 1 && bUseIncrementalLoad == true) ? "AND src.SysDatetimeDeletedUTC is null" : "" #> 
+		THEN 
+			INSERT (<#=drPkgDMDetails["SqlTaskMergeInsColumns"]#>)
+			VALUES (<#=drPkgDMDetails["SqlTaskMergeValColumns"]#>)
+		<# if (bDfFactScdType == 1 && bUseIncrementalLoad == true) { #>
+		WHEN MATCHED AND (src.SysDatetimeDeletedUTC is not null)
+		THEN DELETE
+		WHEN MATCHED
+		<# } else {#>
+		WHEN MATCHED AND (<#=drPkgDMDetails["SqlTaskMergeDiffCols"]#>) <#=(String.IsNullOrEmpty(sSrcFilterCondition) ? "" : "AND (" + sSrcFilterCondition + ")")#>
+		<# } #>
+		THEN 
+			UPDATE SET <#=drPkgDMDetails["SqlTaskMergeUpdCols"]#>
+		<# if (bUseIncrementalLoad == false) { #>
+		WHEN NOT MATCHED BY SOURCE
+		THEN DELETE
+		<# } #>
+		OUTPUT $action INTO @tab (action);
+	    
+		;WITH RowCnt AS (
+			SELECT Coalesce(SUM(CASE WHEN [action] = 'INSERT' THEN 1 ELSE 0 END), 0) As InsertCount,
+				Coalesce(SUM(CASE WHEN [action] = 'UPDATE' THEN 1 ELSE 0 END), 0) As UpdateCount,
+				Coalesce(SUM(CASE WHEN [action] = 'DELETE' THEN 1 ELSE 0 END), 0) As DeleteCount,
+				(SELECT COUNT(*) FROM <#=sSrcTblCatalog#>.<#=sSrcName#> WHERE 1=1 <# if (bUseIncrementalLoad == true) { #> AND SysModifiedUTC > @ModifiedUTC <# } #> <# if (bUseIncrementalLoad == false && bDfFactScdType == 1) { #> AND SysDatetimeDeletedUTC is null <# } #>  <#=(String.IsNullOrEmpty(sSrcFilterCondition) ? "" : "AND (" + sSrcFilterCondition + ")")#>) As ReadCount 
+			FROM @tab
+		)
+		SELECT InsertCount, UpdateCount, ReadCount, DeleteCount, ReadCount - InsertCount - UpdateCount - DeleteCount As IgnoreCount
+		FROM RowCnt;
+	</DirectInput>
+	<Results>
+		<Result Name="InsertCount" VariableName="User.RowsNewMember"></Result>
+		<Result Name="UpdateCount" VariableName="User.RowsUpdateOld"></Result>
+		<Result Name="ReadCount" VariableName="User.RowsRead"></Result>
+		<Result Name="DeleteCount" VariableName="User.RowsDeleted"></Result>
+		<Result Name="IgnoreCount" VariableName="User.RowsIgnore"></Result>
+	</Results>
+</ExecuteSQL>
+<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="SQL_Update_Statistics" >
+	<PrecedenceConstraints LogicalType="And">
+		<Inputs>
+			<Input OutputPathName="EST Merge DW to DM.Output"/>
+		</Inputs>
+	</PrecedenceConstraints>
+	<DirectInput>UPDATE STATISTICS <#=sDstName#></DirectInput>
+</ExecuteSQL>

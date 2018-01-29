@@ -1,0 +1,18 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Alter
+       [CityNetwork].[d_Area] (View)
+       [CityNetwork].[f_Penetration] (View)
+     Create
+       [CityNetwork].[d_Employee] (View)
+
+** Supporting actions

@@ -1,0 +1,60 @@
+<Events>
+	<Event EventType="OnError" ConstraintMode="Parallel" Name="Error event handler">
+	<Tasks>
+		<ExecuteSQL Name="EST Log Package Error" ConnectionName="DWH_0_Admin" ResultSet="None">
+			<DirectInput>
+				EXECUTE [Logging].[LogExecutionEvent]
+				@ExecutionID = ?
+				,@EventDateTime = ?
+				,@EventType = ?
+				,@EventCode = ?
+				,@EventDescription = ?
+				,@SourceID = ?
+				,@SourceName = ?
+			</DirectInput>
+			<Variables>
+				<Variable DataType="String" Name="EventType" ReadOnly="true">OnError</Variable>
+			</Variables>
+			<Parameters>
+				<Parameter DataType="Guid" Direction="Input" Name="0" VariableName="System.ExecutionInstanceGUID"></Parameter>
+				<Parameter DataType="DateTime" Direction="Input" Name="1" VariableName="System.EventHandlerStartTime"></Parameter>
+				<Parameter DataType="String" Length="15" Direction="Input" Name="2" VariableName="User.EventType"></Parameter>
+				<Parameter DataType="String" Length="15" Direction="Input" Name="3" VariableName="System.ErrorCode"></Parameter>
+				<Parameter DataType="String" Length="1000" Direction="Input" Name="4" VariableName="System.ErrorDescription"></Parameter>
+				<Parameter DataType="Guid" Direction="Input" Name="5" VariableName="System.SourceID"></Parameter>
+				<Parameter DataType="String" Length="150" Direction="Input" Name="6" VariableName="System.SourceName"></Parameter>
+			</Parameters>
+		</ExecuteSQL>
+	</Tasks>
+	</Event>
+	<Event EventType="OnTaskFailed" ConstraintMode="Parallel" Name="Task Failed Event handler">
+	<Tasks>
+		<ExecuteSQL Name="EST Log Task Failed" ConnectionName="DWH_0_Admin" ResultSet="None">
+			<DirectInput>
+				EXECUTE [Logging].[LogExecutionEvent]
+				@ExecutionID = ?
+				,@EventDateTime = ?
+				,@EventType = ?
+				,@EventCode = ?
+				,@EventDescription = ?
+				,@SourceID = ?
+				,@SourceName = ?
+			</DirectInput>
+			<Variables>
+				<Variable DataType="String" Name="EventType" ReadOnly="true">OnTaskFailed</Variable>
+				<Variable DataType="String" Name="ErrorDescription" ReadOnly="true">Task Failed</Variable>
+				<Variable DataType="String" Name="ErrorCode" ReadOnly="true"></Variable>
+			</Variables>
+			<Parameters>
+				<Parameter DataType="Guid" Direction="Input" Name="0" VariableName="System.ExecutionInstanceGUID"></Parameter>
+				<Parameter DataType="DateTime" Direction="Input" Name="1" VariableName="System.EventHandlerStartTime"></Parameter>
+				<Parameter DataType="String" Length="15" Direction="Input" Name="2" VariableName="User.EventType"></Parameter>
+				<Parameter DataType="String" Length="15" Direction="Input" Name="3" VariableName="User.ErrorCode"></Parameter>
+				<Parameter DataType="String" Length="1000" Direction="Input" Name="4" VariableName="User.ErrorDescription"></Parameter>
+				<Parameter DataType="Guid" Direction="Input" Name="5" VariableName="System.SourceID"></Parameter>
+				<Parameter DataType="String" Length="150" Direction="Input" Name="6" VariableName="System.SourceName"></Parameter>
+			</Parameters>
+		</ExecuteSQL>
+	</Tasks>
+	</Event>
+</Events>

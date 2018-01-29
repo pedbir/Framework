@@ -1,0 +1,83 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [Norm_Index] (Filegroup)
+       [Norm_Data] (Filegroup)
+       [Fact] (Schema)
+       [FactBudget] (Schema)
+       [Norm] (Schema)
+       [NormBudget] (Schema)
+       [NormBudget_Scd1] (Schema)
+       [Stage] (Schema)
+       [Norm].[n_Calendar] (Table)
+       [Norm].[n_Calendar].[NCIDX_SysModifiedUTC_Norm_n_Calendar] (Index)
+       [Norm].[n_Employee] (Table)
+       [Norm].[n_Employee].[NCIDX_SysModifiedUTC_Norm_n_Employee] (Index)
+       [Norm].[n_Geography] (Table)
+       [Norm].[n_Geography].[NCIDX_SysModifiedUTC_Norm_n_Geography] (Index)
+       [Norm].[n_Project] (Table)
+       [Norm].[n_Project].[NCIDX_SysModifiedUTC_Norm_n_Project] (Index)
+       [Norm].[n_ServiceProvider] (Table)
+       [Norm].[n_ServiceProvider].[NCIDX_SysModifiedUTC_Norm_n_ServiceProvider] (Index)
+       [Norm].[n_AccessCategory] (Table)
+       [Norm].[n_AccessCategory].[NCIDX_SysModifiedUTC_Norm_n_AccessCategory] (Index)
+       [Norm].[n_Area] (Table)
+       [Norm].[n_Area].[NCIDX_SysModifiedUTC_Norm_n_Area] (Index)
+       [Norm].[n_SubscriptionProduct] (Table)
+       [Norm].[n_SubscriptionProduct].[NCIDX_SysModifiedUTC_Norm_n_SubscriptionProduct] (Index)
+       [Norm].[n_Subscription] (Table)
+       [Norm].[n_Subscription].[NCIDX_SysModifiedUTC_Norm_n_Subscription] (Index)
+       [Norm].[n_Access] (Table)
+       [Norm].[n_Access].[NCIDX_SysModifiedUTC_Norm_n_Access] (Index)
+       [Norm].[n_SugarEnum] (Table)
+       [Norm].[n_SugarEnum].[NCIDX_SysModifiedUTC_Norm_n_SugarEnum] (Index)
+       [Norm].[n_SalesOrder] (Table)
+       [Norm].[n_SalesOrder].[NCIDX_SysModifiedUTC_Norm_n_SalesOrder] (Index)
+       [Norm].[n_SalesOrder].[IX_SugarEnum_DeliveryStatus_bkey] (Index)
+       [Norm].[n_SalesOrder].[IX_Oppertunity] (Index)
+       [Norm].[n_Opportunity] (Table)
+       [Norm].[n_Opportunity].[NCIDX_SysModifiedUTC_Norm_n_Opportunity] (Index)
+       [Norm].[n_CustomerCategory] (Table)
+       [Norm].[n_CustomerCategory].[NCIDX_SysModifiedUTC_Norm_n_CustomerCategory] (Index)
+       [dbo].[fn_Calendar] (Function)
+       [dbo].[tvf_split] (Function)
+       [Fact].[f_Subscription] (View)
+       [Fact].[d_SugarEnum] (View)
+       [Fact].[d_SalesOrder] (View)
+       [Fact].[d_Project] (View)
+       [Fact].[d_Geography] (View)
+       [Fact].[d_Customer] (View)
+       [Fact].[d_Calendar] (View)
+       [Fact].[d_Area] (View)
+       [Fact].[d_CustomerCategory] (View)
+       [Norm].[vn_SugarEnum] (View)
+       [Norm].[vn_SubscriptionProduct] (View)
+       [Norm].[vn_Subscription] (View)
+       [Norm].[vn_ServiceProvider] (View)
+       [Norm].[vn_SalesOrder] (View)
+       [Norm].[vn_Project] (View)
+       [Norm].[vn_Opportunity] (View)
+       [Norm].[vn_Geography] (View)
+       [Norm].[vn_Employee] (View)
+       [Norm].[vn_CustomerCategory] (View)
+       [Norm].[vn_Calendar] (View)
+       [Norm].[vn_Area] (View)
+       [Norm].[vn_AccessCategory] (View)
+       [Norm].[vn_Access] (View)
+       [Fact].[f_Penetration] (View)
+       [Fact].[d_Opportunity] (View)
+       [dbo].[CreateNormIsLastView] (Procedure)
+
+** Supporting actions
+
+The object [localhost] already exists in database with a different definition and will not be altered.
+

@@ -1,0 +1,15 @@
+<#@ template language="VB" tier="2" #>
+<#@ Import namespace="System.io" #>
+<#@ code file="./RawTyped_99_FlatFileExtensions.vb" #>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+        <Connections>
+            <OleDbConnection Name="DWH_1_Raw" ConnectionString="Data Source=localhost;initial catalog=DWH_1_Raw;provider=SQLNCLI11;integrated security=SSPI"></OleDbConnection>
+        </Connections>
+        <Databases>
+            <Database Name="DWH_1_Raw" ConnectionName="DWH_1_Raw"></Database>
+        </Databases>
+        <Schemas>
+            <Schema Name="dbo" DatabaseName="DWH_1_Raw"></Schema>
+        </Schemas>
+</Biml>

@@ -1,0 +1,33 @@
+<#@ template tier="4" language="VB" #>
+<#@ code file="./RawTyped_99_FlatFileExtensions.vb" #>
+
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+    <Packages>
+          <Package Name="DWH_1_Raw_<#=FolderName#>_RawTyped_r_CreateTables" ConstraintMode="Parallel" ProtectionLevel="DontSaveSensitive">
+            <Tasks>
+            
+                <#   for each table as asttablenode in RootNode.Tables #>               
+                <Container Name="SEQC_<#=table.Name#>" ConstraintMode="Linear">
+                    <Tasks>
+                        <ExecuteSQL Name="Create_<#=table.Name#>" ConnectionName="DWH_1_Raw">
+                            <DirectInput><#=table.GetDropAndCreateDdl()#></DirectInput>
+                        </ExecuteSQL>
+                        
+                        <ExecuteSQL Name="Create View <#=table.Name#>" ConnectionName="DWH_1_Raw">
+                            <DirectInput>
+                                IF EXISTS (SELECT * from sys.objects WHERE object_id = OBJECT_ID(N'<#=table.Schema#>.v<#=table.Name#>') AND type IN (N'V'))
+                                    DROP VIEW <#=table.Schema#>.v<#=table.Name#>
+                                GO
+                                
+                                CREATE VIEW <#=table.Schema#>.v<#=table.Name#> 
+                                AS SELECT * FROM <#=table.Schema#>.<#=table.Name#>
+                            </DirectInput>
+                        </ExecuteSQL>
+                    </Tasks>    
+                </Container>   
+                
+                <#  next #>      
+                </Tasks>
+            </Package>
+        </Packages>
+    </Biml>

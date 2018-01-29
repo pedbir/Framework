@@ -1,0 +1,48 @@
+<# 
+		// Get Package Details for Dimension
+	string sMetaData_GetPackageDWDetails_Format =  "Exec ssis.GetPackageInfoDWDetails '{0}','{1}','{2}','{3}','{4}', {5}";
+	string sMetaData_GetPackageDWDetails  = string.Format(sMetaData_GetPackageDWDetails_Format, sSrcServer, sSrcTblCatalog, sSrcSchemaName, sSrcTblName, sDstTblCatalog, bUseStageTable ? 1:0);
+	DataTable dtPkgDWDetails = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageDWDetails);
+	DataRow drPkgDWDetails = dtPkgDWDetails.Rows[0];
+	
+	sErrorOutputPathName = "Insert-By Row.Error";
+#>
+<Dataflow Name="Load Stage from Source" >
+	<PrecedenceConstraints LogicalType="And">
+		<Inputs>
+			<Input OutputPathName="TruncateStageTable.Output"/>
+		</Inputs>
+	</PrecedenceConstraints>
+	<Transformations>
+		<OleDbSource Name="Extract from source" ConnectionName="<#=sStgSrcTblCatalog #>">
+		  <DirectInput><#=drPkgDWDetails["StageSqlQuery"]#></DirectInput>
+		  	<# if (bUseIncrementalLoad) { #>
+			<Parameters>
+				<Parameter Name="0" VariableName="User.PackageLastExecutedNew"></Parameter>
+			</Parameters>
+			<# } #>
+		</OleDbSource>
+		<RowCount Name="Row Count Read Data Source" VariableName="User.RowsSourceRead"/>
+		<DerivedColumns Name="DC Init">
+    		<Columns>
+    			<#=drPkgDWDetails["DCInit"]#>
+    		</Columns>
+    		<ErrorHandling TruncationRowDisposition="IgnoreFailure" ErrorRowDisposition="FailComponent"></ErrorHandling>
+    	</DerivedColumns>
+		<OleDbDestination Name="Insert-Batch" ConnectionName="<#=sStgTblCatalog #>" BatchSize="10000" MaximumInsertCommitSize="10000" TableLock="true">
+			<ExternalTableOutput Table="<#=sStgName #>"/>
+			<ErrorHandling  TruncationRowDisposition="FailComponent" ErrorRowDisposition="RedirectRow"/>
+		</OleDbDestination>
+		<OleDbDestination Name="Insert-Batch (smaller)" ConnectionName="<#=sStgTblCatalog #>" BatchSize="1000" MaximumInsertCommitSize="1000" TableLock="true">
+			<ExternalTableOutput Table="<#=sStgName #>"/>
+				<InputPath OutputPathName="Insert-Batch.Error"/>
+			<ErrorHandling  TruncationRowDisposition="FailComponent" ErrorRowDisposition="RedirectRow"/>
+		</OleDbDestination>
+		<OleDbDestination Name="Insert-By Row" ConnectionName="<#=sStgTblCatalog#>" TableLock="false" UseFastLoadIfAvailable="false">
+			<ExternalTableOutput Table="<#=sStgName #>"/>
+			<InputPath OutputPathName="Insert-Batch (smaller).Error"/>
+			<ErrorHandling TruncationRowDisposition="FailComponent" ErrorRowDisposition="RedirectRow"/>
+		</OleDbDestination>	
+		<#@ include file ="INCLUDE_Stage_ERROR_FLOW.biml"#>
+	</Transformations>
+</Dataflow>

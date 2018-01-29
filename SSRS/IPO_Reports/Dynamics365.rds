@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Dynamics365">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=ipo-crmdb1;Initial Catalog=IP_Only_MSCRM</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>e73b57c0-ac52-40a8-a569-760bde300afa</DataSourceID>
+</RptDataSource>

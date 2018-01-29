@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "SSAS", "SSAS\SSAS.dwproj", "{393CDDB0-3A52-4A38-A047-3B4DA957D727}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+		Local|Default = Local|Default
+		PROD|Default = PROD|Default
+		UAT|Default = UAT|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Development|Default.ActiveCfg = Development
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Development|Default.Build.0 = Development
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Development|Default.Deploy.0 = Development
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Local|Default.ActiveCfg = Local
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Local|Default.Build.0 = Local
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.Local|Default.Deploy.0 = Local
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.PROD|Default.ActiveCfg = PROD
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.PROD|Default.Build.0 = PROD
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.PROD|Default.Deploy.0 = PROD
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.UAT|Default.ActiveCfg = UAT
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.UAT|Default.Build.0 = UAT
+		{393CDDB0-3A52-4A38-A047-3B4DA957D727}.UAT|Default.Deploy.0 = UAT
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

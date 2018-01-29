@@ -1,0 +1,21 @@
+<DerivedColumns Name="Stage DC Error metadata">
+  <Columns>
+    <#=drPkgDWDetails["DCError"]#>
+  </Columns>
+  <InputPath OutputPathName="<#=sErrorOutputPathName#>"></InputPath>
+</DerivedColumns>
+<RowCount Name="Stage RC Error" VariableName="User.RowsError">
+  <InputPath OutputPathName="Stage DC Error metadata.Output"></InputPath>
+</RowCount>
+<OleDbCommand ConnectionName="DWH_0_Admin" Name="Stage OLE_CMD Log Data error">
+  <InputPath OutputPathName="Stage RC Error.Output"></InputPath>
+  <Parameters>
+    <Parameter TargetColumn="@DWID" SourceColumn="DWID" Direction="Input"></Parameter>
+    <Parameter TargetColumn="@PackageName" SourceColumn="PackageName" Direction="Input"></Parameter>
+    <Parameter TargetColumn="@SysExecutionLog_key" SourceColumn="SysExecutionLog_key" Direction="Input"></Parameter>
+    <Parameter TargetColumn="@SourceTableName" SourceColumn="SourceTableName" Direction="Input"></Parameter>
+    <Parameter TargetColumn="@ErrorDescription" SourceColumn="ErrorCode" Direction="Input"></Parameter>
+	<Parameter TargetColumn="@RowData" SourceColumn="RowData" Direction="Input"></Parameter>
+  </Parameters>
+  <DirectInput>exec [Audit].[LogDataError] @DWID = ?, @PackageName = ?, @SysExecutionLog_key = ?, @SourceTableName = ?, @ErrorDescription = ?, @RowData = ?</DirectInput>
+</OleDbCommand>

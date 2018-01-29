@@ -1,0 +1,10 @@
+ <# if (!ValidationReporter.ValidationItems.Any(item => item.Message == "ConnectionsIncluded")) {
+	ValidationReporter.Report(Severity.Message, "ConnectionsIncluded"); #>
+	<Connections>
+		<OleDbConnection Name="DWH_1_Raw" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=DWH_1_Raw;Integrated Security=SSPI;"/>
+		<OleDbConnection Name="DWH_2_Norm" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=DWH_2_Norm;Integrated Security=SSPI;"/>
+		<OleDbConnection Name="DWH_3_Fact" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=DWH_3_Fact;Integrated Security=SSPI;"/>
+		<OleDbConnection Name="DWH_0_Admin" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=DWH_0_Admin;Integrated Security=SSPI;"/>
+		<OleDbConnection Name="DWH_0_MDM" ConnectionString="Provider=SQLNCLI11;Server=localhost;Initial Catalog=DWH_0_MDM;Integrated Security=SSPI;"/>
+	</Connections>
+<# } #>

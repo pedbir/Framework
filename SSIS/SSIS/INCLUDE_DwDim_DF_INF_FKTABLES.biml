@@ -1,0 +1,95 @@
+	<DerivedColumns Name="DC Inferred">
+		<InputPath OutputPathName="MC Input.Inferred check"></InputPath>
+		<Columns>
+			<#=drPkgDWDetails["DCInf"]#>
+		</Columns>
+	</DerivedColumns>
+	<# 	if (iForeignKeyCount > 1) { #>
+	<Multicast Name="MC Inferred">
+		<InputPath OutputPathName="DC Inferred.Output"></InputPath>
+		<OutputPaths>
+			<#=drPkgDWDetails["MCInfFK"]#>
+		</OutputPaths>
+	</Multicast>
+
+	<# } #>
+	<#
+	string sGetDWForeignKeyTables = "Exec ssis.GetDWForeignKeyTables '"+sDstTblCatalog+"','"+sDstSchemaName+"','"+sDstTblName+"'";
+	DataTable dtForeignKeys = ExternalDataAccess.GetDataTable(sMetaConnectionString,sGetDWForeignKeyTables);
+	string sForeignKeyTable = String.Empty;
+	string sForeignKeyColumn = String.Empty;
+	string sLkpName = String.Empty;
+	string sAggName = String.Empty;
+	string sLkpSelectQuery = String.Empty;
+	string sDcInferredName = String.Empty;
+
+	foreach (DataRow drForeignKey in dtForeignKeys.Rows)
+	{
+	sForeignKeyTable = Convert.ToString(drForeignKey["ForeignKeyTableName"]);
+	sForeignKeyColumn = Convert.ToString(drForeignKey["ForeignKeyColumn"]);
+	sLkpName = Convert.ToString(drForeignKey["LkpName"]);
+	sAggName = Convert.ToString(drForeignKey["AggName"]);
+	sLkpSelectQuery = Convert.ToString(drForeignKey["LkpSelectQuery"]);
+	sDcInferredName = Convert.ToString(drForeignKey["DerivedColumnName"]);
+
+	// Get Aggregate Output columns
+	string sGetAggTransOutputCols = "select ssis.GetAggregateTransformationOutputColumns('"+sDstTblCatalog+"','"+sDstSchemaName+"','"+sForeignKeyTable+"','"+sForeignKeyColumn+"','GroupBy') as Col";
+	DataTable dtAggCols = ExternalDataAccess.GetDataTable(sMetaConnectionString,sGetAggTransOutputCols);
+	DataRow drAggInfFkCols = dtAggCols.Rows[0];
+
+	// Get Derived columns
+	string sGetDerivedCols = "Select [ssis].[GetDerivedColumns]('"+sSrcTblCatalog+	"','"+sDstTblCatalog+"','"+sForeignKeyTable+"','"+sDstSchemaName+"','dwInfFK') as Col";
+	DataTable dtDerivedCols = ExternalDataAccess.GetDataTable(sMetaConnectionString,sGetDerivedCols);
+	DataRow drDerivedInfFkCols = dtDerivedCols.Rows[0];
+
+	// Set Destination name
+	string sFkTableDstName = sDstSchemaName+"."+sForeignKeyTable;
+
+	#>
+	<Lookup Name="<#=sLkpName#>" NoMatchBehavior="RedirectRowsToNoMatchOutput" CacheMode="Full" OleDbConnectionName="<#=sDstTblCatalog#>">
+			<DirectInput><#=sLkpSelectQuery#></DirectInput>
+			<# if (iForeignKeyCount == 1) { #>
+			<InputPath OutputPathName="DC Inferred.Output"></InputPath>
+			<# } else { #>
+			<InputPath OutputPathName="MC Inferred.<#=sForeignKeyColumn#>"></InputPath>
+			<# } #>
+			<Inputs>
+				<Column SourceColumn="<#=sForeignKeyColumn#>" TargetColumn="<#=sForeignKeyColumn#>"></Column>
+			</Inputs>
+	</Lookup>
+		<ConditionalSplit Name="Check if unknown <#=sForeignKeyColumn#>">
+			<InputPath OutputPathName="<#=sLkpName#>.NoMatch"/>
+			<OutputPaths>
+				<OutputPath Name="NotUnknown">
+					<Expression>(DT_WSTR, 100)<#=sForeignKeyColumn#> != (DT_WSTR, 100)"-1"</Expression>
+				</OutputPath>
+			</OutputPaths>
+		</ConditionalSplit>
+		
+		<!--- Aggregate by group by to get a distint list of unknown members-->
+		<Aggregate Name="<#=sAggName#>">
+			<InputPath OutputPathName="Check if unknown <#=sForeignKeyColumn#>.NotUnknown"></InputPath>
+			<OutputPaths>
+				<OutputPath Name="Output">
+					<Columns>
+						<#=drAggInfFkCols["Col"]#>
+					</Columns>
+				</OutputPath>
+			</OutputPaths>
+		</Aggregate>		
+		<DerivedColumns Name="DC Inferred <#=sDcInferredName#>">
+			<InputPath OutputPathName="<#=sAggName#>.Output"></InputPath>
+				<Columns>
+					<#=drDerivedInfFkCols["Col"]#>
+				</Columns>
+		</DerivedColumns>				
+		<OleDbDestination Name="OLE_DST Insert <#=sForeignKeyColumn#>" ConnectionName="<#=sDstTblCatalog#>" UseFastLoadIfAvailable="false">
+      <ExternalTableOutput Table="<#=sFkTableDstName#>"/>
+        <InputPath OutputPathName="DC Inferred <#=sDcInferredName#>.Output"></InputPath>
+        <ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+		</OleDbDestination>
+    <RowCount Name="Count inf error rows <#=sForeignKeyColumn#>" VariableName="User.RowsNewInferredMemberError">
+      <InputPath OutputPathName="OLE_DST Insert <#=sForeignKeyColumn#>.Error"></InputPath>
+    </RowCount>
+
+<# } #>

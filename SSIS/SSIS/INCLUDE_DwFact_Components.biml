@@ -1,0 +1,95 @@
+<# 
+	// Get Package Details for Dimension
+	string sMetaData_GetPackageDWDetails_Format =  "Exec ssis.GetPackageInfoDWDetails '{0}','{1}','{2}','{3}','{4}', {5}";
+	string sMetaData_GetPackageDWDetails  = string.Format(sMetaData_GetPackageDWDetails_Format, sSrcServer, sSrcTblCatalog, sSrcSchemaName, sSrcTblName, sDstTblCatalog, bUseStageTable ? 1:0);
+	DataTable dtPkgDWDetails = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageDWDetails);
+	DataRow drPkgDWDetails = dtPkgDWDetails.Rows[0];
+
+	// Get no of related dimension members. Used in INCLUDE_DwDim_DF_INF_FKTABLES.biml
+	int iForeignKeyCount = Convert.ToInt32(drPkgDWDetails["ForeignKeyCount"]);
+
+	// Set OutputPath used by Error Script component
+	string sDfOutputComponent = String.Empty;
+	sErrorOutputPathName = "OLE_DST Fact - Row By Row.Error";
+		
+	if (!bUseIncrementalLoad) { 
+		sDfOutputComponent = "TruncateTable.Output"; #>
+		<#@ include file="INCLUDE_TruncateTable.biml" #>
+<#  } else { 
+		sDfOutputComponent = "Delete changed rows in DW.Output"; #>
+	
+
+		<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="Delete changed rows in DW" ResultSet="None">
+			<DirectInput>DELETE dst FROM <#=sDstName#> as dst WHERE EXISTS (
+				SELECT TOP 1 SysModifiedUTC 
+				FROM <#=sSrcTblCatalog#>.<#=sSrcName#> src 
+				WHERE <#=drPkgDWDetails["SqlTaskKeyCondition"]#>
+				AND src.SysModifiedUTC >= cast(? as datetime2(0)))
+			</DirectInput>
+			<Parameters>
+				<Parameter DataType="DateTime" Name="0" Direction="Input" VariableName="User.PackageLastExecutedNew"></Parameter>
+			</Parameters>
+		</ExecuteSQL>
+<# } #>
+	<Dataflow Name="DF Load Fact" DelayValidation="false">
+		<PrecedenceConstraints LogicalType="And">
+			<Inputs>
+				<Input OutputPathName="<#=sDfOutputComponent #>" />
+            </Inputs>
+        </PrecedenceConstraints>
+		<Transformations>
+			<OleDbSource Name="OLE_SRC Extract data" ConnectionName="<#=sSrcTblCatalog#>">
+				<DirectInput><#=drPkgDWDetails["SourceSQLQuery"]#></DirectInput>
+				<ErrorHandling TruncationRowDisposition="IgnoreFailure" ErrorRowDisposition="FailComponent"></ErrorHandling>
+			<# if (bUseIncrementalLoad) { #>
+			<Parameters>
+				<Parameter Name="0" VariableName="User.PackageLastExecutedNew"></Parameter>
+			</Parameters>
+			<# } #>
+			</OleDbSource>
+			<RowCount Name="RC Read" VariableName="User.RowsRead"></RowCount>
+			<DerivedColumns Name="DC Init">
+				<Columns>
+					<#=drPkgDWDetails["DCInit"]#>
+				</Columns>
+				<ErrorHandling TruncationRowDisposition="IgnoreFailure" ErrorRowDisposition="FailComponent"></ErrorHandling>
+			</DerivedColumns>
+			<Multicast Name="MC Input">
+				<InputPath OutputPathName="DC Init.Output"></InputPath>
+				<OutputPaths>
+					<OutputPath Name="Inferred check"></OutputPath>
+					<OutputPath Name="Fact"></OutputPath>
+				</OutputPaths>
+			</Multicast>
+			<!-- Add Inferred Foreign Key Data flow -->
+			<#@ include file="INCLUDE_DwDim_DF_INF_FKTABLES.biml" #>    
+			<!-- Fact Data flow -->
+			<RowCount Name="RC Insert" VariableName="User.RowsNewMember">
+				<InputPath OutputPathName="MC Input.Fact"></InputPath>
+			</RowCount>
+			<OleDbDestination Name="OLE_DST Fact - Batch" ConnectionName="<#=sDstTblCatalog#>" BatchSize="10000" MaximumInsertCommitSize="10000" TableLock="true">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<ErrorHandling  TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+				<InputPath OutputPathName="RC Insert.Output"></InputPath>
+			</OleDbDestination>
+			<OleDbDestination Name="OLE_DST Fact - Batch (smaller)" ConnectionName="<#=sDstTblCatalog#>" BatchSize="1000" MaximumInsertCommitSize="1000" TableLock="true">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<ErrorHandling  TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+				<InputPath OutputPathName="OLE_DST Fact - Batch.Error"></InputPath>
+			</OleDbDestination>
+			<OleDbDestination Name="OLE_DST Fact - Row By Row" ConnectionName="<#=sDstTblCatalog#>" TableLock="false" UseFastLoadIfAvailable="false">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<InputPath OutputPathName="OLE_DST Fact - Batch (smaller).Error"></InputPath>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbDestination>
+			<#@ include file ="INCLUDE_DW_ERROR_FLOW.biml" #>
+		</Transformations>
+	</Dataflow>
+		<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="SQL_Update_Statistics" >
+    	<PrecedenceConstraints LogicalType="And">
+    		<Inputs>
+    			<Input OutputPathName="DF Load Fact.Output"/>
+    		</Inputs>
+    	</PrecedenceConstraints>
+    	<DirectInput>UPDATE STATISTICS <#=sDstName#></DirectInput>
+    </ExecuteSQL>

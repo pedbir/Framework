@@ -1,0 +1,109 @@
+<#
+// Get Package Details Stage
+string sMetaData_GetPackageRawStageDetails = "Exec ssis.GetPackageInfoRawStageDetails '" +sSrcServer+"','"+sSrcTblCatalog+"','"+sSrcSchemaName+"','"+sSrcTblName+"','"+sDstTblCatalog+"','"+sDstSchemaName+"','"+sDstTblName+"'";
+DataTable dtPkgRawStageDetails = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageRawStageDetails);
+DataRow drPkgRawStageDetails = dtPkgRawStageDetails.Rows[0];  
+#>
+<Dataflow Name="Load Raw from Source" >
+	<PrecedenceConstraints LogicalType="And">
+		<Inputs>
+			<Input OutputPathName="TruncateTable.Output"/>
+		</Inputs>
+	</PrecedenceConstraints>
+	<Transformations>
+		<OleDbSource Name="Extract from source" ConnectionName="<#=sSrcTblCatalog #>">
+		  <DirectInput><#=sSourceSQLQuery#></DirectInput>
+		</OleDbSource>
+		<RowCount Name="Row Count Read Data Source" VariableName="User.RowsSourceRead"/>
+		  <DerivedColumns Name="Add MetaData">
+			  <Columns>
+				  <#=drPkgRawStageDetails["DerivedCols"] #>
+          </Columns>
+		  </DerivedColumns>
+		<OleDbDestination Name="Insert-Batch" ConnectionName="<#=sStgTblCatalog #>" BatchSize="10000" MaximumInsertCommitSize="10000" TableLock="true">
+			<ExternalTableOutput Table="<#=sStgName #>"/>
+			<ErrorHandling  TruncationRowDisposition="FailComponent" ErrorRowDisposition="RedirectRow"/>
+		</OleDbDestination>
+		<OleDbDestination Name="Insert-By Row" ConnectionName="<#=sStgTblCatalog#>" TableLock="false" UseFastLoadIfAvailable="false">
+			<ExternalTableOutput Table="<#=sStgName #>"/>
+			<InputPath OutputPathName="Insert-Batch.Error"/>
+			<ErrorHandling TruncationRowDisposition="FailComponent" ErrorRowDisposition="RedirectRow"/>
+		</OleDbDestination>	
+		<RowCount Name="Row Count Error" VariableName="User.RowsError">
+			<InputPath OutputPathName="Insert-By Row.Error"/>
+		</RowCount>
+	</Transformations>
+</Dataflow>
+<ExecuteSQL Name="Merge To Stage" ConnectionName="<#=sDstTblCatalog#>" ResultSet="SingleRow">
+    <PrecedenceConstraints LogicalType="And">
+    <Inputs>
+	    <Input OutputPathName="Load Raw from Source.Output"/>
+    </Inputs>
+</PrecedenceConstraints>
+<Parameters>
+    <#=drPkgRawStageDetails["SqlTaskMergeParameters"] #>
+</Parameters>
+<DirectInput>
+	<# if (!String.IsNullOrEmpty(sStgTblCatalog)) 
+	{ #>
+		DECLARE @tab as table ([action] varchar(25));
+		MERGE <#=sDstName#> as dst USING [<#=sStgTblCatalog#>].<#=sStgName#> as src ON <#=drPkgRawStageDetails["SqlTaskMergeKeyCondition"]#>
+		WHEN NOT MATCHED BY TARGET <#=(String.IsNullOrEmpty(sStgFilterCondition) ? "" : "AND (" + sStgFilterCondition + ")")#>
+		THEN 
+			INSERT (<#=drPkgRawStageDetails["SqlTaskMergeInsColumns"]#>) 
+			VALUES (<#=drPkgRawStageDetails["SqlTaskMergeInsValues"]#>)
+		WHEN MATCHED AND ((<#= drPkgRawStageDetails["SqlTaskMergeDiffCols"] #>) 
+			OR dst.SysDatetimeDeletedUTC IS NOT NULL )
+			<#=(String.IsNullOrEmpty(sStgFilterCondition) ? "" : "AND (" + sStgFilterCondition + ")")#>
+		THEN
+		UPDATE SET <#=drPkgRawStageDetails["SqlTaskMergeUpdCols"]#>
+									
+		<# // Delete marking based on missing rows in source should only be done to full load packages (i.e. not incremental packages such as snapshots/sliding windows)#>
+		<# // OR to packages that normally use CDC and incremental loading but do a full load once (use the base table pattern)#>
+		<# if (bUseIncrementalLoad == false || (bUseIncrementalLoad == true  && !String.IsNullOrEmpty(sCDCInstanceName))) 
+			{ #>
+			WHEN NOT MATCHED BY SOURCE AND dst.SysDateTimeDeletedUTC IS NULL
+			THEN
+			UPDATE SET <#=drPkgRawStageDetails["SqlTaskMergeDelCols"] #>
+		<# } #>
+		OUTPUT $action INTO @tab (action);
+	    
+		;WITH RowCnt AS (
+			SELECT Coalesce(SUM(CASE WHEN [action] = 'INSERT' THEN 1 ELSE 0 END), 0) As InsertCount,
+				Coalesce(SUM(CASE WHEN [action] = 'UPDATE' THEN 1 ELSE 0 END), 0) As UpdateCount,
+				(SELECT COUNT(*) FROM <#=sStgName#> src ) As ReadCount 
+			FROM @tab
+		)
+		SELECT InsertCount, UpdateCount, ReadCount, ReadCount - InsertCount - UpdateCount As IgnoreCount
+		FROM RowCnt;
+	<# } 
+	else
+	{ #>
+		DECLARE @tab as table ([action] varchar(25));
+		MERGE <#=sDstTblName#> as dst USING <#=sStgName#> as src ON <#=sMergeKeyCols#>
+		WHEN NOT MATCHED BY TARGET
+		THEN 
+			INSERT (<#=sMergeInsertCols#>)
+			VALUES (<#=sMergeValuesCols#>)
+		WHEN MATCHED AND (<#=sMergeDiffCols#>)
+		THEN 
+			UPDATE SET <#=sMergeUpdateCols#>
+		OUTPUT $action INTO @tab (action);
+	    
+		;WITH RowCnt AS (
+			SELECT Coalesce(SUM(CASE WHEN [action] = 'INSERT' THEN 1 ELSE 0 END), 0) As InsertCount
+				, Coalesce(SUM(CASE WHEN [action] = 'UPDATE' THEN 1 ELSE 0 END), 0) As UpdateCount
+				, (SELECT COUNT(*) FROM <#=sSrcTblCatalog#>.<#=sSrcName#> src ) As ReadCount 
+			FROM @tab
+		)
+		SELECT InsertCount, UpdateCount, ReadCount, ReadCount - InsertCount - UpdateCount As IgnoreCount
+		FROM RowCnt;
+	<# } #>
+</DirectInput>
+<Results>
+    <Result Name="InsertCount" VariableName="User.RowsNewMember"></Result>
+    <Result Name="UpdateCount" VariableName="User.RowsUpdateOld"></Result>
+    <Result Name="ReadCount" VariableName="User.RowsRead"></Result>
+    <Result Name="IgnoreCount" VariableName="User.RowsIgnore"></Result>
+</Results>                     
+</ExecuteSQL>

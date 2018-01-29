@@ -1,0 +1,90 @@
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+<#@ include file="INCLUDE_Connections.biml"#>
+  <Packages>
+    <#
+      // Global variables
+      string sMetaConnectionString ="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=DevelopmentFrameworkConfig;Integrated Security=SSPI;";
+      // Package Variables
+      string sMetaData_GetPackageInfo = "Exec ssis.GetPackageInfo " +
+      " @DESTINATION_TABLE_CATALOG = 'DWH_3_Fact'" +
+      " ,@DESTINATION_SCHEMA_NAMES = 'Fact'" +
+      " ,@SOURCE_TABLE_NAME = 'd_Area'  ";
+
+      DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
+      foreach(DataRow pkg in dtPackages.Rows)
+      {
+      // Set variables used in BIML scripts 
+      #>
+      <#@ include file="INCLUDE_Meta_Variables.biml"#>       
+        <Package Name="<#=sSSISPackageName#>" Id="<#=sSSISPackageGUID#>" ConstraintMode="Parallel" AutoCreateConfigurationsType="None" LoggingMode="Enabled">
+      <Connections>
+        <Connection ConnectionName="DWH_0_Admin" />
+      </Connections>
+      <LogEvents>
+        <LogEvent EventName="OnError" />
+        <LogEvent EventName="OnPostExecute" />
+        <LogEvent EventName="OnPreExecute" />
+      </LogEvents>
+      <LogProviders>
+        <SqlServerLogProvider Name="SSIS log provider for SQL Server" ConnectionName="DWH_0_Admin" />
+     </LogProviders>
+    
+        <#@ include file="INCLUDE_Annotation.biml" #>
+		    <#@ include file="INCLUDE_Variables.biml" #>
+		    <#@ include file="INCLUDE_PackageConfigurations.biml" #>
+            <#@ include file ="INCLUDE_Events.biml" #>
+        <Tasks>
+		<Container Name="CNT_Prepare" ConstraintMode="Parallel">
+		    <Tasks>
+        <#@ include file="INCLUDE_PackageStartLog.biml"#>
+        <# if (bUseIncrementalLoad) { #>
+		<#@ include file="INCLUDE_LastExecutionDate.biml"#>
+        <# } #>
+            </Tasks>
+        </Container>
+        <# if(bUseStageTable.Equals(true)) { #>
+        <Container Name="CNT_Stage" ConstraintMode="Parallel">
+         <PrecedenceConstraints LogicalType="And">
+            <Inputs>
+              <Input OutputPathName="CNT_Prepare.Output"/>
+            </Inputs>
+          </PrecedenceConstraints>
+            <Tasks>
+        <#@ include file="INCLUDE_TruncateStageTable.biml" #>
+        <#@ include file="INCLUDE_NormStage_Components.biml" #>
+            </Tasks>
+        </Container>
+                <#} #>
+        <Container Name="SequenceContainer" ConstraintMode="Parallel">
+          <Variables>
+            <#=pkg["ContainerVariables"]#>
+          </Variables>
+          <PrecedenceConstraints LogicalType="And">
+            <Inputs>
+              <Input OutputPathName="<#=bUseStageTable ? "CNT_Stage.Output" : "CNT_Prepare.Output"#>"/>
+            </Inputs>
+          </PrecedenceConstraints>
+          <Tasks>
+            <#
+            if(sBimlType.Equals("DWH_2_NormDimension") || sBimlType.Equals("DWH_1_RawDimension")) { #>
+                <#@ include file="INCLUDE_DwDim_Components.biml" #>
+                  <#} 
+            else if(sBimlType.Equals("DWH_2_NormFact") || sBimlType.Equals("DWH_1_RawFact")){ #>
+                  <#@ include file="INCLUDE_DwFact_Components.biml" #>
+                    <# } 
+              else if(sBimlType.Equals("DWH_3_Fact")) { #>
+                    <#@ include file="INCLUDE_DM_Components.biml" #>
+                      <# } #>
+          </Tasks>
+        </Container>
+        <#@ include file="INCLUDE_PackageEndLog.biml" #>
+      </Tasks>
+    </Package>
+  <#}#>
+  </Packages>
+</Biml>
+<#@ template language="C#" hostspecific="true"#>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections"#>
+<#@ import namespace="System.Xml"#>

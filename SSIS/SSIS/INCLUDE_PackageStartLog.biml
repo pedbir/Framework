@@ -1,0 +1,61 @@
+<ExecuteSQL ConnectionName="DWH_0_Admin" Name="EPT Package Start Log" ResultSet="None">
+	<DirectInput>
+		exec Logging.LogPackageStart
+		@PackageID = ?,
+		@PackageName = ?,
+		@VersionID = ?,
+		@VersionMajor = ?,
+		@VersionMinor = ?,
+		@VersionBuild = ?,
+		@VersionComments = ?,
+		@CreationDate = ?,
+		@CreatorName = ?,
+		@CreatorComputerName = ?,
+		@LocaleID = ?,
+		@ExecutionID = ?,
+		@ExecutionStartTime = ?,
+		@ExecutionUserName = ?,
+		@ExecutionMachineName = ?,
+		@ProductVersion = ?,
+		@InteractiveMode = ?,
+		@SysBatchLogExecutionLog_key = ?,
+		@SysExecutionLog_key = ? output,
+        @SourceTableCatalog = ?,
+        @SourceSchemaName = ?,
+        @SourceTableName = ?,
+        @DestinationTableCatalog = ?,
+        @DestinationSchemaName = ?,
+        @DestinationTableName = ?,
+        @SsisIncrementalLoad = ?,
+        @SsisLoadType  = ?
+	</DirectInput>
+	<Parameters>
+		<Parameter DataType="Guid"  Name="0" Direction="Input" VariableName="System.PackageID"></Parameter>
+		<Parameter DataType="String" Length="150" Name="1" Direction="Input" VariableName="System.PackageName"></Parameter>
+		<Parameter DataType="Guid" Name="2" Direction="Input" VariableName="System.VersionGUID"></Parameter>
+		<Parameter DataType="Int32" Name="3" Direction="Input" VariableName="System.VersionMajor"></Parameter>
+		<Parameter DataType="Int32" Name="4" Direction="Input" VariableName="System.VersionMinor"></Parameter>
+		<Parameter DataType="Int32" Name="5" Direction="Input" VariableName="System.VersionBuild"></Parameter>
+		<Parameter DataType="String" Length="250" Name="6" Direction="Input" VariableName="System.VersionComments"></Parameter>
+		<Parameter DataType="Date" Name="7" Direction="Input" VariableName="System.CreationDate"></Parameter>
+		<Parameter DataType="String" Length="50" Name="8" Direction="Input" VariableName="System.CreatorName"></Parameter>
+		<Parameter DataType="String" Length="30" Name="9" Direction="Input" VariableName="System.CreatorComputerName"></Parameter>
+		<Parameter DataType="Int32" Name="10" Direction="Input" VariableName="System.LocaleID"></Parameter>
+		<Parameter DataType="Guid" Name="11" Direction="Input" VariableName="System.ExecutionInstanceGUID"></Parameter>
+		<Parameter DataType="DateTime" Name="12" Direction="Input" VariableName="System.ContainerStartTime"></Parameter>
+		<Parameter DataType="String" Length="50" Name="13" Direction="Input" VariableName="System.UserName"></Parameter>
+		<Parameter DataType="String" Length="30" Name="14" Direction="Input" VariableName="System.MachineName"></Parameter>
+		<Parameter DataType="String" Length="10" Name="15" Direction="Input" VariableName="System.ProductVersion"></Parameter>
+		<Parameter DataType="Boolean" Name="16" Direction="Input" VariableName="System.InteractiveMode"></Parameter>
+		<Parameter DataType="Int32" Name="17" Direction="Input" VariableName="User.SysBatchLogExecutionLog_key"></Parameter>
+		<Parameter DataType="Int32" Name="18" Direction="Output" VariableName="User.SysExecutionLog_key"></Parameter>
+        <Parameter DataType="String" Name = "19" Direction= "Input" VariableName ="User.SourceTableCatalog"></Parameter>
+        <Parameter DataType="String" Name = "20" Direction= "Input" VariableName ="User.SourceSchemaName"></Parameter>
+        <Parameter DataType="String" Name = "21" Direction= "Input" VariableName ="User.SourceTableName"></Parameter>
+        <Parameter DataType="String" Name = "22" Direction= "Input" VariableName ="User.DestinationTableCatalog"></Parameter>
+        <Parameter DataType="String" Name = "23" Direction= "Input" VariableName ="User.DestinationSchemaName"></Parameter>
+        <Parameter DataType="String" Name = "24" Direction= "Input" VariableName ="User.DestinationTableName"></Parameter>
+        <Parameter DataType="String" Name = "25" Direction= "Input" VariableName ="User.SsisIncrementalLoad"></Parameter>
+        <Parameter DataType="String" Name = "26" Direction = "Input" VariableName ="User.SsisLoadType"></Parameter>
+	</Parameters>
+</ExecuteSQL>

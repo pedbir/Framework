@@ -1,0 +1,56 @@
+<PackageConfigurations>
+<PackageConfiguration Name="<#=pkg["DtsConfigEnvironmentVariableName"]#>">
+	<EnvironmentVariableInput EnvironmentVariable="<#=pkg["DtsConfigEnvironmentVariableName"]#>" />
+	<ConfigurationValues>
+		<ConfigurationValue
+			DataType="String"
+			Name="ConnectionString"
+			PropertyPath="\Package.Connections[DWH_0_Admin].Properties[ConnectionString]"
+			Value="" />
+	</ConfigurationValues>
+</PackageConfiguration>
+<PackageConfiguration ConnectionName="<#=pkg["SSISConfigurationFrameWorkCatalog"]#>" Name="<#=pkg["DestinationTableCatalog"]#>">
+	<ExternalTableInput Table="[dbo].[SSISConfigurations]"></ExternalTableInput>
+	<ConfigurationValues>
+		<ConfigurationValue DataType="String" Name="ConnectionString" 
+							PropertyPath="\Package.Connections[<#=pkg["DestinationTableCatalog"]#>].Properties[ConnectionString]"
+								Value="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=<#=pkg["DestinationTableCatalog"]#>;Integrated Security=SSPI;">
+		</ConfigurationValue>
+	</ConfigurationValues>
+</PackageConfiguration>
+<# if (!String.IsNullOrEmpty(Convert.ToString(pkg["SourceTableCatalog"])) && !string.Equals(Convert.ToString(pkg["SourceTableCatalog"]) , Convert.ToString(pkg["DestinationTableCatalog"])) && !string.Equals(Convert.ToString(pkg["DestinationTableCatalog"]),"DWH_3_Fact")) {#>
+<PackageConfiguration ConnectionName="<#=pkg["SSISConfigurationFrameWorkCatalog"]#>" Name="<#=pkg["SourceTableCatalog"]#>">
+	<ExternalTableInput Table="[dbo].[SSISConfigurations]"></ExternalTableInput>
+	<ConfigurationValues>
+		<ConfigurationValue DataType="String" Name="ConnectionString" 
+							PropertyPath="\Package.Connections[<#=pkg["SourceTableCatalog"]#>].Properties[ConnectionString]"
+								Value="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=<#=pkg["SourceTableCatalog"]#>;Integrated Security=SSPI;">
+		</ConfigurationValue>
+	</ConfigurationValues>
+</PackageConfiguration>
+<# }#>
+<# if (!String.IsNullOrEmpty(Convert.ToString(pkg["StageTableCatalog"])) && !string.Equals(Convert.ToString(pkg["DestinationTableCatalog"]), Convert.ToString(pkg["StageTableCatalog"]), StringComparison.CurrentCultureIgnoreCase)) 
+{ #>
+<PackageConfiguration ConnectionName="<#=pkg["SSISConfigurationFrameWorkCatalog"]#>" Name="<#=pkg["StageTableCatalog"]#>">
+	<ExternalTableInput Table="[dbo].[SSISConfigurations]"></ExternalTableInput>
+	<ConfigurationValues>
+		<ConfigurationValue DataType="String" Name="ConnectionString" 
+							PropertyPath="\Package.Connections[<#=pkg["StageTableCatalog"]#>].Properties[ConnectionString]"
+								Value="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=<#=pkg["StageTableCatalog"]#>;Integrated Security=SSPI;">
+		</ConfigurationValue>
+	</ConfigurationValues>
+</PackageConfiguration>
+<# } #>
+<# if (!String.IsNullOrEmpty(Convert.ToString(pkg["StageSourceTableCatalog"])) && !string.Equals(Convert.ToString(pkg["DestinationTableCatalog"]), Convert.ToString(pkg["StageSourceTableCatalog"]), StringComparison.CurrentCultureIgnoreCase)) 
+{ #>
+<PackageConfiguration ConnectionName="<#=pkg["SSISConfigurationFrameWorkCatalog"]#>" Name="<#=pkg["StageSourceTableCatalog"]#>">
+	<ExternalTableInput Table="[dbo].[SSISConfigurations]"></ExternalTableInput>
+	<ConfigurationValues>
+		<ConfigurationValue DataType="String" Name="ConnectionString" 
+							PropertyPath="\Package.Connections[<#=pkg["StageSourceTableCatalog"]#>].Properties[ConnectionString]"
+								Value="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=<#=pkg["StageSourceTableCatalog"]#>;Integrated Security=SSPI;">
+		</ConfigurationValue>
+	</ConfigurationValues>
+</PackageConfiguration>
+<# } #>
+</PackageConfigurations>

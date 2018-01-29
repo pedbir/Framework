@@ -1,0 +1,79 @@
+Task	
+--------------------
+For Loop Container	FLC
+Foreach Loop Container	FELC
+Sequence Container	SEQC
+ActiveX Script	AXS
+Analysis Services Execute DDL	ASE
+Analysis Services Processing	ASP
+Bulk Insert	BLK
+Data Flow	DFT
+Data Mining Query	DMQ
+Execute DTS 2000 Package	EDPT
+Execute Package	EPT
+Execute Process	EPR
+Execute SQL	SQL
+File System	FSYS
+FTP	FTP
+Message Queue	MSMQ
+Script	SCR
+Send Mail	SMT
+Transfer Database	TDB
+Transfer Error Messages	TEM
+Transfer Jobs	TJT
+Transfer Logins	TLT
+Transfer Master Stored Procedures	TSP
+Transfer SQL Server Objects	TSO
+Web Service	WST
+WMI Data Reader	WMID
+WMI Event Watcher	WMIE
+XML	XML
+
+
+DFT Component
+------------------------
+DataReader Source	DR_SRC
+Excel Source	EX_SRC
+Flat File Source	FF_SRC
+OLE DB Source	OLE_SRC
+Raw File Source	RF_SRC
+XML Source	XML_SRC
+Aggregate	AGG
+Audit	AUD
+Character Map	CHM
+Conditional Split	CSPL
+Copy Column	CPYC
+Data Conversion	DCNV
+Data Mining Query	DMQ
+Derived Column	DER
+Export Column	EXPC
+Fuzzy Grouping	FZG
+Fuzzy Lookup	FZL
+Import Column	IMPC
+Lookup	LKP
+Merge	MRG
+Merge Join	MRGJ
+Multicast	MLT
+OLE DB Command	CMD
+Percentage Sampling	PSMP
+Pivot	PVT
+Row Count	CNT
+Row Sampling	RSMP
+Script Component	SCR
+Slowly Changing Dimension	SCD
+Sort	SRT
+Term Extraction	TEX
+Term Lookup	TEL
+Union All	ALL
+Unpivot	UPVT
+Data Mining Model Training	DMMT_DST
+DataReader Destination	DR_DST
+Dimension Processing	DP_DST
+Excel Destination	EX_DST
+Flat File Destination	FF_DST
+OLE DB Destination	OLE_DST
+Partition Processing	PP_DST
+Raw File Destination	RF_DST
+Recordset Destination	RS_DST
+SQL Server Destination	SS_DST
+SQL Server Mobile Destination	SSM_DST

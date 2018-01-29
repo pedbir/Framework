@@ -1,0 +1,215 @@
+<# 
+		// Get Package Details for Dimension
+	string sMetaData_GetPackageDWDetails_Format =  "Exec ssis.GetPackageInfoDWDetails '{0}','{1}','{2}','{3}','{4}', {5}";
+	//string sMetaData_GetPackageDWDetails  = string.Format(sMetaData_GetPackageDWDetails_Format, sSrcServer, sSrcTblCatalog, sSrcSchemaName, sSrcTblName, sDstTblCatalog, bUseStageTable ? 1:0);
+	string sMetaData_GetPackageDWDetails  = string.Format(sMetaData_GetPackageDWDetails_Format, sSrcServer, sSrcTblCatalog, sSrcSchemaName, sSrcTblName, sDstTblCatalog, bUseStageTable ? 1:0);
+	DataTable dtPkgDWDetails = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageDWDetails);
+	DataRow drPkgDWDetails = dtPkgDWDetails.Rows[0];
+
+	string sDestinationIdentityColumn = Convert.ToString(drPkgDWDetails["DestinationIdentityColumn"]);
+	int iForeignKeyCount = Convert.ToInt32(drPkgDWDetails["ForeignKeyCount"]);
+	string sDfOutputComponent = String.Empty;
+
+	// Set OutputPath used by Error Script component
+	sErrorOutputPathName = "Union Error.Output";
+if (!bUseIncrementalLoad) { 
+		#>
+			<#@ include file="INCLUDE_TruncateTable.biml" #>
+		<#}#>
+	<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="EST Add Unknown member" ResultSet="None">
+		<DirectInput>SET IDENTITY_INSERT <#=sDstName#> ON;
+			MERGE <#=sDstName#> dst
+			USING (VALUES (<#=drPkgDWDetails["UnKnownMemberValCols"] #>))
+						AS src (<#=drPkgDWDetails["UnknownMemberInsCols"]#>)
+			ON dst.<#=sDestinationIdentityColumn#> = -1
+			WHEN NOT MATCHED BY TARGET THEN
+			INSERT (<#=drPkgDWDetails["UnknownMemberInsCols"]#>)
+			VALUES (<#=drPkgDWDetails["UnknownMemberInsCols"]#>);
+
+			SET IDENTITY_INSERT <#=sDstName#> OFF;
+		</DirectInput>
+		<Parameters>
+			<Parameter DataType="Int32" Name="0" Direction="Input" VariableName="User.SysExecutionLog_key"></Parameter>
+		</Parameters>
+		<#if (!bUseIncrementalLoad) { #>
+		 <PrecedenceConstraints LogicalType="And">
+           <Inputs>
+             <Input OutputPathName="TruncateTable.Output" />
+           </Inputs>
+         </PrecedenceConstraints>   
+         <#}#>
+	</ExecuteSQL>
+	
+		<Dataflow Name="DF Load Dimension" DelayValidation="true">
+	     <PrecedenceConstraints LogicalType="And">
+           <Inputs>
+             <Input OutputPathName="EST Add Unknown member.Output" />
+           </Inputs>
+         </PrecedenceConstraints>
+		<Transformations>
+			<OleDbSource Name="OLE_SRC Extract data" ConnectionName="<#=sSrcTblCatalog#>">
+				<DirectInput><#=drPkgDWDetails["SourceSQLQuery"]#></DirectInput>
+				<# if (bUseIncrementalLoad) { #>
+				<Parameters>
+					<Parameter Name="0" VariableName="User.PackageLastExecutedNew"></Parameter>
+				</Parameters>
+				<# } #>
+			</OleDbSource>
+			<RowCount Name="RC Read" VariableName="User.RowsRead"></RowCount>
+			<DerivedColumns Name="DC Init">
+				<Columns>
+					<#=drPkgDWDetails["DCInit"]#>
+				</Columns>
+				<ErrorHandling TruncationRowDisposition="IgnoreFailure" ErrorRowDisposition="FailComponent"></ErrorHandling>
+			</DerivedColumns>
+      <!-- If foreign key exists create multicast with separate flows-->
+			<# if (iForeignKeyCount > 0) { #>
+			<Multicast Name="MC Input">
+				<InputPath OutputPathName="DC Init.Output"></InputPath>
+				<OutputPaths>
+					<OutputPath Name="Inferred check"></OutputPath>
+					<OutputPath Name="Dimension update"></OutputPath>
+				</OutputPaths>
+			</Multicast>
+			<!-- Add Inferred Foreign Key Data flow-->
+			<#@ include file="INCLUDE_DwDim_DF_INF_FKTABLES.biml" #>    
+		<# } // End If Foreign Key exists #> 
+		<Lookup Name="Lookup Dimension Key" NoMatchBehavior="RedirectRowsToNoMatchOutput" CacheMode="Full" OleDbConnectionName="<#=sDstTblCatalog#>">
+			<DirectInput><#=drPkgDWDetails["DimLkpSqlQuery"]#></DirectInput>
+			<Inputs>
+				<#=drPkgDWDetails["DimLkpInputCols"]#>
+			</Inputs>
+			<# if (iForeignKeyCount > 0) { #>
+			<InputPath OutputPathName="MC Input.Dimension update"></InputPath>
+			<# } else {#>
+			<InputPath OutputPathName="DC Init.Output"></InputPath>
+			<# }#>
+			<Outputs>
+				<#=drPkgDWDetails["DimLkpOutputCols"]#>
+			</Outputs>
+		</Lookup>
+        <!-- new member start -->
+			<DerivedColumns Name="DC Add meta data new row">
+				<InputPath OutputPathName="Lookup Dimension Key.NoMatch"></InputPath>
+				<Columns>
+					<#=drPkgDWDetails["DCNewRow"]#>
+				</Columns>
+			</DerivedColumns>
+			<RowCount Name="RC New Member" VariableName="User.RowsNewMember">
+				<InputPath OutputPathName="DC Add meta data new row.Output"></InputPath>
+			</RowCount>
+			<OleDbDestination Name="OLE_DST Insert new Member" ConnectionName="<#=sDstTblCatalog#>" BatchSize="1000" MaximumInsertCommitSize="1000">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<InputPath OutputPathName="RC New Member.Output"></InputPath>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbDestination>
+			<OleDbDestination Name="OLE_DST Insert new Member - Row by row" ConnectionName="<#=sDstTblCatalog#>" UseFastLoadIfAvailable="false">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<InputPath OutputPathName="OLE_DST Insert new Member.Error"></InputPath>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbDestination>
+			<RowCount Name="RC Error New Member" VariableName="User.RowsNewMemberError">
+				<InputPath OutputPathName="OLE_DST Insert new Member - Row by row.Error"></InputPath>
+			</RowCount>
+        <!-- New member end-->
+			<ConditionalSplit Name="Compare dim values">
+				<InputPath OutputPathName="Lookup Dimension Key.Match"/>
+				<OutputPaths>
+					<OutputPath Name="InferredUpdate">
+						<Expression>[OldSysIsInferred] == True</Expression>
+					</OutputPath>
+<!--					<OutputPath Name="SCD1">
+						<Expression>(DT_DBDATE)GETUTCDATE() == (DT_DBDATE)OldSysSrcGenerationDateTime &amp;&amp; OldCheckSumNonPK != CheckSumNonPK</Expression>
+					</OutputPath>
+-->					<OutputPath Name="SCD2">
+						<Expression>OldCheckSumNonPK != CheckSumNonPK</Expression>
+					</OutputPath>
+				</OutputPaths>
+			</ConditionalSplit>
+			<RowCount Name="RC Ignore" VariableName="User.RowsIgnore">
+				<InputPath OutputPathName="Compare dim values.Default"></InputPath>
+			</RowCount>
+<!--			<RowCount Name="RC SCD1" VariableName="User.RowsUpdateOld">
+				<InputPath OutputPathName="Compare dim values.SCD1"></InputPath>
+			</RowCount>
+
+			<OleDbCommand ConnectionName="<#=sDstTblCatalog#>" Name="EST Update SCD1">
+				<InputPath OutputPathName="RC SCD1.Output"></InputPath>
+				<Parameters>
+					<#=drPkgDWDetails["OleDbCmdParams"]#>
+				</Parameters>
+				<DirectInput><#=drPkgDWDetails["OleDbCmdUpdSCD1Sql"]#></DirectInput>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbCommand>
+			<RowCount Name="RC Error SCD1" VariableName="User.RowsUpdateOldError">
+				<InputPath OutputPathName="EST Update SCD1.Error"></InputPath>
+			</RowCount>
+-->
+			<RowCount Name="RC Inferred" VariableName="User.RowsUpdateInferred">
+				<InputPath OutputPathName="Compare dim values.InferredUpdate"></InputPath>
+			</RowCount>
+			<OleDbCommand ConnectionName="<#=sDstTblCatalog#>" Name="EST Update inferred">
+				<InputPath OutputPathName="RC Inferred.Output"></InputPath>
+				<Parameters>
+					<#=drPkgDWDetails["OleDbCmdParams"]#>
+				</Parameters>
+				<DirectInput><#=drPkgDWDetails["OleDbCmdUpdInfSql"]#></DirectInput>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbCommand>
+			<RowCount Name="RC Error Inferred" VariableName="User.RowsUpdateInferredError">
+				<InputPath OutputPathName="EST Update inferred.Error"></InputPath>
+			</RowCount>
+			<DerivedColumns Name="DC Meta data New version">
+				<InputPath OutputPathName="Compare dim values.SCD2"></InputPath>
+				<Columns>
+					<#=drPkgDWDetails["DCNewVer"]#>
+				</Columns>
+				<ErrorHandling TruncationRowDisposition="IgnoreFailure" ErrorRowDisposition="FailComponent"></ErrorHandling>
+			</DerivedColumns>								
+			<RowCount Name="RC New Version" VariableName="User.RowsNewVersion">
+				<InputPath OutputPathName="DC Meta data New version.Output"></InputPath>
+			</RowCount>
+			<OleDbDestination Name="OLE_DST Insert new Version" ConnectionName="<#=sDstTblCatalog#>" BatchSize="1000" UseFastLoadIfAvailable="true">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<InputPath OutputPathName="RC New Version.Output"></InputPath>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbDestination>
+			<OleDbDestination Name="OLE_DST Insert new Version - Row by row" ConnectionName="<#=sDstTblCatalog#>" UseFastLoadIfAvailable="false">
+				<ExternalTableOutput Table="<#=sDstName#>"/>
+				<InputPath OutputPathName="OLE_DST Insert new Version.Error"></InputPath>
+				<ErrorHandling TruncationRowDisposition="RedirectRow" ErrorRowDisposition="RedirectRow"></ErrorHandling>
+			</OleDbDestination>
+			<RowCount Name="RC Error New Version" VariableName="User.RowsNewVersionError">
+				<InputPath OutputPathName="OLE_DST Insert new Version - Row by row.Error"></InputPath>
+			</RowCount>
+			<UnionAll Name="Union Error">
+			  <InputPaths>
+				<InputPath OutputPathName="RC Error New Version.Output">
+				  <Columns>
+					<#=drPkgDWDetails["UEInputColumns"]#>
+				  </Columns>
+				</InputPath>
+				<InputPath OutputPathName="RC Error Inferred.Output">
+				  <Columns>
+					<#=drPkgDWDetails["UEInputColumns"]#>
+				  </Columns>
+				</InputPath>
+				<InputPath OutputPathName="RC Error New Member.Output">
+				  <Columns>
+					<#=drPkgDWDetails["UEInputColumns"]#>
+				  </Columns>
+				</InputPath>
+			  </InputPaths>
+			</UnionAll>
+			<!-- Add  Error flow -->
+			<#@ include file ="INCLUDE_DW_ERROR_FLOW.biml" #>
+		</Transformations>
+	</Dataflow>
+	<ExecuteSQL ConnectionName="<#=sDstTblCatalog#>" Name="SQL_Update_Statistics" >
+    	<PrecedenceConstraints LogicalType="And">
+    		<Inputs>
+    			<Input OutputPathName="DF Load Dimension.Output"/>
+    		</Inputs>
+    	</PrecedenceConstraints>
+    	<DirectInput>UPDATE STATISTICS <#=sDstName#></DirectInput>
+    </ExecuteSQL>

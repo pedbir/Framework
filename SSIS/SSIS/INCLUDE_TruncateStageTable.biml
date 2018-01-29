@@ -1,0 +1,5 @@
+<ExecuteSQL ConnectionName="<#=sStgTblCatalog #>" Name="TruncateStageTable" ResultSet="None">
+	<DirectInput>
+    TRUNCATE TABLE <#=sStgName #>
+	</DirectInput>
+</ExecuteSQL>

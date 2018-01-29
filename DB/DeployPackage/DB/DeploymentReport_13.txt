@@ -1,0 +1,29 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [MDS] (Linked Server)
+       [MDS] (Linked Server Login)
+       [Sugar_RawTyped].[r_Mojlighet].[IX_Netadminaddressidc] (Index)
+       [Norm_d].[Planning] (View)
+     Alter
+       [Norm_d].[Access] (View)
+       [Norm_d].[CustomerCategory] (View)
+
+** Supporting actions
+
+The object [Cava] already exists in database with a different definition and will not be altered.
+The object [IFSPROD] already exists in database with a different definition and will not be altered.
+The object [NBS] already exists in database with a different definition and will not be altered.
+The object [NETADMIN] already exists in database with a different definition and will not be altered.
+The object [SUGAR] already exists in database with a different definition and will not be altered.
+The object [localhost] already exists in database with a different definition and will not be altered.
+

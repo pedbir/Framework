@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DevelopmentFrameworkConfig</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{c67b2aa0-96d5-4361-a77e-2b4e5d9ecb03}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DevelopmentFrameworkConfig</RootNamespace>
+    <AssemblyName>DevelopmentFrameworkConfig</AssemblyName>
+    <ModelCollation>1035,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
+    <Recovery>SIMPLE</Recovery>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\DeployPackage\DB</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Metadata\" />
+    <Folder Include="Metadata\Tables\" />
+    <Folder Include="ssis\" />
+    <Folder Include="ssis\Views\" />
+    <Folder Include="Metadata\Views\" />
+    <Folder Include="Deployment\" />
+    <Folder Include="Deployment\Views\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="ssis\Functions\" />
+    <Folder Include="Metadata\Functions\" />
+    <Folder Include="ssis\Stored Procedures\" />
+    <Folder Include="Metadata\Stored Procedures\" />
+    <Folder Include="Maintenance\" />
+    <Folder Include="Maintenance\Stored Procedures\" />
+    <Folder Include="Security\" />
+    <Folder Include="Script" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Metadata\Tables\EnvironmentVariables.sql" />
+    <Build Include="Metadata\Tables\TableKeyDefinition.sql" />
+    <Build Include="Metadata\Tables\SourceFile.sql" />
+    <Build Include="Metadata\Tables\SourceField.sql" />
+    <Build Include="Metadata\Tables\DestinationTableGroup.sql" />
+    <Build Include="Metadata\Tables\DestinationFieldExtended.sql" />
+    <Build Include="Metadata\Tables\DestinationTable.sql" />
+    <Build Include="Metadata\Tables\DerivedColumnOverride.sql" />
+    <Build Include="Metadata\Tables\DataTypeTranslation.sql" />
+    <Build Include="Metadata\Tables\DestinationTableLog.sql" />
+    <Build Include="ssis\Views\HashColumn.sql" />
+    <Build Include="ssis\Views\SQLTaskMergeUpdateColumns.sql" />
+    <Build Include="ssis\Views\SQLTaskAddMissingMemberInsertValueColumns.sql" />
+    <Build Include="ssis\Views\LookupDimensionKeyColumns.sql" />
+    <Build Include="ssis\Views\DimensionForeignKeyColumns.sql" />
+    <Build Include="ssis\Views\LookupDimensionInputColumns.sql" />
+    <Build Include="ssis\Views\UpdatableColumns.sql" />
+    <Build Include="ssis\Views\SQLTaskMergeInsertValueColumns.sql" />
+    <Build Include="ssis\Views\SQLTaskMergeDiffColumns.sql" />
+    <Build Include="ssis\Views\SQLTaskMergeDeleteColumns.sql" />
+    <Build Include="ssis\Views\DerivedColumns.sql" />
+    <Build Include="Metadata\Views\DestinationTableSourceField.sql" />
+    <Build Include="Metadata\Views\PackageDependencyGraph.sql" />
+    <Build Include="Metadata\Views\SourceFileField.sql" />
+    <Build Include="Deployment\Views\ObjectChangeLog.sql" />
+    <Build Include="dbo\Functions\InitCap.sql" />
+    <Build Include="ssis\Functions\GetSourceSelectQuery.sql" />
+    <Build Include="ssis\Functions\GetDimLookupSelectQuery.sql" />
+    <Build Include="ssis\Functions\GetOleDbCommandUpdateColumns.sql" />
+    <Build Include="ssis\Functions\GetOleDbCommandParameters.sql" />
+    <Build Include="ssis\Functions\GetDerivedColumns.sql" />
+    <Build Include="ssis\Functions\GetAggregateTransformationOutputColumns.sql" />
+    <Build Include="ssis\Functions\GetUnionErrorInputColumns.sql" />
+    <Build Include="ssis\Functions\GetSqlTaskMergeUpdateColumns.sql" />
+    <Build Include="ssis\Functions\GetSqlTaskMergeInsertValueColumns.sql" />
+    <Build Include="ssis\Functions\GetSqlTaskMergeDiffColumns.sql" />
+    <Build Include="ssis\Functions\GetMultiCastOutputColumns.sql" />
+    <Build Include="ssis\Functions\GetDimLookupInputColumns.sql" />
+    <Build Include="ssis\Functions\GetDerivedColumnDynamicOverrideValue.sql" />
+    <Build Include="ssis\Functions\GetSqlTaskMergeParameter.sql" />
+    <Build Include="ssis\Functions\GetContainerVariables.sql" />
+    <Build Include="ssis\Functions\GetDimLookupOutputColumns.sql" />
+    <Build Include="ssis\Functions\GetSsisComponentName.sql" />
+    <Build Include="ssis\Functions\GetSrcDstKeyCondition.sql" />
+    <Build Include="Metadata\Functions\GetMergePatternString.sql" />
+    <Build Include="Metadata\Functions\GetLogStartPatternString.sql" />
+    <Build Include="Metadata\Functions\GetSSASProcessingPatternString.sql" />
+    <Build Include="Metadata\Functions\GetCreatePKChecksumString.sql" />
+    <Build Include="Metadata\Functions\GetCreateBaseTableString.sql" />
+    <Build Include="Metadata\Functions\GetPackageVariablesString.sql" />
+    <Build Include="Metadata\Functions\GetLogEndPatternString.sql" />
+    <Build Include="Metadata\Functions\GetIndexMaintenanceString.sql" />
+    <Build Include="Metadata\Functions\GetProcessingOrder.sql" />
+    <Build Include="Metadata\Functions\SplitString.sql" />
+    <Build Include="Metadata\Functions\GetFieldsWithRelatedDimensionKeys.sql" />
+    <Build Include="Metadata\Functions\GetFieldDefaults.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfoRawStageDetails.sql" />
+    <Build Include="ssis\Stored Procedures\GetInferredForeignKeyDataFlow.sql" />
+    <Build Include="ssis\Stored Procedures\GetDWForeignKeyTables.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfoDWDetails.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfoDMDetails.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfo.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateTable.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateStoredProcedurePackage.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateJob.sql" />
+    <Build Include="Metadata\Stored Procedures\GetFieldDefaults_SP.sql" />
+    <Build Include="Metadata\Stored Procedures\RemoveMetaData.sql" />
+    <Build Include="Metadata\Stored Procedures\UpdateMetadataReferences.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateNormEntity.sql" />
+    <Build Include="Metadata\Stored Procedures\UpdateTableKeyDefinitionTable.sql" />
+    <Build Include="Metadata\Stored Procedures\CopyMetadataReferences.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateRawToRawEntity.sql" />
+    <Build Include="Metadata\Stored Procedures\RemoveMultipleMetaDataObject.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateFactEntities.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateNormEntities.sql" />
+    <Build Include="Metadata\Stored Procedures\ReGenerateTable.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateTableWithFullConfig.sql" />
+    <Build Include="Metadata\Stored Procedures\UpdateDestinationTableTable.sql" />
+    <Build Include="Metadata\Stored Procedures\UpdateSourceFieldTable.sql" />
+    <Build Include="Metadata\Stored Procedures\GetTableMetadata.sql" />
+    <Build Include="Maintenance\Stored Procedures\RefreshIndexesRebuild.sql" />
+    <Build Include="Maintenance\Stored Procedures\RefreshIndexes.sql" />
+    <Build Include="Security\ssis.sql" />
+    <Build Include="Security\Metadata.sql" />
+    <Build Include="Security\Maintenance.sql" />
+    <Build Include="Security\Logging.sql" />
+    <Build Include="Security\Error.sql" />
+    <Build Include="Security\Deployment.sql" />
+    <PostDeploy Include="Script\Script.PostDeployment.sql" />
+    <None Include="Script\Script.InsertDerivedColumnOverride.sql" />
+    <None Include="Script\Script.InsertDestinationTableGroup.sql" />
+    <Build Include="Metadata\Functions\GetCreateStageViewString.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfoDWDetails_dbg.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateRawEntities.sql" />
+    <None Include="Script\Script.InsertDestinationFieldExtended.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Script\Script.InsertDataTypeTranslation.sql" />
+    <None Include="Script\Script.InsertEnvironmentVariables.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="DWH_2_Norm">
+      <DefaultValue>DWH_2_Norm</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="DWH_3_Fact">
+      <DefaultValue>DWH_3_Fact</DefaultValue>
+      <Value>$(SqlCmdVar__2)</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script\Script.PreDeployment.sql" />
+  </ItemGroup>
+</Project>

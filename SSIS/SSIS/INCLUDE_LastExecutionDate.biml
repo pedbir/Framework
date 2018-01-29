@@ -1,0 +1,14 @@
+<ExecuteSQL ConnectionName="DWH_0_Admin" Name="EST Get last execution date" ResultSet="SingleRow">
+<PrecedenceConstraints LogicalType="And">
+				<Inputs>
+					<Input OutputPathName="EPT Package Start Log.Output" />
+				</Inputs>
+			</PrecedenceConstraints>
+	<DirectInput>exec dbo.GetPackageLastExecutedTime @PackageGUID = ?</DirectInput>
+	<Parameters>
+		<Parameter DataType="String" Name="0" Direction="Input" Length="50" VariableName="System.PackageID"></Parameter>
+	</Parameters>
+	<Results>
+		<Result Name="0" VariableName="User.PackageLastExecutedNew"></Result>
+	</Results>
+</ExecuteSQL>

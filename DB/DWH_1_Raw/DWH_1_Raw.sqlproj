@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DWH_1_Raw</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{af69a245-61f9-4789-b775-d73cb0755cd5}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DWH_1_Raw</RootNamespace>
+    <AssemblyName>DWH_1_Raw</AssemblyName>
+    <ModelCollation>1035,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
+    <DelayedDurability>DISABLED</DelayedDurability>
+    <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
+    <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
+    <Containment>None</Containment>
+    <IsNestedTriggersOn>True</IsNestedTriggersOn>
+    <IsTransformNoiseWordsOn>False</IsTransformNoiseWordsOn>
+    <TwoDigitYearCutoff>2049</TwoDigitYearCutoff>
+    <NonTransactedFileStreamAccess>OFF</NonTransactedFileStreamAccess>
+    <TargetRecoveryTimePeriod>0</TargetRecoveryTimePeriod>
+    <TargetRecoveryTimeUnit>SECONDS</TargetRecoveryTimeUnit>
+    <IsChangeTrackingOn>False</IsChangeTrackingOn>
+    <IsChangeTrackingAutoCleanupOn>True</IsChangeTrackingAutoCleanupOn>
+    <ChangeTrackingRetentionPeriod>2</ChangeTrackingRetentionPeriod>
+    <ChangeTrackingRetentionUnit>Days</ChangeTrackingRetentionUnit>
+    <IsEncryptionOn>False</IsEncryptionOn>
+    <IsBrokerPriorityHonored>False</IsBrokerPriorityHonored>
+    <Trustworthy>False</Trustworthy>
+    <AutoUpdateStatisticsAsynchronously>False</AutoUpdateStatisticsAsynchronously>
+    <PageVerify>NONE</PageVerify>
+    <ServiceBrokerOption>DisableBroker</ServiceBrokerOption>
+    <DateCorrelationOptimizationOn>False</DateCorrelationOptimizationOn>
+    <Parameterization>SIMPLE</Parameterization>
+    <AllowSnapshotIsolation>False</AllowSnapshotIsolation>
+    <ReadCommittedSnapshot>False</ReadCommittedSnapshot>
+    <VardecimalStorageFormatOn>True</VardecimalStorageFormatOn>
+    <SupplementalLoggingOn>False</SupplementalLoggingOn>
+    <CompatibilityMode>120</CompatibilityMode>
+    <AnsiNullDefault>True</AnsiNullDefault>
+    <AnsiNulls>True</AnsiNulls>
+    <AnsiPadding>True</AnsiPadding>
+    <AnsiWarnings>True</AnsiWarnings>
+    <ArithAbort>True</ArithAbort>
+    <ConcatNullYieldsNull>True</ConcatNullYieldsNull>
+    <QuotedIdentifier>True</QuotedIdentifier>
+    <NumericRoundAbort>False</NumericRoundAbort>
+    <RecursiveTriggersEnabled>False</RecursiveTriggersEnabled>
+    <DatabaseChaining>False</DatabaseChaining>
+    <DatabaseState>ONLINE</DatabaseState>
+    <CloseCursorOnCommitEnabled>False</CloseCursorOnCommitEnabled>
+    <DefaultCursor>LOCAL</DefaultCursor>
+    <AutoClose>False</AutoClose>
+    <AutoCreateStatistics>True</AutoCreateStatistics>
+    <AutoShrink>False</AutoShrink>
+    <AutoUpdateStatistics>True</AutoUpdateStatistics>
+    <TornPageDetection>False</TornPageDetection>
+    <DatabaseAccess>MULTI_USER</DatabaseAccess>
+    <Recovery>SIMPLE</Recovery>
+    <EnableFullTextSearch>True</EnableFullTextSearch>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <CreateProjectFromDatabaseCompleted>True</CreateProjectFromDatabaseCompleted>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\DeployPackage\DB</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UAT|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="Security\" />
+    <Folder Include="Sugar_RawTyped\" />
+    <Folder Include="Sugar_RawTyped\Tables\" />
+    <Folder Include="Sugar\" />
+    <Folder Include="Sugar\Views\" />
+    <Folder Include="Netadmin\" />
+    <Folder Include="Netadmin\Views\" />
+    <Folder Include="Netadmin_RawTyped\" />
+    <Folder Include="Netadmin_RawTyped\Tables\" />
+    <Folder Include="Cava_RawTyped\" />
+    <Folder Include="Cava_RawTyped\Tables\" />
+    <Folder Include="Cava\" />
+    <Folder Include="Cava\Views\" />
+    <Folder Include="IFS_RawTyped\" />
+    <Folder Include="IFS_RawTyped\Tables\" />
+    <Folder Include="IFS\" />
+    <Folder Include="IFS\Views\" />
+    <Folder Include="NBS_RawTyped\" />
+    <Folder Include="NBS_RawTyped\Tables\" />
+    <Folder Include="NBS\" />
+    <Folder Include="NBS\Views\" />
+    <Folder Include="Sugar_RawTyped\Views\" />
+    <Folder Include="Netadmin_RawTyped\Views\" />
+    <Folder Include="Cava_RawTyped\Views\" />
+    <Folder Include="Norm_d\" />
+    <Folder Include="Norm_d\Views\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="NBS_RawTyped\Views\" />
+    <Folder Include="IFS_RawTyped\Views\" />
+    <Folder Include="Norm_f\" />
+    <Folder Include="Norm_f\Views\" />
+    <Folder Include="ManualData\" />
+    <Folder Include="ManualData\Tables\" />
+    <Folder Include="AddressMaster_RawTyped\" />
+    <Folder Include="AddressMaster_RawTyped\Tables\" />
+    <Folder Include="AddressMaster\" />
+    <Folder Include="AddressMaster\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Functions\fn_Calendar.sql" />
+    <Build Include="localhost.sql" />
+    <Build Include="dbo\Functions\tvf_split.sql" />
+    <Build Include="DW_SERVER.sql" />
+    <Build Include="SugarCRM.sql" />
+    <Build Include="Sugar\Views\Omrade.sql" />
+    <Build Include="Security\Sugar_RawTyped.sql" />
+    <Build Include="Security\Sugar.sql" />
+    <Build Include="Sugar\Views\User.sql" />
+    <Build Include="Sugar\Views\Mojlighet.sql" />
+    <Build Include="Sugar\Views\Leveranspunkt.sql" />
+    <Build Include="Sugar\Views\Leveransobjekt.sql" />
+    <Build Include="Sugar\Views\Geografi.sql" />
+    <Build Include="Sugar\Views\Contact.sql" />
+    <Build Include="Sugar\Views\Bestallning.sql" />
+    <Build Include="Sugar\Views\Affarsmojlighet.sql" />
+    <Build Include="Netadmin\Views\Abonnemang.sql" />
+    <Build Include="Netadmin\Views\Adress.sql" />
+    <Build Include="Security\Netadmin.sql" />
+    <Build Include="NetAdmin.sql" />
+    <Build Include="Security\Cava.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_User.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Omrade.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Mojlighet.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkUserOmrade1.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkOmradeMojlighet.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkOmradeBestallning.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkMojlighetBestallning.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkLeveransobjektLeveranspunkt.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkGeografiOmrade.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkGeografiLeveransobjekt.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkContactLeveransobjekt2.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_LinkAffarsmojlighetLeveransobjekt.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Leveranspunkt.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Leveransobjekt.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Geografi.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Contact.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Bestallning.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Affarsmojlighet.sql" />
+    <Build Include="Netadmin_RawTyped\Tables\r_Isp.sql" />
+    <Build Include="Netadmin_RawTyped\Tables\r_AdressKod.sql" />
+    <Build Include="Netadmin_RawTyped\Tables\r_Adress.sql" />
+    <Build Include="Netadmin_RawTyped\Tables\r_Abonnemang.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_ServiceStatus.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_Service.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_OrderService.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_Order.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_Customer.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_AgreementType.sql" />
+    <Build Include="Netadmin\Views\Isp.sql" />
+    <Build Include="Netadmin\Views\AdressKod.sql" />
+    <Build Include="Security\Telemator.sql" />
+    <Build Include="Security\Netadmin_RawTyped.sql" />
+    <Build Include="Security\Cava_RawTyped.sql" />
+    <Build Include="Cava.sql" />
+    <Build Include="Cava\Views\ServiceStatus.sql" />
+    <Build Include="Cava\Views\Service.sql" />
+    <Build Include="Cava\Views\OrderService.sql" />
+    <Build Include="Cava\Views\Order.sql" />
+    <Build Include="Cava\Views\Customer.sql" />
+    <Build Include="Cava\Views\AgreementType.sql" />
+    <Build Include="IFS.sql" />
+    <Build Include="IFS_RawTyped\Tables\r_Project.sql" />
+    <Build Include="IFS_RawTyped\Tables\r_ProjectCost.sql" />
+    <Build Include="Security\IFS_RawTyped.sql" />
+    <Build Include="Security\IFS.sql" />
+    <Build Include="IFS\Views\ProjectCost.sql" />
+    <Build Include="IFS\Views\Project.sql" />
+    <Build Include="Sugar\Views\Enum.sql" />
+    <Build Include="Sugar_RawTyped\Tables\r_Enum.sql" />
+    <Build Include="NBS.sql" />
+    <Build Include="NBS_RawTyped\Tables\r_NetadminArticle.sql" />
+    <Build Include="NBS\Views\NetadminArticle.sql" />
+    <Build Include="Security\NBS_RawTyped.sql" />
+    <Build Include="Security\NBS.sql" />
+    <Build Include="Norm_d\Views\Area.sql" />
+    <Build Include="Norm_d\Views\Geography.sql" />
+    <Build Include="Norm_d\Views\Project.sql" />
+    <Build Include="Security\Norm_d.sql" />
+    <Build Include="Norm_d\Views\ServiceProvider.sql" />
+    <Build Include="Netadmin_RawTyped\Tables\r_PreAbonnemang.sql" />
+    <Build Include="Netadmin\Views\PreAbonnemang.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_User_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Omrade_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Mojlighet_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Leveranspunkt_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Leveransobjekt_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Geografi_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Enum.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Contact_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Bestallning_1.sql" />
+    <Build Include="Sugar_RawTyped\Views\vr_Affarsmojlighet_1.sql" />
+    <Build Include="Norm_d\Views\Employee.sql" />
+    <Build Include="Norm_d\Views\Calendar.sql" />
+    <Build Include="Netadmin_RawTyped\Views\vr_Isp_1.sql" />
+    <Build Include="Netadmin_RawTyped\Views\vr_AdressKod_1.sql" />
+    <Build Include="Netadmin_RawTyped\Views\vr_Adress_1.sql" />
+    <Build Include="Netadmin_RawTyped\Views\vr_Abonnemang_1.sql" />
+    <Build Include="NBS_RawTyped\Views\vr_NetadminArticle.sql" />
+    <Build Include="IFS_RawTyped\Views\vr_ProjectCost.sql" />
+    <Build Include="IFS_RawTyped\Views\vr_Project.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_ServiceStatus_1.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_Service_1.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_OrderService_1.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_Order_1.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_Customer_1.sql" />
+    <Build Include="Cava_RawTyped\Views\vr_AgreementType_1.sql" />
+    <Build Include="dbo\Stored Procedures\CreateNormIsLastView_1.sql" />
+    <Build Include="Security\Norm_f_1.sql" />
+    <Build Include="Norm_d\Views\SubscriptionProduct.sql" />
+    <Build Include="Norm_d\Views\AccessCategory.sql" />
+    <Build Include="Netadmin_RawTyped\Views\vr_PreAbonnemang_1.sql" />
+    <Build Include="Norm_d\Views\SugarEnum.sql" />
+    <Build Include="Norm_d\Views\Subscription.sql" />
+    <Build Include="Norm_d\Views\SalesOrder.sql" />
+    <Build Include="Norm_d\Views\Opportunity.sql" />
+    <Build Include="Norm_d\Views\Access.sql" />
+    <Build Include="Security\ManualData.sql" />
+    <Build Include="Norm_d\Views\CustomerCategory.sql" />
+    <Build Include="MDS.sql" />
+    <Build Include="Norm_d\Views\Planning.sql" />
+    <Build Include="Norm_d\Views\Agreement.sql" />
+    <Build Include="Norm_d\Views\DeliveryPoint.sql" />
+    <Build Include="Norm_d\Views\Delivery.sql" />
+    <Build Include="Norm_d\Views\Customer.sql" />
+    <Build Include="Norm_d\Views\ServiceStatus.sql" />
+    <Build Include="Norm_d\Views\Service.sql" />
+    <Build Include="Norm_d\Views\AgreementService.sql" />
+    <Build Include="Cava\Views\NDBUser.sql" />
+    <Build Include="Cava_RawTyped\Tables\r_NDBUser.sql" />
+    <Build Include="Norm_d\Views\Address.sql" />
+    <Build Include="Security\AddressMaster_RawTyped.sql" />
+    <Build Include="Security\AddressMaster.sql" />
+    <Build Include="AddressMaster_RawTyped\Tables\r_LM90A.sql" />
+    <Build Include="AddressMaster\Views\LM90A.sql" />
+    <Build Include="Norm_d\Views\CustomerCommunication.sql" />
+    <Build Include="Norm_d\Views\Scenario.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
+</Project>

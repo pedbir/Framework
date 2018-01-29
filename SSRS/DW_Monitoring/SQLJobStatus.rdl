@@ -1,0 +1,1674 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DWH_0_Admin">
+      <DataSourceReference>DWH_0_Admin</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>20afd535-d218-49b1-aa4a-c74d4801251d</rd:DataSourceID>
+    </DataSource>
+<<<<<<< HEAD:SSRS/SSRS/SQL Job Status.rdl
+=======
+    <DataSource Name="DebugSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>=Parameters!Environment.Value</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>3ceef619-7ce4-4644-826d-e0bedda5f424</rd:DataSourceID>
+    </DataSource>
+>>>>>>> 184713b... Fix:SSRS/SSRS/SQLJobStatus.rdl
+  </DataSources>
+  <DataSets>
+    <DataSet Name="JobStatus">
+      <Query>
+        <DataSourceName>DebugSource</DataSourceName>
+        <CommandText>
+WITH temp
+  AS (SELECT JobName = SJ.name
+             , SJ.job_id
+             , ExecutionStart = DATEADD(SECOND, DATEDIFF(SECOND, GETDATE(), GETUTCDATE()), msdb.dbo.agent_datetime(SJH.run_date, SJH.run_time))
+             , ExecutionEnd = msdb.dbo.agent_datetime(19000101, SJH.run_duration) + DATEADD(SECOND, DATEDIFF(SECOND, GETDATE(), GETUTCDATE()), msdb.dbo.agent_datetime(SJH.run_date, SJH.run_time))
+             , DurationFormatted = CONVERT(VARCHAR(8), msdb.dbo.agent_datetime(19000101, SJH.run_duration), 8)
+             , DurationSec = SJH.run_duration
+             , JobStatus = CASE
+                                WHEN SJ.enabled = 1 THEN 'Enabled' ELSE 'Disabled'
+                           END
+             , JobOutcome = CASE
+                                 WHEN SJH.run_status = 0 THEN 'Faliure'
+                                 WHEN SJH.run_status = 1 THEN 'Success'
+                                 WHEN SJH.run_status = 2 THEN 'Retry'
+                                 WHEN SJH.run_status = 3 THEN 'Cancelled' ELSE 'Unknown'
+                            END
+             , JobKPI = CASE
+                             WHEN SJH.run_status = 1 THEN 1
+                             WHEN SJH.run_status = 0 THEN -1 ELSE 0
+                        END
+      FROM   msdb.dbo.sysjobhistory SJH
+      JOIN   msdb.dbo.sysjobs SJ
+        ON SJH.job_id = SJ.job_id
+      WHERE  SJH.step_id = 0
+      UNION ALL
+      SELECT JobName = s2.name
+             , s2.job_id
+             , ExecutionStart = DATEADD(SECOND, DATEDIFF(SECOND, GETDATE(), GETUTCDATE()), s.start_execution_date)
+             , ExecutionEnd = GETUTCDATE()
+             , DurationFormatted = CONVERT(VARCHAR(8), GETUTCDATE() - DATEADD(SECOND, DATEDIFF(SECOND, GETDATE(), GETUTCDATE()), s.start_execution_date), 8)
+             , DurationSec = DATEDIFF(SECOND, GETUTCDATE(), s.start_execution_date)
+             , JobStatus = CASE
+                                WHEN s2.enabled = 1 THEN 'Enabled' ELSE 'Disabled'
+                           END
+             , JobOutcome = 'Running'
+             , JobKPI = 0
+      FROM   msdb.dbo.sysjobactivity s
+      INNER JOIN msdb.dbo.sysjobs s2
+              ON s2.job_id = s.job_id
+      WHERE  s.start_execution_date IS NOT NULL
+        AND  s.stop_execution_date IS NULL)
+     , temp2
+  AS (SELECT t.JobName
+             , t.ExecutionStart
+             , t.ExecutionEnd
+             , t.DurationFormatted
+             , t.DurationSec
+             , t.JobStatus
+             , t.JobOutcome
+             , t.job_id
+             , t.JobKPI
+             , _rowCnt = ROW_NUMBER() OVER (PARTITION BY t.job_id
+                                            ORDER BY ExecutionStart desc)
+      FROM   temp t)
+SELECT t.JobName
+       , t.ExecutionStart
+       , t.ExecutionEnd
+       , t.DurationFormatted
+       , t.DurationSec
+       , t.JobStatus
+       , t.JobOutcome
+       , t.job_id
+       , t.JobKPI
+       , t2._rowCnt
+       , ExecutionStartHistory = t2.ExecutionStart
+       , ExecutionEndHistory = t2.ExecutionEnd
+       , DurationFormattedHistory = t2.DurationFormatted
+	   , JobKpiHistory = t2.JobKPI
+       , DurationSecHistory = t2.DurationSec
+	   , JobOutcomeHistory = t2.JobOutcome
+FROM   temp2 t
+LEFT JOIN temp2 t2
+       ON t2.job_id  = t.job_id
+      AND t2._rowCnt &lt; 5
+WHERE  t._rowCnt = 1</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="JobName">
+          <DataField>JobName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExecutionStart">
+          <DataField>ExecutionStart</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ExecutionEnd">
+          <DataField>ExecutionEnd</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DurationFormatted">
+          <DataField>DurationFormatted</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DurationSec">
+          <DataField>DurationSec</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="JobStatus">
+          <DataField>JobStatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JobOutcome">
+          <DataField>JobOutcome</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ExecutionStartHistory">
+          <DataField>ExecutionStartHistory</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="JobKPI">
+          <DataField>JobKPI</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="JobKpiHistory">
+          <DataField>JobKpiHistory</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="job_id">
+          <DataField>job_id</DataField>
+          <rd:TypeName>System.Guid</rd:TypeName>
+        </Field>
+        <Field Name="ExecutionEndHistory">
+          <DataField>ExecutionEndHistory</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ID_rowCnt">
+          <DataField>_rowCnt</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="DurationFormattedHistory">
+          <DataField>DurationFormattedHistory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DurationSecHistory">
+          <DataField>DurationSecHistory</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="JobOutcomeHistory">
+          <DataField>JobOutcomeHistory</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix2">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.10292in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.67797in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.3937in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.7841in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.16667in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.72138in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.36458in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.4375in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.21875in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Run</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Red</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!JobName.Value</SortExpression>
+                            <SortExpressionScope>Details1</SortExpressionScope>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Job / Step Name</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox34">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!JobOutcome.Value</SortExpression>
+                            <SortExpressionScope>Details1</SortExpressionScope>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Status</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox32</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox187">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Duration Trend</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox187</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=IIF(Fields!ID_rowCnt.Value = 1, "Latest", "")</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox38">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!DurationFormatted.Value</SortExpression>
+                            <SortExpressionScope>Details1</SortExpressionScope>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Duration</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox35</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox33">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!ExecutionStart.Value</SortExpression>
+                            <SortExpressionScope>Details1</SortExpressionScope>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value> Last Start</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox32</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox39">
+                          <CanGrow>true</CanGrow>
+                          <UserSort>
+                            <SortExpression>=Fields!ExecutionEnd.Value</SortExpression>
+                            <SortExpressionScope>Details1</SortExpressionScope>
+                          </UserSort>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value> Last End</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>Gainsboro</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.62374in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle3">
+                          <ReportItems>
+                            <Image Name="Image1">
+                              <Source>Embedded</Source>
+                              <Value>UserInterfaceRunCommandicon</Value>
+                              <Sizing>FitProportional</Sizing>
+                              <ActionInfo>
+                                <Actions>
+                                  <Action>
+                                    <Drillthrough>
+                                      <ReportName>SQL Job Run</ReportName>
+                                      <Parameters>
+                                        <Parameter Name="job_name">
+                                          <Value>=Fields!JobName.Value</Value>
+                                        </Parameter>
+                                      </Parameters>
+                                    </Drillthrough>
+                                  </Action>
+                                </Actions>
+                              </ActionInfo>
+                              <Top>0.06124in</Top>
+                              <Left>0.26958in</Left>
+                              <Height>0.5in</Height>
+                              <Width>0.5in</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="JobName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!JobName.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>JobName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle4">
+                          <ReportItems>
+                            <GaugePanel Name="GaugePanel4">
+                              <StateIndicators>
+                                <StateIndicator Name="Indicator1">
+                                  <GaugeInputValue>
+                                    <Value>=Fields!JobKPI.Value</Value>
+                                    <Multiplier>1</Multiplier>
+                                    <DataElementOutput>NoOutput</DataElementOutput>
+                                  </GaugeInputValue>
+                                  <TransformationType>None</TransformationType>
+                                  <TransformationScope>Tablix2</TransformationScope>
+                                  <MinimumValue>
+                                    <Value>NaN</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <MaximumValue>
+                                    <Value>NaN</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <IndicatorStyle>None</IndicatorStyle>
+                                  <IndicatorImage>
+                                    <Source>External</Source>
+                                    <Value />
+                                  </IndicatorImage>
+                                  <ScaleFactor>1</ScaleFactor>
+                                  <IndicatorStates>
+                                    <IndicatorState Name="ThreeSymbolCross">
+                                      <StartValue>
+                                        <Value>-1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>-1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#c0433a</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolCross</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                    <IndicatorState Name="ThreeSymbolExclamation">
+                                      <StartValue>
+                                        <Value>0</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>0</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#e8d62e</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolExclamation</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                    <IndicatorState Name="ThreeSymbolCheck">
+                                      <StartValue>
+                                        <Value>1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#79c75b</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolCheck</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                  </IndicatorStates>
+                                  <Angle>0</Angle>
+                                  <StateDataElementName />
+                                  <rd:IconsSet>ThreeCircledSymbols</rd:IconsSet>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Top>4</Top>
+                                  <Left>4</Left>
+                                  <Height>92</Height>
+                                  <Width>92</Width>
+                                </StateIndicator>
+                              </StateIndicators>
+                              <AutoLayout>true</AutoLayout>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>Silver</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <DataSetName>JobStatus</DataSetName>
+                              <Top>0.47625cm</Top>
+                              <Height>0.635cm</Height>
+                              <Width>1cm</Width>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                              </Style>
+                            </GaugePanel>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="JobOutcome">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!JobOutcome.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>=IIF(First(Fields!JobKpiHistory.Value) = -1, "Red", 
+	IIF(First(Fields!JobKpiHistory.Value) = 1, "Green" , "#333333")
+	)</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>JobOutcome</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <TopBorder>
+                              <Style>Solid</Style>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Style>Solid</Style>
+                            </RightBorder>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle2">
+                          <ReportItems>
+                            <Chart Name="Sparkline2">
+                              <ChartCategoryHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Group Name="Sparkline1_CategoryGroup2">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!ID_rowCnt.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <SortExpressions>
+                                      <SortExpression>
+                                        <Value>=Fields!ID_rowCnt.Value</Value>
+                                        <Direction>Descending</Direction>
+                                      </SortExpression>
+                                    </SortExpressions>
+                                    <Label>=Fields!ID_rowCnt.Value</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartCategoryHierarchy>
+                              <ChartSeriesHierarchy>
+                                <ChartMembers>
+                                  <ChartMember>
+                                    <Label>Duration Sec History</Label>
+                                  </ChartMember>
+                                </ChartMembers>
+                              </ChartSeriesHierarchy>
+                              <ChartData>
+                                <ChartSeriesCollection>
+                                  <ChartSeries Name="DurationSecHistory">
+                                    <ChartDataPoints>
+                                      <ChartDataPoint>
+                                        <ChartDataPointValues>
+                                          <Y>=Sum(Fields!DurationSecHistory.Value)</Y>
+                                        </ChartDataPointValues>
+                                        <ChartDataLabel>
+                                          <Style />
+                                        </ChartDataLabel>
+                                        <Style>
+                                          <Border>
+                                            <Width>2pt</Width>
+                                          </Border>
+                                        </Style>
+                                        <ChartMarker>
+                                          <Style />
+                                        </ChartMarker>
+                                        <DataElementOutput>Output</DataElementOutput>
+                                      </ChartDataPoint>
+                                    </ChartDataPoints>
+                                    <Type>Line</Type>
+                                    <Style />
+                                    <ChartEmptyPoints>
+                                      <Style />
+                                      <ChartMarker>
+                                        <Style />
+                                      </ChartMarker>
+                                      <ChartDataLabel>
+                                        <Style />
+                                      </ChartDataLabel>
+                                    </ChartEmptyPoints>
+                                    <ValueAxisName>Primary</ValueAxisName>
+                                    <CategoryAxisName>Primary</CategoryAxisName>
+                                    <ChartSmartLabel>
+                                      <CalloutLineColor>Black</CalloutLineColor>
+                                      <MinMovingDistance>0pt</MinMovingDistance>
+                                    </ChartSmartLabel>
+                                  </ChartSeries>
+                                </ChartSeriesCollection>
+                              </ChartData>
+                              <ChartAreas>
+                                <ChartArea Name="Default">
+                                  <ChartCategoryAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Visible>False</Visible>
+                                      <Style>
+                                        <Border>
+                                          <Color>Gainsboro</Color>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <FontSize>8pt</FontSize>
+                                        <Color>#5c5c5c</Color>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>9pt</FontSize>
+                                          <Color>#5c5c5c</Color>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Margin>False</Margin>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>None</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Visible>False</Visible>
+                                      <Style>
+                                        <Border>
+                                          <Color>Gainsboro</Color>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <FontSize>8pt</FontSize>
+                                        <Color>#5c5c5c</Color>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>9pt</FontSize>
+                                          <Color>#5c5c5c</Color>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <Margin>False</Margin>
+                                      <ChartMajorGridLines>
+                                        <Enabled>False</Enabled>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>None</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartCategoryAxes>
+                                  <ChartValueAxes>
+                                    <ChartAxis Name="Primary">
+                                      <Visible>False</Visible>
+                                      <Style>
+                                        <Border>
+                                          <Color>Gainsboro</Color>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <FontSize>8pt</FontSize>
+                                        <Color>#5c5c5c</Color>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>9pt</FontSize>
+                                          <Color>#5c5c5c</Color>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>None</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                    <ChartAxis Name="Secondary">
+                                      <Visible>False</Visible>
+                                      <Style>
+                                        <Border>
+                                          <Color>Gainsboro</Color>
+                                          <Style>None</Style>
+                                        </Border>
+                                        <FontSize>8pt</FontSize>
+                                        <Color>#5c5c5c</Color>
+                                      </Style>
+                                      <ChartAxisTitle>
+                                        <Caption />
+                                        <Style>
+                                          <FontSize>9pt</FontSize>
+                                          <Color>#5c5c5c</Color>
+                                        </Style>
+                                      </ChartAxisTitle>
+                                      <ChartMajorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorGridLines>
+                                      <ChartMinorGridLines>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>Dotted</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMinorGridLines>
+                                      <ChartMajorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                            <Style>None</Style>
+                                          </Border>
+                                        </Style>
+                                      </ChartMajorTickMarks>
+                                      <ChartMinorTickMarks>
+                                        <Style>
+                                          <Border>
+                                            <Color>Gainsboro</Color>
+                                          </Border>
+                                        </Style>
+                                        <Length>0.5</Length>
+                                      </ChartMinorTickMarks>
+                                      <CrossAt>NaN</CrossAt>
+                                      <Location>Opposite</Location>
+                                      <Minimum>NaN</Minimum>
+                                      <Maximum>NaN</Maximum>
+                                      <ChartAxisScaleBreak>
+                                        <Style />
+                                      </ChartAxisScaleBreak>
+                                    </ChartAxis>
+                                  </ChartValueAxes>
+                                  <Style>
+                                    <BackgroundColor>#00ffffff</BackgroundColor>
+                                    <BackgroundGradientType>None</BackgroundGradientType>
+                                  </Style>
+                                </ChartArea>
+                              </ChartAreas>
+                              <Palette>Pacific</Palette>
+                              <ChartBorderSkin>
+                                <Style>
+                                  <BackgroundColor>Gray</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <Color>White</Color>
+                                </Style>
+                              </ChartBorderSkin>
+                              <ChartNoDataMessage Name="NoDataMessage">
+                                <Caption>No Data Available</Caption>
+                                <Style>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <FontWeight>Bold</FontWeight>
+                                  <TextAlign>General</TextAlign>
+                                  <VerticalAlign>Top</VerticalAlign>
+                                </Style>
+                              </ChartNoDataMessage>
+                              <rd:DesignerMode>Sparkline</rd:DesignerMode>
+                              <DataSetName>JobStatus</DataSetName>
+                              <Height>1.58431cm</Height>
+                              <Width>2.96333cm</Width>
+                              <Style>
+                                <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <BackgroundGradientType>None</BackgroundGradientType>
+                              </Style>
+                            </Chart>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="Rectangle1">
+                          <ReportItems>
+                            <GaugePanel Name="GaugePanel1">
+                              <StateIndicators>
+                                <StateIndicator Name="Indicator1">
+                                  <GaugeInputValue>
+                                    <Value>=Sum(Fields!JobKpiHistory.Value)</Value>
+                                    <Multiplier>1</Multiplier>
+                                    <DataElementOutput>NoOutput</DataElementOutput>
+                                  </GaugeInputValue>
+                                  <TransformationType>None</TransformationType>
+                                  <TransformationScope>Tablix2</TransformationScope>
+                                  <MinimumValue>
+                                    <Value>-1</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MinimumValue>
+                                  <MaximumValue>
+                                    <Value>1</Value>
+                                    <Multiplier>1</Multiplier>
+                                  </MaximumValue>
+                                  <IndicatorStyle>None</IndicatorStyle>
+                                  <IndicatorImage>
+                                    <Source>External</Source>
+                                    <Value />
+                                  </IndicatorImage>
+                                  <ScaleFactor>1</ScaleFactor>
+                                  <IndicatorStates>
+                                    <IndicatorState Name="ThreeSymbolCross">
+                                      <StartValue>
+                                        <Value>-1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>-1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#c0433a</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolCross</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                    <IndicatorState Name="ThreeSymbolExclamation">
+                                      <StartValue>
+                                        <Value>0</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>0</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#e8d62e</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolExclamation</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                    <IndicatorState Name="ThreeSymbolCheck">
+                                      <StartValue>
+                                        <Value>1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </StartValue>
+                                      <EndValue>
+                                        <Value>1</Value>
+                                        <Multiplier>1</Multiplier>
+                                      </EndValue>
+                                      <Color>#79c75b</Color>
+                                      <ScaleFactor>1</ScaleFactor>
+                                      <IndicatorStyle>ThreeSymbolCheck</IndicatorStyle>
+                                      <IndicatorImage>
+                                        <Source>External</Source>
+                                        <Value />
+                                      </IndicatorImage>
+                                    </IndicatorState>
+                                  </IndicatorStates>
+                                  <Angle>0</Angle>
+                                  <StateDataElementName />
+                                  <rd:IconsSet>ThreeCircledSymbols</rd:IconsSet>
+                                  <Style>
+                                    <Border>
+                                      <Style>None</Style>
+                                    </Border>
+                                    <ShadowOffset>0pt</ShadowOffset>
+                                  </Style>
+                                  <Top>4</Top>
+                                  <Left>4</Left>
+                                  <Height>92</Height>
+                                  <Width>92</Width>
+                                  <ToolTip>=Fields!DurationFormattedHistory.Value</ToolTip>
+                                </StateIndicator>
+                              </StateIndicators>
+                              <AutoLayout>true</AutoLayout>
+                              <BackFrame>
+                                <Style>
+                                  <Border>
+                                    <Style>None</Style>
+                                  </Border>
+                                  <BackgroundColor>Gainsboro</BackgroundColor>
+                                  <BackgroundGradientType>None</BackgroundGradientType>
+                                  <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                  <BackgroundHatchType>None</BackgroundHatchType>
+                                  <ShadowOffset>0pt</ShadowOffset>
+                                </Style>
+                                <FrameBackground>
+                                  <Style>
+                                    <BackgroundColor>Silver</BackgroundColor>
+                                    <BackgroundGradientType>DiagonalLeft</BackgroundGradientType>
+                                    <BackgroundGradientEndColor>Gray</BackgroundGradientEndColor>
+                                    <BackgroundHatchType>None</BackgroundHatchType>
+                                  </Style>
+                                </FrameBackground>
+                                <FrameImage>
+                                  <Source>External</Source>
+                                  <Value />
+                                </FrameImage>
+                              </BackFrame>
+                              <TopImage>
+                                <Source>External</Source>
+                                <Value />
+                              </TopImage>
+                              <DataSetName>JobStatus</DataSetName>
+                              <Top>0.4445cm</Top>
+                              <Height>0.635cm</Height>
+                              <Width>1.75294cm</Width>
+                              <ToolTip>=Fields!JobOutcomeHistory.Value &amp; "(" &amp; FORMAT(Fields!ExecutionStartHistory.Value, "yyyy-MM-dd hh:mm:ss") &amp; ")"</ToolTip>
+                              <Style>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>None</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                              </Style>
+                            </GaugePanel>
+                          </ReportItems>
+                          <KeepTogether>true</KeepTogether>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                          </Style>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DurationFormatted2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DurationFormatted.Value</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DurationFormatted</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ExecutionStart">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=System.TimeZone.CurrentTimeZone().ToLocalTime(Fields!ExecutionStart.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <Format>yyyy-MM-dd hh:mm:ss</Format>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ExecutionStart</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ExecutionEnd">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=System.TimeZone.CurrentTimeZone().ToLocalTime(Fields!ExecutionEnd.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Segoe UI</FontFamily>
+                                    <Format>yyyy-MM-dd hh:mm:ss</Format>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ExecutionEnd</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember>
+                  <Group Name="ID_rowCnt">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ID_rowCnt.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!ID_rowCnt.Value</Value>
+                      <Direction>Descending</Direction>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember>
+                  <Group Name="Details1">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!JobName.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>JobStatus</DataSetName>
+<<<<<<< HEAD:SSRS/SSRS/SQL Job Status.rdl
+            <Top>0.29105cm</Top>
+            <Left>0.635cm</Left>
+            <Height>0.84249in</Height>
+            <Width>9.64882in</Width>
+=======
+            <Top>1.24355cm</Top>
+            <Height>0.47917in</Height>
+            <Width>9.4209in</Width>
+>>>>>>> 184713b... Fix:SSRS/SSRS/SQLJobStatus.rdl
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+<<<<<<< HEAD:SSRS/SSRS/SQL Job Status.rdl
+        </ReportItems>
+        <Height>1.20708in</Height>
+=======
+          <Textbox Name="textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="SQL Job Status " &amp; Parameters!Environment.Label</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>24pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Height>0.46181in</Height>
+            <Width>5.49119in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>0.96876in</Height>
+>>>>>>> 184713b... Fix:SSRS/SSRS/SQLJobStatus.rdl
+        <Style />
+      </Body>
+      <Width>11.52382in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.46181in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="textbox1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value EvaluationMode="Constant">SQL Job Status</Value>
+                      <Style>
+                        <FontFamily>Segoe UI Light</FontFamily>
+                        <FontSize>24pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>textbox1</rd:DefaultName>
+              <Height>0.46181in</Height>
+              <Width>5.49119in</Width>
+              <Style>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+<<<<<<< HEAD:SSRS/SSRS/SQL Job Status.rdl
+=======
+  <ReportParameters>
+    <ReportParameter Name="Environment">
+      <DataType>String</DataType>
+      <Prompt>Environment</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>="Data Source=eqtdwbuildsrv01;Initial Catalog=DWH_0_Admin"</Value>
+            <Label>Development</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>="Data Source=eqtdwuatsrv01;Initial Catalog=DWH_0_Admin"</Value>
+            <Label>UAT</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>="Data Source=eqtdwprdsrv01;Initial Catalog=DWH_0_Admin"</Value>
+            <Label>Producation</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+>>>>>>> 184713b... Fix:SSRS/SSRS/SQLJobStatus.rdl
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="UserInterfaceRunCommandicon">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAG5klEQVR42u2dj5XUNhCH5yqAVMBSQZIKMBWEVBBTQUgFmAoCFcRUEFIBpoKQCmIqCFSQeNZ7xOu/I2kk2Tu/7z099t76cV77W2k0GuvuCJjmLvcJgLxAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAONAAOMcVYAHXfuuaw8v/4L/aQft09bBRxLgUdeeda0k3HQpH7tWX9qXuQOOIADf+Ir6Gw/8+Ez9NXwzfmPvAvzctde5T+KGqLv2gga9wV4F4DH+XdeK3Cdyg/B1/fH+hz0KwDe/IYzzMam69opf7E2Ab6k39JT7RAxw6tqnPQnA3/yPhJufirprz/ckwO/UT/NAOh7uRYCfqDcSpOXZHgTgrr+lPqsH0lLtQQDM9fPxbg8C/E0I/HLR5BaAp30fc18Fw2QX4CX1SQmQh9e5BXhPSPfm5EVuAf4hRP85KXIKwMu8be4rYJysiaAfqM/7gzy0XXucUwAEgHk5LwvnFECa++cTxVRRTkmyvErVtVc5BZAmgIqufch4nkfjT5LVUhRd+5BLAM7/fxYey7OEL8JjAdG/wuNOlLEe4An1VT9btF17nOkcj4j0uvKX7xt+kUsAaQB4Vb8GNpEuqzdde8ovWID3kU7m6cp7v5GszLuiS+0aEPEr9VW/W1Q0qAmUjhkucNT+/cr7ToFKhPO7VaSpdZ59/cEvYglQd+35yvtOgUqE87tVpNeVv3x/8YtYAnA39GbhPedABYhwWVq/G76IIUBBy123tAKoofU4AlwjTa03NLiusQRYm7trBYAPLsdwd1ZE+Ax7oL20umtvN46Vzqz4y/fL/Q8xBOATXpu7OwcqM/AwwrZbWkrm7r2g5S+W9LqWNJAphgBbc/fQAPDR5WJYuvn31LQcXEtrKwoaDM8xBKhouev2ClRGWF9FPNH0i+FS
+W3E3/kFbgIKWA0DnTNUM1svI+LOPr680AJzkZ1iAJ8onyL9kaZySZqquApURMYLWI1HQVABpr1jTaAhJvRbgFagMQBn5vADS2opJfia1ANJA5WumagSeIZyfYnvXVqQUwDtQGSAdQm6VlqZT7KDaipQCeAcqA6wHgHNT7KDaipQCeAcqA6QBIPcSR4oV+DOfBMdVNJ1iB9VWpBRA+u1dWkhyCQCXYoi9IhV7LjsalFpPKUBoEahLAJj7iScXpF04c6JpEiiotiLVhXIJVEIzgA0daxVRujq6tDwelFpPJYBGEah0CFlLIu0R6cymoanYwbUVmqnggpZTwBpFoNIcQknbS6d7Qip2RdMxPLi2QlOAtd5Emqma+5CMSw7BUgDoXAQ6RkuA2EWgLg+SHikAdJnZnGg6hgfXVmgJUJNOEehSJdGtBoDSmU2UAJDREqCi5RoAjSJQBIBTsTVqK9QEKChuESgCwOkXTKO2Qk2AmEWgLgFgQcd6kER67Uuaiu1VBDpGQ4CW4haBIgCcn9mE1lac0RAgdhGo1PStmcjeCBU7tLbi638cKkBFcYtApTmEho5VLFqSbGjkzzUewzVqK7bfVEAjULG+lezcGK5RW3EmtgChRaAui0i3Skn+AWBN6/mZ6AKEBiouS6W3SkgAuPaQ7pnYAoQGKtYfAmHm7pHaBlsxBdAIVKwL0NA0NtKorZAfEIDX48ojrAswFxupbrAVUwCNQMV6DDCXHFPdYCumAFqBinQp+dZYmsKF1lZcEVMAr8eVZ7D4l0Tby+edW19R3WCLBXjpeZLNyi9QDVQucFKJzb/lfQH4mnHXvbaiGVpbcUVIKlhjI6ij5e9zo77BVogABcUtAgVT1DfYChEgZhEomEd9h1VfAba6bmwFHweNDbau8BVAqwYAW8G7ob7Dqq8AFYUXgbaEreBdUCkCnTvQR4CCsBNoalSKQMf4CpBiJ1BwjcYGWxN8BGhpveuWZqrEgQo4o1IEOsbn
+D0bwOLRmGLaCj4NKEegY7bUAtWJFcIV0ad15i33tm+CyfHu0p3hzIh1WnTOrOQWoaaNgEZyRBtWMc1yVUwCmIswEluB5P0f0hfD4ljzyKtoC+JRx8/FH2tItBSdyfxaiJI8HY2MEYtYf5MiB97J6DAFcxiwQDvegBXkG1DEEwI7eaSkpYE+EWHNx63v6pqKkwA0xYglg+e/6pKIkhd1Q9vBgCHCDx/ySlNZRYqdjWYKa0BNo0VB/89XWUFLk43k4qAkxQQgt9Ukz9Q2wUi7IcJaQ17MLQo8goaX+G19TxLrJXCty93+prMj0+/fKfVa0pURL5ViSNQ4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMA4EMM5/HCDI5oQCA5QAAAAASUVORK5CYII=</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>07d4f112-ade9-41eb-9d78-c2833160b045</rd:ReportID>
+</Report>

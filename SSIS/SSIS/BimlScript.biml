@@ -1,0 +1,86 @@
+<#@ template language="C#" tier="1"#>
+<#@ import namespace="Varigence.Biml.Extensions.SchemaManagement" #>
+<#@ import namespace="Varigence.Biml.CoreLowerer.SchemaManagement" #>
+<#@ import namespace="Varigence.Biml.Extensions" #>
+<#@ import namespace="Varigence.Languages.Biml" #>
+<#@ import namespace="Varigence.Languages.Biml.Connection" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<!-- This is the path to the directory that will be searched, all files in this dir that mnatch the file spec will be included, it must end with a \ character -->
+<# var folderpath=@"C:\Users\pedrambirounvand\Documents\Visual Studio 2015\Projects\Spotify DW\IS\J.dwautogen\"; #>
+<!--	This only seraches the directory specified if you want to recurse down a directory tree 
+		you need to change the SearchOption.TopDirectoryOnly value to SearchOption.AllDirectories
+		throughout the script -->
+<!-- This is the name of the package that will be produced -->
+<# var pkgName=@"U_MASTER" ;#>
+<!-- This is the wildcard search spec for the files that will be included in the generated package -->
+<# var FileSpec=@"*.dtsx" ;#>
+	
+	
+<Biml xmlns="http://schemas.varigence.com/biml.xsd">
+	<Connections>
+		<!-- Need to Build a file connection for each package we want to run-->
+		<# foreach (var file in Directory.GetFiles(folderpath ,FileSpec, SearchOption.TopDirectoryOnly)) { #>
+			<FileConnection Name="<#=Path.GetFileNameWithoutExtension(file).ToString().Trim()#>_FileConn" 
+							FileUsageType="ExistingFile" 
+							CreateInProject="false" 
+							FilePath="<#=folderpath#><#=Path.GetFileNameWithoutExtension(file).ToString().Trim()#>.dtsx"/>
+		<#  } #>
+	</Connections>
+		
+	<!-- Start of the package we are going to build-->
+	<Packages>
+		<Package Name="<#=pkgName#>" ConstraintMode="Parallel">
+			
+			<!-- Package level vars -->	
+			<Variables>
+				<!-- var for holding the base path that we will use to link all the connections -->	
+				<Variable DataType="String" Name="local_Base_Path_For_SSIS_Pkgs" Namespace="User">
+					<#=folderpath#>
+				</Variable>	
+			</Variables>
+				
+			<!--	There's no logging in the master package we are creating. It is assumed the sub packages have logging enabled.
+					If not you could add a logging framework here whihc would track the packages that started, succeeded and failed. -->
+				
+			<Connections>	
+				<!-- Create a Package connection for each of the sub packages we will access -->
+				<# foreach (var file in Directory.GetFiles(folderpath ,FileSpec, SearchOption.TopDirectoryOnly)) { #>	
+					<Connection ConnectionName="<#=Path.GetFileNameWithoutExtension(file)#>_FileConn" >
+						<!--	The connectionString property will be built dynamically using the local_Base_Path_For_SSIS_Pkgs VAR. 
+								This enables all the sub packages to be relocated. A change to the local_Base_Path_For_SSIS_Pkgs VAR 
+								to the new path will relink them all correctly. This makes the master package a bit more portable.-->
+						<Expressions>
+							<Expression ExternalProperty="ConnectionString">@[User::local_Base_Path_For_SSIS_Pkgs] + "<#=Path.GetFileNameWithoutExtension(file)#>.dtsx"</Expression>
+						</Expressions>
+					</Connection>
+				<#  } #>	
+							
+			</Connections>
+					
+			<Tasks>
+				<!-- Now build an ExecPkg task for every package we want to include-->
+				<# foreach (var file in Directory.GetFiles(folderpath ,FileSpec, SearchOption.TopDirectoryOnly)) { #>
+					
+					<!-- Quick trap/test to make sure we are not putting a link to the package we are building in
+							This would be bad as it would recurse into itself and probably blow up at some point. -->
+					<# if (Path.GetFileNameWithoutExtension(file) != pkgName) { 
+					    string packageName = Path.GetFileNameWithoutExtension(file).ToString().Trim();
+					    string packageConnectionName = Path.GetFileNameWithoutExtension(file).ToString().Trim() + "_FileConn" ; 
+					#>
+						
+						<!-- The Exec Task itself is rally simple. You could adjust settings here if you needed to -->
+
+						<ExecutePackage Name="<#=packageName#>">
+            				<File ConnectionName="<#=packageConnectionName#>" />
+        				</ExecutePackage>
+			
+						
+					<#  } #>	
+				<#  } #>
+			</Tasks>
+				
+				
+		</Package>
+	</Packages>
+</Biml>

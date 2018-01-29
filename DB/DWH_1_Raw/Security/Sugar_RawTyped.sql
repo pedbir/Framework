@@ -1,0 +1,33 @@
+﻿CREATE SCHEMA [Sugar_RawTyped]
+    AUTHORIZATION [dbo];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

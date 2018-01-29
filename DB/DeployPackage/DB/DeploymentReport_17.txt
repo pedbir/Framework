@@ -1,0 +1,38 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [Norm].[n_CustomerCategory]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The column [Norm].[n_CustomerCategory].[CustomerTypeCategory] is being dropped, data loss could occur.
+       The column [Norm].[n_CustomerCategory].[CustomerTypeCategoryDetail] is being dropped, data loss could occur.
+       The column [Norm].[n_CustomerCategory].[CustomerCategoryCode] on table [Norm].[n_CustomerCategory] must be added, but
+         the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not
+         work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable
+         the generation of smart-defaults as a deployment option.
+
+** User actions
+     Table rebuild
+       [Norm].[n_CustomerCategory] (Table)
+     Create
+       [Norm].[n_Planning] (Table)
+       [Norm].[n_Planning].[NCIDX_SysModifiedUTC_Norm_n_Planning] (Index)
+       [Norm].[vn_Planning] (View)
+       [Fact].[f_Planning] (View)
+     Alter
+       [Fact].[d_CustomerCategory] (View)
+       [Norm].[vn_CustomerCategory] (View)
+       [Fact].[d_Opportunity] (View)
+       [Fact].[f_Penetration] (View)
+
+** Supporting actions
+     Create
+       [Norm].[n_CustomerCategory].[NCIDX_SysModifiedUTC_Norm_n_CustomerCategory] (Index)
+
+The object [localhost] already exists in database with a different definition and will not be altered.
+The column [Norm].[n_CustomerCategory].[CustomerTypeCategory] is being dropped, data loss could occur.
+The column [Norm].[n_CustomerCategory].[CustomerTypeCategoryDetail] is being dropped, data loss could occur.
+The column [Norm].[n_CustomerCategory].[CustomerCategoryCode] on table [Norm].[n_CustomerCategory] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
+

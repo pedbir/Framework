@@ -1,0 +1,52 @@
+<#
+
+// SSIS
+  string sSSISPackageName =Convert.ToString(pkg["SSISPackageName"]);
+  string sSSISPackageGUID = Convert.ToString(pkg["SSISPackageGUID"]);
+  string sSSISConfigurationFrameWorkCatalog =Convert.ToString(pkg["SSISConfigurationFrameWorkCatalog"]);
+  string sDtsConfigEnvVarName = Convert.ToString(pkg["DtsConfigEnvironmentVariableName"]);
+  string sCDCInstanceName = Convert.ToString(pkg["CDCInstanceName"]);
+  bool bUseSSISLoggingFrameWork = Convert.ToBoolean(pkg["UseSSISLoggingFrameWork"]);
+  bool bUseIncrementalLoad = Convert.ToBoolean(pkg["SSISIncrementalLoad"]);
+  bool bUseStageTable = Convert.ToBoolean(pkg["UseStageTable"]);
+// Stage
+  string sStgSrcTblCatalog =Convert.ToString(pkg["StageSourceTableCatalog"]);
+  string sStgSrcSchemaName = Convert.ToString(pkg["StageSourceSchemaName"]);
+  string sStgSrcTblName =Convert.ToString(pkg["SourceTableName"]);
+  string sStgSrcName = Convert.ToString(pkg["StageSourceName"]);
+  string sStgSrcSQLQuery = Convert.ToString(pkg["StageSourceSQLQuery"]);
+  string sStgTblCatalog =Convert.ToString(pkg["StageTableCatalog"]);
+  string sStgSchemaName = Convert.ToString(pkg["StageSchemaName"]);
+  string sStgName = Convert.ToString(pkg["StageName"]);
+  string sStgFilterCondition = Convert.ToString(pkg["StageFilterCondition"]);
+// Source
+  string sSrcServer = Convert.ToString(pkg["SourceServer"]);
+  string sSrcTblCatalog = Convert.ToString(pkg["SourceTableCatalog"]);
+  string sSrcSchemaName = Convert.ToString(pkg["SourceSchemaName"]);
+  string sSrcTblName = Convert.ToString(pkg["SourceTableName"]);
+  string sSrcName = Convert.ToString(pkg["SourceName"]);
+  string sSourceSQLQuery = Convert.ToString(pkg["SourceSQLQuery"]);
+  string sSrcFilterCondition = Convert.ToString(pkg["SourceFilterCondition"]);
+// Destination
+  string sDstTblCatalog =Convert.ToString(pkg["DestinationTableCatalog"]);
+  string sDstSchemaName = Convert.ToString(pkg["DestinationSchemaName"]);
+  string sDstTblName =Convert.ToString(pkg["DestinationTableName"]);
+  string sDstName = Convert.ToString(pkg["DestinationName"]);
+  string sDstDeleteCondition = Convert.ToString(pkg["DestinationDeleteCondition"]);
+  // Stage Merge Component
+	string sMergeCDCExtVariables = String.Empty;
+	string sMergeExtParameters = String.Empty;
+	string sMergeExtUpDelSqlAssignment = String.Empty;
+	int iMergeExtParamOrdinal = 0; 
+	string sMergeInsertCols = String.Empty;
+	string sMergeValuesCols = String.Empty;
+	string sMergeUpdateCols = String.Empty;
+	string sMergeDiffCols = String.Empty;
+	string sMergeKeyCols = String.Empty;
+// Misc
+  string sBimlType = Convert.ToString(pkg["BimlType"]);
+  string sErrorOutputPathName = String.Empty;
+// Set Values
+     string sTruncateTableCatalog = sDstTblCatalog;
+	
+#>

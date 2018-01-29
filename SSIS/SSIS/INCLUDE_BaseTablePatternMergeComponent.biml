@@ -1,0 +1,34 @@
+
+<#
+					//insert
+					foreach (DataRow row2 in extendedFieldsTable.Rows)
+					{ 
+						if (!string.Equals("LoadBatchID", (string)row2[0], StringComparison.CurrentCultureIgnoreCase))
+							exVariables += "<Variable DataType=\"" + row2[1]+ "\" Name=\"" + row2[0] + "\" Namespace=\"User\" EvaluateAsExpression=\"true\">" + row2[2] + "</Variable>\n";
+
+						if (Convert.ToBoolean(row2[4])) 
+						{
+							exParameters += "<Parameter DataType=\"" + row2[1]+ "\" Name=\"" + exParamOrdinal + "\" VariableName=\"User." + row2[0] + "\" Direction=\"Input\"></Parameter>\n";
+							exParamOrdinal++;
+						}
+					}
+					//update
+
+					exUpDelSqlAssignment = "";
+					
+					// Delete marking based on missing rows in source should only be done to full load packages (i.e. not incremental packages such as snapshots/sliding windows)
+					// OR to packages that normally use CDC and incremental loading but do a full load once (use the base table pattern)
+					if (ssisIncrementalLoad == false || (ssisIncrementalLoad == true  && !String.IsNullOrEmpty(CDCInstanceName))) 
+					{ 
+						foreach (DataRow row2 in extendedFieldsTable.Rows)
+						{
+							if (Convert.ToBoolean(row2[5])) 
+							{
+								exParameters += "<Parameter DataType=\"" + row2[1]+ "\" Name=\"" + exParamOrdinal + "\" VariableName=\"User." + row2[0] + "\" Direction=\"Input\"></Parameter>\n";
+								exUpDelSqlAssignment += row2[0] + " = ?,";
+								exParamOrdinal++;
+							}
+						}	
+					}												
+			#>
+	

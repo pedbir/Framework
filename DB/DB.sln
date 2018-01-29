@@ -1,0 +1,130 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH_1_Raw", "DWH_1_Raw\DWH_1_Raw.sqlproj", "{AF69A245-61F9-4789-B775-D73CB0755CD5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH_0_Admin", "DWH_0_Admin\DWH_0_Admin.sqlproj", "{FEE77F06-B032-45F7-BCC0-D6B72594588B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH_2_Norm", "DWH_2_Norm\DWH_2_Norm.sqlproj", "{3A718732-59BB-49C1-86E2-7E4B156E1602}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH_3_Fact", "DWH_3_Fact\DWH_3_Fact.sqlproj", "{8957FCA3-8660-4778-92F5-FE92A6EDF80F}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DWH_6_DataAccess", "DWH_6_DataAccess\DWH_6_DataAccess.sqlproj", "{4A0F16AA-7E61-4899-A045-F2881B238107}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DevelopmentFrameworkConfig", "DevelopmentFrameworkConfig\DevelopmentFrameworkConfig.sqlproj", "{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeployPackage", "DeployPackage", "{7B21C9A0-4BCA-46BC-BB28-A35637379831}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{B007B372-AEB7-4BA7-AA6D-99D668B59820}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeployScript", "DeployScript", "{3203414A-FAD5-4B8D-A714-95C046850663}"
+	ProjectSection(SolutionItems) = preProject
+		DeployPackage\DeployScript\Deploy.ps1 = DeployPackage\DeployScript\Deploy.ps1
+		DeployPackage\DeployScript\RunSqlServerJob.ps1 = DeployPackage\DeployScript\RunSqlServerJob.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DEV", "DEV", "{A994DD9D-3D32-480D-83AB-694761273CA6}"
+	ProjectSection(SolutionItems) = preProject
+		DeployPackage\DeployScript\DEV\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\DEV\DevelopmentFrameworkConfig.publish.xml
+		DeployPackage\DeployScript\DEV\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\DEV\DWH_0_Admin.publish.xml
+		DeployPackage\DeployScript\DEV\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\DEV\DWH_1_Raw.publish.xml
+		DeployPackage\DeployScript\DEV\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\DEV\DWH_2_Norm.publish.xml
+		DeployPackage\DeployScript\DEV\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\DEV\DWH_3_Fact.publish.xml
+		DeployPackage\DeployScript\DEV\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\DEV\DWH_6_DataAccess.publish.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UAT", "UAT", "{36DA9416-AE04-470D-92DC-90980765104E}"
+	ProjectSection(SolutionItems) = preProject
+		DeployPackage\DeployScript\UAT\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\UAT\DevelopmentFrameworkConfig.publish.xml
+		DeployPackage\DeployScript\UAT\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\UAT\DWH_0_Admin.publish.xml
+		DeployPackage\DeployScript\UAT\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\UAT\DWH_1_Raw.publish.xml
+		DeployPackage\DeployScript\UAT\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\UAT\DWH_2_Norm.publish.xml
+		DeployPackage\DeployScript\UAT\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\UAT\DWH_3_Fact.publish.xml
+		DeployPackage\DeployScript\UAT\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\UAT\DWH_6_DataAccess.publish.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PROD", "PROD", "{52945CAC-C71A-44F1-ADA2-697E18F5E629}"
+	ProjectSection(SolutionItems) = preProject
+		DeployPackage\DeployScript\PROD\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\PROD\DevelopmentFrameworkConfig.publish.xml
+		DeployPackage\DeployScript\PROD\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\PROD\DWH_0_Admin.publish.xml
+		DeployPackage\DeployScript\PROD\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\PROD\DWH_1_Raw.publish.xml
+		DeployPackage\DeployScript\PROD\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\PROD\DWH_2_Norm.publish.xml
+		DeployPackage\DeployScript\PROD\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\PROD\DWH_3_Fact.publish.xml
+		DeployPackage\DeployScript\PROD\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\PROD\DWH_6_DataAccess.publish.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		UAT|Any CPU = UAT|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{AF69A245-61F9-4789-B775-D73CB0755CD5}.UAT|Any CPU.Deploy.0 = UAT|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{FEE77F06-B032-45F7-BCC0-D6B72594588B}.UAT|Any CPU.Deploy.0 = UAT|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{3A718732-59BB-49C1-86E2-7E4B156E1602}.UAT|Any CPU.Deploy.0 = UAT|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{8957FCA3-8660-4778-92F5-FE92A6EDF80F}.UAT|Any CPU.Deploy.0 = UAT|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.UAT|Any CPU.ActiveCfg = UAT|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.UAT|Any CPU.Build.0 = UAT|Any CPU
+		{4A0F16AA-7E61-4899-A045-F2881B238107}.UAT|Any CPU.Deploy.0 = UAT|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.UAT|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.UAT|Any CPU.Build.0 = Debug|Any CPU
+		{C67B2AA0-96D5-4361-A77E-2B4E5D9ECB03}.UAT|Any CPU.Deploy.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B007B372-AEB7-4BA7-AA6D-99D668B59820} = {7B21C9A0-4BCA-46BC-BB28-A35637379831}
+		{3203414A-FAD5-4B8D-A714-95C046850663} = {7B21C9A0-4BCA-46BC-BB28-A35637379831}
+		{A994DD9D-3D32-480D-83AB-694761273CA6} = {3203414A-FAD5-4B8D-A714-95C046850663}
+		{36DA9416-AE04-470D-92DC-90980765104E} = {3203414A-FAD5-4B8D-A714-95C046850663}
+		{52945CAC-C71A-44F1-ADA2-697E18F5E629} = {3203414A-FAD5-4B8D-A714-95C046850663}
+	EndGlobalSection
+EndGlobal

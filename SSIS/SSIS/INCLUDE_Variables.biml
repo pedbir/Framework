@@ -1,0 +1,38 @@
+<Variables>
+	<Variable DataType="Int32" Name="DWID">3</Variable>
+	<Variable DataType="Int32" Name="SysExecutionLog_key">0</Variable>
+	<Variable DataType="Int32" Name="SysBatchLogExecutionLog_key" InheritFromPackageParentConfigurationString="SysExecutionLog_key">0</Variable>
+	<Variable DataType="String" Name="PackagePath">C:\auto.gen\ETL\bin\</Variable>
+	<Variable DataType="String" Name="FilePath">C:\auto.gen\ETL\ImportFiles\</Variable>
+	<Variable DataType="Int32" Name="RowsDeleted">0</Variable>
+	<Variable DataType="Int32" Name="RowsError">0</Variable>
+	<Variable DataType="Int32" Name="RowsIgnore">0</Variable>
+	<Variable DataType="Int32" Name="RowsSourceRead">0</Variable>
+	<Variable DataType="Int32" Name="RowsRead">0</Variable>
+	<Variable DataType="String" Name="PackageLastExecuted">1900-01-01</Variable>
+     <Variable DataType="DateTime" Name="PackageLastExecutedNew">1900-01-01</Variable>
+     <Variable DataType="DateTime" Name="SysDatetimeInsertedUTC" EvaluateAsExpression="true">GETUTCDATE()</Variable>
+     <Variable DataType="DateTime" Name="SysDatetimeUpdatedUTC" EvaluateAsExpression="true">GETUTCDATE()</Variable>
+     <Variable DataType="DateTime" Name="SysModifiedUTC" EvaluateAsExpression="true">GETUTCDATE()</Variable>
+     <Variable DataType="DateTime" Name="SysDatetimeDeletedUTC" EvaluateAsExpression="true">GETUTCDATE()</Variable>
+     <Variable DataType="Int32" Name="PackageLastExecutedTimeOffset">-30</Variable>
+	<Variable DataType="Int32" Name="RowsNewVersion">0</Variable>
+	<Variable DataType="Int32" Name="RowsUpdateInferred">0</Variable>
+	<Variable DataType="Int32" Name="RowsNewVersionError">0</Variable>
+	<Variable DataType="Int32" Name="RowsUpdateOldError">0</Variable>
+	<Variable DataType="Int32" Name="RowsUpdateOld">0</Variable>
+	<Variable DataType="Int32" Name="RowsUpdateInferredError">0</Variable>
+	<Variable DataType="Int32" Name="RowsNewMemberError">0</Variable>
+	<Variable DataType="Int32" Name="RowsNewMember">0</Variable>
+    <Variable DataType="Int32" Name="RowsNewInferredMemberError">0</Variable>
+    <Variable DataType="Int32" Name="RowsInserted" EvaluateAsExpression="true">@[User::RowsNewVersion]+@[User::RowsNewMember]-(@[User::RowsNewMemberError]+@[User::RowsNewVersionError])</Variable>
+	<Variable DataType="Int32" Name="RowsUpdated" EvaluateAsExpression="true">(@[User::RowsUpdateOld]+@[User::RowsUpdateInferred])-(@[User::RowsUpdateInferredError] + @[User::RowsUpdateOldError])</Variable>
+    <Variable DataType="String" Name="SourceTableCatalog"><#=pkg["SourceTableCatalog"]#></Variable>
+    <Variable DataType="String" Name="SourceSchemaName"><#=pkg["SourceSchemaName"]#></Variable>
+    <Variable DataType="String" Name="SourceTableName"><#=pkg["SourceTableName"]#></Variable>
+    <Variable DataType="String" Name="DestinationTableCatalog"><#=pkg["DestinationTableCatalog"]#></Variable>
+    <Variable DataType="String" Name="DestinationSchemaName"><#=pkg["DestinationSchemaName"]#></Variable>
+    <Variable DataType="String" Name="DestinationTableName"><#=pkg["DestinationTableName"]#></Variable>
+    <Variable DataType="String" Name="SsisIncrementalLoad"><#=pkg["SSISIncrementalLoad"]#></Variable>
+    <Variable DataType="String" Name="SsisLoadType"><#=pkg["BimlType"]#></Variable>
+</Variables>

@@ -1,0 +1,26 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Alter
+       [Norm_d].[Access] (View)
+       [Norm_d].[CustomerCategory] (View)
+     Create
+       [Norm_d].[Planning] (View)
+
+** Supporting actions
+
+The object [Cava] already exists in database with a different definition and will not be altered.
+The object [IFSPROD] already exists in database with a different definition and will not be altered.
+The object [NBS] already exists in database with a different definition and will not be altered.
+The object [NETADMIN] already exists in database with a different definition and will not be altered.
+The object [SUGAR] already exists in database with a different definition and will not be altered.
+The object [localhost] already exists in database with a different definition and will not be altered.
+

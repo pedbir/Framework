@@ -1,0 +1,2 @@
+<Variable DataType="Int64" Namespace="User" Name="LastRecId">0</Variable>
+<Variable DataType="String" Namespace="User" Name="PackageLastExecuted">1900-01-01</Variable>

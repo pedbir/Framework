@@ -1,0 +1,5 @@
+<ExecuteSQL ConnectionName="<#=sTruncateTableCatalog #>" Name="TruncateTable" ResultSet="None">
+	<DirectInput>
+    TRUNCATE TABLE <#=sDstName #>
+	</DirectInput>
+</ExecuteSQL>

@@ -1,0 +1,3 @@
+﻿CREATE SCHEMA [DWH_1_RawTyped]
+    AUTHORIZATION [dbo];
+
