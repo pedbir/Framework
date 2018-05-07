@@ -78,29 +78,10 @@
     <Folder Include="Properties" />
     <Folder Include="Storage\" />
     <Folder Include="Security\" />
-    <Folder Include="CityNetwork\" />
-    <Folder Include="CityNetwork\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Storage\Norm_Index.sql" />
     <Build Include="Storage\Norm_Data.sql" />
-    <Build Include="Security\FinanceOLAP.sql" />
-    <Build Include="Security\ExOpen.sql" />
-    <Build Include="Security\QS.sql" />
-    <Build Include="Security\DEMO.sql" />
-    <Build Include="Security\FundOLAP.sql" />
-    <Build Include="CityNetwork\Views\d_Project.sql" />
-    <Build Include="CityNetwork\Views\d_Opportunity.sql" />
-    <Build Include="CityNetwork\Views\d_Geography.sql" />
-    <Build Include="CityNetwork\Views\d_Customer.sql" />
-    <Build Include="CityNetwork\Views\d_Area.sql" />
-    <Build Include="CityNetwork\Views\f_Penetration.sql" />
-    <Build Include="CityNetwork\Views\f_Subscription.sql" />
-    <Build Include="Security\CityNetwork.sql" />
-    <Build Include="CityNetwork\Views\d_CustomerCategory.sql" />
-    <Build Include="CityNetwork\Views\d_Address.sql" />
-    <Build Include="CityNetwork\Views\d_Employee_SalesResponsible.sql" />
-    <Build Include="CityNetwork\Views\d_SalesOrder.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DWH_3_Fact\DWH_3_Fact.sqlproj">

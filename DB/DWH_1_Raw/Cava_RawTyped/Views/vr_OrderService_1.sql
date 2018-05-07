@@ -1,5 +1,0 @@
-﻿CREATE VIEW Cava_RawTyped.vr_OrderService AS
-							WITH temp AS (SELECT *, _isLast = LEAD(0,1,1) OVER (PARTITION BY OrderService_bkey ORDER BY SysValidFromDateTime) FROM   Cava_RawTyped.r_OrderService)
-							SELECT  t1.OrderService_key, t2.SysExecutionLog_key, t2.SysDatetimeInsertedUTC, t2.SysDatetimeUpdatedUTC, t2.SysDatetimeDeletedUTC, t2.SysModifiedUTC, t2.SysIsInferred, t2.SysValidFromDateTime, t2.SysSrcGenerationDateTime, t2.OrderService_bkey, t2.OrderID, t2.ServiceID, t2.Currency, t2.NRCC, t2.MRCC, t2.InstallationReady, t2.FirstInvoiceDate, t2.LastInvoiceDate, t2.TerminationNoticeDate, t2.ReplaceNoticeDate, t2.EndOfService, t2.ServicestatusID, t2.SLA, t2.Cap, t2.UnitID, t2.ConnectionID, t2.IsReneg, t2.SiteID, t2.CustomerServiceName, t1._isLast
-							FROM temp t1 
-							INNER JOIN temp t2 ON t2.OrderService_bkey = t1.OrderService_bkey AND t2._isLast = 1

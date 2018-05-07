@@ -128,27 +128,11 @@
     <Folder Include="Storage\" />
     <Folder Include="Security\" />
     <Folder Include="Fact\" />
-    <Folder Include="Fact\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Storage\Fact_Data.sql" />
     <Build Include="Storage\Fact_Index.sql" />
     <Build Include="Security\Fact.sql" />
-    <Build Include="Fact\Tables\f_Subscription.sql" />
-    <Build Include="Fact\Tables\f_Penetration.sql" />
-    <Build Include="Fact\Tables\d_SugarEnum.sql" />
-    <Build Include="Fact\Tables\d_SalesOrder.sql" />
-    <Build Include="Fact\Tables\d_Project.sql" />
-    <Build Include="Fact\Tables\d_Opportunity.sql" />
-    <Build Include="Fact\Tables\d_Geography.sql" />
-    <Build Include="Fact\Tables\d_Customer.sql" />
-    <Build Include="Fact\Tables\d_Calendar.sql" />
-    <Build Include="Fact\Tables\d_Area.sql" />
-    <Build Include="Fact\Tables\d_CustomerCategory.sql" />
-    <Build Include="Fact\Tables\f_Planning.sql" />
-    <Build Include="Fact\Tables\d_Employee.sql" />
-    <Build Include="Fact\Tables\d_Address.sql" />
-    <Build Include="Fact\Tables\d_Scenario.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />

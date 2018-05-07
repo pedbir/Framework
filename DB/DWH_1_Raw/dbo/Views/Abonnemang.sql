@@ -1,6 +1,9 @@
 ﻿
-CREATE VIEW [Netadmin].[Abonnemang]
+CREATE VIEW dbo.[Abonnemang]
 AS
+
+SELECT 1 AS apa
+/*
 
 SELECT  SysValidFromDateTime = CAST(abochanged AS DATETIME2(0))
       , SysSrcGenerationDateTime = CAST(GETUTCDATE() AS DATETIME2(0))
@@ -31,3 +34,6 @@ SELECT
 FROM netadmin.abonnemang
 WHERE abotmpid <> 2585
 ') oq;
+
+
+*/

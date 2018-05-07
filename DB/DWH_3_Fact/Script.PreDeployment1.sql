@@ -31,6 +31,3 @@ BEGIN
 	set @LastRowNo= (select top 1 rowNo from #temp where rowNo > @LastRowNo order by rowNo)
 END
 */
-
-
-TRUNCATE TABLE Fact.f_Planning

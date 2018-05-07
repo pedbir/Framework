@@ -73,10 +73,16 @@ BEGIN
 	set @LastRowNo= (select top 1 rowNo from #temp where rowNo > @LastRowNo order by rowNo)
 END
 */
-
-
-TRUNCATE TABLE Fact.f_Planning
 GO
+
+GO
+PRINT N'Creating [Fact]...';
+
+
+GO
+CREATE SCHEMA [Fact]
+    AUTHORIZATION [dbo];
+
 
 GO
 PRINT N'Update complete.';

@@ -2,6 +2,9 @@
 CREATE VIEW [Norm_d].[Access]
 AS
 
+SELECT 1 AS apa
+
+/*
 SELECT ra.SysDatetimeDeletedUTC
      , ra.SysModifiedUTC     
      , ra.SysValidFromDateTime
@@ -15,3 +18,4 @@ SELECT ra.SysDatetimeDeletedUTC
      , AccessCategory_Lvl5_bkey		= ISNULL(NULLIF(ra.adrkodid5, 0), -1)
 FROM Netadmin_RawTyped.r_Adress ra
 WHERE ra.Adress_bkey <> -1
+*/
