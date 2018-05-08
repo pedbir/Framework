@@ -26,34 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeployScript", "DeployScrip
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DEV", "DEV", "{A994DD9D-3D32-480D-83AB-694761273CA6}"
-	ProjectSection(SolutionItems) = preProject
-		DeployPackage\DeployScript\DEV\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\DEV\DevelopmentFrameworkConfig.publish.xml
-		DeployPackage\DeployScript\DEV\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\DEV\DWH_0_Admin.publish.xml
-		DeployPackage\DeployScript\DEV\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\DEV\DWH_1_Raw.publish.xml
-		DeployPackage\DeployScript\DEV\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\DEV\DWH_2_Norm.publish.xml
-		DeployPackage\DeployScript\DEV\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\DEV\DWH_3_Fact.publish.xml
-		DeployPackage\DeployScript\DEV\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\DEV\DWH_6_DataAccess.publish.xml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UAT", "UAT", "{36DA9416-AE04-470D-92DC-90980765104E}"
-	ProjectSection(SolutionItems) = preProject
-		DeployPackage\DeployScript\UAT\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\UAT\DevelopmentFrameworkConfig.publish.xml
-		DeployPackage\DeployScript\UAT\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\UAT\DWH_0_Admin.publish.xml
-		DeployPackage\DeployScript\UAT\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\UAT\DWH_1_Raw.publish.xml
-		DeployPackage\DeployScript\UAT\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\UAT\DWH_2_Norm.publish.xml
-		DeployPackage\DeployScript\UAT\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\UAT\DWH_3_Fact.publish.xml
-		DeployPackage\DeployScript\UAT\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\UAT\DWH_6_DataAccess.publish.xml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PROD", "PROD", "{52945CAC-C71A-44F1-ADA2-697E18F5E629}"
-	ProjectSection(SolutionItems) = preProject
-		DeployPackage\DeployScript\PROD\DevelopmentFrameworkConfig.publish.xml = DeployPackage\DeployScript\PROD\DevelopmentFrameworkConfig.publish.xml
-		DeployPackage\DeployScript\PROD\DWH_0_Admin.publish.xml = DeployPackage\DeployScript\PROD\DWH_0_Admin.publish.xml
-		DeployPackage\DeployScript\PROD\DWH_1_Raw.publish.xml = DeployPackage\DeployScript\PROD\DWH_1_Raw.publish.xml
-		DeployPackage\DeployScript\PROD\DWH_2_Norm.publish.xml = DeployPackage\DeployScript\PROD\DWH_2_Norm.publish.xml
-		DeployPackage\DeployScript\PROD\DWH_3_Fact.publish.xml = DeployPackage\DeployScript\PROD\DWH_3_Fact.publish.xml
-		DeployPackage\DeployScript\PROD\DWH_6_DataAccess.publish.xml = DeployPackage\DeployScript\PROD\DWH_6_DataAccess.publish.xml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,12 +9,12 @@
   DTS:DTSID="{C977214A-C761-4CD0-B6D6-33B7B168F3F0}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="13.0.4001.0"
+  DTS:LastModifiedProductVersion="14.0.3008.28"
   DTS:LocaleID="1053"
   DTS:ObjectName="Master"
   DTS:ProtectionLevel="0"
-  DTS:VersionBuild="29"
-  DTS:VersionGUID="{A8912099-7825-4BC1-A19E-ECDBC75B04E8}"
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{434F957D-9BB0-4CF5-8DCE-39CE90289434}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -29,16 +29,6 @@
           DTS:ConnectionString="server=localhost;initial catalog=DWH_0_Admin;provider=SQLNCLI11;integrated security=SSPI;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[DWH_1_Raw]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{3E563D0C-B059-41C0-94A5-7187ED973F96}"
-      DTS:ObjectName="DWH_1_Raw">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_1_Raw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Configurations>
     <DTS:Configuration
@@ -48,12 +38,6 @@
       DTS:CreationName=""
       DTS:DTSID="{362BAA61-AE81-420D-8932-85627BBAB2F1}"
       DTS:ObjectName="J_dwautogen_SSISAdminConfig" />
-    <DTS:Configuration
-      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;DWH_1_Raw&quot;;"
-      DTS:ConfigurationType="7"
-      DTS:CreationName=""
-      DTS:DTSID="{0C95AB4F-2559-4718-80A6-478812647E95}"
-      DTS:ObjectName="DWH_1_Raw" />
     <DTS:Configuration
       DTS:ConfigurationString="SysExecutionLog_key"
       DTS:ConfigurationVariable="\Package.Variables[User::SysBatchLogExecutionLog_key].Properties[Value]"
@@ -365,7 +349,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeDeletedUTC">
       <DTS:VariableValue
-        DTS:DataType="7">1/16/2018 2:20:44 PM</DTS:VariableValue>
+        DTS:DataType="7">5/8/2018 8:14:08 AM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -376,7 +360,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeInsertedUTC">
       <DTS:VariableValue
-        DTS:DataType="7">1/16/2018 2:20:44 PM</DTS:VariableValue>
+        DTS:DataType="7">5/8/2018 8:14:08 AM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -387,7 +371,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeUpdatedUTC">
       <DTS:VariableValue
-        DTS:DataType="7">1/16/2018 2:20:44 PM</DTS:VariableValue>
+        DTS:DataType="7">5/8/2018 8:14:08 AM</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -407,7 +391,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="SysModifiedUTC">
       <DTS:VariableValue
-        DTS:DataType="7">1/16/2018 2:20:44 PM</DTS:VariableValue>
+        DTS:DataType="7">5/8/2018 8:14:08 AM</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:LoggingOptions
@@ -782,77 +766,7 @@
       DTS:LocaleID="-1"
       DTS:ObjectName="SequenceContainer">
       <DTS:Variables />
-      <DTS:Executables>
-        <DTS:Executable
-          DTS:refId="Package\SequenceContainer\EPT_Master_Fact"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{42A33379-0FC6-44DB-8C4B-0203CBD05715}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="EPT_Master_Fact"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>Master_Fact.dtsx</PackageName>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\SequenceContainer\EPT_Master_Norm"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{D673B247-E0C4-431C-A827-61D8117E2F52}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="EPT_Master_Norm"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>Master_Norm.dtsx</PackageName>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-        <DTS:Executable
-          DTS:refId="Package\SequenceContainer\EPT_Master_RawTyped"
-          DTS:CreationName="Microsoft.ExecutePackageTask"
-          DTS:Description="Execute Package Task"
-          DTS:DTSID="{20F0A3D5-54CC-4A51-8729-028B41E158E8}"
-          DTS:ExecutableType="Microsoft.ExecutePackageTask"
-          DTS:LocaleID="-1"
-          DTS:ObjectName="EPT_Master_RawTyped"
-          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-          <DTS:Variables />
-          <DTS:ObjectData>
-            <ExecutePackageTask>
-              <UseProjectReference>True</UseProjectReference>
-              <PackageName>Master_RawTyped.dtsx</PackageName>
-            </ExecutePackageTask>
-          </DTS:ObjectData>
-        </DTS:Executable>
-      </DTS:Executables>
-      <DTS:PrecedenceConstraints>
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\SequenceContainer.PrecedenceConstraints[Constraint]"
-          DTS:CreationName=""
-          DTS:DTSID="{794F3F2A-B76C-4040-A5D2-099240E8786F}"
-          DTS:From="Package\SequenceContainer\EPT_Master_RawTyped"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint"
-          DTS:To="Package\SequenceContainer\EPT_Master_Norm" />
-        <DTS:PrecedenceConstraint
-          DTS:refId="Package\SequenceContainer.PrecedenceConstraints[Constraint 1]"
-          DTS:CreationName=""
-          DTS:DTSID="{3D97C01E-977C-4DC0-9CFE-92A208267ADD}"
-          DTS:From="Package\SequenceContainer\EPT_Master_Norm"
-          DTS:LogicalAnd="True"
-          DTS:ObjectName="Constraint 1"
-          DTS:To="Package\SequenceContainer\EPT_Master_Fact" />
-      </DTS:PrecedenceConstraints>
+      <DTS:Executables />
     </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
@@ -1139,62 +1053,6 @@
           Size="180,42"
           Id="Package\EPT Log Package end"
           TopLeft="25.5000000000001,723.5" />
-        <NodeLayout
-          Size="160,42"
-          Id="Package\SequenceContainer\EPT_Master_Fact"
-          TopLeft="21.5,209.5" />
-        <NodeLayout
-          Size="192,42"
-          Id="Package\SequenceContainer\EPT_Master_Norm"
-          TopLeft="5.50000000000003,107.5" />
-        <NodeLayout
-          Size="189,42"
-          Id="Package\SequenceContainer\EPT_Master_RawTyped"
-          TopLeft="7.00000000000001,5.5" />
-        <EdgeLayout
-          Id="Package\SequenceContainer.PrecedenceConstraints[Constraint]"
-          TopLeft="101.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\SequenceContainer.PrecedenceConstraints[Constraint 1]"
-          TopLeft="101.5,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
