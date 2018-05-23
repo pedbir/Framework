@@ -14,20 +14,15 @@
       <Query>
         <DataSourceName>DWH_0_Admin</DataSourceName>
         <QueryParameters>
-          <QueryParameter Name="@PackageName">
-            <Value>=Parameters!PackageName.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ExecutionStart">
-            <Value>=Parameters!ExecutionStart.Value</Value>
-          </QueryParameter>
-          <QueryParameter Name="@ExecutionEnd">
-            <Value>=Parameters!ExecutionEnd.Value</Value>
+          <QueryParameter Name="@BatchId">
+            <Value>=Parameters!BatchId.Value</Value>
           </QueryParameter>
         </QueryParameters>
-        <CommandText>WITH tblChild AS(
+        <CommandText>
+WITH tblChild AS(
 	SELECT * 
 	FROM Logging.PackageExecutionV pev
-	WHERE pev.PackageName IN (@PackageName) AND pev.ExecutionStart BETWEEN @ExecutionStart AND @ExecutionEnd
+	WHERE pev.SysExecutionLog_key = @BatchId
 	UNION ALL
 	SELECT pev1.*
 	FROM Logging.PackageExecutionV pev1
@@ -51,6 +46,10 @@ SELECT pev.PackageName
      , pev.SysBatchLogExecutionLog_key 
 	 , pev.PackageID
      , pev.ExecutionID     
+	 , pev.EventDescription
+,pev.SourceName
+		 ,pev.SourceView
+		 ,pev.DestinationTable
 FROM tblChild pev
 ORDER BY pev.SysExecutionLog_key DESC</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
@@ -128,18 +127,20 @@ ORDER BY pev.SysExecutionLog_key DESC</CommandText>
           <DataField>ExecutionID</DataField>
           <rd:TypeName>System.Guid</rd:TypeName>
         </Field>
-      </Fields>
-    </DataSet>
-    <DataSet Name="Package">
-      <Query>
-        <DataSourceName>DWH_0_Admin</DataSourceName>
-        <CommandText>SELECT DISTINCT p.PackageName     
-FROM Logging.Package p
-ORDER BY PackageName</CommandText>
-      </Query>
-      <Fields>
-        <Field Name="PackageName">
-          <DataField>PackageName</DataField>
+        <Field Name="EventDescription">
+          <DataField>EventDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SourceName">
+          <DataField>SourceName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SourceView">
+          <DataField>SourceView</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DestinationTable">
+          <DataField>DestinationTable</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
@@ -156,23 +157,7 @@ ORDER BY PackageName</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>PackageExecution (</Value>
-                    <Style>
-                      <FontFamily>Segoe UI Light</FontFamily>
-                      <FontSize>24pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!Environment.Value</Value>
-                    <Style>
-                      <FontFamily>Segoe UI Light</FontFamily>
-                      <FontSize>24pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>)</Value>
+                    <Value>Package Execution</Value>
                     <Style>
                       <FontFamily>Segoe UI Light</FontFamily>
                       <FontSize>24pt</FontSize>
@@ -184,9 +169,12 @@ ORDER BY PackageName</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
-            <Height>0.43in</Height>
-            <Width>6.86459in</Width>
+            <Top>0.01389in</Top>
+            <Left>0.86111in</Left>
+            <Height>0.84722in</Height>
+            <Width>2.95834in</Width>
             <Style>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -197,55 +185,110 @@ ORDER BY PackageName</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
+                  <Width>0.70834in</Width>
+                </TablixColumn>
+                <TablixColumn>
                   <Width>3.625in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.63542in</Width>
+                  <Width>0.71875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.375in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.83333in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.22917in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.11458in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.69791in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.70833in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>0.89583in</Width>
+                  <Width>1.34375in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.85417in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.84375in</Width>
+                  <Width>0.7in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.82292in</Width>
+                  <Width>0.7in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.6875in</Width>
+                  <Width>0.7in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.38542in</Width>
+                  <Width>0.7in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.54167in</Width>
+                  <Width>0.7in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.7in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.22917in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.22917in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>4.44792in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.22in</Height>
+                  <Height>0.25in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox13">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Exec ID</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="textbox2">
@@ -257,10 +300,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>Package Name</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -273,10 +316,29 @@ ORDER BY PackageName</CommandText>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -297,15 +359,15 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>Status</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -313,90 +375,29 @@ ORDER BY PackageName</CommandText>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox85">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox85</rd:DefaultName>
-                          <Style>
-                            <Border>
+                            </Border>
+                            <TopBorder>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="textbox16">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Duration</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>11pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <FontFamily />
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>textbox5</rd:DefaultName>
-                          <Style>
-                            <Border>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -417,10 +418,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>Start</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -433,10 +434,29 @@ ORDER BY PackageName</CommandText>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -448,74 +468,55 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="End2">
+                        <Textbox Name="textbox16">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>End</Value>
+                                  <Value>Duration</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <FontFamily />
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="End">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>*Detials</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#666666</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
+                            </Border>
+                            <TopBorder>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -536,10 +537,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Read</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -550,22 +551,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox6</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -586,10 +597,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Inserted</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -600,17 +611,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox7</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -631,10 +657,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Updated</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -645,17 +671,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox8</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -676,10 +717,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Deleted</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -690,17 +731,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox9</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -721,10 +777,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Ignored</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -735,17 +791,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox10</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -766,10 +837,10 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>#Error</Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -780,22 +851,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox11</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -807,19 +888,19 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="textbox13">
+                        <Textbox Name="Textbox21">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Server</Value>
+                                  <Value>Source </Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -828,25 +909,33 @@ ORDER BY PackageName</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>textbox13</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
+                          <rd:DefaultName>Textbox21</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
-                            <FontFamily />
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -857,19 +946,19 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="textbox14">
+                        <Textbox Name="Textbox19">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>User Name</Value>
+                                  <Value>Destination </Value>
                                   <Style>
-                                    <FontFamily />
+                                    <FontFamily>calibri</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>#666666</Color>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -878,19 +967,91 @@ ORDER BY PackageName</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>textbox14</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
+                          <rd:DefaultName>Textbox19</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
-                            <FontFamily />
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Error Description</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>DimGray</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -902,8 +1063,63 @@ ORDER BY PackageName</CommandText>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.21in</Height>
+                  <Height>0.25in</Height>
                   <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SysExecutionLog_key">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SysExecutionLog_key.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SysExecutionLog_key</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="PackageName">
@@ -913,10 +1129,9 @@ ORDER BY PackageName</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!PackageName.Value &amp; " (" &amp; Fields!SysExecutionLog_key.Value &amp; ") "</Value>
+                                  <Value>=Fields!PackageName.Value</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -930,12 +1145,30 @@ ORDER BY PackageName</CommandText>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
-                            <PaddingLeft>= 2 + Level() * 15 &amp; "pt"</PaddingLeft>
+                            <PaddingLeft>= 2 + Level() * 10 &amp; "pt"</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
@@ -954,134 +1187,13 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Fields!Status.Value + IIF(Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive) &gt; 0, " with Data Error", "")</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <FontWeight>ExtraBold</FontWeight>
                                     <Color>=IIF(Fields!Status.Value = "Failure", "Red",
 	IIF(Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive) &gt; 0, "Orange",
 		IIF(Fields!Status.Value = "Success", "Green", "#333333")
 		)
 	)</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Status</rd:DefaultName>
-                          <ActionInfo>
-                            <Actions>
-                              <Action>
-                                <Drillthrough>
-                                  <ReportName>PackageExecutionDetail</ReportName>
-                                  <Parameters>
-                                    <Parameter Name="executionid">
-                                      <Value>=Fields!ExecutionID.Value</Value>
-                                    </Parameter>
-                                    <Parameter Name="Environment">
-                                      <Value>=Parameters!Environment.Value</Value>
-                                    </Parameter>
-                                  </Parameters>
-                                </Drillthrough>
-                              </Action>
-                            </Actions>
-                          </ActionInfo>
-                          <ToolTip>Click to see package execution detail</ToolTip>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox86">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=IIF(Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive) &gt; 0, "(" &amp; Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive) &amp; ")", "")</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>ExtraBold</FontWeight>
-                                    <Color>=IIF(Fields!Status.Value = "Failure", "Red",
-	IIF(Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive) &gt; 0, "Orange",
-		IIF(Fields!Status.Value = "Success", "Green", "#333333")
-		)
-	)</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox86</rd:DefaultName>
-                          <ActionInfo>
-                            <Actions>
-                              <Action>
-                                <Drillthrough>
-                                  <ReportName>PackageExecutionDataError</ReportName>
-                                  <Parameters>
-                                    <Parameter Name="SysExecutionLogKey">
-                                      <Value>=Fields!SysExecutionLog_key.Value</Value>
-                                    </Parameter>
-                                    <Parameter Name="Environment">
-                                      <Value>=Parameters!Environment.Value</Value>
-                                    </Parameter>
-                                  </Parameters>
-                                </Drillthrough>
-                              </Action>
-                            </Actions>
-                          </ActionInfo>
-                          <ToolTip>Click to see data error records</ToolTip>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="DurationFormatted">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!DurationFormatted.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Normal</FontWeight>
-                                    <Format>n0</Format>
-                                    <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1090,14 +1202,33 @@ ORDER BY PackageName</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>DurationFormatted</rd:DefaultName>
+                          <rd:DefaultName>Status</rd:DefaultName>
+                          <ToolTip>Click to see package execution detail</ToolTip>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1118,15 +1249,14 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=IIF(IsNothing(Fields!ExecutionStart.Value), Now(), Fields!ExecutionStart.Value)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>yyyy-MM-dd hh:mm:ss</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -1134,10 +1264,28 @@ ORDER BY PackageName</CommandText>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1149,74 +1297,54 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ExecutionEnd2">
+                        <Textbox Name="DurationFormatted">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=IIF(IsNothing(Fields!ExecutionEnd.Value), Now, Fields!ExecutionEnd.Value)</Value>
+                                  <Value>=Fields!DurationFormatted.Value</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <Format>yyyy-MM-dd hh:mm:ss</Format>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ExecutionEnd</rd:DefaultName>
+                          <rd:DefaultName>DurationFormatted</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox15">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox15</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1236,8 +1364,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsRead.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1249,22 +1376,31 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsRead</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1285,8 +1421,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsInserted.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1298,17 +1433,31 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsInserted</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1329,8 +1478,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsUpdated.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1342,17 +1490,31 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsUpdated</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1373,8 +1535,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsDeleted.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1386,17 +1547,31 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsDeleted</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1417,8 +1592,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsIgnored.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1430,17 +1604,31 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsIgnored</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1461,8 +1649,7 @@ ORDER BY PackageName</CommandText>
                                 <TextRun>
                                   <Value>=Sum(Fields!RowsError.Value, "table1_Details_Group", Recursive)</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>calibri</FontFamily>
                                     <Format>n0</Format>
                                     <Color>#333333</Color>
                                   </Style>
@@ -1474,445 +1661,32 @@ ORDER BY PackageName</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>RowsIgnored</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="MachineName">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!MachineName.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>MachineName</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
-                          <Style>
-                            <Border>
+                            </Border>
+                            <TopBorder>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="UserName">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!UserName.Value</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>UserName</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>true</Hidden>
-                            <ToggleItem>End</ToggleItem>
-                          </Visibility>
-                          <Style>
-                            <Border>
+                            <RightBorder>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.25in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox4">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Summery</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox5">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox5</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox11">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox12">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Dateadd(DateInterval.Second,DateDiff(DateInterval.Second, Min(Fields!ExecutionStart.Value), Max(Fields!ExecutionEnd.Value)), CDate("1900-01-01"))</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Format>hh:mm:ss</Format>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox12</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="ExecutionStart2">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=IIF(IsNothing(Min(Fields!ExecutionStart.Value)), Now, Min(Fields!ExecutionStart.Value))</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Format>yyyy-MM-dd hh:mm:ss</Format>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>ExecutionStart</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="ExecutionEnd3">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=IIF(IsNothing(Max(Fields!ExecutionEnd.Value)), Now, Max(Fields!ExecutionEnd.Value))</Value>
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Format>yyyy-MM-dd hh:mm:ss</Format>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>ExecutionEnd</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <FontFamily />
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox19">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox19</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox20">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox20</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
                               <Width>1pt</Width>
-                            </LeftBorder>
+                            </RightBorder>
+                            <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1923,219 +1697,16 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox21">
+                        <Textbox Name="SourceView">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!SourceView.Value</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox21</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox22">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox22</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox25">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox25</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox26">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox26</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox27">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                    <Color>#333333</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox27</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox28">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
+                                    <FontFamily>calibri</FontFamily>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2145,20 +1716,32 @@ ORDER BY PackageName</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox28</rd:DefaultName>
+                          <rd:DefaultName>SourceView</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
                             <LeftBorder>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                               <Width>1pt</Width>
                             </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -2169,19 +1752,16 @@ ORDER BY PackageName</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox29">
+                        <Textbox Name="DestinationTable">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!DestinationTable.Value</Value>
                                   <Style>
-                                    <FontFamily />
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
+                                    <FontFamily>calibri</FontFamily>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -2191,20 +1771,94 @@ ORDER BY PackageName</CommandText>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <rd:DefaultName>DestinationTable</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                            </Border>
-                            <BottomBorder>
                               <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
                             </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EventDescription">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SourceName.Value &amp; IIF(Fields!EventDescription.Value is nothing, nothing, vbcrlf)  &amp; Trim(Fields!EventDescription.Value)</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EventDescription</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -2213,7 +1867,6 @@ ORDER BY PackageName</CommandText>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -2248,31 +1901,69 @@ ORDER BY PackageName</CommandText>
                   <TablixMembers>
                     <TablixMember />
                   </TablixMembers>
-                  <Visibility>
-                    <Hidden>true</Hidden>
-                    <ToggleItem>PackageName</ToggleItem>
-                  </Visibility>
                   <DataElementName>Detail_Collection</DataElementName>
                   <DataElementOutput>Output</DataElementOutput>
                   <KeepTogether>true</KeepTogether>
                 </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>PackageExecution</DataSetName>
-            <Top>0.44389in</Top>
-            <Height>0.68in</Height>
-            <Width>18.25in</Width>
+            <Top>1.18056in</Top>
+            <Height>0.5in</Height>
+            <Width>20.35627in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
+          <Textbox Name="Textbox98">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Batch ID: " &amp; Parameters!BatchId.Value</Value>
+                    <Style>
+                      <FontFamily>calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox98</rd:DefaultName>
+            <Top>0.875in</Top>
+            <Height>0.25in</Height>
+            <Width>1.51042in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="Image2">
+            <Source>Embedded</Source>
+            <Value>download</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>0.01389in</Top>
+            <Height>0.84722in</Height>
+            <Width>0.81944in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
-        <Height>1.12389in</Height>
+        <Height>1.68056in</Height>
         <Style />
       </Body>
-      <Width>18.25in</Width>
+      <Width>20.35627in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -2283,69 +1974,9 @@ ORDER BY PackageName</CommandText>
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="Environment">
+    <ReportParameter Name="BatchId">
       <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>eqtdwprdsrv01</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Environment</Prompt>
-      <ValidValues>
-        <ParameterValues>
-          <ParameterValue>
-            <Value>localhost</Value>
-            <Label>Local</Label>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>eqtdwbuildsrv01</Value>
-            <Label>Dev</Label>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>eqtdwuatsrv01</Value>
-            <Label>UAT</Label>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>eqtdwprdsrv01</Value>
-            <Label>Prod</Label>
-          </ParameterValue>
-        </ParameterValues>
-      </ValidValues>
-    </ReportParameter>
-    <ReportParameter Name="PackageName">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>AARO_Master</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Package Name</Prompt>
-      <ValidValues>
-        <DataSetReference>
-          <DataSetName>Package</DataSetName>
-          <ValueField>PackageName</ValueField>
-          <LabelField>PackageName</LabelField>
-        </DataSetReference>
-      </ValidValues>
-      <MultiValue>true</MultiValue>
-    </ReportParameter>
-    <ReportParameter Name="ExecutionStart">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>= DateAdd("d", -10, Now())</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Execution Start</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="ExecutionEnd">
-      <DataType>DateTime</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>=NOW()</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Execution End</Prompt>
+      <Prompt>Batch ID</Prompt>
     </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
@@ -2356,26 +1987,23 @@ ORDER BY PackageName</CommandText>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>Environment</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>PackageName</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>1</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>ExecutionStart</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>ExecutionEnd</ParameterName>
+          <ParameterName>BatchId</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="download">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>

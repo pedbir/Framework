@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <connectionStrings>
+    <add name="SQL Server" connectionString="Data Source=.;Initial Catalog=DWH_4_UnitTest;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True"/>    
+  </connectionStrings>
+</RunSettings>

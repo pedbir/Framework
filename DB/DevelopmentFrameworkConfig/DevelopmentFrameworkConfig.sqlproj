@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DevelopmentFrameworkConfig</RootNamespace>
     <AssemblyName>DevelopmentFrameworkConfig</AssemblyName>
-    <ModelCollation>1035,CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <Recovery>SIMPLE</Recovery>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -181,16 +181,6 @@
   <ItemGroup>
     <None Include="Script\Script.InsertDataTypeTranslation.sql" />
     <None Include="Script\Script.InsertEnvironmentVariables.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <SqlCmdVariable Include="DWH_2_Norm">
-      <DefaultValue>DWH_2_Norm</DefaultValue>
-      <Value>$(SqlCmdVar__1)</Value>
-    </SqlCmdVariable>
-    <SqlCmdVariable Include="DWH_3_Fact">
-      <DefaultValue>DWH_3_Fact</DefaultValue>
-      <Value>$(SqlCmdVar__2)</Value>
-    </SqlCmdVariable>
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script\Script.PreDeployment.sql" />

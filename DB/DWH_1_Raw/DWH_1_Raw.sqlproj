@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DWH_1_Raw</RootNamespace>
     <AssemblyName>DWH_1_Raw</AssemblyName>
-    <ModelCollation>1035,CI</ModelCollation>
+    <ModelCollation>1033,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DelayedDurability>DISABLED</DelayedDurability>
     <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
     <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
@@ -146,6 +146,7 @@
     <Build Include="Norm_d\Views\Access.sql" />
     <Build Include="MDS.sql" />
     <Build Include="dbo\Views\Abonnemang.sql" />
+    <Build Include="Norm_d\Views\Package.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment.sql" />
