@@ -6,9 +6,10 @@
     [SourceTableName]     NVARCHAR (100) NOT NULL,
     [ErrorDescription]    NVARCHAR (255) NOT NULL,
     [RowData]             XML            NULL,
-    [FlatFileData]        NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_Audit_DataError] PRIMARY KEY CLUSTERED ([DataError_key] ASC)
 );
+
+
 
 
 

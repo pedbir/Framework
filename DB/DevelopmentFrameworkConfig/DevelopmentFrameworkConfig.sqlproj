@@ -177,6 +177,7 @@
     <Build Include="ssis\Stored Procedures\GetPackageInfoDWDetails_dbg.sql" />
     <Build Include="Metadata\Stored Procedures\CreateRawEntities.sql" />
     <None Include="Script\Script.InsertDestinationFieldExtended.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateFlatFileEntity.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script\Script.InsertDataTypeTranslation.sql" />

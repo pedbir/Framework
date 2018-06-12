@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DTS:Executable DTS:CreationDate="06/02/2018 14:04:27" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="STO-PC-682" DTS:CreatorName="pedram.birounvand" DTS:DelayValidation="True" DTS:DTSID="{94FECCFF-70FF-4875-81FA-5E4B65B0EE3D}" DTS:EnableConfig="True" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="" DTS:LocaleID="1033" DTS:ObjectName="DWH_1_Raw_Manual_RawTyped_r_Package_01" DTS:ProtectionLevel="0" DTS:refId="Package" DTS:VersionBuild="0" DTS:VersionGUID="{95084C86-66E0-4646-A0D0-2C655B19A5D4}" DTS:VersionMajor="0" xmlns:DTS="www.microsoft.com/SqlServer/Dts">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{240FE020-DE7C-4365-BACA-AF7B58E5B808}" DTS:ObjectName="DWH_1_Raw" DTS:refId="Package.ConnectionManagers[DWH_1_Raw]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;server=localhost;initial catalog=DWH_1_Raw;integrated security=SSPI"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="FLATFILE" DTS:DTSID="{44EC4761-19C6-4EA0-8E0A-085C1ABD2C46}" DTS:ObjectName="Package_01" DTS:refId="Package.ConnectionManagers[Package_01]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:CodePage="1252" DTS:ColumnNamesInFirstDataRow="True" DTS:ConnectionString="C:/DW/Manual/Package_01.csv" DTS:Format="Delimited" DTS:HeaderRowDelimiter="_x007B_CR_x007D__x007B_LF_x007D_" DTS:LocaleID="1053" DTS:RowDelimiter="_x007B_CR_x007D__x007B_LF_x007D_" DTS:TextQualifier="_x0022_">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn DTS:ColumnDelimiter="_x002C_" DTS:ColumnType="Delimited" DTS:CreationName="" DTS:DataType="3" DTS:DTSID="{514569CD-5474-4A0B-8E1E-1BE12F93B47F}" DTS:ObjectName="PackageID" DTS:TextQualified="True"></DTS:FlatFileColumn>
+            <DTS:FlatFileColumn DTS:ColumnDelimiter="_x002C_" DTS:ColumnType="Delimited" DTS:CreationName="" DTS:DataType="130" DTS:DTSID="{39741EDF-E34D-4B30-9ADA-F78BBEEDDB79}" DTS:MaximumWidth="50" DTS:ObjectName="PackageGUID" DTS:TextQualified="True"></DTS:FlatFileColumn>
+            <DTS:FlatFileColumn DTS:ColumnDelimiter="_x002C_" DTS:ColumnType="Delimited" DTS:CreationName="" DTS:DataType="130" DTS:DTSID="{5A2B0F78-599B-4014-B48C-5A80B31E8058}" DTS:MaximumWidth="50" DTS:ObjectName="PackageName" DTS:TextQualified="True"></DTS:FlatFileColumn>
+            <DTS:FlatFileColumn DTS:ColumnDelimiter="_x007B_CR_x007D__x007B_LF_x007D_" DTS:ColumnType="Delimited" DTS:CreationName="" DTS:DataType="6" DTS:DTSID="{4F230BF3-1984-4817-9B81-35E99DBCC4A1}" DTS:ObjectName="Amount" DTS:TextQualified="True"></DTS:FlatFileColumn>
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+      <DTS:PropertyExpression DTS:Name="ConnectionString">@[User::Package_01_SourceFullFilePath]</DTS:PropertyExpression>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:CreationName="OLEDB" DTS:DTSID="{A74734C6-732C-46D1-96FC-96CF11658470}" DTS:ObjectName="DWH_0_Admin" DTS:refId="Package.ConnectionManagers[DWH_0_Admin]">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectionString="provider=SQLNCLI11.1;server=localhost;initial catalog=DWH_0_Admin;integrated security=SSPI"></DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:LogProviders>
+    <DTS:LogProvider DTS:ConfigString="DWH_0_Admin" DTS:CreationName="Microsoft.LogProviderSQLServer" DTS:DelayValidation="False" DTS:Description="" DTS:DTSID="{7835D8EB-EE64-4A04-8208-BB1A16ADE667}" DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject></InnerObject>
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{08081B9F-A037-47FE-887B-3DB96A8421C1}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Package_01_FileName">
+      <DTS:VariableValue DTS:DataType="8">Package_01.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{684C18C3-BF2E-48D8-AD90-0175FD7007B4}" DTS:EvaluateAsExpression="True" DTS:Expression="@[User::Manual_SourceFolderPath] + &quot;\\&quot; + @[User::Package_01_FileName]" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Package_01_SourceFullFilePath">
+      <DTS:VariableValue DTS:DataType="8">\Package_01.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{E0815DE4-B2C3-4ECC-AAE5-5AC86B98275D}" DTS:EvaluateAsExpression="True" DTS:Expression="@[User::Manual_ArchiveFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::Package_01_FileName], 1,FINDSTRING(@[User::Package_01_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.csv&quot;" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Package_01_ArchiveFullFilePath">
+      <DTS:VariableValue DTS:DataType="8">\Package_01_20180602_0.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{90556C89-2189-4BF2-B2A3-512902E05A2D}" DTS:EvaluateAsExpression="True" DTS:Expression="@[User::Manual_ErrorFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::Package_01_FileName], 1,FINDSTRING(@[User::Package_01_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.csv&quot;" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Package_01_ErrorFullFilePath">
+      <DTS:VariableValue DTS:DataType="8">\Package_01_20180602_0.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{D48678C5-6FA4-4837-BE28-D08AF6B32768}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Manual_SourceFolderPath">
+      <DTS:VariableValue DTS:DataType="8"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{BAA03089-378A-4014-AF0D-0D8422DB29B3}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Manual_ArchiveFolderPath">
+      <DTS:VariableValue DTS:DataType="8"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{54122C6B-7D5A-4888-B12D-C2F084957E0B}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="Manual_ErrorFolderPath">
+      <DTS:VariableValue DTS:DataType="8"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{F886BBDA-1F38-4DE3-87ED-C385509F8ACB}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="MoveFileWhenComplete">
+      <DTS:VariableValue DTS:DataType="11">True</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{4D849173-2D1D-4BC1-AE7F-4039D57F2308}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="DWID">
+      <DTS:VariableValue DTS:DataType="3">3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{A08C123E-819D-4644-BE81-CFFB8059FBD8}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="SysExecutionLog_key">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{65F58E99-46B8-4570-9134-00B9AF8E2D62}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="SysBatchLogExecutionLog_key">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{1438A9D9-0608-439D-AF93-23F9297A294C}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsDeleted">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{9A84815B-A84B-4D95-9AD9-5C3C80AD1005}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{7FC5C71A-C4FF-4586-9504-3C5710A866C2}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsIgnore">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{0EC6BE0F-2FAA-42F6-8188-FF52E87956D4}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsSourceRead">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{6BEEB527-2E7D-49C1-98CA-CF33EBD06CF2}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsRead">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{48540A14-7D7E-4A36-B7B4-0EA70014A2FC}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="PackageLastExecuted">
+      <DTS:VariableValue DTS:DataType="8">1900-01-01</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{BF7E4A6C-F978-4882-80DC-832D90EB5F1A}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="PackageLastExecutedNew">
+      <DTS:VariableValue DTS:DataType="7">01/01/1900 00:00:00</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{C9BC1A48-31C5-4767-BF23-F11C191D8F68}" DTS:EvaluateAsExpression="True" DTS:Expression="(DT_WSTR, 100)GETUTCDATE()" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SysDatetimeInsertedUTC">
+      <DTS:VariableValue DTS:DataType="8">2018-06-02 12:04:27.796</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{088AA45F-4696-4292-907A-A01B74B8EA96}" DTS:EvaluateAsExpression="True" DTS:Expression="(DT_WSTR, 100)GETUTCDATE()" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SysDatetimeUpdatedUTC">
+      <DTS:VariableValue DTS:DataType="8">2018-06-02 12:04:27.796</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{DDB71B24-848F-4B3A-A3D8-B0E3C47F818B}" DTS:EvaluateAsExpression="True" DTS:Expression="(DT_WSTR, 100)GETUTCDATE()" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SysModifiedUTC">
+      <DTS:VariableValue DTS:DataType="8">2018-06-02 12:04:27.796</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{43691534-5486-47F5-92F3-FD4A5ECFFD7E}" DTS:EvaluateAsExpression="True" DTS:Expression="(DT_WSTR, 100)GETUTCDATE()" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SysDatetimeDeletedUTC">
+      <DTS:VariableValue DTS:DataType="8">2018-06-02 12:04:27.796</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{3E6C970C-31A4-44E3-BB5D-544B6F793438}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="PackageLastExecutedTimeOffset">
+      <DTS:VariableValue DTS:DataType="3">-30</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{047B12D2-4CCB-48B1-BAFB-AE7474422DF5}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsNewVersion">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{86E0F23C-5767-4539-83E5-A83D3A0BCE6D}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsUpdateInferred">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{5250CD75-D3BA-41B3-AAAB-23D92028FDD2}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsNewVersionError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{630C7863-175D-4353-B8C4-6D27CEBFF4ED}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsUpdateOldError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{E34A2F52-5476-40CB-AE52-121E8F608580}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsUpdateOld">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{55D901D5-853C-4E17-A4D3-4C7D83AFCFC1}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsUpdateInferredError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{90681885-70DE-442B-BDE2-2D12B97F173F}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsNewMemberError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{69513AFF-A494-484C-936E-7E06C1E8D51A}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsNewMember">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{3F543503-ED74-4619-BB2C-7AD26E6B2025}" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsNewInferredMemberError">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{F52F9AE0-FF8F-436F-9FA5-434A58E515DC}" DTS:EvaluateAsExpression="True" DTS:Expression="@[User::RowsNewVersion]+@[User::RowsNewMember]-(@[User::RowsNewMemberError]+@[User::RowsNewVersionError])" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsInserted">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{7543E204-7AD8-4391-8F6C-392AC3D1B657}" DTS:EvaluateAsExpression="True" DTS:Expression="(@[User::RowsUpdateOld]+@[User::RowsUpdateInferred])-(@[User::RowsUpdateInferredError] + @[User::RowsUpdateOldError])" DTS:IncludeInDebugDump="6789" DTS:Namespace="User" DTS:ObjectName="RowsUpdated">
+      <DTS:VariableValue DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{AF1017E3-BCC8-403E-87B1-E499C670772B}" DTS:EvaluateAsExpression="True" DTS:Expression="@[User::Manual_SourceFolderPath]" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SourceTableCatalog">
+      <DTS:VariableValue DTS:DataType="8"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{C47E0C5D-89AF-47B9-A08A-8945DB75FEF0}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SourceSchemaName">
+      <DTS:VariableValue DTS:DataType="8">Manual</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{11EFD555-E2A1-4499-882C-5A0CBD92458B}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SourceTableName">
+      <DTS:VariableValue DTS:DataType="8">Package_01*.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{C731A1E1-C6B2-48EE-8087-707467AD83FB}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="DestinationTableCatalog">
+      <DTS:VariableValue DTS:DataType="8">DWH_1_Raw</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{317DA7BA-77E4-470D-8850-6679C28619DB}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="DestinationSchemaName">
+      <DTS:VariableValue DTS:DataType="8">Manual</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{7D95B419-3752-4E51-A63F-F234547A206A}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="DestinationTableName">
+      <DTS:VariableValue DTS:DataType="8">Manual</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{FA9DB824-10C2-49D5-AF9B-025A086ABE6C}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SsisIncrementalLoad">
+      <DTS:VariableValue DTS:DataType="8">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable DTS:CreationName="" DTS:DTSID="{76F9ED4F-3A20-4536-8AE3-711454719BE0}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="SsisLoadType">
+      <DTS:VariableValue DTS:DataType="8">FlatFile</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable DTS:CreationName="STOCK:SEQUENCE" DTS:DTSID="{49071EC0-C60E-497E-B0B9-F21FD4B742AA}" DTS:ExecutableType="STOCK:SEQUENCE" DTS:LocaleID="-1" DTS:ObjectName="SEQC_Package_01_PackageStartLog" DTS:refId="Package\SEQC_Package_01_PackageStartLog">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{5215DFD3-50C4-402C-A058-9D3E126BABCE}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="EPT Package Start Log" DTS:refId="Package\SEQC_Package_01_PackageStartLog\EPT Package Start Log" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData SQLTask:Connection="DWH_0_Admin" SQLTask:SqlStatementSource="&#xA;  exec Logging.LogPackageStart&#xA;  @PackageID = ?,&#xA;  @PackageName = ?,&#xA;  @VersionID = ?,&#xA;  @VersionMajor = ?,&#xA;  @VersionMinor = ?,&#xA;  @VersionBuild = ?,&#xA;  @VersionComments = ?,&#xA;  @CreationDate = ?,&#xA;  @CreatorName = ?,&#xA;  @CreatorComputerName = ?,&#xA;  @LocaleID = ?,&#xA;  @ExecutionID = ?,&#xA;  @ExecutionStartTime = ?,&#xA;  @ExecutionUserName = ?,&#xA;  @ExecutionMachineName = ?,&#xA;  @ProductVersion = ?,&#xA;  @InteractiveMode = ?,&#xA;  @SysBatchLogExecutionLog_key = ?,&#xA;  @SysExecutionLog_key = ? output,&#xA;        @SourceTableCatalog = ?,&#xA;        @SourceSchemaName = ?,&#xA;        @SourceTableName = ?,&#xA;        @DestinationTableCatalog = ?,&#xA;        @DestinationSchemaName = ?,&#xA;        @DestinationTableName = ?,&#xA;        @SsisIncrementalLoad = ?,&#xA;        @SsisLoadType  = ?&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::PackageID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::PackageName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="1" SQLTask:ParameterSize="150"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::VersionGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="2" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="System::VersionMajor" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="3" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="System::VersionMinor" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="4" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="System::VersionBuild" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="5" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::VersionComments" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="6" SQLTask:ParameterSize="250"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="7" SQLTask:DtsVariableName="System::CreationDate" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="7" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::CreatorName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="8" SQLTask:ParameterSize="50"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::CreatorComputerName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="9" SQLTask:ParameterSize="30"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="System::LocaleID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="10" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::ExecutionInstanceGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="11" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="7" SQLTask:DtsVariableName="System::ContainerStartTime" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="12" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::UserName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="13" SQLTask:ParameterSize="50"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::MachineName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="14" SQLTask:ParameterSize="30"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::ProductVersion" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="15" SQLTask:ParameterSize="10"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="11" SQLTask:DtsVariableName="System::InteractiveMode" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="16" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="User::SysBatchLogExecutionLog_key" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="17" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="3" SQLTask:DtsVariableName="User::SysExecutionLog_key" SQLTask:ParameterDirection="Output" SQLTask:ParameterName="18" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::SourceTableCatalog" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="19" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::SourceSchemaName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="20" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::SourceTableName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="21" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::DestinationTableCatalog" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="22" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::DestinationSchemaName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="23" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::DestinationTableName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="24" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::SsisIncrementalLoad" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="25" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::SsisLoadType" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="26" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="STOCK:FOREACHLOOP" DTS:DTSID="{F14A5EB9-E4B5-4B0C-AAE4-5DC27BE42DAD}" DTS:ExecutableType="STOCK:FOREACHLOOP" DTS:LocaleID="-1" DTS:ObjectName="FELC_Package_01_LoopThroughCSV" DTS:refId="Package\FELC_Package_01_LoopThroughCSV">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="STOCK:SEQUENCE" DTS:DTSID="{EF137A6C-67EE-40CA-B04A-8C64F7402CF0}" DTS:ExecutableType="STOCK:SEQUENCE" DTS:LocaleID="-1" DTS:ObjectName="SEQC_Package_01_LoadFile" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile">
+          <DTS:Executables>
+            <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{CCBA31AD-4900-4AFE-B988-5205223D990A}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="SQL_Package_01_DeleteExistingFileNames" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\SQL_Package_01_DeleteExistingFileNames" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData SQLTask:Connection="DWH_1_Raw" SQLTask:ResultType="ResultSetType_SingleRow" SQLTask:SqlStatementSource="DELETE [Manual_RawTyped].[rt_Package_01] WHERE sysFileName = ? SELECT @@ROWCOUNT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::Package_01_FileName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ResultBinding SQLTask:DtsVariableName="User::RowsDeleted" SQLTask:ResultName="0"></SQLTask:ResultBinding>
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable DTS:CreationName="Microsoft.Pipeline" DTS:DTSID="{039C0BC9-2EC7-4C52-BB0D-222998E811E1}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="DFP_Package_01_LoadAllFiles" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:ObjectData>
+                <pipeline BLOBTempStoragePath="" bufferTempStoragePath="" version="1">
+                  <components>
+                    <component componentClassID="Microsoft.FlatFileSource" contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" localeId="1053" name="FF_SRC_Package_01" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01" usesDispositions="true" version="1">
+                      <connections>
+                        <connection connectionManagerID="Package.ConnectionManagers[Package_01]" connectionManagerRefId="Package.ConnectionManagers[Package_01]" name="FlatFileConnection" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Connections[FlatFileConnection]"></connection>
+                      </connections>
+                      <outputs>
+                        <output name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output]">
+                          <externalMetadataColumns isUsed="True">
+                            <externalMetadataColumn dataType="i4" name="PackageID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageID]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="50" name="PackageGUID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageGUID]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="50" name="PackageName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageName]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="cy" name="Amount" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[Amount]"></externalMetadataColumn>
+                          </externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="RedirectRow" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageID]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageID]" name="PackageID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageID]" truncationRowDisposition="RedirectRow">
+                              <properties>
+                                <property dataType="System.Boolean" description="Indicates whether the column uses the faster, locale-neutral parsing routines." name="FastParse">false</property>
+                                <property dataType="System.Boolean" description="Indicates whether the data is in binary format." name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="RedirectRow" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageGUID]" length="50" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageGUID]" name="PackageGUID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageGUID]" truncationRowDisposition="RedirectRow">
+                              <properties>
+                                <property dataType="System.Boolean" description="Indicates whether the column uses the faster, locale-neutral parsing routines." name="FastParse">false</property>
+                                <property dataType="System.Boolean" description="Indicates whether the data is in binary format." name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Conversion" errorRowDisposition="RedirectRow" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[PackageName]" length="50" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageName]" name="PackageName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageName]" truncationRowDisposition="RedirectRow">
+                              <properties>
+                                <property dataType="System.Boolean" description="Indicates whether the column uses the faster, locale-neutral parsing routines." name="FastParse">false</property>
+                                <property dataType="System.Boolean" description="Indicates whether the data is in binary format." name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="cy" errorOrTruncationOperation="Conversion" errorRowDisposition="RedirectRow" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].ExternalColumns[Amount]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[Amount]" name="Amount" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[Amount]" truncationRowDisposition="RedirectRow">
+                              <properties>
+                                <property dataType="System.Boolean" description="Indicates whether the column uses the faster, locale-neutral parsing routines." name="FastParse">false</property>
+                                <property dataType="System.Boolean" description="Indicates whether the data is in binary format." name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                        </output>
+                        <output isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn codePage="1252" dataType="text" description="Flat File Source Error Output Column" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[Flat File Source Error Output Column]" name="Flat File Source Error Output Column" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[Flat File Source Error Output Column]"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.Boolean" description="Specifies whether zero-length columns are treated as null." name="RetainNulls">true</property>
+                        <property dataType="System.String" description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated." name="FileNameColumnName"></property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.RowCount" contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="CNT_Package_01_Read" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read">
+                      <inputs>
+                        <input hasSideEffects="true" name="FF_SRC_Package_01_Output_CNT_Package_01_Read" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read.Inputs[FF_SRC_Package_01_Output_CNT_Package_01_Read]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read.Inputs[FF_SRC_Package_01_Output_CNT_Package_01_Read]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.String" description="Specifies the variable to hold the row count." name="VariableName">User::RowsRead</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.DerivedColumn" contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="DER_Package_01_sysFilename" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename" usesDispositions="true">
+                      <inputs>
+                        <input name="CNT_Package_01_Read_Output_DER_Package_01_sysFilename" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Inputs[CNT_Package_01_Read_Output_DER_Package_01_sysFilename]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output exclusionGroup="1" name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Inputs[CNT_Package_01_Read_Output_DER_Package_01_sysFilename]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" length="250" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[sysFilename]" name="sysFilename" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[sysFilename]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::Package_01_FileName]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::Package_01_FileName]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="dbTimeStamp" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysDatetimeInsertedUTC]" name="SysDatetimeInsertedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysDatetimeInsertedUTC]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::SysDatetimeInsertedUTC]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::SysDatetimeInsertedUTC]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="dbTimeStamp" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysModifiedUTC]" name="SysModifiedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysModifiedUTC]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::SysModifiedUTC]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::SysModifiedUTC]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="i4" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysExecutionLog_key]" name="SysExecutionLog_key" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysExecutionLog_key]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::SysExecutionLog_key]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::SysExecutionLog_key]</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                        </output>
+                        <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Error]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Inputs[CNT_Package_01_Read_Output_DER_Package_01_sysFilename]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                    </component>
+                    <component componentClassID="Microsoft.Lookup" contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6" name="LKP_Package_01_CheckIfExists" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists" usesDispositions="true" version="6">
+                      <connections>
+                        <connection connectionManagerID="Package.ConnectionManagers[DWH_1_Raw]" connectionManagerRefId="Package.ConnectionManagers[DWH_1_Raw]" description="Connection manager used to access lookup data." name="OleDbConnection" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Connections[OleDbConnection]"></connection>
+                      </connections>
+                      <inputs>
+                        <input name="DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <inputColumns>
+                            <inputColumn cachedDataType="i4" cachedName="PackageID" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageID]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists].Columns[PackageID]">
+                              <properties>
+                                <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">PackageID</property>
+                                <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn"></property>
+                              </properties>
+                            </inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="PackageGUID" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageGUID]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists].Columns[PackageGUID]">
+                              <properties>
+                                <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">PackageGUID</property>
+                                <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn"></property>
+                              </properties>
+                            </inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="PackageName" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageName]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists].Columns[PackageName]">
+                              <properties>
+                                <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">PackageName</property>
+                                <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn"></property>
+                              </properties>
+                            </inputColumn>
+                            <inputColumn cachedDataType="cy" cachedName="Amount" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[Amount]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists].Columns[Amount]">
+                              <properties>
+                                <property dataType="System.String" description="Specifies the column in the reference table that a column joins." name="JoinToReferenceColumn">Amount</property>
+                                <property dataType="System.Null" description="Specifies the column in the reference table from which a column is copied." name="CopyFromReferenceColumn"></property>
+                              </properties>
+                            </inputColumn>
+                          </inputColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output errorOrTruncationOperation="Lookup" exclusionGroup="1" name="Match" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Match]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                        <output description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;" exclusionGroup="1" name="NoMatch" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[NoMatch]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                        <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Error]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.String" description="Specifies the SQL statement that generates the lookup table." expressionType="Notify" name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT * FROM [Manual_RawTyped].[vrt_Package_01]
+                                            </property>
+                        <property dataType="System.String" description="Specifies a SQL statement that uses parameters to generate the lookup table." expressionType="Notify" name="SqlCommandParam" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT * FROM [Manual_RawTyped].[vrt_Package_01]
+                                            ) [refTable] where [refTable].[PackageID] = ? and [refTable].[PackageGUID] = ? and [refTable].[PackageName] = ? and [refTable].[Amount] = ?</property>
+                        <property dataType="System.Int32" description="Specifies the type of connection used to access the reference dataset." name="ConnectionType" typeConverter="LookupConnectionType">0</property>
+                        <property dataType="System.Int32" description="Specifies the cache type of the lookup table." name="CacheType" typeConverter="CacheType">0</property>
+                        <property dataType="System.Int32" description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set." name="NoMatchBehavior" typeConverter="LookupNoMatchBehavior">1</property>
+                        <property dataType="System.Int32" description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset." name="NoMatchCachePercentage">0</property>
+                        <property dataType="System.Int32" description="Maximum Memory Usage for Reference Cache on a 32 bit platform." name="MaxMemoryUsage">25</property>
+                        <property dataType="System.Int64" description="Maximum Memory Usage for Reference Cache on a 64 bit platform." name="MaxMemoryUsage64">25</property>
+                        <property dataType="System.String" description="Indicates whether to reference metadata in an XML format." name="ReferenceMetadataXml">&lt;referenceMetadata&gt;
+  &lt;referenceColumns&gt;
+    &lt;referenceColumn name="SysFileName" dataType="DT_WSTR" length="250" precision="-1" scale="-1" codePage="0" /&gt;
+    &lt;referenceColumn name="SysDatetimeInsertedUTC" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="SysDatetimeUpdatedUTC" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="SysDatetimeDeletedUTC" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="SysModifiedUTC" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="SysExecutionLog_key" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="PackageID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="PackageGUID" dataType="DT_WSTR" length="50" precision="-1" scale="-1" codePage="0" /&gt;
+    &lt;referenceColumn name="PackageName" dataType="DT_WSTR" length="50" precision="-1" scale="-1" codePage="0" /&gt;
+    &lt;referenceColumn name="Amount" dataType="DT_CY" length="0" precision="0" scale="0" codePage="0" /&gt;
+  &lt;/referenceColumns&gt;
+&lt;/referenceMetadata&gt;</property>
+                        <property containsID="true" dataType="System.String" description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons." name="ParameterMap">#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageID]};#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageGUID]};#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageName]};#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[Amount]};</property>
+                        <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                        <property dataType="System.Boolean" description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used." name="TreatDuplicateKeysAsError">false</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.RowCount" contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="CNT_IgnoredMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_IgnoredMembers">
+                      <inputs>
+                        <input hasSideEffects="true" name="LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_IgnoredMembers.Inputs[LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_IgnoredMembers.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_IgnoredMembers.Inputs[LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.String" description="Specifies the variable to hold the row count." name="VariableName">User::RowsIgnore</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.RowCount" contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="CNT_NewMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers">
+                      <inputs>
+                        <input hasSideEffects="true" name="LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers.Inputs[LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers.Inputs[LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.String" description="Specifies the variable to hold the row count." name="VariableName">User::RowsNewMember</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="OLE_DST_Package_01" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01" usesDispositions="true" version="4">
+                      <connections>
+                        <connection connectionManagerID="Package.ConnectionManagers[DWH_1_Raw]" connectionManagerRefId="Package.ConnectionManagers[DWH_1_Raw]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Connections[OleDbConnection]"></connection>
+                      </connections>
+                      <inputs>
+                        <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="CNT_NewMembers_Output_OLE_DST_Package_01" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01]">
+                          <externalMetadataColumns isUsed="True">
+                            <externalMetadataColumn dataType="wstr" length="250" name="SysFileName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysFileName]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="dbTimeStamp2" name="SysDatetimeInsertedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysDatetimeInsertedUTC]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="dbTimeStamp2" name="SysDatetimeUpdatedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysDatetimeUpdatedUTC]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="dbTimeStamp2" name="SysDatetimeDeletedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysDatetimeDeletedUTC]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="dbTimeStamp2" name="SysModifiedUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysModifiedUTC]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="i4" name="SysExecutionLog_key" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysExecutionLog_key]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="i4" name="PackageID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageID]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="50" name="PackageGUID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageGUID]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="50" name="PackageName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageName]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="cy" name="Amount" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[Amount]"></externalMetadataColumn>
+                          </externalMetadataColumns>
+                          <inputColumns>
+                            <inputColumn cachedDataType="wstr" cachedLength="250" cachedName="sysFilename" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysFileName]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[sysFilename]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[sysFilename]"></inputColumn>
+                            <inputColumn cachedDataType="dbTimeStamp" cachedName="SysDatetimeInsertedUTC" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysDatetimeInsertedUTC]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysDatetimeInsertedUTC]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[SysDatetimeInsertedUTC]"></inputColumn>
+                            <inputColumn cachedDataType="dbTimeStamp" cachedName="SysModifiedUTC" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysModifiedUTC]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysModifiedUTC]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[SysModifiedUTC]"></inputColumn>
+                            <inputColumn cachedDataType="i4" cachedName="SysExecutionLog_key" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[SysExecutionLog_key]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output].Columns[SysExecutionLog_key]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[SysExecutionLog_key]"></inputColumn>
+                            <inputColumn cachedDataType="i4" cachedName="PackageID" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageID]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageID]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[PackageID]"></inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="PackageGUID" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageGUID]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageGUID]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[PackageGUID]"></inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="50" cachedName="PackageName" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[PackageName]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[PackageName]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[PackageName]"></inputColumn>
+                            <inputColumn cachedDataType="cy" cachedName="Amount" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].ExternalColumns[Amount]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output].Columns[Amount]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01].Columns[Amount]"></inputColumn>
+                          </inputColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Outputs[Error]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                        <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[Manual_RawTyped].[rt_Package_01]</property>
+                        <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable"></property>
+                        <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                        <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                        <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                        <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                        <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                        <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.RowCount" contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="CNT_Package_01_ErrorNewMember" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember">
+                      <inputs>
+                        <input hasSideEffects="true" name="FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember.Inputs[FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember.Inputs[FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.String" description="Specifies the variable to hold the row count." name="VariableName">User::RowsError</property>
+                      </properties>
+                    </component>
+                    <component componentClassID="Microsoft.DerivedColumn" contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0" name="DER_Package_01_ErrorMetadata" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata" usesDispositions="true">
+                      <inputs>
+                        <input name="CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <inputColumns>
+                            <inputColumn cachedCodepage="1252" cachedDataType="text" cachedName="Flat File Source Error Output Column" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[Flat File Source Error Output Column]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata].Columns[Flat File Source Error Output Column]"></inputColumn>
+                            <inputColumn cachedDataType="i4" cachedName="ErrorCode" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorCode]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata].Columns[ErrorCode]"></inputColumn>
+                          </inputColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output exclusionGroup="1" name="Output" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="dbTimeStamp" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[DateTimeErrorUTC]" name="DateTimeErrorUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[DateTimeErrorUTC]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">GETUTCDATE()</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">GETUTCDATE()</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="i4" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[DWID]" name="DWID" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[DWID]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::DWID]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::DWID]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" length="100" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[PackageName]" name="PackageName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[PackageName]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[System::PackageName]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[System::PackageName]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="nText" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[FlatFileData]" name="FlatFileData" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[FlatFileData]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property containsID="true" dataType="System.String" description="Derived Column Expression" name="Expression">#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[Flat File Source Error Output Column]}</property>
+                                <property containsID="true" dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">[Flat File Source Error Output Column]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" length="100" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SourceTableName]" name="SourceTableName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SourceTableName]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::SourceTableName]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::SourceTableName]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="i4" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SysExecutionLog_key]" name="SysExecutionLog_key" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SysExecutionLog_key]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property dataType="System.String" description="Derived Column Expression" name="Expression">@[User::SysExecutionLog_key]</property>
+                                <property dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">@[User::SysExecutionLog_key]</property>
+                              </properties>
+                            </outputColumn>
+                            <outputColumn dataType="wstr" errorOrTruncationOperation="Computation" errorRowDisposition="FailComponent" length="100" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[ErrorDescription]" name="ErrorDescription" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[ErrorDescription]" truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property containsID="true" dataType="System.String" description="Derived Column Expression" name="Expression">(DT_WSTR, 100)#{Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error].Columns[ErrorCode]}</property>
+                                <property containsID="true" dataType="System.String" description="Derived Column Friendly Expression" expressionType="Notify" name="FriendlyExpression">(DT_WSTR, 100)[ErrorCode]</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                        </output>
+                        <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Error]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                    </component>
+                    <component componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" name="OLE_DST_Package_01_DataError" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError" usesDispositions="true" version="4">
+                      <connections>
+                        <connection connectionManagerID="Package.ConnectionManagers[DWH_0_Admin]" connectionManagerRefId="Package.ConnectionManagers[DWH_0_Admin]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Connections[OleDbConnection]"></connection>
+                      </connections>
+                      <inputs>
+                        <input errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError]">
+                          <externalMetadataColumns isUsed="True">
+                            <externalMetadataColumn dataType="i4" name="DataError_key" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[DataError_key]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="dbTimeStamp" name="DateTimeErrorUTC" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[DateTimeErrorUTC]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="100" name="PackageName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[PackageName]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="i4" name="SysExecutionLog_key" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[SysExecutionLog_key]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="100" name="SourceTableName" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[SourceTableName]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="wstr" length="255" name="ErrorDescription" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[ErrorDescription]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="nText" name="RowData" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[RowData]"></externalMetadataColumn>
+                            <externalMetadataColumn dataType="nText" name="FlatFileData" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[FlatFileData]"></externalMetadataColumn>
+                          </externalMetadataColumns>
+                          <inputColumns>
+                            <inputColumn cachedDataType="dbTimeStamp" cachedName="DateTimeErrorUTC" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[DateTimeErrorUTC]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[DateTimeErrorUTC]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[DateTimeErrorUTC]"></inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="100" cachedName="PackageName" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[PackageName]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[PackageName]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[PackageName]"></inputColumn>
+                            <inputColumn cachedDataType="nText" cachedName="FlatFileData" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[FlatFileData]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[FlatFileData]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[FlatFileData]"></inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="100" cachedName="SourceTableName" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[SourceTableName]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SourceTableName]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[SourceTableName]"></inputColumn>
+                            <inputColumn cachedDataType="i4" cachedName="SysExecutionLog_key" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[SysExecutionLog_key]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[SysExecutionLog_key]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[SysExecutionLog_key]"></inputColumn>
+                            <inputColumn cachedDataType="wstr" cachedLength="100" cachedName="ErrorDescription" externalMetadataColumnId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].ExternalColumns[ErrorDescription]" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output].Columns[ErrorDescription]" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError].Columns[ErrorDescription]"></inputColumn>
+                          </inputColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output exclusionGroup="1" isErrorOut="true" name="Error" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Outputs[Error]" synchronousInputId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError]">
+                          <externalMetadataColumns></externalMetadataColumns>
+                          <outputColumns>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Outputs[Error].Columns[ErrorCode]" name="ErrorCode" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Outputs[Error].Columns[ErrorCode]" specialFlags="1"></outputColumn>
+                            <outputColumn dataType="i4" lineageId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Outputs[Error].Columns[ErrorColumn]" name="ErrorColumn" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Outputs[Error].Columns[ErrorColumn]" specialFlags="2"></outputColumn>
+                          </outputColumns>
+                        </output>
+                      </outputs>
+                      <properties>
+                        <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                        <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[Audit].[DataError]</property>
+                        <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable"></property>
+                        <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                        <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                        <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode">3</property>
+                        <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                        <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                        <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                    </component>
+                  </components>
+                  <paths>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember.Inputs[FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember]" name="FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[FF_SRC_Package_01_Error_CNT_Package_01_ErrorNewMember]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Error]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Inputs[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata]" name="CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[CNT_Package_01_ErrorNewMember_Output_DER_Package_01_ErrorMetadata]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_ErrorNewMember.Outputs[Output]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01_DataError.Inputs[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError]" name="DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[DER_Package_01_ErrorMetadata_Output_OLE_DST_Package_01_DataError]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_ErrorMetadata.Outputs[Output]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read.Inputs[FF_SRC_Package_01_Output_CNT_Package_01_Read]" name="FF_SRC_Package_01_Output_CNT_Package_01_Read" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[FF_SRC_Package_01_Output_CNT_Package_01_Read]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\FF_SRC_Package_01.Outputs[Output]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Inputs[CNT_Package_01_Read_Output_DER_Package_01_sysFilename]" name="CNT_Package_01_Read_Output_DER_Package_01_sysFilename" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[CNT_Package_01_Read_Output_DER_Package_01_sysFilename]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_Package_01_Read.Outputs[Output]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Inputs[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]" name="DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[DER_Package_01_sysFilename_Output_LKP_Package_01_CheckIfExists]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\DER_Package_01_sysFilename.Outputs[Output]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_IgnoredMembers.Inputs[LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers]" name="LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[LKP_Package_01_CheckIfExists_Match_CNT_IgnoredMembers]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[Match]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers.Inputs[LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers]" name="LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[LKP_Package_01_CheckIfExists_NoMatch_CNT_NewMembers]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\LKP_Package_01_CheckIfExists.Outputs[NoMatch]"></path>
+                    <path endId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\OLE_DST_Package_01.Inputs[CNT_NewMembers_Output_OLE_DST_Package_01]" name="CNT_NewMembers_Output_OLE_DST_Package_01" refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles.Paths[CNT_NewMembers_Output_OLE_DST_Package_01]" startId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles\CNT_NewMembers.Outputs[Output]"></path>
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{C88E5F82-B2B0-499D-8591-D881D96B2BF4}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="SQL_Package_01_LogPackageFileExecutionEnd" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\SQL_Package_01_LogPackageFileExecutionEnd" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData SQLTask:Connection="DWH_0_Admin" SQLTask:SqlStatementSource=" EXEC Logging.LogPackageFileExecutionEnd @PackageID = ?&#xA;          , @ExecutionID = ?&#xA;          , @RowsRead = ?&#xA;          , @RowsInserted = ?&#xA;          , @RowsUpdated = ?&#xA;          , @RowsDeleted = ?&#xA;          , @RowsIgnored = ?&#xA;          , @RowsError = ?&#xA;          , @SysFileName = ?&#xA;          , @SysExecutionLog_key = ?&#xA;          , @PackageVersionId = ?&#xA;                             " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::PackageID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::ExecutionInstanceGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="1" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsRead" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="2" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsInserted" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="3" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsUpdated" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="4" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsDeleted" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="5" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsIgnore" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="6" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsError" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="7" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::Package_01_FileName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="8" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::SysExecutionLog_key" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="9" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                  <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::VersionGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="10" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{6F9125F3-DE89-4417-BA0B-B8DF5E9AAE71}" DTS:From="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\SQL_Package_01_DeleteExistingFileNames" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_SQL_Package_01_DeleteExistingFileNames_To_DFP_Package_01_LoadAllFiles" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile.PrecedenceConstraints[Constraint_SQL_Package_01_DeleteExistingFileNames_To_DFP_Package_01_LoadAllFiles]" DTS:To="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles"></DTS:PrecedenceConstraint>
+            <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{615D9A2D-7CB5-4786-B55F-472988B0BC3B}" DTS:From="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\DFP_Package_01_LoadAllFiles" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_DFP_Package_01_LoadAllFiles_To_SQL_Package_01_LogPackageFileExecutionEnd" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile.PrecedenceConstraints[Constraint_DFP_Package_01_LoadAllFiles_To_SQL_Package_01_LogPackageFileExecutionEnd]" DTS:To="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile\SQL_Package_01_LogPackageFileExecutionEnd" DTS:Value="2"></DTS:PrecedenceConstraint>
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable DTS:CreationName="Microsoft.FileSystemTask" DTS:DTSID="{50DDDA07-9374-4BB4-99A9-0C070A05A602}" DTS:ExecutableType="Microsoft.FileSystemTask" DTS:LocaleID="-1" DTS:ObjectName="FSYS_Package_01_ArchiveFile" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\FSYS_Package_01_ArchiveFile" DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <FileSystemData TaskDestinationPath="User::Package_01_ArchiveFullFilePath" TaskIsDestinationVariable="True" TaskIsSourceVariable="True" TaskOperationType="RenameFile" TaskSourcePath="User::Package_01_SourceFullFilePath"></FileSystemData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable DTS:CreationName="Microsoft.FileSystemTask" DTS:DTSID="{E6EB27D2-9B31-4276-BE84-EFDF42904B88}" DTS:ExecutableType="Microsoft.FileSystemTask" DTS:LocaleID="-1" DTS:ObjectName="FSYS_Package_01_ErrorFile" DTS:refId="Package\FELC_Package_01_LoopThroughCSV\FSYS_Package_01_ErrorFile" DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <FileSystemData TaskDestinationPath="User::Package_01_ErrorFullFilePath" TaskIsDestinationVariable="True" TaskIsSourceVariable="True" TaskOperationType="RenameFile" TaskSourcePath="User::Package_01_SourceFullFilePath"></FileSystemData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachEnumerator DTS:CreationName="Microsoft.ForEachFileEnumerator" DTS:DTSID="{9A4AB0ED-95E2-4FE0-A44C-5A4ECDE07C4D}" DTS:ObjectName="{9A4AB0ED-95E2-4FE0-A44C-5A4ECDE07C4D}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty Folder="C:/DW/Manual/"></FEFEProperty>
+            <FEFEProperty FileSpec="Package_01*.csv"></FEFEProperty>
+            <FEFEProperty FileNameRetrievalType="1"></FEFEProperty>
+            <FEFEProperty Recurse="0"></FEFEProperty>
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+        <DTS:PropertyExpression DTS:Name="Directory">@[User::Manual_SourceFolderPath]</DTS:PropertyExpression>
+      </DTS:ForEachEnumerator>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping DTS:CreationName="" DTS:DTSID="{9968764A-A1B5-4C4F-BAE6-E61E534B9636}" DTS:ObjectName="{9968764A-A1B5-4C4F-BAE6-E61E534B9636}" DTS:ValueIndex="0" DTS:VariableName="User::Package_01_FileName"></DTS:ForEachVariableMapping>
+      </DTS:ForEachVariableMappings>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{B9929BC2-6AB3-4258-8637-1353D28D10DE}" DTS:EvalOp="3" DTS:Expression="@[User::MoveFileWhenComplete]" DTS:From="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_SEQC_Package_01_LoadFile_To_FSYS_Package_01_ArchiveFile" DTS:refId="Package\FELC_Package_01_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_Package_01_LoadFile_To_FSYS_Package_01_ArchiveFile]" DTS:To="Package\FELC_Package_01_LoopThroughCSV\FSYS_Package_01_ArchiveFile"></DTS:PrecedenceConstraint>
+        <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{F838A922-323E-4001-9AD1-0E3BACA24755}" DTS:EvalOp="3" DTS:Expression="@[User::MoveFileWhenComplete]" DTS:From="Package\FELC_Package_01_LoopThroughCSV\SEQC_Package_01_LoadFile" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_SEQC_Package_01_LoadFile_To_FSYS_Package_01_ErrorFile" DTS:refId="Package\FELC_Package_01_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_Package_01_LoadFile_To_FSYS_Package_01_ErrorFile]" DTS:To="Package\FELC_Package_01_LoopThroughCSV\FSYS_Package_01_ErrorFile" DTS:Value="1"></DTS:PrecedenceConstraint>
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable DTS:CreationName="STOCK:SEQUENCE" DTS:DTSID="{F7280C72-9D61-4369-A365-46FDE410DAB5}" DTS:ExecutableType="STOCK:SEQUENCE" DTS:LocaleID="-1" DTS:ObjectName="SEQC_Package_01_PackageEndLog" DTS:refId="Package\SEQC_Package_01_PackageEndLog">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{C2F9BBAF-C79F-483F-8347-D3FA0934F28B}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="SQL_Package_01_LogPackageEnd" DTS:refId="Package\SEQC_Package_01_PackageEndLog\SQL_Package_01_LogPackageEnd" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData SQLTask:Connection="DWH_0_Admin" SQLTask:SqlStatementSource="exec Logging.LogPackageEnd&#xA;                  @PackageID = ?,&#xA;                  @ExecutionID = ?,&#xA;                  @ExecutionEndTime = ?,&#xA;                  @RowsRead = ?,&#xA;                  @RowsInserted = ?,&#xA;                  @RowsUpdated = ?,&#xA;                  @RowsDeleted = ?,&#xA;                  @RowsIgnored = ?,&#xA;                  @RowsError = ?&#xA;                 " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::PackageID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::ExecutionInstanceGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="1" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="7" SQLTask:DtsVariableName="System::ContainerStartTime" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="2" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsRead" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="3" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsInserted" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="4" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsUpdated" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="5" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsDeleted" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="6" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsIgnore" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="7" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="20" SQLTask:DtsVariableName="User::RowsError" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="8" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{FC33F3B4-3F75-4F70-942C-DFF254B63854}" DTS:From="Package\SEQC_Package_01_PackageStartLog" DTS:LogicalAnd="True" DTS:ObjectName="Constraint_SEQC_Package_01_PackageStartLog_To_FELC_Package_01_LoopThroughCSV" DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_Package_01_PackageStartLog_To_FELC_Package_01_LoopThroughCSV]" DTS:To="Package\FELC_Package_01_LoopThroughCSV"></DTS:PrecedenceConstraint>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{19DC6F2B-85C5-4B30-9843-3A38D245596E}" DTS:From="Package\FELC_Package_01_LoopThroughCSV" DTS:ObjectName="Constraint_FELC_Package_01_LoopThroughCSV_To_SEQC_Package_01_PackageEndLog" DTS:refId="Package.PrecedenceConstraints[Constraint_FELC_Package_01_LoopThroughCSV_To_SEQC_Package_01_PackageEndLog]" DTS:To="Package\SEQC_Package_01_PackageEndLog" DTS:Value="2"></DTS:PrecedenceConstraint>
+    <DTS:PrecedenceConstraint DTS:CreationName="" DTS:DTSID="{80116A06-477B-4A28-991F-16FF01388A4A}" DTS:From="Package\SEQC_Package_01_PackageStartLog" DTS:ObjectName="Constraint_SEQC_Package_01_PackageStartLog_To_SEQC_Package_01_PackageEndLog" DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_Package_01_PackageStartLog_To_SEQC_Package_01_PackageEndLog]" DTS:To="Package\SEQC_Package_01_PackageEndLog" DTS:Value="1"></DTS:PrecedenceConstraint>
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler DTS:CreationName="OnError" DTS:DTSID="{87578454-D41F-4DF7-9B2C-712BB7FE042C}" DTS:EventID="0" DTS:EventName="OnError" DTS:LocaleID="-1" DTS:refId="Package.EventHandlers[OnError]">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{EDA5B853-F882-4AF2-8887-E9876BC7ED81}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="EST Log Package Error" DTS:refId="Package.EventHandlers[OnError]\EST Log Package Error" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData SQLTask:Connection="DWH_0_Admin" SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::ExecutionInstanceGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="7" SQLTask:DtsVariableName="System::EventHandlerStartTime" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="1" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::EventType" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="2" SQLTask:ParameterSize="15"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::ErrorCode" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="3" SQLTask:ParameterSize="15"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::ErrorDescription" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="4" SQLTask:ParameterSize="1000"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::SourceID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="5" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::SourceName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="6" SQLTask:ParameterSize="150"></SQLTask:ParameterBinding>
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+          <DTS:Variables>
+            <DTS:Variable DTS:CreationName="" DTS:DTSID="{23576508-0012-4181-9ADF-A19AB4D21C01}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="EventType" DTS:ReadOnly="True">
+              <DTS:VariableValue DTS:DataType="8">OnError</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:Variables>
+        <DTS:Variable DTS:CreationName="" DTS:Description="The propagate property of the event&#xD;&#xA;The propagate property of the event" DTS:DTSID="{E50BB21B-2137-4A72-B33C-FB51E9596C54}" DTS:IncludeInDebugDump="6789" DTS:Namespace="System" DTS:ObjectName="Propagate">
+          <DTS:VariableValue DTS:DataType="11">True</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+    </DTS:EventHandler>
+    <DTS:EventHandler DTS:CreationName="OnTaskFailed" DTS:DTSID="{C7629581-1E40-405A-9348-895DF223379F}" DTS:EventID="0" DTS:EventName="OnTaskFailed" DTS:LocaleID="-1" DTS:refId="Package.EventHandlers[OnTaskFailed]">
+      <DTS:Executables>
+        <DTS:Executable DTS:CreationName="Microsoft.ExecuteSQLTask" DTS:DTSID="{9B86F6E6-1AA7-4619-A7BF-ACF8ECED4593}" DTS:ExecutableType="Microsoft.ExecuteSQLTask" DTS:LocaleID="-1" DTS:ObjectName="EST Log Task Failed" DTS:refId="Package.EventHandlers[OnTaskFailed]\EST Log Task Failed" DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData SQLTask:Connection="DWH_0_Admin" SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::ExecutionInstanceGUID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="0" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="7" SQLTask:DtsVariableName="System::EventHandlerStartTime" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="1" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::EventType" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="2" SQLTask:ParameterSize="15"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::ErrorCode" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="3" SQLTask:ParameterSize="15"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="User::ErrorDescription" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="4" SQLTask:ParameterSize="1000"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="72" SQLTask:DtsVariableName="System::SourceID" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="5" SQLTask:ParameterSize="0"></SQLTask:ParameterBinding>
+              <SQLTask:ParameterBinding SQLTask:DataType="130" SQLTask:DtsVariableName="System::SourceName" SQLTask:ParameterDirection="Input" SQLTask:ParameterName="6" SQLTask:ParameterSize="150"></SQLTask:ParameterBinding>
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+          <DTS:Variables>
+            <DTS:Variable DTS:CreationName="" DTS:DTSID="{FF9869C7-46F0-446E-B54C-E36F520A14E9}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="EventType" DTS:ReadOnly="True">
+              <DTS:VariableValue DTS:DataType="8">OnTaskFailed</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable DTS:CreationName="" DTS:DTSID="{9D1B6624-93A2-4DAD-9BC1-2B51275B11B8}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="ErrorDescription" DTS:ReadOnly="True">
+              <DTS:VariableValue DTS:DataType="8">Task Failed</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable DTS:CreationName="" DTS:DTSID="{3B9D6FC3-8248-43A1-952F-F78359B6656A}" DTS:IncludeInDebugDump="2345" DTS:Namespace="User" DTS:ObjectName="ErrorCode" DTS:ReadOnly="True">
+              <DTS:VariableValue DTS:DataType="8"></DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:Variables>
+        <DTS:Variable DTS:CreationName="" DTS:Description="The propagate property of the event&#xD;&#xA;The propagate property of the event" DTS:DTSID="{50A009B1-3DEA-4FAB-B995-34B550F12F3E}" DTS:IncludeInDebugDump="6789" DTS:Namespace="System" DTS:ObjectName="Propagate">
+          <DTS:VariableValue DTS:DataType="11">True</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:Configurations>
+    <DTS:Configuration DTS:ConfigurationString="J_dwautogen_SSISAdminConfig" DTS:ConfigurationType="2" DTS:ConfigurationVariable="\Package.Connections[DWH_0_Admin].Properties[ConnectionString]" DTS:CreationName="" DTS:DTSID="{893C139A-4331-4099-AED3-23F30D6C7009}" DTS:ObjectName="J_dwautogen_SSISAdminConfig"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;DWH_1_Raw&quot;;" DTS:ConfigurationType="7" DTS:CreationName="" DTS:DTSID="{2B03CD2B-EA10-4483-8F30-47ADB2EA1809}" DTS:ObjectName="DWH_1_Raw"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Manual_SourceFolderPath&quot;;" DTS:ConfigurationType="7" DTS:CreationName="" DTS:DTSID="{E955A930-FA1B-4BE3-8957-20AB35B7A050}" DTS:ObjectName="Manual_SourceFolderPath"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Manual_ArchiveFolderPath&quot;;" DTS:ConfigurationType="7" DTS:CreationName="" DTS:DTSID="{02A84EAB-58B5-4379-8E80-89A9045A77E8}" DTS:ObjectName="Manual_ArchiveFolderPath"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Manual_ErrorFolderPath&quot;;" DTS:ConfigurationType="7" DTS:CreationName="" DTS:DTSID="{835338C7-2D6C-4E67-970E-3B7A0EA0F199}" DTS:ObjectName="Manual_ErrorFolderPath"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;MoveFileWhenComplete&quot;;" DTS:ConfigurationType="7" DTS:CreationName="" DTS:DTSID="{E1DAF5AA-26D0-4F30-B38F-1F572675492B}" DTS:ObjectName="MoveFileWhenComplete"></DTS:Configuration>
+    <DTS:Configuration DTS:ConfigurationString="SysExecutionLog_key" DTS:ConfigurationVariable="\Package.Variables[User::SysBatchLogExecutionLog_key].Properties[Value]" DTS:CreationName="" DTS:DTSID="{7AC753FF-C056-4108-9096-3FC15ED1DD11}" DTS:ObjectName="SysBatchLogExecutionLog_key"></DTS:Configuration>
+  </DTS:Configurations>
+</DTS:Executable>

@@ -133,6 +133,7 @@
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Functions\" />
     <Folder Include="Norm\" />
+    <Folder Include="Norm\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Storage\Norm_Data.sql" />

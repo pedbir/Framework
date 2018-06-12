@@ -2,18 +2,22 @@
     [SourceTableCatalog]        VARCHAR (128) NOT NULL,
     [SourceSchemaName]          VARCHAR (128) NOT NULL,
     [SourceTableName]           VARCHAR (128) NOT NULL,
+    [FilePattern]               VARCHAR (128) NOT NULL,
     [ColumnNamesInFirstDataRow] BIT           NOT NULL,
     [HeaderRowsToSkip]          SMALLINT      NOT NULL,
     [DataRowsToSkip]            SMALLINT      NOT NULL,
     [FlatFileType]              VARCHAR (20)  NOT NULL,
-    [HeaderRowDelimiter]        VARCHAR (5)   NOT NULL,
-    [RowDelimiter]              VARCHAR (5)   NOT NULL,
-    [ColumnDelimiter]           VARCHAR (5)   NULL,
-    [TextQualifier]             VARCHAR (5)   NULL,
+    [HeaderRowDelimiter]        VARCHAR (128) NOT NULL,
+    [RowDelimiter]              VARCHAR (128) NOT NULL,
+    [ColumnDelimiter]           VARCHAR (128) NULL,
+    [TextQualifer]              VARCHAR (5)   NULL,
     [IsUnicode]                 BIT           NOT NULL,
+    [CodePage]                  VARCHAR (128) NOT NULL,
     CONSTRAINT [PK_SourceFile] PRIMARY KEY CLUSTERED ([SourceTableCatalog] ASC, [SourceSchemaName] ASC, [SourceTableName] ASC),
     CONSTRAINT [CK_SourceFile_FlatFileType] CHECK ([FlatFileType]='Delimited' OR [FlatFileType]='FixedWidth' OR [FlatFileType]='RaggedRight')
 );
+
+
 
 
 GO
@@ -25,11 +29,11 @@ EXECUTE sp_addextendedproperty @name = N'ColumnDescription', @value = N'Flag to 
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'ExampleValue', @value = N'', @level0type = N'SCHEMA', @level0name = N'Metadata', @level1type = N'TABLE', @level1name = N'SourceFile', @level2type = N'COLUMN', @level2name = N'TextQualifier';
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'ColumnDescription', @value = N'', @level0type = N'SCHEMA', @level0name = N'Metadata', @level1type = N'TABLE', @level1name = N'SourceFile', @level2type = N'COLUMN', @level2name = N'TextQualifier';
+
 
 
 GO
@@ -110,4 +114,12 @@ EXECUTE sp_addextendedproperty @name = N'ExampleValue', @value = N'EDWHistory, S
 
 GO
 EXECUTE sp_addextendedproperty @name = N'ColumnDescription', @value = N'Name of the source database.', @level0type = N'SCHEMA', @level0name = N'Metadata', @level1type = N'TABLE', @level1name = N'SourceFile', @level2type = N'COLUMN', @level2name = N'SourceTableCatalog';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'ExampleValue', @value = N'', @level0type = N'SCHEMA', @level0name = N'Metadata', @level1type = N'TABLE', @level1name = N'SourceFile', @level2type = N'COLUMN', @level2name = N'TextQualifer';
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'ColumnDescription', @value = N'', @level0type = N'SCHEMA', @level0name = N'Metadata', @level1type = N'TABLE', @level1name = N'SourceFile', @level2type = N'COLUMN', @level2name = N'TextQualifer';
 

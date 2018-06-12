@@ -133,6 +133,8 @@
     <Build Include="Storage\Fact_Data.sql" />
     <Build Include="Storage\Fact_Index.sql" />
     <Build Include="Security\Fact.sql" />
+    <Build Include="Security\NT SERVICE_MSSQLServerOLAPService.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />

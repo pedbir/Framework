@@ -13,7 +13,7 @@ Module FlatFileExtension
 
 
     Public Datapath As String
-    Public FormatPath As String = "C:\Users\pedram.birounvand\Source\Repos\KPI\SSIS\Format\iLevel\"
+    Public FormatPath As String = "C:\Users\pedram.birounvand\Source\Repos\Datawarehouse\SSIS\Format\Manual\"
     Public FolderName As String = Directory.GetParent(FormatPath).Name
 
 
