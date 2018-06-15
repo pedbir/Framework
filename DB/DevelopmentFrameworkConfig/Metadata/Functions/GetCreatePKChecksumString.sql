@@ -1,4 +1,5 @@
-﻿-- =============================================
+﻿
+-- =============================================
 --
 -- Author:		
 -- Create date: 2016-06-05
@@ -102,7 +103,7 @@ BEGIN
 						THEN ', '
 					ELSE ''
 					END
-				) + @ColumnNamePrimaryKey
+				) + @ColumnNamePrimaryKey + IIF(@ColumnNamePrimaryKey = 'SysValidFromDateTime', ' DESC', ' ASC')
 		SET @ChecksumPrimaryKeyString = @ChecksumPrimaryKeyString + (
 				CASE 
 					WHEN @NrOfPrimaryKeyColumns > 1

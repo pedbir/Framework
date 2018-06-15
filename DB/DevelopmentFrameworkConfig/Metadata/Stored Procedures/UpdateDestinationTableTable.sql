@@ -228,40 +228,6 @@ begin
 		PRINT 'Creation of table ' + @DestinationTableName + ' needs to be handled' + CHAR(10) + 'Execute following script after actions needed above:'
 		PRINT (@ExecuteString)
 
-		if (@ColumnNamesInFirstDataRow is not null)
-		begin
-			insert into Metadata.SourceFile (
-				[SourceTableCatalog]
-				,[SourceSchemaName]
-				,[SourceTableName]
-				,[ColumnNamesInFirstDataRow]
-				,[HeaderRowsToSkip]
-				,[DataRowsToSkip]
-				,[FlatFileType]
-				,[HeaderRowDelimiter]
-				,[RowDelimiter]
-				,[ColumnDelimiter]
-				,[TextQualifier]
-				,[IsUnicode]
-				)
-			values (
-				@SourceDatabaseName
-				,@SourceSchemaName
-				,@SourceTableName
-				,@ColumnNamesInFirstDataRow
-				,@HeaderRowsToSkip
-				,@DataRowsToSkip
-				,@FlatFileType
-				,@HeaderRowDelimiter
-				,@RowDelimiter
-				,@ColumnDelimiter
-				,@TextQualifier
-				,@IsUnicode
-				)
-
-			print 'Table [Metadata].[SourceFile] handled.' + CHAR(10) + '--- No more actions required ---' + CHAR(10)
-		end
-
 		commit transaction ActivateTablesForDestinations
 	end try
 
