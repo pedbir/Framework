@@ -5,22 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "SSIS", "SSIS\SSIS.dtproj", "{2071874C-6A42-49E4-BBA1-0397B240D3FF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Format", "Format", "{7933EE32-C498-4BAC-A742-3AD578288374}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Script", "Script", "{5D1BDEC2-FBF6-4DF9-89D5-34F9C62D7170}"
-	ProjectSection(SolutionItems) = preProject
-		Script\CreateFormatFilesFromTable.sql = Script\CreateFormatFilesFromTable.sql
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manual", "Manual", "{00BF2EA3-5C04-462D-B424-319BC29E6F79}"
-	ProjectSection(SolutionItems) = preProject
-		Format\Manual\CostCenterCategory_01.xml = Format\Manual\CostCenterCategory_01.xml
-		Format\Manual\CountryCode_01.xml = Format\Manual\CountryCode_01.xml
-		Format\Manual\FinancialAllocationMapping_01.xml = Format\Manual\FinancialAllocationMapping_01.xml
-		Format\Manual\ReportStructure_01.xml = Format\Manual\ReportStructure_01.xml
-		Format\Manual\ValuationFxRates_01.xml = Format\Manual\ValuationFxRates_01.xml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|Default = Development|Default
@@ -31,8 +15,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{00BF2EA3-5C04-462D-B424-319BC29E6F79} = {7933EE32-C498-4BAC-A742-3AD578288374}
 	EndGlobalSection
 EndGlobal

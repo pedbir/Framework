@@ -1,0 +1,2349 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/13/2018 5:23:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="STO-PC-682"
+  DTS:CreatorName="Pedram.Birounvand"
+  DTS:DelayValidation="True"
+  DTS:Description="EXEC Metadata.CreateFlatFileEntity &#xA;&#x9;@SourceFileRootFolder&#x9;&#x9;&#x9;=&#x9;'C:/DW/se_credit_deposits/'  &#xA;&#x9;,@SourceFileType&#x9;&#x9;&#x9;&#x9;=&#x9;'ConvertExcelToCsv_RawTyped'  &#xA;&#x9;,@SourceTableName&#x9;&#x9;&#x9;&#x9;=&#x9;'rt_ConvertExcelToCsv'  &#xA;&#x9;,@FilePattern&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'*Bluestep Inl?ning - Databasereport Daily*.csv'  &#xA;&#x9;,@ColumnNamesInFirstDataRow&#x9;&#x9;=&#x9;  1&#x9;   &#xA;&#x9;,@HeaderRowsToSkip&#x9;&#x9;&#x9;&#x9;=&#x9;  4&#x9;   &#xA;&#x9;,@DataRowsToSkip&#x9;&#x9;&#x9;&#x9;=&#x9;  0&#x9;   &#xA;&#x9;,@FlatFileType&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'Delimited'  &#xA;&#x9;,@HeaderRowDelimiter&#x9;&#x9;&#x9;=&#x9;'{CR}{LF}'  &#xA;&#x9;,@RowDelimiter&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'{CR}{LF}'  &#xA;&#x9;,@ColumnDelimiter&#x9;&#x9;&#x9;&#x9;=&#x9;','  &#xA;&#x9;,@TextQualifer&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'&quot;'  &#xA;&#x9;,@IsUnicode&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;  0&#x9;   &#xA;&#x9;,@CodePage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'1252'  &#xA;&#x9;,@DestinationDatabaseName&#x9;&#x9;=&#x9;'DWH_1_Raw'  &#xA;&#x9;,@LinkedServerName&#x9;&#x9;&#x9;&#x9;=&#x9;'localhost'  &#xA;&#x9;,@SourceMetadataDatabaseName&#x9;=&#x9;'DWH_1_Raw'  &#xA;&#x9;,@Locale&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'Lcid1033'  &#xA;&#x9;,@FileNameRegExDateTime&#x9;&#x9;&#x9;=&#x9;'(\d{4})-(\d{2})-(\d{2}) (\d{2})_(\d{2})_(\d{2})'  &#xA;&#x9;,@FileNameDateTimePattern&#x9;&#x9;=&#x9;'yyyy-MM-dd hh_mm_ss'"
+  DTS:DTSID="{06275462-2E37-43CA-A5C5-FFCEF24D7F65}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3025.39"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ConvertExcelToCsv"
+  DTS:ProtectionLevel="0"
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{D8611980-53DB-4702-A606-B2B93992C83C}"
+  DTS:VersionMajor="0">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ConvertExcelToCsv]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B0F459B5-65D2-4BF7-899D-6FC1A0866EDE}"
+      DTS:ObjectName="ConvertExcelToCsv">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::ConvertExcelToCsv_SourceFullFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowsToSkip="4"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter="_x007B_CR_x007D__x007B_LF_x007D_"
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\DW\se_credit_deposits\Source\RawExcel\ConvertExcelToCsv.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:DataPrecision="10"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AccountNumber"
+              DTS:DTSID="{B7BE939D-29C3-4FB1-ACD7-EA807BE66514}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountproductcode"
+              DTS:DTSID="{05D4DD65-F3B0-4175-A1D7-705E2FF4A0D6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountproductname"
+              DTS:DTSID="{6F27FD70-16DA-43E9-A33F-9452C6B747ED}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountopeningdate"
+              DTS:DTSID="{21919F13-195B-4181-A97C-C1A06E5313D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountfirstdepostitdate"
+              DTS:DTSID="{BC3AAAE0-37B4-4C69-A0D2-76C378DF57E8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountclosingdate"
+              DTS:DTSID="{149F372D-DCCA-4C70-8355-E1A823F743E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="2"
+              DTS:DataPrecision="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Termofproduct"
+              DTS:DTSID="{7E540F72-0AA3-4BE5-843D-F5697AB065C7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="32"
+              DTS:DataScale="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Interestrate"
+              DTS:DTSID="{1DCF8DE2-6EE1-4DC1-9ECD-B642DC699C32}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="32"
+              DTS:DataScale="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Interestbonusrate"
+              DTS:DTSID="{E493FA0C-6C53-4C88-A5A5-2A1021C8BA70}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dateofpaymentofbonusrate"
+              DTS:DTSID="{78B475B2-CA52-4007-88D0-714B7E7D4EC4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Interestpaymentdate"
+              DTS:DTSID="{A53634A1-C9D2-46DA-B616-37C97190258F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Nominatedbankaccountforwithdrawals"
+              DTS:DTSID="{3FBC8B55-1FC2-4A87-BAEA-2F73817FD45A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="32"
+              DTS:DataScale="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Amountondeposit"
+              DTS:DTSID="{35EBB2FC-D2F7-4AD0-99DC-66C7B4026986}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="32"
+              DTS:DataScale="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accruedbutunpaidinterest"
+              DTS:DTSID="{4DBA0394-570D-41A6-B88C-95A325D3D21C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="32"
+              DTS:DataScale="4"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accruedbutunpaidbonus"
+              DTS:DTSID="{02990A83-427F-4F0C-84F8-D91F0A7B2640}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dateoflastwithdrawal"
+              DTS:DTSID="{26F61BA9-496B-491D-8CEB-8D787012FD28}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Dateoflastdeposit"
+              DTS:DTSID="{2E470B0C-00BC-423E-8029-0A1CF1E8F98C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DatelasttransferFrom"
+              DTS:DTSID="{9BFEE90D-2263-47BB-B52C-55E762783642}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DatelasttransferTo"
+              DTS:DTSID="{FA97F80B-3E69-43B0-B0E9-CE70E334A062}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:DataPrecision="10"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Numberofaccountholders"
+              DTS:DTSID="{FEC67DDD-2548-453E-A175-13F7215BB192}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Manualaccount"
+              DTS:DTSID="{A1F7C3AF-DD02-4A08-A588-939D113BAAA2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1FirstName"
+              DTS:DTSID="{BE7EB2FC-749D-4879-BA8C-BD3FB641B96A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1LastName"
+              DTS:DTSID="{771CE2C3-BFF7-4D35-9E6A-2F307F791E72}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1Personnumber"
+              DTS:DTSID="{EB3D8726-66F4-4B56-8079-7A2EB452BC9E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1StreetAddress"
+              DTS:DTSID="{D78E6ADA-3ED3-4A73-9F81-54F2E0FE0A07}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1CityAddress"
+              DTS:DTSID="{EBA1E409-A507-4826-877E-239B8EDBC234}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1Email"
+              DTS:DTSID="{00D8E173-D024-4B02-89AA-7568FA177886}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1Mobilnumber"
+              DTS:DTSID="{09737D5D-F52C-4F60-A903-1781A9740655}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1TelephoneDaytime"
+              DTS:DTSID="{E389C6D3-5F85-472C-A120-0A05AB53745E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1TelephoneEvening"
+              DTS:DTSID="{6FB3EF78-3A1A-4BBD-A2A2-41576543FBEB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1FeedbackQuestion1"
+              DTS:DTSID="{9AB0434E-D1B4-48C2-AF66-5146FA60BFCB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1FeedbackQuestion2"
+              DTS:DTSID="{A2D6FF4A-A0DD-4CEE-8120-3A863E6DA1F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1FeedbackQuestion3"
+              DTS:DTSID="{745DDFC4-BDF8-4729-8BCF-0529C279787F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1FeedbackQuestion4"
+              DTS:DTSID="{3516C21F-26E0-48B1-A115-1CB052B1B0F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1AMLquestionsQuestion1"
+              DTS:DTSID="{B8E8F159-A14E-44AA-AC00-CFE50B085EAC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1AMLquestionsQuestion2"
+              DTS:DTSID="{11ECD505-2C14-40C3-9E02-6CC878EEDF82}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder1AMLquestionsQuestion3"
+              DTS:DTSID="{CBBC2048-4CAE-49A5-B602-ED063B5256E7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2FirstName"
+              DTS:DTSID="{8CD391D6-1367-43CE-A341-697BA65EB7C9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2LastName"
+              DTS:DTSID="{A4935DD3-9309-4534-92DC-6012B22165FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2Personnumber"
+              DTS:DTSID="{B5B93047-E516-4A74-B701-1105C8597FE3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2StreetAddress"
+              DTS:DTSID="{506000E9-D425-405C-9A67-F4D3E4A2A8D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2CityAddress"
+              DTS:DTSID="{3AD2476A-F85D-4930-AEAE-34D0CDE5687E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2Email"
+              DTS:DTSID="{8C0ED0AB-532B-4EB9-90AD-12C9F90245D8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2Mobilnumber"
+              DTS:DTSID="{702F52EC-3607-47D7-9C4C-C86D7FBDDEA3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2TelephoneDaytime"
+              DTS:DTSID="{F8983C49-FA85-4AEE-8579-3DD9F6B641D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2TelephoneEvening"
+              DTS:DTSID="{D2BE618D-8391-4459-91F7-C8AB5CE48D6C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2FeedbackQuestion1"
+              DTS:DTSID="{6967F323-F9C3-4ADA-8E20-217AD68A05CA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2FeedbackQuestion2"
+              DTS:DTSID="{D648743D-5565-48D6-AD44-908FF75BF0F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2FeedbackQuestion3"
+              DTS:DTSID="{D10182BC-7114-4379-B6F5-F760CA4C56A6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2FeedbackQuestion4"
+              DTS:DTSID="{FC4A0AB1-4984-4B74-97BC-B7FD19F788E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2AMLquestionsQuestion1"
+              DTS:DTSID="{3E74B617-FE81-4257-870B-354DE305C817}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2AMLquestionsQuestion2"
+              DTS:DTSID="{2158E085-2475-4BD8-ABB9-AB12E0D3292D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder2AMLquestionsQuestion3"
+              DTS:DTSID="{11939710-8310-471F-B458-B8409FCADF69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3FirstName"
+              DTS:DTSID="{F7861D6B-3222-4217-98D0-556E581F4735}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3LastName"
+              DTS:DTSID="{BE2B9853-8D01-4186-9E93-A3EDDA77F898}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3Personnumber"
+              DTS:DTSID="{C876A394-1358-44C6-B69D-DFD93DD366C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3StreetAddress"
+              DTS:DTSID="{B37A05EF-4F92-45BD-984B-97A903B3F0F2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3CityAddress"
+              DTS:DTSID="{0B467CCD-7328-4DF3-885B-0EF46C20789E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3Email"
+              DTS:DTSID="{1FCDCE66-F409-467D-83E2-636923B7886B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3Mobilnumber"
+              DTS:DTSID="{F2B9B355-B4FD-4878-A703-E8BC97FA4B4E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3TelephoneDaytime"
+              DTS:DTSID="{0C5F43D8-4103-40B5-BC6B-4BD5790505AB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3TelephoneEvening"
+              DTS:DTSID="{BAFABA08-878E-4999-876F-1531856746E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3FeedbackQuestion1"
+              DTS:DTSID="{D5DAC90E-6E5D-44CC-8D1A-3DD455AAC5F1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3FeedbackQuestion2"
+              DTS:DTSID="{86D0E6EE-050E-4F05-961F-531BA856F88F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3FeedbackQuestion3"
+              DTS:DTSID="{E37FEFB5-D1FE-4DC7-8D1E-2FF473B2F381}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3FeedbackQuestion4"
+              DTS:DTSID="{8C6B136B-777C-44A4-A9F5-DF10E10C6CB3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3AMLquestionsQuestion1"
+              DTS:DTSID="{50DAC3AD-5BEC-4648-A352-E6C12F97B5AE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3AMLquestionsQuestion2"
+              DTS:DTSID="{24E77887-DA0A-486E-B0B0-813F4952B28F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder3AMLquestionsQuestion3"
+              DTS:DTSID="{BDD314F7-C695-43B3-A39A-1E44F19079EA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4FirstName"
+              DTS:DTSID="{B25556B9-02FA-4C79-A629-896F6D70F4BE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4LastName"
+              DTS:DTSID="{0BA87E87-7A54-4B5D-A988-16F93C2D9DF0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4Personnumber"
+              DTS:DTSID="{F36F9137-C138-460E-9E2B-1CC44CEDFC89}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4StreetAddress"
+              DTS:DTSID="{0F101F9A-1864-484B-9817-1C84EE525CE4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4CityAddress"
+              DTS:DTSID="{A742B08F-B4C4-4544-AC63-82071E5FF912}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4Email"
+              DTS:DTSID="{973E8210-4CC9-43BA-A26C-EA7ABBC705FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4Mobilnumber"
+              DTS:DTSID="{13D78886-A581-4840-89B5-E5C12E5B15D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4TelephoneDaytime"
+              DTS:DTSID="{C9580A16-9964-4B3F-ACB8-161F2D23B5E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4TelephoneEvening"
+              DTS:DTSID="{7767AC0C-CD2F-4DCC-B73F-8F78F6D203E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4FeedbackQuestion1"
+              DTS:DTSID="{64AA9D77-04A7-4972-A4B9-8A2F109CB4E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4FeedbackQuestion2"
+              DTS:DTSID="{605C4833-C851-4F34-9D91-A95E563942D0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4FeedbackQuestion3"
+              DTS:DTSID="{FBA6C7CE-F027-458B-9F26-3C8F005AAC5B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4FeedbackQuestion4"
+              DTS:DTSID="{0622455A-4549-4537-812D-8B4F4EA47E3B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4AMLquestionsQuestion1"
+              DTS:DTSID="{3169517D-676A-452B-BA1B-19DB9FAB591F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4AMLquestionsQuestion2"
+              DTS:DTSID="{10188D03-9995-4DFB-A801-BF7D65348D7B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Accountholder4AMLquestionsQuestion3"
+              DTS:DTSID="{93AF47CA-894A-464A-9238-B0B4E1EFAD82}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH_0_Admin]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+      DTS:ObjectName="DWH_0_Admin">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=localhost;initial catalog=DWH_0_Admin;provider=SQLNCLI11;integrated security=SSPI;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DWH_1_Raw]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{27E5D09E-6B6E-4D1E-9486-8F7532EDB043}"
+      DTS:ObjectName="DWH_1_Raw">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=DWH_1_Raw;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Configurations>
+    <DTS:Configuration
+      DTS:ConfigurationString="J_dwautogen_SSISAdminConfig"
+      DTS:ConfigurationType="2"
+      DTS:ConfigurationVariable="\Package.Connections[DWH_0_Admin].Properties[ConnectionString]"
+      DTS:CreationName=""
+      DTS:DTSID="{EBE3E9DB-03E8-4A09-A9D3-CF048739B8E7}"
+      DTS:ObjectName="J_dwautogen_SSISAdminConfig" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;DWH_1_Raw&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{A03FE6F4-268C-4B86-9CB4-FB5FA76E7301}"
+      DTS:ObjectName="DWH_1_Raw" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;ConvertExcelToCsv_SourceFolderPath&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{F253A6AC-828B-4D73-BB42-7E2E0255CDE4}"
+      DTS:ObjectName="ConvertExcelToCsv_SourceFolderPath" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;ConvertExcelToCsv_ArchiveFolderPath&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{218D6B7E-5E95-484D-8E45-68AC6F43DF5C}"
+      DTS:ObjectName="ConvertExcelToCsv_ArchiveFolderPath" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;ConvertExcelToCsv_ErrorFolderPath&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{475C948C-158A-469D-B2B7-733B1B3BEA15}"
+      DTS:ObjectName="ConvertExcelToCsv_ErrorFolderPath" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;ConvertExcelToCsv_DestinationFolderPath&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{F96D4864-9CC8-45CB-9A5F-20B87ABF3334}"
+      DTS:ObjectName="ConvertExcelToCsv_DestinationFolderPath" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;ConvertExcelToCsv_ExeFilePath&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{30569A30-DA94-4AF1-B2A0-6F6A8294DE65}"
+      DTS:ObjectName="ConvertExcelToCsv_ExeFilePath" />
+    <DTS:Configuration
+      DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;MoveFileWhenComplete&quot;;"
+      DTS:ConfigurationType="7"
+      DTS:CreationName=""
+      DTS:DTSID="{3DA0809A-C7EC-4EDE-B846-91FA3A3F4822}"
+      DTS:ObjectName="MoveFileWhenComplete" />
+    <DTS:Configuration
+      DTS:ConfigurationString="SysExecutionLog_key"
+      DTS:ConfigurationVariable="\Package.Variables[User::SysBatchLogExecutionLog_key].Properties[Value]"
+      DTS:CreationName=""
+      DTS:DTSID="{CC624C56-6BA7-483A-B110-07333D9966D6}"
+      DTS:ObjectName="SysBatchLogExecutionLog_key" />
+  </DTS:Configurations>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="DWH_0_Admin"
+      DTS:CreationName="Microsoft.LogProviderSQLServer"
+      DTS:DTSID="{34C4771A-879D-48AC-950D-DB72C26D0543}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D758F76-6841-4A7E-BB12-0AA293C52D4D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_ArchiveFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Archive\RawExcel</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AABBA061-F6E6-4F0D-9399-EAA8FFBE6E6A}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ConvertExcelToCsv_ArchiveFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::ConvertExcelToCsv_FileName], 1,FINDSTRING(@[User::ConvertExcelToCsv_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_ArchiveFullFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Archive\RawExcel\ConvertExcelToCsv_20180614_0.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{95A330EC-BC67-4432-9A06-AD647D7CF3D0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_DestinationFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Source</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A1D607EC-EBDF-43CE-827E-BD8F2CA49DA1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_ErrorFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Error\RawExcel</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A0DEC3A1-9B42-4C74-B8CC-42F5DAA86631}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ConvertExcelToCsv_ErrorFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::ConvertExcelToCsv_FileName], 1,FINDSTRING(@[User::ConvertExcelToCsv_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.xlsx&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_ErrorFullFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Error\RawExcel\ConvertExcelToCsv_20180614_0.xlsx</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2C243CA6-F13A-4D3A-A4E7-74BA89FA74B3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_ExeFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Users\pedram.birounvand\Source\Repos\Datawarehouse\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConvertExcelToCsv.exe</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6FA33467-F6AD-452B-9070-393F63D78142}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">ConvertExcelToCsv.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{19639210-27A7-4B16-BFBD-80BC8CF7C594}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_SourceFolderPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Source\RawExcel</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B621C8C8-4FCB-48EE-9CD2-B425761158CA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ConvertExcelToCsv_SourceFolderPath] + &quot;\\&quot; + @[User::ConvertExcelToCsv_FileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ConvertExcelToCsv_SourceFullFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Source\RawExcel\ConvertExcelToCsv.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E8240AF5-C976-4EE9-811B-2DF8D87F17B2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationSchemaName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F7E8F252-5ABB-431E-ABB0-A88F1A36BF48}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationTableCatalog">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2E6D1C65-E5F1-4CB5-88FF-99F1BE3862D1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="DestinationTableName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1EF45DFF-228D-4C0F-AE7B-1642118F501F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="DWID">
+      <DTS:VariableValue
+        DTS:DataType="3">3</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{87A58DF4-2D00-4698-A07C-A275AFAF077B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="MoveFileWhenComplete">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{66603EB6-A866-4DDA-86A9-9E1598F669EC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageLastExecuted">
+      <DTS:VariableValue
+        DTS:DataType="8">1900-01-01</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4A4A0A75-773D-40E7-B3A6-ABD1B72DB0DA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageLastExecutedNew">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3E40FF58-D829-4EA0-B0DD-9D0F2FD6C016}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="PackageLastExecutedTimeOffset">
+      <DTS:VariableValue
+        DTS:DataType="3">-30</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{17EDE4C7-85A7-403C-8195-5D455A21A193}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsDeleted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6AE3ED1E-3A3D-4048-9AF3-98870C00EA73}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7372ADC6-353C-444A-AF11-F9287B36E60B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsIgnore">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3D160CC0-E589-4409-ADBF-A122533B41D2}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::RowsNewVersion]+@[User::RowsNewMember]-(@[User::RowsNewMemberError]+@[User::RowsNewVersionError])"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsInserted">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{109B8DEC-0D8E-48B8-AD68-F9CEDDE54541}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsNewInferredMemberError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{28584964-5807-4C6D-835A-84A9E4B5DBA1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsNewMember">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{412A1E6D-71E5-446F-B4CB-DC80FB9AB3F8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsNewMemberError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{32087880-A9AD-4A06-93A5-A2824A97F036}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsNewVersion">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0ACDFE0D-816A-404C-8467-F87A952FC12A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsNewVersionError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67C8E60B-2ACF-456F-A9F3-4455CFFB1F5B}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsRead">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FB4438BB-3C6A-40D6-AE6C-0E847CBA75F1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsSourceRead">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{75CBEA1A-02D4-4B02-9E79-2890CA1CB814}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(@[User::RowsUpdateOld]+@[User::RowsUpdateInferred])-(@[User::RowsUpdateInferredError] + @[User::RowsUpdateOldError])"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdated">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E8DAE049-6D5E-4E8D-92D1-D6C07972F062}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdateInferred">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED007BB1-E5D8-43CB-8834-16C1D02C4561}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdateInferredError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{30B58A08-18C7-4F4B-8124-6BB9231993EF}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdateOld">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D11F38F-14AB-42C2-9782-883738292588}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RowsUpdateOldError">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{338313E5-06BF-45CB-8545-57FF7BF8021A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceSchemaName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4751D2EA-5AE2-4EFC-9F0E-4E668B80FFD9}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::ConvertExcelToCsv_SourceFolderPath]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceTableCatalog">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\DW\se_credit_deposits\Source\RawExcel</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5B779D8-60CB-4218-8BFC-DC32AA776AF2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceTableName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BA4F3E72-8238-4D53-B58C-9A69EA4B675A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SsisIncrementalLoad">
+      <DTS:VariableValue
+        DTS:DataType="8">1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{104D8BE9-D12E-4DDC-B7D1-F9827422074D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SsisLoadType">
+      <DTS:VariableValue
+        DTS:DataType="8">FlatFile</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{87A84D39-CB33-4FA5-8FB8-AEC48F6E3582}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysBatchLogExecutionLog_key">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{37E0DCB5-BE5A-437C-8BE0-E402BC2D020C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysDatetimeDeletedUTC">
+      <DTS:VariableValue
+        DTS:DataType="8">2018-06-14 13:59:02.250000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1275A34F-7A8B-451D-AFE7-1A39CD4E30E6}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysDatetimeInsertedUTC">
+      <DTS:VariableValue
+        DTS:DataType="8">2018-06-14 13:59:02.250000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6CCD501F-8129-4AAC-9D4F-64C5F9FF640D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysDatetimeUpdatedUTC">
+      <DTS:VariableValue
+        DTS:DataType="8">2018-06-14 13:59:02.250000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{796401DE-AAFF-45B2-B6AD-EE912AD9C157}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysExecutionLog_key">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5693DE9F-F7B1-48EB-BB05-B1A6AEDA657E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysModifiedUTC">
+      <DTS:VariableValue
+        DTS:DataType="8">2018-06-14 13:59:02.250000000</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C3A127A2-DE1B-421C-A0F3-6294FEAC6118}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SysSrcGenerationDateTime">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DTSID="{61A819CC-D3D9-4B6D-8F05-05695471874F}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FELC_ConvertExcelToCsv_LoopThroughCSV">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{2F8CA26E-F2CE-4A9A-8623-C77AB71041FF}"
+        DTS:ObjectName="{2F8CA26E-F2CE-4A9A-8623-C77AB71041FF}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::ConvertExcelToCsv_SourceFolderPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\DW\se_credit_deposits\Source\RawExcel" />
+            <FEFEProperty
+              FileSpec="*.xlsx" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ArchiveFile"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DTSID="{C6455E95-49D5-4D7F-BFD1-CEDAE28B0D27}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FSYS_ConvertExcelToCsv_ArchiveFile"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="RenameFile"
+              TaskSourcePath="User::ConvertExcelToCsv_SourceFullFilePath"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::ConvertExcelToCsv_ArchiveFullFilePath"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ErrorFile"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DTSID="{27E22DA9-2611-47A0-BBA6-CE70D41064D9}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="FSYS_ConvertExcelToCsv_ErrorFile"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="RenameFile"
+              TaskSourcePath="User::ConvertExcelToCsv_SourceFullFilePath"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::ConvertExcelToCsv_ErrorFullFilePath"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:DTSID="{87C465A8-70A7-43D8-91AB-8AD1AE2E60C0}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SEQC_ConvertExcelToCsv_LoadFile">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SQL_ConvertExcelToCsv_LogPackageFileExecutionEnd"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:DTSID="{8efe6202-f63c-4250-8f77-356679ea1425}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SQL_ConvertExcelToCsv_LogPackageFileExecutionEnd"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+                  SQLTask:SqlStatementSource=" EXEC Logging.LogPackageFileExecutionEnd @PackageID = ?&#xA;          , @ExecutionID = ?&#xA;          , @RowsRead = ?&#xA;          , @RowsInserted = ?&#xA;          , @RowsUpdated = ?&#xA;          , @RowsDeleted = ?&#xA;          , @RowsIgnored = ?&#xA;          , @RowsError = ?&#xA;          , @SysFileName = ?&#xA;          , @SysExecutionLog_key = ?&#xA;          , @PackageVersionId = ?&#xA;                             " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::PackageID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::RowsRead"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::RowsInserted"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="User::RowsUpdated"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="User::RowsDeleted"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="6"
+                    SQLTask:DtsVariableName="User::RowsIgnore"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="7"
+                    SQLTask:DtsVariableName="User::RowsError"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="8"
+                    SQLTask:DtsVariableName="User::ConvertExcelToCsv_FileName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="130"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="9"
+                    SQLTask:DtsVariableName="User::SysExecutionLog_key"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="20"
+                    SQLTask:ParameterSize="0" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="10"
+                    SQLTask:DtsVariableName="System::VersionGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="72"
+                    SQLTask:ParameterSize="0" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SRC_ConvertExcelToCsv"
+              DTS:CreationName="Microsoft.ExecuteProcess"
+              DTS:Description="Execute Process Task"
+              DTS:DTSID="{BDE62D34-AE71-422D-BF15-5B70F0BC78C7}"
+              DTS:ExecutableType="Microsoft.ExecuteProcess"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="SRC_ConvertExcelToCsv"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:PropertyExpression
+                DTS:Name="Arguments">"\"" + @[User::ConvertExcelToCsv_SourceFullFilePath] + "\""  + " \"" + @[User::ConvertExcelToCsv_DestinationFolderPath] + "\""</DTS:PropertyExpression>
+              <DTS:PropertyExpression
+                DTS:Name="Executable">@[User::ConvertExcelToCsv_ExeFilePath]</DTS:PropertyExpression>
+              <DTS:ObjectData>
+                <ExecuteProcessData
+                  Executable="C:\Users\pedram.birounvand\Source\Repos\Datawarehouse\ConsoleApplication1\ConsoleApplication1\bin\Debug\ConvertExcelToCsv.exe"
+                  Arguments="&quot;C:\DW\se_credit_deposits\Source\RawExcel\ConvertExcelToCsv.csv&quot; &quot;C:\DW\se_credit_deposits\Source&quot;" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{CC9CB8FD-6DD7-4FED-97EF-A0316CF3E85A}"
+              DTS:From="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SRC_ConvertExcelToCsv"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SQL_ConvertExcelToCsv_LogPackageFileExecutionEnd" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ArchiveFile]"
+          DTS:CreationName=""
+          DTS:DTSID="{39771279-9AF7-4B13-A659-3D7C25FDA346}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::MoveFileWhenComplete]"
+          DTS:From="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ArchiveFile"
+          DTS:To="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ArchiveFile" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC_ConvertExcelToCsv_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ErrorFile]"
+          DTS:CreationName=""
+          DTS:DTSID="{5AB95AA8-3E58-4258-8DEE-90A70E42FF6C}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::MoveFileWhenComplete]"
+          DTS:From="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ErrorFile"
+          DTS:To="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ErrorFile"
+          DTS:Value="1" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{C9D5E327-783D-468E-9B66-1B644EA82005}"
+          DTS:ObjectName="{C9D5E327-783D-468E-9B66-1B644EA82005}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::ConvertExcelToCsv_FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQC_ConvertExcelToCsv_PackageEndLog"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DTSID="{8C49C5E7-DAE2-435E-AB7D-C8D16BB36203}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQC_ConvertExcelToCsv_PackageEndLog">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQC_ConvertExcelToCsv_PackageEndLog\SQL_ConvertExcelToCsv_LogPackageEnd"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{9C266AAC-7B27-4121-8A23-DD94F8B872F6}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SQL_ConvertExcelToCsv_LogPackageEnd"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="2">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+              SQLTask:SqlStatementSource="exec Logging.LogPackageEnd&#xA;                  @PackageID = ?,&#xA;                  @ExecutionID = ?,&#xA;                  @ExecutionEndTime = ?,&#xA;                  @RowsRead = ?,&#xA;                  @RowsInserted = ?,&#xA;                  @RowsUpdated = ?,&#xA;                  @RowsDeleted = ?,&#xA;                  @RowsIgnored = ?,&#xA;                  @RowsError = ?&#xA;                 " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::ContainerStartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::RowsRead"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::RowsInserted"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="User::RowsUpdated"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="User::RowsDeleted"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="User::RowsIgnore"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="User::RowsError"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="20"
+                SQLTask:ParameterSize="0" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQC_ConvertExcelToCsv_PackageStartLog"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DTSID="{0F2C7500-962A-4B0C-9AA4-8DFC854E4175}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQC_ConvertExcelToCsv_PackageStartLog">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQC_ConvertExcelToCsv_PackageStartLog\EPT Package Start Log"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{30DFA453-BA07-4AAB-80D4-A49ABBDCD75A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EPT Package Start Log"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+              SQLTask:SqlStatementSource="&#xA;  exec Logging.LogPackageStart&#xA;  @PackageID = ?,&#xA;  @PackageName = ?,&#xA;  @VersionID = ?,&#xA;  @VersionMajor = ?,&#xA;  @VersionMinor = ?,&#xA;  @VersionBuild = ?,&#xA;  @VersionComments = ?,&#xA;  @CreationDate = ?,&#xA;  @CreatorName = ?,&#xA;  @CreatorComputerName = ?,&#xA;  @LocaleID = ?,&#xA;  @ExecutionID = ?,&#xA;  @ExecutionStartTime = ?,&#xA;  @ExecutionUserName = ?,&#xA;  @ExecutionMachineName = ?,&#xA;  @ProductVersion = ?,&#xA;  @InteractiveMode = ?,&#xA;  @SysBatchLogExecutionLog_key = ?,&#xA;  @SysExecutionLog_key = ? output,&#xA;        @SourceTableCatalog = ?,&#xA;        @SourceSchemaName = ?,&#xA;        @SourceTableName = ?,&#xA;        @DestinationTableCatalog = ?,&#xA;        @DestinationSchemaName = ?,&#xA;        @DestinationTableName = ?,&#xA;        @SsisIncrementalLoad = ?,&#xA;        @SsisLoadType  = ?&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="150" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::VersionGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::VersionMajor"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="System::VersionMinor"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="System::VersionBuild"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="System::VersionComments"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="250" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="7"
+                SQLTask:DtsVariableName="System::CreationDate"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="8"
+                SQLTask:DtsVariableName="System::CreatorName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="50" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="9"
+                SQLTask:DtsVariableName="System::CreatorComputerName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="30" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="10"
+                SQLTask:DtsVariableName="System::LocaleID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="11"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="12"
+                SQLTask:DtsVariableName="System::ContainerStartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="13"
+                SQLTask:DtsVariableName="System::UserName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="50" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="14"
+                SQLTask:DtsVariableName="System::MachineName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="30" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="15"
+                SQLTask:DtsVariableName="System::ProductVersion"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="10" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="16"
+                SQLTask:DtsVariableName="System::InteractiveMode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="11"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="17"
+                SQLTask:DtsVariableName="User::SysBatchLogExecutionLog_key"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="18"
+                SQLTask:DtsVariableName="User::SysExecutionLog_key"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="19"
+                SQLTask:DtsVariableName="User::SourceTableCatalog"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="20"
+                SQLTask:DtsVariableName="User::SourceSchemaName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="21"
+                SQLTask:DtsVariableName="User::SourceTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="22"
+                SQLTask:DtsVariableName="User::DestinationTableCatalog"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="23"
+                SQLTask:DtsVariableName="User::DestinationSchemaName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="24"
+                SQLTask:DtsVariableName="User::DestinationTableName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="25"
+                SQLTask:DtsVariableName="User::SsisIncrementalLoad"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="26"
+                SQLTask:DtsVariableName="User::SsisLoadType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="0" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_FELC_ConvertExcelToCsv_LoopThroughCSV_To_SEQC_ConvertExcelToCsv_PackageEndLog]"
+      DTS:CreationName=""
+      DTS:DTSID="{31128D33-C25D-4BB6-B2E3-A10CD19FBF00}"
+      DTS:From="Package\FELC_ConvertExcelToCsv_LoopThroughCSV"
+      DTS:ObjectName="Constraint_FELC_ConvertExcelToCsv_LoopThroughCSV_To_SEQC_ConvertExcelToCsv_PackageEndLog"
+      DTS:To="Package\SEQC_ConvertExcelToCsv_PackageEndLog"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_FELC_ConvertExcelToCsv_LoopThroughCSV]"
+      DTS:CreationName=""
+      DTS:DTSID="{9D578C80-7499-4691-89C6-AEB3EAACEDD7}"
+      DTS:From="Package\SEQC_ConvertExcelToCsv_PackageStartLog"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_FELC_ConvertExcelToCsv_LoopThroughCSV"
+      DTS:To="Package\FELC_ConvertExcelToCsv_LoopThroughCSV" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_SEQC_ConvertExcelToCsv_PackageEndLog]"
+      DTS:CreationName=""
+      DTS:DTSID="{4E5D589E-0FEC-4A49-867A-F6DEEA5A0664}"
+      DTS:From="Package\SEQC_ConvertExcelToCsv_PackageStartLog"
+      DTS:ObjectName="Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_SEQC_ConvertExcelToCsv_PackageEndLog"
+      DTS:To="Package\SEQC_ConvertExcelToCsv_PackageEndLog"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{9D547585-5163-42EE-ABFA-87FD43027C2D}"
+      DTS:EventID="0"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event&#xA;The propagate property of the event"
+          DTS:DTSID="{7000B152-CD17-48E2-83F1-F56BA4530C74}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\EST Log Package Error"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{D791D886-3EE5-4443-9BB0-BC7747CF727B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Log Package Error"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{DA8B05FC-11D7-41F4-A84B-C5C10A924EFE}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="EventType"
+              DTS:ReadOnly="True">
+              <DTS:VariableValue
+                DTS:DataType="8">OnError</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+              SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::EventHandlerStartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EventType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="15" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="15" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="1000" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="System::SourceID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="150" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnTaskFailed]"
+      DTS:CreationName="OnTaskFailed"
+      DTS:DTSID="{AFFA6F1B-2BFE-4775-AD83-B9A76309018D}"
+      DTS:EventID="0"
+      DTS:EventName="OnTaskFailed"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event&#xA;The propagate property of the event"
+          DTS:DTSID="{70A4236D-A288-4B7B-B233-DBC1994A8A55}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnTaskFailed]\EST Log Task Failed"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:DTSID="{760574AF-39A6-4916-8049-96B86D85F078}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="EST Log Task Failed"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{3B530EFB-40D9-418E-8922-3D292983CEF5}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="ErrorCode"
+              DTS:ReadOnly="True">
+              <DTS:VariableValue
+                DTS:DataType="8"
+                xml:space="preserve"></DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{4C4ED57A-D7C9-4908-9F48-9D318721B809}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="ErrorDescription"
+              DTS:ReadOnly="True">
+              <DTS:VariableValue
+                DTS:DataType="8">Task Failed</DTS:VariableValue>
+            </DTS:Variable>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:DTSID="{7E2DE7C0-4D2D-478A-BDF2-3549B01F58FE}"
+              DTS:IncludeInDebugDump="2345"
+              DTS:Namespace="User"
+              DTS:ObjectName="EventType"
+              DTS:ReadOnly="True">
+              <DTS:VariableValue
+                DTS:DataType="8">OnTaskFailed</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{AA506ACA-8928-4F6B-B30F-42A2E3EF81C7}"
+              SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::EventHandlerStartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EventType"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="15" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::ErrorCode"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="15" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="User::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="1000" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="5"
+                SQLTask:DtsVariableName="System::SourceID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="0" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="6"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="150" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="257,42"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ArchiveFile"
+          TopLeft="5.50000000000006,313.5" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\FSYS_ConvertExcelToCsv_ErrorFile"
+          TopLeft="323,313.5" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SRC_ConvertExcelToCsv"
+          TopLeft="76,5.5" />
+        <NodeLayout
+          Size="334,42"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile\SQL_ConvertExcelToCsv_LogPackageFileExecutionEnd"
+          TopLeft="5.50000000000003,107.5" />
+        <EdgeLayout
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile.PrecedenceConstraints[Constraint]"
+          TopLeft="172.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="345,204"
+          Size="345,248"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV\SEQC_ConvertExcelToCsv_LoadFile"
+          TopLeft="273.5,5.5" />
+        <EdgeLayout
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ArchiveFile]"
+          TopLeft="389.833333333333,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-255.833333333333,60"
+              Start="0,0"
+              End="-255.833333333333,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1661858049625" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1661858049625"
+                    Point2="0,24.1661858049625"
+                    Point3="-4,24.1661858049625" />
+                  <mssgle:LineSegment
+                    End="-251.833333333333,24.1661858049625" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-251.833333333333,24.1661858049625"
+                    Point2="-255.833333333333,24.1661858049625"
+                    Point3="-255.833333333333,28.1661858049625" />
+                  <mssgle:LineSegment
+                    End="-255.833333333333,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-135.916666666667,29.1661858049625,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_LoadFile_To_FSYS_ConvertExcelToCsv_ErrorFile]"
+          TopLeft="502.166666666667,253.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-56.1666666666666,60"
+              Start="0,0"
+              End="-56.1666666666666,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.1661858049625" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.1661858049625"
+                    Point2="0,24.1661858049625"
+                    Point3="-4,24.1661858049625" />
+                  <mssgle:LineSegment
+                    End="-52.1666666666666,24.1661858049625" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-52.1666666666666,24.1661858049625"
+                    Point2="-56.1666666666666,24.1661858049625"
+                    Point3="-56.1666666666666,28.1661858049625" />
+                  <mssgle:LineSegment
+                    End="-56.1666666666666,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-52.1933333333333,29.1661858049625,48.22,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="624,410"
+          Size="624,454"
+          Id="Package\FELC_ConvertExcelToCsv_LoopThroughCSV"
+          TopLeft="5.5,211.5" />
+        <NodeLayout
+          Size="275,42"
+          Id="Package\SEQC_ConvertExcelToCsv_PackageEndLog\SQL_ConvertExcelToCsv_LogPackageEnd"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="286,102"
+          Size="286,146"
+          Id="Package\SEQC_ConvertExcelToCsv_PackageEndLog"
+          TopLeft="547.5,725.5" />
+        <NodeLayout
+          Size="185,42"
+          Id="Package\SEQC_ConvertExcelToCsv_PackageStartLog\EPT Package Start Log"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="196,102"
+          Size="196,146"
+          Id="Package\SEQC_ConvertExcelToCsv_PackageStartLog"
+          TopLeft="592.5,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint_FELC_ConvertExcelToCsv_LoopThroughCSV_To_SEQC_ConvertExcelToCsv_PackageEndLog]"
+          TopLeft="317.5,665.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="326.666666666667,60"
+              Start="0,0"
+              End="326.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.7997218358832" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.7997218358832"
+                    Point2="0,35.7997218358832"
+                    Point3="4,35.7997218358832" />
+                  <mssgle:LineSegment
+                    End="322.666666666667,35.7997218358832" />
+                  <mssgle:CubicBezierSegment
+                    Point1="322.666666666667,35.7997218358832"
+                    Point2="326.666666666667,35.7997218358832"
+                    Point3="326.666666666667,39.7997218358832" />
+                  <mssgle:LineSegment
+                    End="326.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="138.028880208333,40.7997218358832,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_FELC_ConvertExcelToCsv_LoopThroughCSV]"
+          TopLeft="659.166666666667,151.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-341.666666666667,60"
+              Start="0,0"
+              End="-341.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2914979757085" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2914979757085"
+                    Point2="0,24.2914979757085"
+                    Point3="-4,24.2914979757085" />
+                  <mssgle:LineSegment
+                    End="-337.666666666667,24.2914979757085" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-337.666666666667,24.2914979757085"
+                    Point2="-341.666666666667,24.2914979757085"
+                    Point3="-341.666666666667,28.2914979757085" />
+                  <mssgle:LineSegment
+                    End="-341.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint_SEQC_ConvertExcelToCsv_PackageStartLog_To_SEQC_ConvertExcelToCsv_PackageEndLog]"
+          TopLeft="721.833333333333,151.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14.9999999999999,574"
+              Start="0,0"
+              End="14.9999999999999,566.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,283.905997895475" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,283.905997895475"
+                    Point2="0,287.905997895475"
+                    Point3="4,287.905997895475" />
+                  <mssgle:LineSegment
+                    End="10.9999999999999,287.905997895475" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10.9999999999999,287.905997895475"
+                    Point2="14.9999999999999,287.905997895475"
+                    Point3="14.9999999999999,291.905997895475" />
+                  <mssgle:LineSegment
+                    End="14.9999999999999,566.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-7.74134765625006,292.905997895475,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package.EventHandlers[OnError]\EST Log Package Error"
+          TopLeft="NaN,NaN" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnTaskFailed]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="NaN,NaN"
+          Id="Package.EventHandlers[OnTaskFailed]\EST Log Task Failed"
+          TopLeft="NaN,NaN" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

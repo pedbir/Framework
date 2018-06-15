@@ -8,7 +8,7 @@
       string sMetaData_GetPackageInfo = "Exec ssis.GetPackageInfo " +
       " @DESTINATION_TABLE_CATALOG = 'DWH_2_Norm'" +
       " ,@DESTINATION_SCHEMA_NAMES = 'Norm'" +
-      " ,@SOURCE_TABLE_NAME = 'Package'  ";
+      " ,@SOURCE_TABLE_NAME = 'DepositAccount'  ";
 
       DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
       foreach(DataRow pkg in dtPackages.Rows)

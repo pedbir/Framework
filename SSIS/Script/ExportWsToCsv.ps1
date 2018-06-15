@@ -1,4 +1,14 @@
-﻿# https://www.mssqltips.com/sqlservertip/3223/extract-and-convert-all-excel-worksheets-into-csv-files-using-powershell/
+﻿#ExportWsToCsv.ps1 -sourceFolderPath "C:\DW\" -destinationFolderPath "C:\DW\"
+
+param(
+    [string]$sourceFolderPath = $(throw "-sourceFolderPath is required."), 
+    [string]$destinationFolderPath = $(throw "-destinationFolderPath is required.")
+    )
+
+ExportFolderToCSV -folderPath $sourceFolderPath -csvLoc $destinationFolderPath      
+
+
+# https://www.mssqltips.com/sqlservertip/3223/extract-and-convert-all-excel-worksheets-into-csv-files-using-powershell/
 
 Function ExportWSToCSV ($excelFilePath, $csvLoc)
 {
@@ -22,7 +32,7 @@ Function ExportWSToCSV ($excelFilePath, $csvLoc)
 
 Function ExportFolderToCSV ($folderPath, $csvLoc)
 {
-   $files = Get-ChildItem $folderPath
+   $files = Get-ChildItem $folderPath *.xlsx
    
    for ($i=0; $i -lt $files.Count; $i++) 
    {    
@@ -31,7 +41,3 @@ Function ExportFolderToCSV ($folderPath, $csvLoc)
    }
 
 }
-
-ExportFolderToCSV -folderPath "C:\DW\se_credit_deposits\Source\Raw\" -csvLoc "C:\DW\se_credit_deposits\Source\"        
-
-

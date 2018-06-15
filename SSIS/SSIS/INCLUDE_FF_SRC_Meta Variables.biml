@@ -1,0 +1,43 @@
+<#
+
+/*
+
+SELECT CASE 
+		WHEN c.DATA_TYPE IN ('varchar') THEN 'string s'+c.COLUMN_NAME+' =Convert.ToString(pkg["'+c.COLUMN_NAME+'"])' 
+		WHEN c.DATA_TYPE IN ('bit') THEN 'Bool s'+c.COLUMN_NAME+' =Convert.ToBoolean(pkg["'+c.COLUMN_NAME+'"])' 
+		WHEN c.DATA_TYPE IN ('int', 'smallint') THEN 'int s'+c.COLUMN_NAME+' =Convert.ToInt32(pkg["'+c.COLUMN_NAME+'"])' 
+		ELSE '' END		
+		, 's' + c.COLUMN_NAME
+FROM INFORMATION_SCHEMA.COLUMNS c WHERE c.TABLE_NAME = 'SourceFile'
+ORDER BY c.DATA_TYPE
+
+
+*/
+
+// SSIS
+string sSourceTableCatalog =Convert.ToString(pkg["SourceTableCatalog"]);
+string sSourceSchemaName =Convert.ToString(pkg["SourceSchemaName"]);
+string sSourceTableName =Convert.ToString(pkg["SourceTableName"]);
+string sFilePattern =Convert.ToString(pkg["FilePattern"]);
+string sColumnNamesInFirstDataRow = Convert.ToString(pkg["ColumnNamesInFirstDataRow"]).ToLower();
+string sHeaderRowsToSkip =Convert.ToString(pkg["HeaderRowsToSkip"]);
+string sDataRowsToSkip =Convert.ToString(pkg["DataRowsToSkip"]);
+string sFlatFileType =Convert.ToString(pkg["FlatFileType"]);
+string sHeaderRowDelimiter =Convert.ToString(pkg["HeaderRowDelimiter"]);
+string sRowDelimiter =Convert.ToString(pkg["RowDelimiter"]);
+string sColumnDelimiter =Convert.ToString(pkg["ColumnDelimiter"]);
+string sTextQualifer =Convert.ToString(pkg["TextQualifer"]);
+string sIsUnicode =Convert.ToString(pkg["IsUnicode"]).ToLower();
+string sCodePage =Convert.ToString(pkg["CodePage"]);
+string sDestinationFullTableName =Convert.ToString(pkg["DestinationFullTableName"]);
+string sDestinationFullViewName =Convert.ToString(pkg["DestinationFullViewName"]);
+string sDestinationDatabaseName =Convert.ToString(pkg["DestinationDatabaseName"]);
+string sLocale =Convert.ToString(pkg["Locale"]);
+string sFileNameRegExDateTime =Convert.ToString(pkg["FileNameRegExDateTime"]);
+string sFileNameDateTimePattern =Convert.ToString(pkg["FileNameDateTimePattern"]);
+string sExecProc =Convert.ToString(pkg["ExecProc"]);
+
+string sDestinationSchemaName =Convert.ToString(pkg["DestinationSchemaName"]);
+string sDestinationTableName =Convert.ToString(pkg["DestinationTableName"]);
+
+#>
