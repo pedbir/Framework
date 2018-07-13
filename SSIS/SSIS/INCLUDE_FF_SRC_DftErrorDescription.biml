@@ -17,68 +17,52 @@
                            <File Path="AssemblyInfo.cs">
 using System.Reflection;
 using System.Runtime.CompilerServices;
-  
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("SC_977e21e288ea4faaaa4e6b2ad2cd125d")]
+
+[assembly: AssemblyTitle("SC_b53532d4cf87412181ad404f6447acbb")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SC_977e21e288ea4faaaa4e6b2ad2cd125d")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("SC_b53532d4cf87412181ad404f6447acbb")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-  
-[assembly: AssemblyVersion("1.0.*")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+
                            </File>
        <!-- Replaced greater/less than by &gt; and &lt; -->
-                           <File Path="main.cs">#region Namespaces
+                    <File Path="main.cs">
+                        
+                        
 using System;
 using System.Data;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-#endregion
-  
-/// &lt;summary&gt;
-/// Rownumber transformation to create an identity column
-/// &lt;/summary&gt;
+
 [Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
 public class ScriptMain : UserComponent
 {
- int rownumber = 0;
+    public override void PreExecute()
+    {
+        base.PreExecute();
+      
+    }
+
+    public override void PostExecute()
+    {
+        base.PostExecute();
+       
+    }
   
- /// &lt;summary&gt;
- /// Get max rownumber from variable
- /// &lt;/summary&gt;
- public override void PreExecute()
- {
-  
- }
-   
- /// &lt;summary&gt;
- /// Increase rownumber and fill rownumber column
- /// &lt;/summary&gt;
- /// &lt;param name="Row"&gt;The row that is currently passing through the component&lt;/param&gt;
- public override void Input0_ProcessInputRow(Input0Buffer Row)
- {
-    var componentMetaData130 = this.ComponentMetaData as IDTSComponentMetaData130;
-    Row.ErrorColumnDescription = componentMetaData130.GetIdentificationStringByID(Row.ErrorColumn);
-    Row.ErrorCodeDescription = componentMetaData130.GetErrorDescription(Row.ErrorCode);
- }
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        var componentMetaData130 = this.ComponentMetaData as IDTSComponentMetaData130;
+        Row.ErrorColumnDescription = componentMetaData130.GetIdentificationStringByID(Row.ErrorColumn);
+        Row.ErrorCodeDescription = componentMetaData130.GetErrorDescription(Row.ErrorCode);
+    }
+
 }
+                        
                    </File>
             </Files>
             <InputBuffer Name="Input0">

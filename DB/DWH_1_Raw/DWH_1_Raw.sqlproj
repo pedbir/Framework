@@ -134,19 +134,26 @@
     <Folder Include="Norm_f\" />
     <Folder Include="Norm_f\Views\" />
     <Folder Include="dbo\Views" />
+    <Folder Include="Manual_RawTyped\" />
+    <Folder Include="Manual_RawTyped\Tables\" />
+    <Folder Include="Deposit_RawTyped\" />
+    <Folder Include="Deposit_RawTyped\Tables\" />
+    <Folder Include="Manual_RawTyped\Views\" />
+    <Folder Include="Deposit_RawTyped\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Functions\fn_Calendar.sql" />
     <Build Include="localhost.sql" />
     <Build Include="dbo\Functions\tvf_split.sql" />
     <Build Include="DW_SERVER.sql" />
-    <Build Include="Security\Norm_d.sql" />
     <Build Include="dbo\Stored Procedures\CreateNormIsLastView_1.sql" />
-    <Build Include="Security\Norm_f_1.sql" />
-    <Build Include="Norm_d\Views\Access.sql" />
     <Build Include="MDS.sql" />
-    <Build Include="dbo\Views\Abonnemang.sql" />
-    <Build Include="Norm_d\Views\Package.sql" />
+    <Build Include="Manual_RawTyped\Tables\rt_Package_01.sql" />
+    <Build Include="Deposit_RawTyped\Tables\rt_SeCreditDeposit_01.sql" />
+    <Build Include="Manual_RawTyped\Views\vrt_Package_01.sql" />
+    <Build Include="Deposit_RawTyped\Views\vrt_SeCreditDeposit_01.sql" />
+    <Build Include="Security\Manual_RawTyped.sql" />
+    <Build Include="Security\Deposit_RawTyped.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment.sql" />

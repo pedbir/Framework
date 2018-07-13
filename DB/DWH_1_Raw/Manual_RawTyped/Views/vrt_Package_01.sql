@@ -1,0 +1,1 @@
+﻿CREATE VIEW [Manual_RawTyped].[vrt_Package_01]ASSELECT * FROM [Manual_RawTyped].[rt_Package_01]

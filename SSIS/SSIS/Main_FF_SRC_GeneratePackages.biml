@@ -8,27 +8,27 @@
     // Global variables
       string sMetaConnectionString ="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=DevelopmentFrameworkConfig;Integrated Security=SSPI;";
       // Package Variables
-      string sMetaData_GetPackageInfo = "EXEC Metadata.CreateFlatFileEntity                                         " +  
-      "  	@SourceFileRootFolder			=	'C:/DW/se_credit_deposits/'                                         " +
-      "  	,@SourceFileType				=	'Deposit_RawTyped'                                                  " +
-      "  	,@SourceTableName				=	'rt_SeCreditDeposit_01'                                             " +
-      "  	,@FilePattern					=	'*Bluestep Inlåning - Databasereport Daily*.csv'                    " + 
-      "  	,@ColumnNamesInFirstDataRow		=	1                                                                   " +
-      "  	,@HeaderRowsToSkip				=	4                                                                   " +
-      "  	,@DataRowsToSkip				=	0                                                                   " +
-      "  	,@FlatFileType					=	'Delimited'                                                         " +
-      "  	,@HeaderRowDelimiter			=	'{CR}{LF}'                                                          " +
-      "  	,@RowDelimiter					=	'{CR}{LF}'                                                          " +
-      "  	,@ColumnDelimiter				=	','                                                                 " +
-      "  	,@TextQualifer					=	'\"'                                                                " +
-      "  	,@IsUnicode						=	0                                                                   " +
-      "  	,@CodePage						=	'1252'                                                              " +
-      "  	,@DestinationDatabaseName		=	'DWH_1_Raw'                                                         " +
-      "  	,@SourceMetadataDatabaseName	=	'DWH_1_Raw'                                                         " +
-      "  	,@Locale	                    =	'Lcid1033'                                                          " +
-      "  	,@FileNameRegExDateTime         =	'(\\d{4})-(\\d{2})-(\\d{2}) (\\d{2})_(\\d{2})_(\\d{2})'             " +
-      "  	,@FileNameDateTimePattern	    =	'yyyy-MM-dd hh_mm_ss'                                               " +
-      "  	,@LinkedServerName				=	'localhost'                                                         ";
+      string sMetaData_GetPackageInfo = "EXEC Metadata.CreateFlatFileEntity                                                         " +  
+      "  	@SourceFileRootFolder			=	'C:/DW/Agresso'                                                                     " +
+      "  	,@SourceSchemaName				=	'Agresso'                                                                          " +
+      "  	,@SourceTableName				=	'Huvudbok_01'                                                                       " +
+      "  	,@FilePattern					=	'svc_huvudbok_01*.csv'                                                      " + 
+      "  	,@ColumnNamesInFirstDataRow		=	1                                                                                   " +
+      "  	,@HeaderRowsToSkip				=	0                                                                                   " +
+      "  	,@DataRowsToSkip				=	0                                                                                   " +
+      "  	,@FlatFileType					=	'Delimited'                                                                         " +
+      "  	,@HeaderRowDelimiter			=	'{CR}{LF}'                                                                          " +
+      "  	,@RowDelimiter					=	'{CR}{LF}'                                                                          " +
+      "  	,@ColumnDelimiter				=	';'                                                                                 " +
+      "  	,@TextQualifer					=	'\"'                                                                                " +
+      "  	,@IsUnicode						=	0                                                                                   " +
+      "  	,@CodePage						=	'65001'                                                                             " +
+      "  	,@DestinationDatabaseName		=	'DWH_1_Raw'                                                                         " +
+      "  	,@SourceMetadataDatabaseName	=	'Test'                                                                         " +
+      "  	,@Locale	                    =	'Lcid1033'                                                                          " +
+      "  	,@FileNameRegExDateTime         =	'(\\d{14})'                                                                         " +
+      "  	,@FileNameDateTimePattern	    =	'yyyyMMddHHmmss'                                                                    " +
+      "  	,@LinkedServerName				=	'localhost'                                                                         ";
       
      
 
@@ -56,7 +56,7 @@
     <#@ include file="INCLUDE_FF_SRC_ParsDateTimeFileName.biml"#>     
     </ScriptProjects>
     <Packages>
-        <Package Name="<#=sDestinationDatabaseName#>_<#=sSourceSchemaName#>_RawTyped_r_<#=sSourceTableName#>" ConstraintMode="Parallel"  ProtectionLevel="DontSaveSensitive" DelayValidation="true">
+        <Package Name="<#=sDestinationDatabaseName#>_<#=sDestinationSchemaName#>_<#=sSourceTableName#>" ConstraintMode="Parallel"  ProtectionLevel="DontSaveSensitive" DelayValidation="true">
         <#@ include file ="INCLUDE_Events.biml" #>
             	<Annotations>
 				<Annotation AnnotationType ="Description"><#=sExecProc#></Annotation>
@@ -169,7 +169,7 @@
                 <Variable DataType="Int32" Name="RowsUpdated" EvaluateAsExpression="true">(@[User::RowsUpdateOld]+@[User::RowsUpdateInferred])-(@[User::RowsUpdateInferredError] + @[User::RowsUpdateOldError])</Variable>
                 <Variable DataType="String" Name="SourceTableCatalog" EvaluateAsExpression="true">@[User::<#=sSourceSchemaName#>_SourceFolderPath]</Variable>
                 <Variable DataType="String" Name="SourceSchemaName"><#=sSourceSchemaName#></Variable>
-                <Variable DataType="String" Name="SourceTableName"><#=sSourceTableName#>*.csv</Variable>
+                <Variable DataType="String" Name="SourceTableName"><#=sFilePattern#></Variable>
                 <Variable DataType="String" Name="DestinationTableCatalog"><#=sDestinationDatabaseName#></Variable>
                 <Variable DataType="String" Name="DestinationSchemaName"><#=sDestinationSchemaName#></Variable>
                 <Variable DataType="String" Name="DestinationTableName"><#=sDestinationTableName#></Variable>
@@ -199,7 +199,7 @@
                     </Expressions>
                     <Tasks>
                         <Script Name="SCR_<#=sSourceTableName#>_ParsDateTimeFileName">
-                              <ScriptTaskProjectReference ScriptTaskProjectName="ST_ParsDateTimeFileName" />
+                              <ScriptTaskProjectReference ScriptTaskProjectName="ST_a16c9d61c26e4dcda16f7d5026cddc11" />
                         </Script>
                         <Container Name="SEQC_<#=sSourceTableName#>_LoadFile" ConstraintMode="Parallel">
                             <Tasks>
@@ -258,7 +258,7 @@
                                                 <Column Name="sysFilename" DataType="String" Length="250">@[User::<#=sSourceTableName#>_FileName]</Column>
                                                 <Column Name="SysDatetimeInsertedUTC" DataType="DateTime">(DT_DBTIMESTAMP2,0)@[User::SysDatetimeInsertedUTC]</Column>
                                                 <Column Name="SysModifiedUTC" DataType="DateTime">(DT_DBTIMESTAMP2,0)@[User::SysModifiedUTC]</Column>
-                                                <Column Name="SysSrcGenerationDateTime" DataType="DateTime">(DT_DBTIMESTAMP2,0)@[User::SysSrcGenerationDateTime]</Column>
+                                                <Column Name="SysSrcGenerationDateTime" DataType="DateTime">(DT_DBTIMESTAMP)(ISNULL(@[User::SysSrcGenerationDateTime]) ? (DT_WSTR,255)GETUTCDATE() : @[User::SysSrcGenerationDateTime])</Column>
                                                 <Column Name="SysExecutionLog_key" DataType="Int32">@[User::SysExecutionLog_key]</Column>
                                             </Columns>
                                             <InputPath OutputPathName="CNT_<#=sSourceTableName#>_Read.Output"/>
