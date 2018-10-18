@@ -40,4 +40,5 @@ string sExecProc =Convert.ToString(pkg["ExecProc"]);
 string sDestinationSchemaName =Convert.ToString(pkg["DestinationSchemaName"]);
 string sDestinationTableName =Convert.ToString(pkg["DestinationTableName"]);
 
+string sSSISPackageName =Convert.ToString(pkg["SSISPackageName"]);
 #>

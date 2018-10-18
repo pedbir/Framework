@@ -30,8 +30,10 @@
 );
 
 
+
+
 GO
-ALTER TABLE [Metadata].[SourceField] NOCHECK CONSTRAINT [CK_SourceField_Catalogs];
+
 
 
 

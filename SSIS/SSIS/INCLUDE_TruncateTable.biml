@@ -1,5 +1,11 @@
-<ExecuteSQL ConnectionName="<#=sTruncateTableCatalog #>" Name="TruncateTable" ResultSet="None">
+<ExecuteSQL ConnectionName="<#=sTruncateTableCatalog #>" Name="TruncateTable" ResultSet="SingleRow">
 	<DirectInput>
+	SELECT COUNT(*) FROM <#=sDstName #>
     TRUNCATE TABLE <#=sDstName #>
 	</DirectInput>
+	<Results>
+        <Result Name="0" VariableName="User.RowsDeleted" />
+    </Results>
 </ExecuteSQL>
+
+

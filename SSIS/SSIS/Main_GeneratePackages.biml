@@ -6,10 +6,10 @@
       string sMetaConnectionString ="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=DevelopmentFrameworkConfig;Integrated Security=SSPI;";
       // Package Variables
       string sMetaData_GetPackageInfo = "Exec ssis.GetPackageInfo " +
-      " @DESTINATION_TABLE_CATALOG = 'DWH_2_Norm'" +
-      " ,@DESTINATION_SCHEMA_NAMES = 'Norm'" +
-      " ,@SOURCE_TABLE_NAME = 'DepositAccount'  ";
-
+      " @DESTINATION_TABLE_CATALOG = 'DWH_3_Fact'" +
+      " ,@DESTINATION_SCHEMA_NAMES = 'Fact'" +
+      " ,@SOURCE_TABLE_NAME = 'f_BridgeReportStructure'  ";
+    
       DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
       foreach(DataRow pkg in dtPackages.Rows)
       {
@@ -28,11 +28,10 @@
       <LogProviders>
         <SqlServerLogProvider Name="SSIS log provider for SQL Server" ConnectionName="DWH_0_Admin" />
      </LogProviders>
-    
         <#@ include file="INCLUDE_Annotation.biml" #>
-		    <#@ include file="INCLUDE_Variables.biml" #>
-		    <#@ include file="INCLUDE_PackageConfigurations.biml" #>
-            <#@ include file ="INCLUDE_Events.biml" #>
+	    <#@ include file="INCLUDE_Variables.biml" #>
+	    <#@ include file="INCLUDE_PackageConfigurations.biml" #>
+        <#@ include file ="INCLUDE_Events.biml" #>
         <Tasks>
 		<Container Name="CNT_Prepare" ConstraintMode="Parallel">
 		    <Tasks>

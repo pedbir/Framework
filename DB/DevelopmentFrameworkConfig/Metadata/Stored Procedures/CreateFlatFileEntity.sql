@@ -13,11 +13,11 @@
     , @TextQualifer VARCHAR(5)
     , @IsUnicode BIT
     , @CodePage VARCHAR(128)
-    , @FileNameRegExDateTime NVARCHAR(100) = '(\d{4})-(\d{2})-(\d{2}) (\d{2})_(\d{2})_(\d{2})'
-    , @FileNameDateTimePattern NVARCHAR(100) = 'yyyy-MM-dd hh_mm_ss'
+    , @FileNameRegExDateTime NVARCHAR(100) = '(\\d{14})'
+    , @FileNameDateTimePattern NVARCHAR(100) = 'yyyyMMddHHmmss'
     , @DestinationDatabaseName VARCHAR(50) = 'DWH_1_Raw'
     , @LinkedServerName VARCHAR(50) = 'localhost'
-    , @SourceMetadataDatabaseName VARCHAR(50) = 'Test'
+    , @SourceMetadataDatabaseName VARCHAR(50) = 'TEST'
     , @Locale VARCHAR(50) = 'Lcid1033'  -- Lcid1053 Swedish
 AS
 	/*
@@ -95,6 +95,12 @@ BEGIN TRY
 	PRINT CHAR(13) + '-----------------------------------------' + CHAR(13) + '-- Create #SourceMetadata table' + CHAR(13) + '-----------------------------------------' 
 	PRINT @SQLString 
 	INSERT INTO #SourceMetadata EXECUTE (@SQLString);
+	IF NOT EXISTS (SELECT TOP 1 * FROM #SourceMetadata) 
+	BEGIN 
+		DECLARE @errormsg NVARCHAR(MAX) = 'Source tables ' + QUOTENAME(@SourceSchemaName) + '.' + QUOTENAME(@SourceTableName) + ' was not found in database ' + QUOTENAME(@SourceMetadataDatabaseName)
+		RAISERROR(@errormsg, 16, 1) 
+	END 
+
 	ALTER TABLE #SourceMetadata DROP COLUMN TABLE_CATALOG
 	ALTER TABLE #SourceMetadata DROP COLUMN TABLE_SCHEMA
 	ALTER TABLE #SourceMetadata DROP COLUMN TABLE_NAME
@@ -117,7 +123,7 @@ BEGIN TRY
 	FROM	sys.objects o WITH (NOWAIT)
 	JOIN sys.schemas s WITH (NOWAIT) ON o.schema_id = s.schema_id
 	WHERE s.name  = '''''+@SourceSchemaName+'''''
-				AND o.name = '''''+@DestinationTableName+'''''
+				AND o.name = '''''+@SourceTableName+'''''
 				AND o.type = ''''U''''
 				AND o.is_ms_shipped = 0
 				)
@@ -139,6 +145,8 @@ BEGIN TRY
 	( N'SysSrcGenerationDateTime'	, -60, NULL, 'NO', N'datetime2', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL ), 
 	( N'SysModifiedUTC'				, -50, NULL, 'NO', N'datetime2', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL ), 
 	( N'SysExecutionLog_key'		, -40, NULL, 'NO', N'int', NULL, NULL, 10, 10, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL )
+	
+
 	
 	-- Drop table and view and create schema	
 	DECLARE @CreateTableSql NVARCHAR(max) = 
@@ -221,40 +229,35 @@ BEGIN TRY
 	PRINT @SQLString 	
 	EXECUTE (@SQLString);
 
-	SELECT	sm.COLUMN_NAME
 
-					,BIML_DATATYPE					= dtt.Biml
-					,LENGHT							= ISNULL(sm.CHARACTER_MAXIMUM_LENGTH, 0)
-					,NUMERIC_PRECISION				= ISNULL(sm.NUMERIC_PRECISION, 0)
-					,NUMERIC_SCALE					= ISNULL(sm.NUMERIC_SCALE, 0)
-					,sm.ORDINAL_POSITION
-					,DELIMITER						= LEAD(@ColumnDelimiter, 1, @RowDelimiter) OVER (ORDER BY sm.ORDINAL_POSITION)
-					,SOURCETABLECATALOG				= @SourceFileRootFolder
-					,SOURCESCHEMANAME				= @SourceSchemaName
-					,SourceTableName				= @SourceTableName
-					,FilePattern					= @FilePattern
-					,ColumnNamesInFirstDataRow		= @ColumnNamesInFirstDataRow
-					,HeaderRowsToSkip				= @HeaderRowsToSkip
-					,DataRowsToSkip					= @DataRowsToSkip
-					,FlatFileType					= @FlatFileType
-					,HeaderRowDelimiter				= @HeaderRowDelimiter
-					,RowDelimiter					= @RowDelimiter
-					,ColumnDelimiter				= @ColumnDelimiter
-					,TextQualifer					= IIF(@TextQualifer = '"', '&quot;', @TextQualifer)
-					,IsUnicode						= @IsUnicode
-					,CodePage						= @CodePage
-					,DestinationFullTableName		= @DestinationTableFullNameWithBrackets
-					,DestinationFullViewName		= @DestinationViewFullNameWithBrackets
-					,DestinationDatabaseName		= @DestinationDatabaseName
-					,Locale							= @Locale
-					,FileNameRegExDateTime			= @FileNameRegExDateTime
-					,FileNameDateTimePattern		= @FileNameDateTimePattern
-					,ExecProc						= @ExecProcAnnotation
-					,DestinationSchemaName			= @DestinationSchemaName
-					,DestinationTableName			= @DestinationTableName
-	FROM	#SourceMetadata										sm
-	LEFT JOIN Metadata.DataTypeTranslation dtt ON dtt.SQLServer = sm.DATA_TYPE
-	ORDER BY sm.ORDINAL_POSITION
+DECLARE @SSISPackageName NVARCHAR(250) = @DestinationDatabaseName + '_' + @DestinationSchemaName + '_' + @SourceTableName
+SELECT SSISPackageName=@SSISPackageName, SourceArea=@SourceSchemaName, FilePattern=@FilePattern, ColumnNamesInFirstDataRow=@ColumnNamesInFirstDataRow, HeaderRowsToSkip=@HeaderRowsToSkip, DataRowsToSkip=@DataRowsToSkip, FlatFileType=@FlatFileType, HeaderRowDelimiter=@HeaderRowDelimiter, RowDelimiter=@RowDelimiter, ColumnDelimiter=@ColumnDelimiter, TextQualifer=IIF(@TextQualifer='"', '&quot;', @TextQualifer), IsUnicode=@IsUnicode, CodePage=@CodePage, DestinationDatabaseName=@DestinationDatabaseName, Locale=@Locale, FileNameRegExDateTime=@FileNameRegExDateTime, FileNameDateTimePattern=@FileNameDateTimePattern, DestinationSchemaName=@DestinationSchemaName, DestinationTableName=@DestinationTableName, SourceRootFolder=@SourceFileRootFolder, ExecProcAnnotation = @ExecProcAnnotation
+INTO #DestinationTableFlatFileSource
+
+-- Create a temporary table variable to hold the output actions.  
+DECLARE @SummaryOfChanges TABLE (Change VARCHAR(20));
+MERGE INTO Metadata.DestinationTableFlatFileSource Target
+USING #DestinationTableFlatFileSource Source
+ON Source.SSISPackageName=Target.SSISPackageName
+WHEN MATCHED AND (Source.ExecProcAnnotation <> Target.ExecProcAnnotation OR Source.SourceArea<>Target.SourceArea OR Source.FilePattern<>Target.FilePattern OR Source.ColumnNamesInFirstDataRow<>Target.ColumnNamesInFirstDataRow OR Source.HeaderRowsToSkip<>Target.HeaderRowsToSkip OR Source.DataRowsToSkip<>Target.DataRowsToSkip OR Source.FlatFileType<>Target.FlatFileType OR Source.HeaderRowDelimiter<>Target.HeaderRowDelimiter OR Source.RowDelimiter<>Target.RowDelimiter OR Source.ColumnDelimiter<>Target.ColumnDelimiter OR Source.TextQualifer<>Target.TextQualifer OR Source.IsUnicode<>Target.IsUnicode OR Source.CodePage<>Target.CodePage OR Source.DestinationDatabaseName<>Target.DestinationDatabaseName OR Source.Locale<>Target.Locale OR Source.FileNameRegExDateTime<>Target.FileNameRegExDateTime OR Source.FileNameDateTimePattern<>Target.FileNameDateTimePattern OR Source.DestinationSchemaName<>Target.DestinationSchemaName OR Source.DestinationTableName<>Target.DestinationTableName OR Source.SourceRootFolder<>Target.SourceRootFolder) THEN UPDATE SET Target.SourceArea=Source.SourceArea, Target.FilePattern=Source.FilePattern, Target.ColumnNamesInFirstDataRow=Source.ColumnNamesInFirstDataRow, Target.HeaderRowsToSkip=Source.HeaderRowsToSkip, Target.DataRowsToSkip=Source.DataRowsToSkip, Target.FlatFileType=Source.FlatFileType, Target.HeaderRowDelimiter=Source.HeaderRowDelimiter, Target.RowDelimiter=Source.RowDelimiter, Target.ColumnDelimiter=Source.ColumnDelimiter, Target.TextQualifer=Source.TextQualifer, Target.IsUnicode=Source.IsUnicode, Target.CodePage=Source.CodePage, Target.DestinationDatabaseName=Source.DestinationDatabaseName, Target.Locale=Source.Locale, Target.FileNameRegExDateTime=Source.FileNameRegExDateTime, Target.FileNameDateTimePattern=Source.FileNameDateTimePattern, Target.DestinationSchemaName=Source.DestinationSchemaName, Target.DestinationTableName=Source.DestinationTableName, Target.SourceRootFolder=Source.SourceRootFolder, Target.UserNameUpdated=SYSTEM_USER, Target.DateTimeUpdatedUTC=GETUTCDATE(), Target.ExecProcAnnotation = @ExecProcAnnotation
+WHEN NOT MATCHED BY TARGET THEN INSERT (SSISPackageName, SourceArea, FilePattern, ColumnNamesInFirstDataRow, HeaderRowsToSkip, DataRowsToSkip, FlatFileType, HeaderRowDelimiter, RowDelimiter, ColumnDelimiter, TextQualifer, IsUnicode, CodePage, DestinationDatabaseName, Locale, FileNameRegExDateTime, FileNameDateTimePattern, DestinationSchemaName, DestinationTableName, SourceRootFolder, ExecProcAnnotation)
+								VALUES (Source.SSISPackageName, Source.SourceArea, Source.FilePattern, Source.ColumnNamesInFirstDataRow, Source.HeaderRowsToSkip, Source.DataRowsToSkip, Source.FlatFileType, Source.HeaderRowDelimiter, Source.RowDelimiter, Source.ColumnDelimiter, Source.TextQualifer, Source.IsUnicode, Source.CodePage, Source.DestinationDatabaseName, Source.Locale, Source.FileNameRegExDateTime, Source.FileNameDateTimePattern, Source.DestinationSchemaName, Source.DestinationTableName, Source.SourceRootFolder, Source.ExecProcAnnotation)
+OUTPUT $action
+INTO @SummaryOfChanges;
+
+---- Query the results of the table variable.  
+--SELECT Change, CountPerChange=COUNT(*)
+--FROM @SummaryOfChanges
+--GROUP BY Change;
+
+DELETE Metadata.SourceFieldFlatFileSource
+WHERE SSISPackageName = @SSISPackageName
+
+INSERT INTO Metadata.SourceFieldFlatFileSource (COLUMN_NAME, ORDINAL_POSITION, COLUMN_DEFAULT, IS_NULLABLE, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, CHARACTER_OCTET_LENGTH, NUMERIC_PRECISION, NUMERIC_PRECISION_RADIX, NUMERIC_SCALE, DATETIME_PRECISION, CHARACTER_SET_CATALOG, CHARACTER_SET_SCHEMA, CHARACTER_SET_NAME, COLLATION_CATALOG, COLLATION_SCHEMA, COLLATION_NAME, DOMAIN_CATALOG, DOMAIN_SCHEMA, DOMAIN_NAME, BIML_DATATYPE, SSISPackageName)
+SELECT sm.COLUMN_NAME, sm.ORDINAL_POSITION, sm.COLUMN_DEFAULT, sm.IS_NULLABLE, sm.DATA_TYPE, sm.CHARACTER_MAXIMUM_LENGTH, sm.CHARACTER_OCTET_LENGTH, sm.NUMERIC_PRECISION, sm.NUMERIC_PRECISION_RADIX, sm.NUMERIC_SCALE, sm.DATETIME_PRECISION, sm.CHARACTER_SET_CATALOG, sm.CHARACTER_SET_SCHEMA, sm.CHARACTER_SET_NAME, sm.COLLATION_CATALOG, sm.COLLATION_SCHEMA, sm.COLLATION_NAME, sm.DOMAIN_CATALOG, sm.DOMAIN_SCHEMA, sm.DOMAIN_NAME, BIML_DATATYPE=dtt.Biml, SSISPackageName=@SSISPackageName
+FROM #SourceMetadata sm
+LEFT JOIN Metadata.DataTypeTranslation dtt ON dtt.SQLServer=sm.DATA_TYPE
+ORDER BY sm.ORDINAL_POSITION
 
 
 END TRY
@@ -274,3 +277,4 @@ END CATCH;
 
 IF @@TRANCOUNT > 0
     COMMIT TRANSACTION;
+GO

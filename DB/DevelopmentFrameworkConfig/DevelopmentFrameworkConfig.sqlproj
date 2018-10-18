@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DevelopmentFrameworkConfig</RootNamespace>
     <AssemblyName>DevelopmentFrameworkConfig</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1035,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
     <Recovery>SIMPLE</Recovery>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -155,8 +155,6 @@
     <Build Include="Metadata\Stored Procedures\CopyMetadataReferences.sql" />
     <Build Include="Metadata\Stored Procedures\CreateRawToRawEntity.sql" />
     <Build Include="Metadata\Stored Procedures\RemoveMultipleMetaDataObject.sql" />
-    <Build Include="Metadata\Stored Procedures\CreateFactEntities.sql" />
-    <Build Include="Metadata\Stored Procedures\CreateNormEntities.sql" />
     <Build Include="Metadata\Stored Procedures\ReGenerateTable.sql" />
     <Build Include="Metadata\Stored Procedures\CreateTableWithFullConfig.sql" />
     <Build Include="Metadata\Stored Procedures\UpdateDestinationTableTable.sql" />
@@ -175,9 +173,13 @@
     <None Include="Script\Script.InsertDestinationTableGroup.sql" />
     <Build Include="Metadata\Functions\GetCreateStageViewString.sql" />
     <Build Include="ssis\Stored Procedures\GetPackageInfoDWDetails_dbg.sql" />
-    <Build Include="Metadata\Stored Procedures\CreateRawEntities.sql" />
     <None Include="Script\Script.InsertDestinationFieldExtended.sql" />
     <Build Include="Metadata\Stored Procedures\CreateFlatFileEntity.sql" />
+    <Build Include="Metadata\Stored Procedures\CreateFlatFileEntity.sql" />
+    <None Include="Script\Script.DeployMetadata.sql" />
+    <Build Include="Metadata\Tables\SourceFieldFlatFileSource.sql" />
+    <Build Include="Metadata\Tables\DestinationTableFlatFileSource.sql" />
+    <Build Include="ssis\Stored Procedures\GetPackageInfoFlatFileSource.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script\Script.InsertDataTypeTranslation.sql" />

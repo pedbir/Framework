@@ -11,7 +11,7 @@
 --
 --
 -- =============================================
-CREATE PROC Metadata.CreateNormEntity
+CREATE PROC [Metadata].[CreateNormEntity]
     (
       @source_DB NVARCHAR(50)
     , @dest_db NVARCHAR(50)
@@ -39,7 +39,7 @@ SET NOCOUNT ON
     DECLARE @SQL_GetSourceTable NVARCHAR(MAX) = '
 			SELECT TABLE_NAME
 			FROM '+@source_DB+'.INFORMATION_SCHEMA.TABLES
-			WHERE TABLE_TYPE = ''VIEW'' AND TABLE_SCHEMA = '''+@source_schema+'''' + IIF(@source_table IS NOT NULL, ' AND TABLE_NAME LIKE ''' + @source_table + '%''', '')
+			WHERE TABLE_TYPE = ''VIEW'' AND TABLE_SCHEMA = '''+@source_schema+'''' + IIF(@source_table IS NOT NULL, ' AND TABLE_NAME LIKE ''' + @source_table + '''', '')
 
 
 

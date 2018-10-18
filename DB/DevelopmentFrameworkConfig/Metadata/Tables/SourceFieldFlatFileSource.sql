@@ -1,0 +1,27 @@
+﻿CREATE TABLE [Metadata].[SourceFieldFlatFileSource] (
+    [COLUMN_NAME]              [sysname]       NOT NULL,
+    [ORDINAL_POSITION]         INT             NULL,
+    [COLUMN_DEFAULT]           NVARCHAR (4000) NULL,
+    [IS_NULLABLE]              VARCHAR (3)     NULL,
+    [DATA_TYPE]                NVARCHAR (128)  NULL,
+    [CHARACTER_MAXIMUM_LENGTH] INT             NULL,
+    [CHARACTER_OCTET_LENGTH]   INT             NULL,
+    [NUMERIC_PRECISION]        TINYINT         NULL,
+    [NUMERIC_PRECISION_RADIX]  SMALLINT        NULL,
+    [NUMERIC_SCALE]            INT             NULL,
+    [DATETIME_PRECISION]       SMALLINT        NULL,
+    [CHARACTER_SET_CATALOG]    [sysname]       NULL,
+    [CHARACTER_SET_SCHEMA]     [sysname]       NULL,
+    [CHARACTER_SET_NAME]       [sysname]       NULL,
+    [COLLATION_CATALOG]        [sysname]       NULL,
+    [COLLATION_SCHEMA]         [sysname]       NULL,
+    [COLLATION_NAME]           [sysname]       NULL,
+    [DOMAIN_CATALOG]           [sysname]       NULL,
+    [DOMAIN_SCHEMA]            [sysname]       NULL,
+    [DOMAIN_NAME]              [sysname]       NULL,
+    [BIML_DATATYPE]            VARCHAR (50)    NULL,
+    [SSISPackageName]          VARCHAR (128)   NOT NULL,
+    CONSTRAINT [PK_SourceFieldFlatFileSource] PRIMARY KEY CLUSTERED ([SSISPackageName] ASC, [COLUMN_NAME] ASC),
+    CONSTRAINT [FK_SourceFieldFlatFileSource_DestinationTableFlatFileSource] FOREIGN KEY ([SSISPackageName]) REFERENCES [Metadata].[DestinationTableFlatFileSource] ([SSISPackageName])
+);
+

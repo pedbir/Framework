@@ -11,6 +11,23 @@ Post-Deployment Script Template
 */
 
 
+SELECT tablename = QUOTENAME(t.TABLE_SCHEMA) + '.' + QUOTENAME(t.TABLE_NAME)
+INTO #temp
+FROM   INFORMATION_SCHEMA.TABLES t
+WHERE t.TABLE_TYPE = 'BASE TABLE' AND t.TABLE_SCHEMA = 'Metadata'
+
+
+DECLARE @sqlDeleteStatement NVARCHAR(MAX),  @sqlDeleteStatement1 NVARCHAR(MAX)
+
+SELECT @sqlDeleteStatement  = STUFF((SELECT '1' + 'ALTER TABLE ' + t.tablename + ' NOCHECK CONSTRAINT ALL' FROM #temp t FOR XML path('')), 1, 1, '') 
+SELECT @sqlDeleteStatement  = @sqlDeleteStatement  + '1' +  STUFF((SELECT '1' + 'DELETE ' + t.tablename FROM #temp t FOR XML path('')), 1, 1, '') 
+SELECT @sqlDeleteStatement  = @sqlDeleteStatement  + '1' + STUFF((SELECT '1' + 'ALTER TABLE ' + t.tablename + ' CHECK CONSTRAINT ALL' FROM #temp t FOR XML path('')), 1, 1, '') 
+
+SELECT @sqlDeleteStatement1 = REPLACE(@sqlDeleteStatement, '1', CHAR(13))
+
+EXEC(@sqlDeleteStatement1)
+
+
 :r .\Script.InsertDataTypeTranslation.sql
 
 :r .\Script.InsertDerivedColumnOverride.sql
@@ -20,3 +37,5 @@ Post-Deployment Script Template
 :r .\Script.InsertEnvironmentVariables.sql
 
 :r .\Script.InsertDestinationFieldExtended.sql
+
+:r .\Script.DeployMetadata.sql

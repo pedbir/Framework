@@ -29,6 +29,5 @@ INNER JOIN Logging.PackageVersion pv
 INNER JOIN Logging.Package p
         ON pv.PackageID        = p.PackageID
 INNER JOIN Logging.PackageDestinationTable pdt
-        ON pdt.PackageID       = pv.PackageID
+        ON pdt.PackageName      = p.PackageName
 OUTER APPLY (SELECT TOP 1 ee.SourceName, EventDescription FROM Logging.ExecutionEvent ee WHERE ee.ExecutionID = pe.ExecutionID AND ee.EventType = 'OnError' ORDER BY ee.EventDateTime DESC) ee
-

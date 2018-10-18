@@ -8,8 +8,8 @@ UNION ALL SELECT 15, N'dwError', N'PackageName', N'@[System::PackageName]', N'nv
 UNION ALL SELECT 16, N'dwError', N'SourceTableName', N'<<DynamicValue>>', N'nvarchar', NULL, NULL, 50
 UNION ALL SELECT 17, N'dwError', N'RowData', N'<<DynamicValue>>', N'nvarchar', NULL, NULL, 4000
 UNION ALL SELECT 18, N'dwInf', N'SysIsInferred', N'1', NULL, NULL, NULL, NULL
-UNION ALL SELECT 19, N'dwInfFK', N'SysSrcGenerationDateTime', N'(DT_DBTIMESTAMP2, 0) ((DT_DBDATE)"1900-01-01")', N'datetime', NULL, NULL, NULL
-UNION ALL SELECT 20, N'dwInfFK', N'SysValidFromDateTime', N'(DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100)GETUTCDATE(),1,19))', N'datetime', NULL, NULL, NULL
+UNION ALL SELECT 19, N'dwInfFK', N'SysSrcGenerationDateTime', N'(DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100)GETUTCDATE(),1,19))', N'datetime', NULL, NULL, NULL
+UNION ALL SELECT 20, N'dwInfFK', N'SysValidFromDateTime', N'(DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100) DATEADD( "yyyy", -100, GETUTCDATE()),1,19))', N'datetime', NULL, NULL, NULL
 UNION ALL SELECT 21, N'dwInfFK', N'SysDatetimeInsertedUTC', N'(DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100)GETUTCDATE(),1,19))', N'datetime', NULL, NULL, NULL
 UNION ALL SELECT 22, N'dwInfFK', N'SysModifiedUTC', N'(DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100)GETUTCDATE(),1,19))', N'datetime', NULL, NULL, NULL
 --UNION ALL SELECT 24, N'dwInit', N'SysDateTimeDeletedUTC', N'ISNULL([SysDatetimeDeletedUTC])? [SysDatetimeDeletedUTC] : (DT_DBTIMESTAMP2,0)(SUBSTRING((DT_WSTR,100)GETUTCDATE(),1,19))', N'datetime', NULL, NULL, NULL
