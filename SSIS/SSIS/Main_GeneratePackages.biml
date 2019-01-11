@@ -8,7 +8,7 @@
       string sMetaData_GetPackageInfo = "Exec ssis.GetPackageInfo " +
       " @DESTINATION_TABLE_CATALOG = 'DWH_3_Fact'" +
       " ,@DESTINATION_SCHEMA_NAMES = 'Fact'" +
-      " ,@SOURCE_TABLE_NAME = 'f_BridgeReportStructure'  ";
+      " ,@SOURCE_TABLE_NAME = 'f_MLLoanApplicationMilestone'  ";
     
       DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
       foreach(DataRow pkg in dtPackages.Rows)

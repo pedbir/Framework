@@ -1,4 +1,6 @@
-﻿CREATE VIEW Logging.PackageExecutionV
+﻿
+
+CREATE VIEW [Logging].[PackageExecutionV]
 AS
 SELECT p.PackageID
        , p.PackageName
@@ -6,7 +8,7 @@ SELECT p.PackageID
        , pe.ExecutionID
        , pe.ExecutionStart
        , pe.ExecutionEnd
-       , Duration = CASE WHEN pe.ExecutionStart < '1900-01-01' THEN NULL ELSE DATEDIFF(SECOND, pe.ExecutionStart, pe.ExecutionEnd) END	   
+       , Duration = CASE WHEN pe.ExecutionStart < '1900-01-01' THEN NULL ELSE DATEDIFF(SECOND, pe.ExecutionStart, ISNULL(pe.ExecutionEnd, GETUTCDATE())) END	   
        , pe.RowsRead
        , pe.RowsInserted
        , pe.RowsUpdated

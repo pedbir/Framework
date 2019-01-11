@@ -1,5 +1,4 @@
-﻿
-CREATE PROC [ssis].[GetPackageInfoFlatFileSource]
+﻿CREATE PROC [ssis].[GetPackageInfoFlatFileSource]
   @DESTINATION_TABLE_CATALOG VARCHAR(128)
  ,@DESTINATION_SCHEMA_NAMES VARCHAR(128)
  ,@DESTINATION_TABLE_NAME VARCHAR(128)
@@ -23,7 +22,7 @@ SELECT      COLUMN_NAME
            ,DELIMITER                = LEAD(dtffs.ColumnDelimiter, 1, dtffs.RowDelimiter) OVER (ORDER BY sfffs.ORDINAL_POSITION)
            ,SOURCETABLECATALOG       = dtffs.SourceRootFolder
            ,SOURCESCHEMANAME         = dtffs.SourceArea
-           ,SourceTableName          = dtffs.DestinationTableName
+           ,SourceTableName          = REPLACE(dtffs.DestinationTableName, 'rt_', '')
            ,FilePattern
            ,ColumnNamesInFirstDataRow = IIF(ColumnNamesInFirstDataRow = 1, 'true', 'false')
            ,HeaderRowsToSkip

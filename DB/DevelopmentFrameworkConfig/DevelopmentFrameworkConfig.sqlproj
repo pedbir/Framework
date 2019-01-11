@@ -180,6 +180,7 @@
     <Build Include="Metadata\Tables\SourceFieldFlatFileSource.sql" />
     <Build Include="Metadata\Tables\DestinationTableFlatFileSource.sql" />
     <Build Include="ssis\Stored Procedures\GetPackageInfoFlatFileSource.sql" />
+    <Build Include="Metadata\Stored Procedures\DropTableAndRemoveMetaData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Script\Script.InsertDataTypeTranslation.sql" />

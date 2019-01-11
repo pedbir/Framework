@@ -10,8 +10,8 @@
       // Package Variables
       string sMetaData_GetPackageInfo = "EXEC ssis.GetPackageInfoFlatFileSource                                                                        "+
       "                                 @DESTINATION_TABLE_CATALOG = 'DWH_1_Raw'                         "+ 
-      "                                ,@DESTINATION_SCHEMA_NAMES = 'Tracelog_RawTyped'                   "+ 
-      "                                ,@DESTINATION_TABLE_NAME = 'rt_DailyQueries_01'                ";  
+      "                                ,@DESTINATION_SCHEMA_NAMES = 'Agresso_RawTyped'                   "+ 
+      "                                ,@DESTINATION_TABLE_NAME = 'rt_DimRelationer_01'                ";  
 
       DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
       DataRow pkg = dtPackages.Rows[0];

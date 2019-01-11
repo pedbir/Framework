@@ -212,16 +212,16 @@ BEGIN TRY
 	EXECUTE (@SQLString);
 
 	SET @CreateTableSql = N'
-	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaName + N'_ArchiveFolderPath'''')
-		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaName + N'_ArchiveFolderPath''''
-	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaName + N'_SourceFolderPath'''')
-		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaName + N'_SourceFolderPath''''
-	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaName + N'_ErrorFolderPath'''')
-		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaName + N'_ErrorFolderPath''''
+	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_ArchiveFolderPath'''')
+		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_ArchiveFolderPath''''
+	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_SourceFolderPath'''')
+		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_SourceFolderPath''''
+	IF EXISTS (SELECT TOP 1 * FROM dbo.SSISConfigurations sc WHERE sc.ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_ErrorFolderPath'''')
+		DELETE dbo.SSISConfigurations WHERE ConfigurationFilter = '''''+ @SourceSchemaNameWitoutSuffix + N'_ErrorFolderPath''''
 
-	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaName+N'_ArchiveFolderPath'''',N'''''+@SourceFileRootFolder+N'Archive'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaName+N'_ArchiveFolderPath].Properties[Value]' + N''''',N''''String'''')
-	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaName+N'_SourceFolderPath'''',N'''''+@SourceFileRootFolder+N'Data'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaName+N'_SourceFolderPath].Properties[Value]' + N''''',N''''String'''')
-	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaName+N'_ErrorFolderPath'''',N'''''+@SourceFileRootFolder+N'Error'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaName+N'_ErrorFolderPath].Properties[Value]' + N''''',N''''String'''')
+	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaNameWitoutSuffix+N'_ArchiveFolderPath'''',N'''''+@SourceFileRootFolder+N'Archive'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaNameWitoutSuffix+N'_ArchiveFolderPath].Properties[Value]' + N''''',N''''String'''')
+	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaNameWitoutSuffix+N'_SourceFolderPath'''',N'''''+@SourceFileRootFolder+N'Data'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaNameWitoutSuffix+N'_SourceFolderPath].Properties[Value]' + N''''',N''''String'''')
+	INSERT INTO dbo.SSISConfigurations (ConfigurationFilter, ConfiguredValue, PackagePath, ConfiguredValueType) VALUES (N'''''+@SourceSchemaNameWitoutSuffix+N'_ErrorFolderPath'''',N'''''+@SourceFileRootFolder+N'Error'''',N''''' + N'\Package.Variables[User::'+ @SourceSchemaNameWitoutSuffix+N'_ErrorFolderPath].Properties[Value]' + N''''',N''''String'''')
 	'
 	SET @SQLString ='EXECUTE '+@LinkedServerName+'.DWH_0_Admin.dbo.sp_executesql N'''+@CreateTableSql+'''';
 
@@ -230,8 +230,8 @@ BEGIN TRY
 	EXECUTE (@SQLString);
 
 
-DECLARE @SSISPackageName NVARCHAR(250) = @DestinationDatabaseName + '_' + @DestinationSchemaName + '_' + @SourceTableName
-SELECT SSISPackageName=@SSISPackageName, SourceArea=@SourceSchemaName, FilePattern=@FilePattern, ColumnNamesInFirstDataRow=@ColumnNamesInFirstDataRow, HeaderRowsToSkip=@HeaderRowsToSkip, DataRowsToSkip=@DataRowsToSkip, FlatFileType=@FlatFileType, HeaderRowDelimiter=@HeaderRowDelimiter, RowDelimiter=@RowDelimiter, ColumnDelimiter=@ColumnDelimiter, TextQualifer=IIF(@TextQualifer='"', '&quot;', @TextQualifer), IsUnicode=@IsUnicode, CodePage=@CodePage, DestinationDatabaseName=@DestinationDatabaseName, Locale=@Locale, FileNameRegExDateTime=@FileNameRegExDateTime, FileNameDateTimePattern=@FileNameDateTimePattern, DestinationSchemaName=@DestinationSchemaName, DestinationTableName=@DestinationTableName, SourceRootFolder=@SourceFileRootFolder, ExecProcAnnotation = @ExecProcAnnotation
+DECLARE @SSISPackageName NVARCHAR(250) = @DestinationDatabaseName + '_' + @DestinationSchemaName + '_' + @SourceTableNameWithoutPrefix
+SELECT SSISPackageName=@SSISPackageName, SourceArea=@SourceSchemaNameWitoutSuffix, FilePattern=@FilePattern, ColumnNamesInFirstDataRow=@ColumnNamesInFirstDataRow, HeaderRowsToSkip=@HeaderRowsToSkip, DataRowsToSkip=@DataRowsToSkip, FlatFileType=@FlatFileType, HeaderRowDelimiter=@HeaderRowDelimiter, RowDelimiter=@RowDelimiter, ColumnDelimiter=@ColumnDelimiter, TextQualifer=IIF(@TextQualifer='"', '&quot;', @TextQualifer), IsUnicode=@IsUnicode, CodePage=@CodePage, DestinationDatabaseName=@DestinationDatabaseName, Locale=@Locale, FileNameRegExDateTime=@FileNameRegExDateTime, FileNameDateTimePattern=@FileNameDateTimePattern, DestinationSchemaName=@DestinationSchemaName, DestinationTableName=@DestinationTableName, SourceRootFolder=@SourceFileRootFolder, ExecProcAnnotation = @ExecProcAnnotation
 INTO #DestinationTableFlatFileSource
 
 -- Create a temporary table variable to hold the output actions.  

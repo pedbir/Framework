@@ -166,7 +166,7 @@
     <None Include="Script\Script.InsertConfigurationLocal.sql" />
     <None Include="Script\Script.InsertConfigurationUAT.sql" />
     <None Include="Script\Script.InsertConfigurationPROD.sql" />
-    <Build Include="dbo\Stored Procedures\usp_killConnections.sql" />
+    <Build Include="dbo\Stored Procedures\sp_sp_start_job_wait.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script\Script.PreDeployment.sql" />

@@ -25,9 +25,10 @@
     [DestinationTableCatalog]  NVARCHAR (128)  NOT NULL,
     [TABLE_SERVER]             VARCHAR (128)   NULL,
     [SourceFieldID]            INT             IDENTITY (1, 1) NOT NULL,
-    CONSTRAINT [CK_SourceField_Catalogs] CHECK ([TABLE_CATALOG]<>[DestinationTableCatalog]),
     CONSTRAINT [UQ_SourceField] UNIQUE CLUSTERED ([TABLE_CATALOG] ASC, [TABLE_SCHEMA] ASC, [TABLE_NAME] ASC, [COLUMN_NAME] ASC, [DestinationTableCatalog] ASC, [TABLE_SERVER] ASC)
 );
+
+
 
 
 
