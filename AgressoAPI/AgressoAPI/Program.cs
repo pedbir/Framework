@@ -75,8 +75,8 @@ namespace AgressoAPI
         private WSCredentials GetUserCredentials()
         {
             WSCredentials cred = new WSCredentials();
-            cred.Username = "WEBSERVICE";
-            cred.Password = "Webservice2018!";
+            cred.Username = "";
+            cred.Password = "";
             cred.Client = "BFAB";
             return cred;
         }
