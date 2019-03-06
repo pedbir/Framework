@@ -1,0 +1,31 @@
+﻿CREATE SCHEMA [Agresso_RawTyped]
+    AUTHORIZATION [dbo];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

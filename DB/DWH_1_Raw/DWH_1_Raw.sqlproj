@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DWH_1_Raw</RootNamespace>
     <AssemblyName>DWH_1_Raw</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1035,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
     <DelayedDurability>DISABLED</DelayedDurability>
     <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
     <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
@@ -127,38 +127,133 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Functions\" />
-    <Folder Include="Security\" />
-    <Folder Include="Norm_d\" />
-    <Folder Include="Norm_d\Views\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="Norm_f\" />
-    <Folder Include="Norm_f\Views\" />
     <Folder Include="dbo\Views" />
+    <Folder Include="Agresso_RawTyped\" />
+    <Folder Include="Agresso_RawTyped\Tables\" />
+    <Folder Include="Agresso_RawTyped\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="Norm\" />
+    <Folder Include="Norm\Views\" />
+    <Folder Include="dbo\Tables\" />
     <Folder Include="Manual_RawTyped\" />
     <Folder Include="Manual_RawTyped\Tables\" />
-    <Folder Include="Deposit_RawTyped\" />
-    <Folder Include="Deposit_RawTyped\Tables\" />
     <Folder Include="Manual_RawTyped\Views\" />
-    <Folder Include="Deposit_RawTyped\Views\" />
+    <Folder Include="UCAP_RawTyped\" />
+    <Folder Include="UCAP_RawTyped\Tables\" />
+    <Folder Include="BamsSe_RawTyped\" />
+    <Folder Include="BamsSe_RawTyped\Tables\" />
+    <Folder Include="BamsNo_RawTyped\" />
+    <Folder Include="BamsNo_RawTyped\Tables\" />
+    <Folder Include="MDS_RawTyped\" />
+    <Folder Include="MDS_RawTyped\Tables\" />
+    <Folder Include="MDS\" />
+    <Folder Include="MDS\Views\" />
+    <Folder Include="BamsSe_RawTyped\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Functions\fn_Calendar.sql" />
-    <Build Include="localhost.sql" />
     <Build Include="dbo\Functions\tvf_split.sql" />
-    <Build Include="DW_SERVER.sql" />
     <Build Include="dbo\Stored Procedures\CreateNormIsLastView_1.sql" />
-    <Build Include="MDS.sql" />
-    <Build Include="Manual_RawTyped\Tables\rt_Package_01.sql" />
-    <Build Include="Deposit_RawTyped\Tables\rt_SeCreditDeposit_01.sql" />
-    <Build Include="Manual_RawTyped\Views\vrt_Package_01.sql" />
-    <Build Include="Deposit_RawTyped\Views\vrt_SeCreditDeposit_01.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_Huvudbok_01.sql" />
+    <Build Include="Agresso_RawTyped\Views\vrt_Huvudbok_01.sql" />
+    <Build Include="Security\Agresso_RawTyped.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_Dimension_01.sql" />
+    <Build Include="Agresso_RawTyped\Views\vrt_Dimension_01.sql" />
+    <Build Include="Norm\Views\Currency.sql" />
+    <Build Include="Norm\Views\GeneralLedger.sql" />
+    <Build Include="Norm\Views\FinanceProduct.sql" />
+    <Build Include="Norm\Views\FinanceCounterparty.sql" />
+    <Build Include="Norm\Views\FinanceSegment.sql" />
+    <Build Include="Norm\Views\FinanceAnalysis.sql" />
+    <Build Include="Norm\Views\Project.sql" />
+    <Build Include="Norm\Views\CostCenter.sql" />
+    <Build Include="Norm\Views\LegalEntity.sql" />
+    <Build Include="Norm\Views\GLAccount.sql" />
+    <Build Include="Security\Norm.sql" />
+    <Build Include="Norm\Views\FinanceVendor.sql" />
+    <Build Include="Norm\Views\FinanceCustomer.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_Kontoplan_01.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_DimRelationer_01.sql" />
+    <Build Include="Agresso_RawTyped\Views\vrt_Kontoplan_01.sql" />
+    <Build Include="Agresso_RawTyped\Views\vrt_DimRelationer_01.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_Kontorapportstuktur_01.sql" />
+    <Build Include="Norm\Views\Calendar.sql" />
+    <Build Include="Norm\Views\GeneralLedgerAllocation.sql" />
+    <Build Include="Norm\Views\AllocationPrinciple.sql" />
+    <Build Include="Norm\Views\ReportStructure.sql" />
+    <Build Include="Norm\Views\GLAccountLegalEntity.sql" />
+    <Build Include="Norm\Views\BridgeReportStructure.sql" />
+    <Build Include="Manual_RawTyped\Tables\rt_AllocationMapping_01.sql" />
+    <Build Include="Manual_RawTyped\Tables\rt_AllocationPrinciple_01.sql" />
+    <Build Include="Manual_RawTyped\Tables\rt_AllocationKey_01.sql" />
     <Build Include="Security\Manual_RawTyped.sql" />
-    <Build Include="Security\Deposit_RawTyped.sql" />
+    <Build Include="Agresso_RawTyped\Tables\rt_Rapportstruktur_01.sql" />
+    <Build Include="Agresso_RawTyped\Views\vrt_Rapportstruktur_01.sql" />
+    <Build Include="MDS_LinkedServer.sql" />
+    <Build Include="Security\Tracelog_RawTyped.sql" />
+    <Build Include="UCAP_RawTyped\Tables\r_UcapLkp.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_LoanApplication.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_LoanApplication.sql" />
+    <Build Include="Security\UCAP_RawTyped.sql" />
+    <Build Include="Security\BamsSe_RawTyped.sql" />
+    <Build Include="Security\BamsNo_RawTyped.sql" />
+    <Build Include="UCAP_RawTyped\Tables\r_PLLoanApplication.sql" />
+    <Build Include="Norm\Views\UcapLkp.sql" />
+    <Build Include="Norm\Views\PLLoanApplication.sql" />
+    <Build Include="MDS_RawTyped\Tables\r_Segment.sql" />
+    <Build Include="MDS_RawTyped\Tables\r_PlanningSales.sql" />
+    <Build Include="Norm\Views\PlanningSales.sql">
+      <SuppressTSqlWarnings>
+      </SuppressTSqlWarnings>
+    </Build>
+    <Build Include="Security\MDS_RawTyped.sql" />
+    <Build Include="Security\MDS.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_LoanApplicationStatus.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_LoanApplicationStatus.sql" />
+    <Build Include="Norm\Views\MLLoanApplication.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_BamsUser.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_ApplicationUser.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_BamsUser.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_ApplicationUser.sql" />
+    <Build Include="Norm\Views\MLLoanApplicationEmployee.sql" />
+    <Build Include="Norm\Views\CustomerSupportEmployee.sql" />
+    <Build Include="Norm\Views\MLLoanApplicationMilestone.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_OpocLoanApplication.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_OpocLoanApplication.sql" />
+    <Build Include="DWH_PROD.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_Media.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_Media.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_Customer.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_ApplicationCustomer.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_Customer.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_ApplicationCustomer.sql" />
+    <Build Include="Norm\Views\MLLoanCustomer.sql" />
+    <Build Include="Norm\Views\MLLoanApplicationStatus.sql" />
+    <Build Include="BamsSe_RawTyped\Tables\r_OpocCustomer.sql" />
+    <Build Include="BamsNo_RawTyped\Tables\r_OpocCustomer.sql" />
+    <Build Include="Norm\Views\MLLoanApplicationCustomer.sql" />
+    <None Include="Script.CreateMdsTables.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DWH_2_Norm\DWH_2_Norm.sqlproj">
+      <Name>DWH_2_Norm</Name>
+      <Project>{3a718732-59bb-49c1-86e2-7e4b156e1602}</Project>
+      <Private>True</Private>
+      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
+      <DatabaseSqlCmdVariable>DWH_2_Norm</DatabaseSqlCmdVariable>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="DWH_2_Norm">
+      <DefaultValue>DWH_2_Norm</DefaultValue>
+      <Value>$(SqlCmdVar__1)</Value>
+    </SqlCmdVariable>
   </ItemGroup>
 </Project>

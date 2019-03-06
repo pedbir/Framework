@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DWH_2_Norm</RootNamespace>
     <AssemblyName>DWH_2_Norm</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1035,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
     <DelayedDurability>DISABLED</DelayedDurability>
     <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
     <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
@@ -134,6 +134,7 @@
     <Folder Include="dbo\Functions\" />
     <Folder Include="Norm\" />
     <Folder Include="Norm\Tables\" />
+    <Folder Include="Fact\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Storage\Norm_Data.sql" />
@@ -141,10 +142,73 @@
     <Build Include="Security\Norm.sql" />
     <Build Include="Security\Fact.sql" />
     <Build Include="Security\Stage.sql" />
-    <Build Include="localhost.sql" />
     <Build Include="dbo\Stored Procedures\CreateNormIsLastView.sql" />
     <Build Include="dbo\Functions\fn_Calendar.sql" />
     <Build Include="dbo\Functions\tvf_split.sql" />
+    <Build Include="Norm\Tables\n_Project.sql" />
+    <Build Include="Norm\Tables\n_LegalEntity.sql" />
+    <Build Include="Norm\Tables\n_FinanceSegment.sql" />
+    <Build Include="Norm\Tables\n_FinanceProduct.sql" />
+    <Build Include="Norm\Tables\n_FinanceCounterparty.sql" />
+    <Build Include="Norm\Tables\n_FinanceAnalysis.sql" />
+    <Build Include="Norm\Tables\n_DepositAccount.sql" />
+    <Build Include="Norm\Tables\n_Currency.sql" />
+    <Build Include="Norm\Tables\n_CostCenter.sql" />
+    <Build Include="Norm\Tables\n_GeneralLedger.sql" />
+    <Build Include="Norm\Tables\n_FinanceVendor.sql" />
+    <Build Include="Norm\Tables\n_FinanceCustomer.sql" />
+    <Build Include="Norm\Tables\n_GLAccount.sql" />
+    <Build Include="Fact\Views\d_CostCenter.sql" />
+    <Build Include="Fact\Views\d_FinanceVendor.sql" />
+    <Build Include="Fact\Views\f_GeneralLedger.sql" />
+    <Build Include="Fact\Views\d_Project.sql" />
+    <Build Include="Fact\Views\d_LegalEntity.sql" />
+    <Build Include="Fact\Views\d_GLAccount.sql" />
+    <Build Include="Fact\Views\d_FinanceSegment.sql" />
+    <Build Include="Fact\Views\d_FinanceProduct.sql" />
+    <Build Include="Fact\Views\d_FinanceCustomer.sql" />
+    <Build Include="Fact\Views\d_FinanceCounterparty.sql" />
+    <Build Include="Fact\Views\d_FinanceAnalysis.sql" />
+    <Build Include="Fact\Views\d_Currency.sql" />
+    <Build Include="Norm\Tables\n_Calendar.sql" />
+    <Build Include="Fact\Views\d_Calendar.sql" />
+    <Build Include="Norm\Tables\n_GeneralLedgerAllocation.sql" />
+    <Build Include="Norm\Tables\n_AllocationPrinciple.sql" />
+    <Build Include="Fact\Views\f_GeneralLedgerAllocation.sql" />
+    <Build Include="Fact\Views\d_AllocationPrinciple.sql" />
+    <Build Include="Fact\Stored Procedures\sp_GeneralLedgerAllocation.sql" />
+    <Build Include="Norm\Tables\n_ReportStructure.sql" />
+    <Build Include="Norm\Tables\n_GLAccountLegalEntity.sql" />
+    <Build Include="Norm\Tables\n_BridgeReportStructure.sql" />
+    <Build Include="Fact\Views\f_BridgeReportStructure.sql" />
+    <Build Include="Fact\Views\d_ReportStructure.sql" />
+    <Build Include="Fact\Views\d_GLAccountLegalEntity.sql" />
+    <Build Include="Norm\Tables\n_Fields.sql" />
+    <Build Include="Norm\Tables\n_DailyQueries.sql" />
+    <Build Include="Fact\Views\f_DailyQueryMetrics.sql" />
+    <Build Include="Fact\Views\d_User.sql" />
+    <Build Include="Fact\Views\d_Query.sql" />
+    <Build Include="Fact\Views\d_Fields.sql" />
+    <Build Include="Norm\Tables\n_UcapLkp.sql" />
+    <Build Include="Norm\Tables\n_PLLoanApplication.sql" />
+    <Build Include="Norm\Tables\n_PlanningSales.sql" />
+    <Build Include="Fact\Views\f_PLLoanApplicationMetrics.sql" />
+    <Build Include="Fact\Views\f_PlanningSales.sql" />
+    <Build Include="Fact\Views\d_UcapLkp.sql" />
+    <Build Include="localhost2.sql" />
+    <Build Include="Norm\Tables\n_MLLoanApplication.sql" />
+    <Build Include="Fact\Views\f_MLLoanApplicationMetrics.sql" />
+    <Build Include="Fact\Views\d_MLLoanApplication.sql" />
+    <Build Include="Norm\Tables\n_MLLoanApplicationStatus.sql" />
+    <Build Include="Norm\Tables\n_MLLoanApplicationEmployee.sql" />
+    <Build Include="Norm\Tables\n_CustomerSupportEmployee.sql" />
+    <Build Include="Norm\Tables\n_MLLoanApplicationMilestone.sql" />
+    <Build Include="Fact\Views\d_CustomerSupportEmployee.sql" />
+    <Build Include="Fact\Views\b_MLLoanApplicationEmployee.sql" />
+    <Build Include="Norm\Tables\n_MLLoanCustomer.sql" />
+    <Build Include="Fact\Views\d_MLLoanCustomer.sql" />
+    <Build Include="Norm\Tables\n_MLLoanApplicationCustomer.sql" />
+    <Build Include="Fact\Views\b_MLLoanApplicationCustomer.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />

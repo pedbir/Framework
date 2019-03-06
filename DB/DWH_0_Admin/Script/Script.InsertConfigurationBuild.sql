@@ -34,3 +34,7 @@ UNION SELECT 	'Manual_SourceFolderPath',	'C:\DW\Manual\Data',	'\Package.Variable
 UNION SELECT 	'Manual_ErrorFolderPath',	'C:\DW\Manual\Error',	'\Package.Variables[User::Manual_ErrorFolderPath].Properties[Value]',	'String'
 
 UNION SELECT 	'Agresso_ExecFilePath',			'C:\API\Agresso\AgressoAPI.exe'								,'\Package.Variables[User::Agresso_ExecFilePath].Properties[Value]',	'String'
+
+UNION SELECT 	'BamsNo',	'Provider=SQLNCLI11;Server=STO-DB-05;Initial Catalog=BAMS2NO;Integrated Security=SSPI;',	'\Package.Connections[BamsNo].Properties[ConnectionString]',	'String'
+UNION SELECT 	'BamsSe',	'Provider=SQLNCLI11;Server=STO-DB-05;Initial Catalog=BAMS2SE;Integrated Security=SSPI;',	'\Package.Connections[BamsSe].Properties[ConnectionString]',	'String'
+UNION SELECT 	'UCAP',	'Data Source=STO-DB-04;Initial Catalog=DW_UcapPL_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;',	'\Package.Connections[UCAP].Properties[ConnectionString]',	'String'

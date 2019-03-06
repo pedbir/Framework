@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DWH_3_Fact</RootNamespace>
     <AssemblyName>DWH_3_Fact</AssemblyName>
-    <ModelCollation>1033,CI</ModelCollation>
+    <ModelCollation>1035,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -27,7 +27,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
     <DelayedDurability>DISABLED</DelayedDurability>
     <AutoCreateStatisticsIncremental>False</AutoCreateStatisticsIncremental>
     <MemoryOptimizedElevateToSnapshot>False</MemoryOptimizedElevateToSnapshot>
@@ -128,6 +128,13 @@
     <Folder Include="Storage\" />
     <Folder Include="Security\" />
     <Folder Include="Fact\" />
+    <Folder Include="Fact\Tables\" />
+    <Folder Include="Finance\" />
+    <Folder Include="Finance\Views\" />
+    <Folder Include="Sales\" />
+    <Folder Include="Sales\Views\" />
+    <Folder Include="Marketing\" />
+    <Folder Include="Marketing\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Storage\Fact_Data.sql" />
@@ -135,6 +142,84 @@
     <Build Include="Security\Fact.sql" />
     <Build Include="Security\NT SERVICE_MSSQLServerOLAPService.sql" />
     <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="Fact\Tables\d_FinanceVendor.sql" />
+    <Build Include="Fact\Tables\d_CostCenter.sql" />
+    <Build Include="Fact\Tables\f_GeneralLedger.sql" />
+    <Build Include="Fact\Tables\d_Project.sql" />
+    <Build Include="Fact\Tables\d_LegalEntity.sql" />
+    <Build Include="Fact\Tables\d_GLAccount.sql" />
+    <Build Include="Fact\Tables\d_FinanceSegment.sql" />
+    <Build Include="Fact\Tables\d_FinanceProduct.sql" />
+    <Build Include="Fact\Tables\d_FinanceCustomer.sql" />
+    <Build Include="Fact\Tables\d_FinanceCounterparty.sql" />
+    <Build Include="Fact\Tables\d_FinanceAnalysis.sql" />
+    <Build Include="Fact\Tables\d_Currency.sql" />
+    <Build Include="Finance\Views\d_Product.sql" />
+    <Build Include="Finance\Views\d_Segment.sql" />
+    <Build Include="Finance\Views\d_Vendor.sql" />
+    <Build Include="Finance\Views\d_Account.sql" />
+    <Build Include="Finance\Views\d_LegalEntity.sql" />
+    <Build Include="Finance\Views\f_GeneralLedger.sql" />
+    <Build Include="Finance\Views\d_Project.sql" />
+    <Build Include="Finance\Views\d_Customer.sql" />
+    <Build Include="Finance\Views\d_Counterparty.sql" />
+    <Build Include="Finance\Views\d_Analysis.sql" />
+    <Build Include="Finance\Views\d_Currency.sql" />
+    <Build Include="Finance\Views\d_CostCenter.sql" />
+    <Build Include="Security\Finance.sql" />
+    <Build Include="Fact\Tables\d_Calendar.sql" />
+    <Build Include="Finance\Views\d_VoucherDate.sql" />
+    <Build Include="Finance\Views\d_Period.sql" />
+    <Build Include="Fact\Tables\f_GeneralLedgerAllocation.sql" />
+    <Build Include="Fact\Tables\d_AllocationPrinciple.sql" />
+    <Build Include="Finance\Views\d_AllocationPrinciple.sql" />
+    <Build Include="Fact\Tables\f_BridgeReportStructure.sql" />
+    <Build Include="Fact\Tables\d_ReportStructure.sql" />
+    <Build Include="Fact\Tables\d_GLAccountLegalEntity.sql" />
+    <Build Include="Finance\Views\f_BridgeReportStructure.sql" />
+    <Build Include="Finance\Views\d_ReportStructure.sql" />
+    <Build Include="Finance\Views\d_GLAccountLegalEntity.sql" />
+    <Build Include="Sales\Views\f_LoanApplicationMetrics.sql" />
+    <Build Include="Sales\Views\d_LoanApplication.sql" />
+    <Build Include="Security\Sales.sql" />
+    <Build Include="Fact\Tables\f_DailyQueryMetrics.sql" />
+    <Build Include="Fact\Tables\d_User.sql" />
+    <Build Include="Fact\Tables\d_Query.sql" />
+    <Build Include="Fact\Tables\d_Fields.sql" />
+    <Build Include="Fact\Tables\f_PLLoanApplicationMetrics.sql" />
+    <Build Include="Fact\Tables\f_PlanningSales.sql" />
+    <Build Include="Fact\Tables\d_UcapLkp.sql" />
+    <Build Include="Sales\Views\d_FinanceSegment.sql" />
+    <Build Include="Sales\Views\d_Date.sql" />
+    <Build Include="Fact\Tables\f_MLLoanApplicationMetrics.sql" />
+    <Build Include="Fact\Tables\d_MLLoanApplication.sql" />
+    <Build Include="Fact\Tables\f_MLLoanApplicationMilestone.sql" />
+    <Build Include="Fact\Tables\d_MLLoanApplicationStatus.sql" />
+    <Build Include="Fact\Tables\d_CustomerSupportEmployee.sql" />
+    <Build Include="Fact\Tables\b_MLLoanApplicationEmployee.sql" />
+    <Build Include="Sales\Views\d_CustomerSupportEmployee.sql" />
+    <Build Include="Sales\Views\b_LoanApplicationEmployee.sql" />
+    <Build Include="Sales\Views\d_CurrentPeriod.sql" />
+    <Build Include="Fact\Tables\d_MLLoanCustomer.sql" />
+    <Build Include="Fact\Tables\b_MLLoanApplicationCustomer.sql" />
+    <Build Include="Sales\Views\d_LoanCustomer.sql" />
+    <Build Include="Sales\Views\b_LoanApplicationCustomer.sql" />
+    <Build Include="Marketing\Views\f_Planning.sql" />
+    <Build Include="Marketing\Views\f_LoanApplicationMetrics.sql" />
+    <Build Include="Marketing\Views\d_LoanCustomer.sql" />
+    <Build Include="Marketing\Views\d_LoanApplication.sql" />
+    <Build Include="Marketing\Views\d_FinanceSegment.sql" />
+    <Build Include="Marketing\Views\d_Date.sql" />
+    <Build Include="Marketing\Views\d_CustomerSupportEmployee.sql" />
+    <Build Include="Marketing\Views\d_CurrentPeriod.sql" />
+    <Build Include="Marketing\Views\b_LoanApplicationEmployee.sql" />
+    <Build Include="Marketing\Views\d_Channel.sql" />
+    <Build Include="Marketing\Views\d_ChannelCategory.sql" />
+    <Build Include="Marketing\Views\d_FinanceProduct.sql" />
+    <Build Include="Marketing\Views\f_FinanceMarketMetrics.sql" />
+    <Build Include="Security\Marketing.sql" />
+    <Build Include="Marketing\Views\b_LoanApplicationCustomer.sql" />
+    <Build Include="Marketing\Views\d_Vendor.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />

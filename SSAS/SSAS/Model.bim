@@ -6,7 +6,7 @@
     "dataSources": [
       {
         "name": "DWH_3_Fact",
-        "connectionString": "Provider=SQLNCLI11;Data Source=localhost;Initial Catalog=DWH_3_Fact;Integrated Security=SSPI;Persist Security Info=false",
+        "connectionString": "Provider=SQLNCLI11;Data Source=localhost;Persist Security Info=false;Integrated Security=SSPI;Initial Catalog=DWH_3_Fact",
         "impersonationMode": "impersonateServiceAccount",
         "annotations": [
           {
@@ -18,27 +18,357 @@
     ],
     "tables": [
       {
-        "name": "Query",
+        "name": "Account",
         "columns": [
           {
-            "name": "Test",
+            "name": "GLAccount_key",
             "dataType": "int64",
-            "sourceColumn": "Test",
+            "isHidden": true,
+            "sourceColumn": "GLAccount_key",
             "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AccountCode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "AccountCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Account",
+            "dataType": "string",
+            "sourceColumn": "Account",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Account Group",
+            "dataType": "string",
+            "sourceColumn": "AccountGroup",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Account Type",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "AccountType",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Account Hierarchy1 Code",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy1Code"
+          },
+          {
+            "name": "Account Hierarchy1 Name",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy1Name"
+          },
+          {
+            "name": "Account Hierarchy2 Code",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy2Code"
+          },
+          {
+            "name": "Account Hierarchy2 Name",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy2Name",
+            "sortByColumn": "Account Hierarchy2 Code"
+          },
+          {
+            "name": "Account Hierarchy3 Code",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy3Code"
+          },
+          {
+            "name": "Account Hierarchy3 Name",
+            "dataType": "string",
+            "sourceColumn": "AccountHierarchy3Name"
           }
         ],
         "partitions": [
           {
-            "name": "Query",
+            "name": "d_Account",
             "dataView": "full",
             "source": {
-              "query": "SELECT 1 as Test",
+              "query": " SELECT [Finance].[d_Account].* FROM [Finance].[d_Account] ",
               "dataSource": "DWH_3_Fact"
             },
             "annotations": [
               {
-                "name": "QueryEditorSerialization",
-                "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT 1 as Test</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccount_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>104</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountCode</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>94</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Account</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>69</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountGroup</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>98</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountType</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>93</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>146</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>148</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>146</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>148</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>146</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>148</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccount_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountCode</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Account</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountGroup</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountType</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>8</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>9</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>10</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy2Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AccountHierarchy3Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Account Hierarchy Structure",
+            "levels": [
+              {
+                "name": "Account Hierarchy3 Name",
+                "ordinal": 0,
+                "column": "Account Hierarchy3 Name"
+              },
+              {
+                "name": "Account Hierarchy2 Name",
+                "ordinal": 1,
+                "column": "Account Hierarchy2 Name"
+              },
+              {
+                "name": "Account Hierarchy1 Name",
+                "ordinal": 2,
+                "column": "Account Hierarchy1 Name"
+              },
+              {
+                "name": "Account",
+                "ordinal": 3,
+                "column": "Account"
               }
             ]
           }
@@ -46,17 +376,2759 @@
         "annotations": [
           {
             "name": "_TM_ExtProp_QueryDefinition",
-            "value": "SELECT 1 as Test"
+            "value": " SELECT [Finance].[d_Account].* FROM [Finance].[d_Account] "
           },
           {
             "name": "_TM_ExtProp_DbTableName",
-            "value": "Query"
+            "value": "d_Account"
           },
           {
-            "name": "QueryEditorSerialization",
-            "value": "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>SELECT 1 as Test</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccount_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>104</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountCode</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>94</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Account</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>69</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountGroup</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>98</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountType</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>93</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>146</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>148</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>146</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>148</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>146</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>148</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccount_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountCode</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Account</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountGroup</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountType</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>8</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>9</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>10</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy2Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AccountHierarchy3Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
           }
         ]
+      },
+      {
+        "name": "Analysis",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "FinanceAnalysis_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceAnalysis_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AnalysisCode",
+            "dataType": "string",
+            "sourceColumn": "AnalysisCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Analysis",
+            "dataType": "string",
+            "sourceColumn": "Analysis",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Analysis",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Analysis].* FROM [Finance].[d_Analysis] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Analysis].* FROM [Finance].[d_Analysis] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Analysis"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Counterparty",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "FinanceCounterparty_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceCounterparty_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Counterparty Code",
+            "dataType": "string",
+            "sourceColumn": "CounterpartyCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Counterparty",
+            "dataType": "string",
+            "sourceColumn": "CounterpartyName",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Counterparty",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Counterparty].* FROM [Finance].[d_Counterparty] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Counterparty].* FROM [Finance].[d_Counterparty] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Counterparty"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Currency",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "Currency_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Currency_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Currency ISO",
+            "dataType": "string",
+            "sourceColumn": "CurrencyISOCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Currency",
+            "dataType": "string",
+            "sourceColumn": "Currency",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Currency",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Currency].* FROM [Finance].[d_Currency] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Currency].* FROM [Finance].[d_Currency] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Currency"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Customer",
+        "columns": [
+          {
+            "name": "FinanceCustomer_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceCustomer_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Customer Code",
+            "dataType": "string",
+            "sourceColumn": "CustomerCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Customer",
+            "dataType": "string",
+            "sourceColumn": "Customer",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Customer",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Customer].* FROM [Finance].[d_Customer] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Customer].* FROM [Finance].[d_Customer] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Customer"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Legal Entity",
+        "columns": [
+          {
+            "name": "LegalEntity_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "LegalEntity_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Legal Entity Code",
+            "dataType": "string",
+            "sourceColumn": "LegalEntityCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Legal Entity",
+            "dataType": "string",
+            "sourceColumn": "LegalEntity",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_LegalEntity",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_LegalEntity].* FROM [Finance].[d_LegalEntity] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_LegalEntity].* FROM [Finance].[d_LegalEntity] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_LegalEntity"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Product",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "FinanceProduct_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceProduct_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Product Code",
+            "dataType": "string",
+            "sourceColumn": "ProductCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Product",
+            "dataType": "string",
+            "sourceColumn": "Product",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Product",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Product].* FROM [Finance].[d_Product] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Product].* FROM [Finance].[d_Product] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Product"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Project",
+        "columns": [
+          {
+            "name": "Project_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Project_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Project Code",
+            "dataType": "string",
+            "sourceColumn": "ProjectCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Project",
+            "dataType": "string",
+            "sourceColumn": "Project",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Project",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Project].* FROM [Finance].[d_Project] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Project].* FROM [Finance].[d_Project] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Project"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Segment",
+        "columns": [
+          {
+            "name": "FinanceSegment_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceSegment_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Segment Code",
+            "dataType": "string",
+            "sourceColumn": "SegmentCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Segment",
+            "dataType": "string",
+            "sourceColumn": "Segment",
+            "sortByColumn": "Segment Code",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Segment",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Segment].* FROM [Finance].[d_Segment] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Segment].* FROM [Finance].[d_Segment] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Segment"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Vendor",
+        "columns": [
+          {
+            "name": "FinanceVendor_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceVendor_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Vendor Code",
+            "dataType": "string",
+            "sourceColumn": "VendorCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Vendor",
+            "dataType": "string",
+            "sourceColumn": "Vendor",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Vendor",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Vendor].* FROM [Finance].[d_Vendor] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Vendor].* FROM [Finance].[d_Vendor] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Vendor"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "General Ledger",
+        "columns": [
+          {
+            "name": "Voucher Type",
+            "dataType": "string",
+            "sourceColumn": "Vouchertype",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Voucher No",
+            "dataType": "int64",
+            "sourceColumn": "Voucherno",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Sequenceno",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Sequenceno",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Voucher Description",
+            "dataType": "string",
+            "sourceColumn": "GLDescription",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Invoice No",
+            "dataType": "string",
+            "sourceColumn": "ExtInvoiceRef",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Voucherdate_key",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Voucherdate_key",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "Period_key",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "sourceColumn": "Period_key",
+            "formatString": "General Date",
+            "sourceProviderType": "DBDate"
+          },
+          {
+            "name": "GLAccount_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "GLAccount_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "LegalEntity_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "LegalEntity_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "CostCenter_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "CostCenter_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Project_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Project_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceProduct_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceProduct_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceAnalysis_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceAnalysis_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceCounterparty_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceCounterparty_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceSegment_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceSegment_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceCustomer_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceCustomer_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "FinanceVendor_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "FinanceVendor_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Currency_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "Currency_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AmountLCY",
+            "dataType": "double",
+            "isHidden": true,
+            "sourceColumn": "AmountLCY",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "AmountTCY",
+            "dataType": "double",
+            "isHidden": true,
+            "sourceColumn": "AmountTCY",
+            "sourceProviderType": "Numeric"
+          },
+          {
+            "name": "AllocationPrinciple_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "AllocationPrinciple_key"
+          },
+          {
+            "name": "GLAccountLegalEntity_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "GLAccountLegalEntity_key"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "f_GeneralLedger",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[f_GeneralLedger].* FROM [Finance].[f_GeneralLedger] ",
+              "dataSource": "DWH_3_Fact"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Vouchertype</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>91</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Voucherno</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>81</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Sequenceno</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>89</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLDescription</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>95</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ExtInvoiceRef</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>98</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Voucherdate_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>114</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Period_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>83</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccount_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>104</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LegalEntity_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>106</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>CostCenter_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>108</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Project_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>87</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceProduct_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>127</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceAnalysis_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>129</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceCounterparty_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>155</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceSegment_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>132</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceCustomer_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>136</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceVendor_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>124</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Currency_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>97</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AllocationPrinciple_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>138</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AmountLCY</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>85</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AmountTCY</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>86</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountLegalEntity_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>157</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountHierarchy_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>150</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Vouchertype</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Voucherno</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Sequenceno</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLDescription</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ExtInvoiceRef</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Voucherdate_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Period_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccount_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>LegalEntity_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>8</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>CostCenter_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>9</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Project_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>10</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceProduct_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>11</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceAnalysis_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>12</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceCounterparty_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>13</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceSegment_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>14</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceCustomer_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>15</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>FinanceVendor_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>16</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>Currency_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>17</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AllocationPrinciple_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>18</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AmountLCY</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>19</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AmountTCY</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>20</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountLegalEntity_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>21</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountHierarchy_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>22</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>AllocationPrinciple_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountLegalEntity_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>GLAccountHierarchy_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "name": "Period Amount LCY",
+            "expression": [
+              "IF(",
+              "    SUM([AmountLCY])= 0",
+              "    , BLANK()",
+              "    , SUM([AmountLCY])",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Period Amount TCY",
+            "expression": [
+              "IF(SUM([AmountTCY]) = 0, BLANK(), SUM([AmountTCY]))",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "Balance LCY",
+            "expression": [
+              "",
+              "CALCULATE (",
+              "    [Period Amount LCY],",
+              "    FILTER (",
+              "        ALL ( Period[Period_key] ),",
+              "        Period[Period_key] <= MAX ( Period[Period_key] )",
+              "    )",
+              ")"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "Balance TCY",
+            "expression": [
+              "",
+              "CALCULATE (",
+              "    [Period Amount TCY],",
+              "    FILTER (",
+              "        ALL ( Period[Period_key] ),",
+              "        Period[Period_key] <= MAX ( Period[Period_key] )",
+              "    )",
+              ")"
+            ],
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "YTD LCY",
+            "expression": [
+              " TOTALYTD(",
+              "    [Period Amount LCY]",
+              "    , 'Period'[Period_key]",
+              "    )",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "YTD TCY",
+            "expression": [
+              " TOTALYTD([Period Amount TCY], 'Period'[Period_key])",
+              "",
+              ""
+            ],
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "YTD YoY Growth",
+            "expression": [
+              "  DIVIDE([YTD LCY]-[YTD LCY LY], ABS([YTD LCY LY]), BLANK())",
+              ""
+            ],
+            "formatString": "0 %;-0 %;0 %",
+            "isHidden": true
+          },
+          {
+            "name": "YTD LCY LY",
+            "expression": "   CALCULATE([YTD LCY], SAMEPERIODLASTYEAR(Period[Period_key]))",
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "VPY LCY",
+            "expression": " [YTD LCY] - [YTD LCY LY]",
+            "isHidden": true
+          },
+          {
+            "name": "FTE",
+            "expression": [
+              "",
+              "CALCULATE (",
+              "    SUM ( 'General Ledger'[AmountLCY] ),",
+              "    LASTNONBLANK (",
+              "        Period[Period_key],",
+              "        CALCULATE ( SUM ( 'General Ledger'[AmountLCY] ) )",
+              "    ),",
+              "    Account[AccountCode] = \"9001\",",
+              "    ALL ( 'Report Structure' )",
+              ")\t"
+            ],
+            "formatString": "#,0"
+          },
+          {
+            "name": "FTE QoQ Growth",
+            "expression": " DIVIDE([FTE]-CALCULATE([FTE], PREVIOUSQUARTER(Period[Period_key])),  ABS(CALCULATE([FTE], PREVIOUSQUARTER(Period[Period_key]))))",
+            "formatString": "0 %;-0 %;0 %",
+            "isHidden": true
+          },
+          {
+            "name": "MTD LCY",
+            "expression": " TOTALMTD([Period Amount LCY],Period[Period_key])",
+            "formatString": "#,0",
+            "isHidden": true
+          },
+          {
+            "name": "QTD LCY",
+            "expression": " TOTALQTD([Period Amount LCY],Period[Period_key])",
+            "formatString": "#,0",
+            "isHidden": true
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[f_GeneralLedger].* FROM [Finance].[f_GeneralLedger] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "f_GeneralLedger"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>Vouchertype</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>91</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Voucherno</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>81</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Sequenceno</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>89</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLDescription</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>95</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ExtInvoiceRef</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>98</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Voucherdate_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>114</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Period_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>83</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccount_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>104</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LegalEntity_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>106</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>CostCenter_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>108</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Project_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>87</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceProduct_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>127</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceAnalysis_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>129</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceCounterparty_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>155</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceSegment_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>132</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceCustomer_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>136</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceVendor_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>124</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Currency_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>97</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AllocationPrinciple_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>138</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AmountLCY</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>85</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AmountTCY</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>86</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountLegalEntity_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>157</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountHierarchy_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>150</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>Vouchertype</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Voucherno</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Sequenceno</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLDescription</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ExtInvoiceRef</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Voucherdate_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Period_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccount_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>LegalEntity_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>8</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>CostCenter_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>9</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Project_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>10</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceProduct_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>11</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceAnalysis_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>12</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceCounterparty_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>13</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceSegment_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>14</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceCustomer_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>15</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>FinanceVendor_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>16</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>Currency_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>17</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AllocationPrinciple_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>18</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AmountLCY</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>19</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>AmountTCY</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>20</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountLegalEntity_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>21</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountHierarchy_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>22</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>AllocationPrinciple_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountLegalEntity_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>GLAccountHierarchy_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Period",
+        "dataCategory": "Time",
+        "columns": [
+          {
+            "name": "Period_key",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isKey": true,
+            "sourceColumn": "Period_key",
+            "formatString": "yyyy-MM-dd",
+            "sourceProviderType": "DBDate",
+            "annotations": [
+              {
+                "name": "Format",
+                "value": "<Format Format=\"DateTimeCustom\"><DateTimes><DateTime LCID=\"1053\" Group=\"ShortDate\" FormatString=\"yyyy-MM-dd\" /></DateTimes></Format>"
+              }
+            ]
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "sourceColumn": "CalendarYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Year Month",
+            "dataType": "string",
+            "sourceColumn": "YearMonth",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "YearWeek",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "YearWeek",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Year Quarter",
+            "dataType": "string",
+            "sourceColumn": "YearQuarter",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "string",
+            "sourceColumn": "CalendarQuarter",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "MonthofYear",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "MonthofYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "MonthName",
+            "sortByColumn": "MonthofYear",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "WeekOfYear",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "WeekOfYear",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DayofWeek",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DayofWeek",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "DayName",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "DayName",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "DayofMonth",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "DayofMonth",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_Period",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_Period].* FROM [Finance].[d_Period] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Y-Q-M",
+            "levels": [
+              {
+                "name": "Year",
+                "ordinal": 0,
+                "column": "Year"
+              },
+              {
+                "name": "YearMonth",
+                "ordinal": 2,
+                "column": "Year Month"
+              },
+              {
+                "name": "YearQuarter",
+                "ordinal": 1,
+                "column": "Year Quarter"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_Period].* FROM [Finance].[d_Period] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_Period"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Allocation",
+        "columns": [
+          {
+            "name": "AllocationPrinciple_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "AllocationPrinciple_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "AllocationPrincipleCode",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "AllocationPrincipleCode",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Allocation",
+            "dataType": "string",
+            "sourceColumn": "AllocationPrinciple",
+            "sortByColumn": "AllocationPrincipleCode",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_AllocationPrinciple",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_AllocationPrinciple].* FROM [Finance].[d_AllocationPrinciple] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_AllocationPrinciple].* FROM [Finance].[d_AllocationPrinciple] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_AllocationPrinciple"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Account LegalEntity",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "GLAccountLegalEntity_key",
+            "dataType": "int64",
+            "sourceColumn": "GLAccountLegalEntity_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "GLAccountLegalEntity_bkey",
+            "dataType": "string",
+            "sourceColumn": "GLAccountLegalEntity_bkey",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_GLAccountLegalEntity",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_GLAccountLegalEntity].* FROM [Finance].[d_GLAccountLegalEntity] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_GLAccountLegalEntity].* FROM [Finance].[d_GLAccountLegalEntity] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_GLAccountLegalEntity"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "Report Structure",
+        "columns": [
+          {
+            "name": "ReportStructure_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "ReportStructure_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ReportStructure_bkey",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ReportStructure_bkey",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Report Code",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ReportStructureLvl1Code",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Line Item Category Code",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ReportStructureLvl2Code",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Line Item Category",
+            "dataType": "string",
+            "sourceColumn": "ReportStructureLvl2Name",
+            "sortByColumn": "Line Item Category Code",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Line Item Code",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "ReportStructureLvl3Code",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Line Item",
+            "dataType": "string",
+            "sourceColumn": "ReportStructureLvl3Name",
+            "sortByColumn": "Line Item Code",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Report",
+            "dataType": "string",
+            "sourceColumn": "ReportStructureLvl1Name",
+            "sortByColumn": "Report Code"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_ReportStructure",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_ReportStructure].* FROM [Finance].[d_ReportStructure] ",
+              "dataSource": "DWH_3_Fact"
+            },
+            "annotations": [
+              {
+                "name": "TableWidgetSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+                  "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+                  "  <ColumnSuggestedType />",
+                  "  <ColumnFormat />",
+                  "  <ColumnAccuracy />",
+                  "  <ColumnCurrencySymbol />",
+                  "  <ColumnPositivePattern />",
+                  "  <ColumnNegativePattern />",
+                  "  <ColumnWidths>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructure_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>131</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructure_bkey</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>137</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl1Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>152</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>154</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl2Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>152</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl2Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>154</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl3Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>152</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl3Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>154</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnWidths>",
+                  "  <ColumnDisplayIndex>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructure_key</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>0</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructure_bkey</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>1</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl1Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>2</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>3</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl2Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>4</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl2Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>5</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl3Code</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>6</int>",
+                  "      </value>",
+                  "    </item>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl3Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <int>7</int>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnDisplayIndex>",
+                  "  <ColumnFrozen />",
+                  "  <ColumnChecked>",
+                  "    <item>",
+                  "      <key>",
+                  "        <string>ReportStructureLvl1Name</string>",
+                  "      </key>",
+                  "      <value>",
+                  "        <boolean>true</boolean>",
+                  "      </value>",
+                  "    </item>",
+                  "  </ColumnChecked>",
+                  "  <ColumnFilter />",
+                  "  <SelectionFilter />",
+                  "  <FilterParameters />",
+                  "  <IsSortDescending>false</IsSortDescending>",
+                  "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Report Structure",
+            "levels": [
+              {
+                "name": "Report",
+                "ordinal": 0,
+                "column": "Report"
+              },
+              {
+                "name": "Line Item",
+                "ordinal": 2,
+                "column": "Line Item"
+              },
+              {
+                "name": "Line Item Category",
+                "ordinal": 1,
+                "column": "Line Item Category"
+              }
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_ReportStructure].* FROM [Finance].[d_ReportStructure] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_ReportStructure"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          },
+          {
+            "name": "TableWidgetSerialization",
+            "value": [
+              "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"TableWidgetSerialization\"><AnnotationContent><![CDATA[<?xml version=\"1.0\"?>",
+              "<TableWidgetGridSerialization xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">",
+              "  <ColumnSuggestedType />",
+              "  <ColumnFormat />",
+              "  <ColumnAccuracy />",
+              "  <ColumnCurrencySymbol />",
+              "  <ColumnPositivePattern />",
+              "  <ColumnNegativePattern />",
+              "  <ColumnWidths>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructure_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>131</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructure_bkey</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>137</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl1Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>152</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>154</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl2Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>152</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl2Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>154</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl3Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>152</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl3Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>154</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnWidths>",
+              "  <ColumnDisplayIndex>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructure_key</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>0</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructure_bkey</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>1</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl1Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>2</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>3</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl2Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>4</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl2Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>5</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl3Code</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>6</int>",
+              "      </value>",
+              "    </item>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl3Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <int>7</int>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnDisplayIndex>",
+              "  <ColumnFrozen />",
+              "  <ColumnChecked>",
+              "    <item>",
+              "      <key>",
+              "        <string>ReportStructureLvl1Name</string>",
+              "      </key>",
+              "      <value>",
+              "        <boolean>true</boolean>",
+              "      </value>",
+              "    </item>",
+              "  </ColumnChecked>",
+              "  <ColumnFilter />",
+              "  <SelectionFilter />",
+              "  <FilterParameters />",
+              "  <IsSortDescending>false</IsSortDescending>",
+              "</TableWidgetGridSerialization>]]></AnnotationContent></Gemini>"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bridge Report Structure",
+        "isHidden": true,
+        "columns": [
+          {
+            "name": "BridgeReportStructure_key",
+            "dataType": "int64",
+            "sourceColumn": "BridgeReportStructure_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "GLAccountLegalEntity_key",
+            "dataType": "int64",
+            "sourceColumn": "GLAccountLegalEntity_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "ReportStructure_key",
+            "dataType": "int64",
+            "sourceColumn": "ReportStructure_key",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "f_BridgeReportStructure",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[f_BridgeReportStructure].* FROM [Finance].[f_BridgeReportStructure] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[f_BridgeReportStructure].* FROM [Finance].[f_BridgeReportStructure] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "f_BridgeReportStructure"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      },
+      {
+        "name": "CostCenter",
+        "columns": [
+          {
+            "name": "CostCenter_key",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "CostCenter_key",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "Cost Center Code",
+            "dataType": "string",
+            "sourceColumn": "CostCenterCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Cost Center",
+            "dataType": "string",
+            "sourceColumn": "CostCenter",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "CostCenterManagerCode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "CostCenterManagerCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Manger",
+            "dataType": "string",
+            "sourceColumn": "CostCenterManger",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "SecondLineApproverCode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "SecondLineApproverCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Second Line Approver",
+            "dataType": "string",
+            "sourceColumn": "SecondLineApprover",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "DepartmentCode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "DepartmentCode",
+            "sourceProviderType": "WChar"
+          },
+          {
+            "name": "Department",
+            "dataType": "string",
+            "sourceColumn": "Department",
+            "sourceProviderType": "WChar"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "d_CostCenter",
+            "dataView": "full",
+            "source": {
+              "query": " SELECT [Finance].[d_CostCenter].* FROM [Finance].[d_CostCenter] ",
+              "dataSource": "DWH_3_Fact"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " SELECT [Finance].[d_CostCenter].* FROM [Finance].[d_CostCenter] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "d_CostCenter"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "Finance"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "8c096c4e-1e09-42f5-afd4-8a06b73375dc",
+        "fromTable": "General Ledger",
+        "fromColumn": "GLAccount_key",
+        "toTable": "Account",
+        "toColumn": "GLAccount_key"
+      },
+      {
+        "name": "497495b0-074d-4ecc-a1d8-8dd19e62a10f",
+        "fromTable": "General Ledger",
+        "fromColumn": "LegalEntity_key",
+        "toTable": "Legal Entity",
+        "toColumn": "LegalEntity_key"
+      },
+      {
+        "name": "85357b1a-21bf-4ce0-9af6-e7595b404fbb",
+        "fromTable": "General Ledger",
+        "fromColumn": "Project_key",
+        "toTable": "Project",
+        "toColumn": "Project_key"
+      },
+      {
+        "name": "75e1405a-4306-4913-90d4-fd92e25c931b",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceProduct_key",
+        "toTable": "Product",
+        "toColumn": "FinanceProduct_key"
+      },
+      {
+        "name": "1172ed0b-bb1d-47c6-93ec-472686db3672",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceAnalysis_key",
+        "toTable": "Analysis",
+        "toColumn": "FinanceAnalysis_key"
+      },
+      {
+        "name": "cbf29d6e-ab00-40b2-9df0-b71b77603e2a",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceCounterparty_key",
+        "toTable": "Counterparty",
+        "toColumn": "FinanceCounterparty_key"
+      },
+      {
+        "name": "b738166e-e73c-42d8-8e79-428ce785be8d",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceSegment_key",
+        "toTable": "Segment",
+        "toColumn": "FinanceSegment_key"
+      },
+      {
+        "name": "9223e1d6-2775-48fb-b413-8f7deb052248",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceCustomer_key",
+        "toTable": "Customer",
+        "toColumn": "FinanceCustomer_key"
+      },
+      {
+        "name": "c1b2d0c0-5843-45ee-b45f-ac910d48351b",
+        "fromTable": "General Ledger",
+        "fromColumn": "FinanceVendor_key",
+        "toTable": "Vendor",
+        "toColumn": "FinanceVendor_key"
+      },
+      {
+        "name": "4e43c90f-087e-4f5d-ba0a-8c6f3866804b",
+        "fromTable": "General Ledger",
+        "fromColumn": "Currency_key",
+        "toTable": "Currency",
+        "toColumn": "Currency_key"
+      },
+      {
+        "name": "90f27bfd-3094-41e3-b043-bfa44f5b32b2",
+        "fromTable": "General Ledger",
+        "fromColumn": "Period_key",
+        "toTable": "Period",
+        "toColumn": "Period_key"
+      },
+      {
+        "name": "ea402e4a-e38b-4f43-9c34-d1f78cda2cd5",
+        "fromTable": "General Ledger",
+        "fromColumn": "AllocationPrinciple_key",
+        "toTable": "Allocation",
+        "toColumn": "AllocationPrinciple_key"
+      },
+      {
+        "name": "24e49c60-ff12-4254-b164-492449b72627",
+        "fromTable": "General Ledger",
+        "fromColumn": "GLAccountLegalEntity_key",
+        "toTable": "Account LegalEntity",
+        "toColumn": "GLAccountLegalEntity_key"
+      },
+      {
+        "name": "d2a1503f-0719-4432-a043-f6d0160797d7",
+        "fromTable": "Bridge Report Structure",
+        "fromColumn": "ReportStructure_key",
+        "toTable": "Report Structure",
+        "toColumn": "ReportStructure_key"
+      },
+      {
+        "name": "c127cb22-8cf4-4b4c-a527-3e3fce62cf90",
+        "fromTable": "Bridge Report Structure",
+        "fromColumn": "GLAccountLegalEntity_key",
+        "toTable": "Account LegalEntity",
+        "toColumn": "GLAccountLegalEntity_key",
+        "crossFilteringBehavior": "bothDirections"
+      },
+      {
+        "name": "3650ecbc-7e8a-45db-b171-29dc70305cde",
+        "fromTable": "General Ledger",
+        "fromColumn": "CostCenter_key",
+        "toTable": "CostCenter",
+        "toColumn": "CostCenter_key"
       }
     ],
     "annotations": [

@@ -98,7 +98,7 @@
     <None Include="Service References\TSWS\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\TSWS\QueryEngineV200606DotNet1.wsdl" />
+    <None Include="Service References\TSWS\QueryEngineV200606DotNet.wsdl" />
     <None Include="Service References\TSWS\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

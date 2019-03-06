@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
-  DTS:CreationDate="7/13/2018 11:35:44 PM"
+  DTS:CreationDate="7/14/2018 10:43:00 PM"
   DTS:CreationName="Microsoft.Package"
   DTS:CreatorComputerName="STO-PC-682"
   DTS:CreatorName="Pedram.Birounvand"
   DTS:DelayValidation="True"
   DTS:Description="EXEC Metadata.CreateFlatFileEntity &#xA;&#x9;&#x9;@SourceFileRootFolder&#x9;&#x9;&#x9;=&#x9;'C:/DW/Agresso'  &#xA;&#x9;&#x9;,@SourceSchemaName&#x9;&#x9;&#x9;&#x9;=&#x9;'Agresso'  &#xA;&#x9;&#x9;,@SourceTableName&#x9;&#x9;&#x9;&#x9;=&#x9;'Huvudbok_01'  &#xA;&#x9;&#x9;,@FilePattern&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'svc_huvudbok_01*.csv'  &#xA;&#x9;&#x9;,@ColumnNamesInFirstDataRow&#x9;&#x9;=&#x9;  1&#x9;   &#xA;&#x9;&#x9;,@HeaderRowsToSkip&#x9;&#x9;&#x9;&#x9;=&#x9;  0&#x9;   &#xA;&#x9;&#x9;,@DataRowsToSkip&#x9;&#x9;&#x9;&#x9;=&#x9;  0&#x9;   &#xA;&#x9;&#x9;,@FlatFileType&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'Delimited'  &#xA;&#x9;&#x9;,@HeaderRowDelimiter&#x9;&#x9;&#x9;=&#x9;'{CR}{LF}'  &#xA;&#x9;&#x9;,@RowDelimiter&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'{CR}{LF}'  &#xA;&#x9;&#x9;,@ColumnDelimiter&#x9;&#x9;&#x9;&#x9;=&#x9;';'  &#xA;&#x9;&#x9;,@TextQualifer&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'&quot;'  &#xA;&#x9;&#x9;,@IsUnicode&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;  0&#x9;   &#xA;&#x9;&#x9;,@CodePage&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'65001'  &#xA;&#x9;&#x9;,@DestinationDatabaseName&#x9;&#x9;=&#x9;'DWH_1_Raw'  &#xA;&#x9;&#x9;,@LinkedServerName&#x9;&#x9;&#x9;&#x9;=&#x9;'localhost'  &#xA;&#x9;&#x9;,@SourceMetadataDatabaseName&#x9;=&#x9;'Test'  &#xA;&#x9;&#x9;,@Locale&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;=&#x9;'Lcid1033'  &#xA;&#x9;&#x9;,@FileNameRegExDateTime&#x9;&#x9;&#x9;=&#x9;'(\d{14})'  &#xA;&#x9;&#x9;,@FileNameDateTimePattern&#x9;&#x9;=&#x9;'yyyyMMddHHmmss'"
-  DTS:DTSID="{18B465F2-D47B-4A48-A3A8-8027C8BBAC12}"
+  DTS:DTSID="{A204F6EE-FBFE-4B06-93DC-C6E61E2E63DB}"
   DTS:EnableConfig="True"
   DTS:ExecutableType="Microsoft.Package"
   DTS:LastModifiedProductVersion="14.0.3025.39"
@@ -15,7 +15,7 @@
   DTS:ObjectName="DWH_1_Raw_Agresso_RawTyped_Huvudbok_01"
   DTS:ProtectionLevel="0"
   DTS:VersionBuild="2"
-  DTS:VersionGUID="{8F51154D-9AD4-4B58-9477-2DD47D4B73DF}"
+  DTS:VersionGUID="{85D68827-A06F-41DC-8F09-F8AAF236AF06}"
   DTS:VersionMajor="0">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
@@ -23,7 +23,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DWH_0_Admin]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+      DTS:DTSID="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
       DTS:ObjectName="DWH_0_Admin">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -33,7 +33,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[DWH_1_Raw]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{F5F2C27F-7387-41FC-8FE0-F4F02936E07B}"
+      DTS:DTSID="{EDD16C8E-6E1C-4E0B-828E-AE1CBE18483B}"
       DTS:ObjectName="DWH_1_Raw">
       <DTS:ObjectData>
         <DTS:ConnectionManager
@@ -43,7 +43,7 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Huvudbok_01]"
       DTS:CreationName="FLATFILE"
-      DTS:DTSID="{84B48663-4035-4A06-A720-CF21D5E1CC98}"
+      DTS:DTSID="{D9D3CD28-59B3-46C2-8022-1DC1170ACA4F}"
       DTS:ObjectName="Huvudbok_01">
       <DTS:PropertyExpression
         DTS:Name="ConnectionString">@[User::Huvudbok_01_SourceFullFilePath]</DTS:PropertyExpression>
@@ -56,7 +56,7 @@
           DTS:RowDelimiter="_x007B_CR_x007D__x007B_LF_x007D_"
           DTS:TextQualifier="_x0022_"
           DTS:CodePage="65001"
-          DTS:ConnectionString="C:\DW\Agresso\Data\svc_huvudbok_01_201708_20180713162711.csv">
+          DTS:ConnectionString="C:\DW\Agresso\Data\svc_huvudbok_01_201807_20180714003127_20180714_178.csv">
           <DTS:FlatFileColumns>
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -65,7 +65,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="recno"
-              DTS:DTSID="{CDAEF0CF-86C7-4CB8-A424-95AE77BB9CA5}"
+              DTS:DTSID="{53C40FDA-554F-4D11-813B-7DC6602B41C6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -74,7 +74,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="section"
-              DTS:DTSID="{68C21686-5908-4CC5-A8C0-639ABE1B79FF}"
+              DTS:DTSID="{B4ECDC95-F71D-402B-A5A8-D520EA960C02}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -83,7 +83,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Tab"
-              DTS:DTSID="{6DBD598F-F47D-44B8-AC8D-27EA8CFD4B72}"
+              DTS:DTSID="{DC93BE40-E501-4B73-8D64-20B0EB0BE83B}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -92,7 +92,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="Account"
-              DTS:DTSID="{4F74EE5B-A3E6-4A54-8838-AE65B7B117B8}"
+              DTS:DTSID="{D60A4FA8-7C02-48F0-AB32-1E4EC263FFC6}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -101,7 +101,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Client"
-              DTS:DTSID="{E0A029DC-F95B-44ED-BBA9-931363251FDA}"
+              DTS:DTSID="{EE33A34F-F458-436B-BEBC-7456848E60C7}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -109,7 +109,7 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="Lastupdate"
-              DTS:DTSID="{A2B9C5C7-6F0A-410F-B5A8-A49D9A94DF80}"
+              DTS:DTSID="{80D872D8-3393-4FD4-B0DA-F80C559F6B67}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -118,7 +118,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Vouchertype"
-              DTS:DTSID="{F80FE487-BD5A-45F4-A3AC-54032DE3F4EE}"
+              DTS:DTSID="{8CCE8ADD-BE09-4588-B962-0F75085C34C4}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -127,7 +127,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="Voucherno"
-              DTS:DTSID="{095381C0-853B-4232-A0D3-2A6D839B826C}"
+              DTS:DTSID="{EA56BA4A-653E-464F-8E51-D4A1524386D5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -136,7 +136,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="Sequenceno"
-              DTS:DTSID="{1E5E2670-209B-4221-AB81-45E33F6DF9C4}"
+              DTS:DTSID="{E2DB9810-4DF8-4516-A477-8B2E7DEE1F38}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -144,7 +144,7 @@
               DTS:DataType="135"
               DTS:TextQualified="True"
               DTS:ObjectName="Voucherdate"
-              DTS:DTSID="{0DD5AED9-53F0-44CD-97CD-07C4C34B5C73}"
+              DTS:DTSID="{442DE883-3262-46D3-8C66-546F4A3D8107}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -153,7 +153,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="PERIOD"
-              DTS:DTSID="{3AC2461E-37D3-4BDA-8441-4E4BBED42E73}"
+              DTS:DTSID="{DF69B55B-FE64-45F7-97BD-6DB43BCCB040}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -162,7 +162,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim1"
-              DTS:DTSID="{0B8E9361-FFE8-44E7-A2D1-CACB977F7348}"
+              DTS:DTSID="{6BEE78BB-6ADD-4AF0-8468-1E1748DD56D3}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -171,7 +171,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim2"
-              DTS:DTSID="{8E2525D2-9EF0-4EE1-88F3-1596EEC2350B}"
+              DTS:DTSID="{DFB14ED2-6C7F-4C0A-8E78-DC3933EA6C55}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -180,7 +180,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim3"
-              DTS:DTSID="{A3051741-C507-4717-9743-EBE90216857D}"
+              DTS:DTSID="{B98D5F98-3EFF-49ED-B285-C71F12E8E5FF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -189,7 +189,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim4"
-              DTS:DTSID="{493A6F4C-FA73-4B28-9E7E-E7D80513C752}"
+              DTS:DTSID="{0699BBAB-7722-4435-9A39-2A201521B50A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -198,7 +198,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim5"
-              DTS:DTSID="{FA02AED3-6E52-42CF-A9CC-A445B641B176}"
+              DTS:DTSID="{5C48A426-6A6A-4C4A-9EC0-79E47869FBAB}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -207,7 +207,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim6"
-              DTS:DTSID="{60B3359D-4E61-4219-BA4B-AC6F922A53A6}"
+              DTS:DTSID="{2F57FB68-8338-4911-825E-C9588237B570}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -216,7 +216,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Dim7"
-              DTS:DTSID="{69319A6F-AEF5-4D84-B971-79C533B5C74C}"
+              DTS:DTSID="{1F3A28A4-EB77-4ADC-850F-8405FA1AB5AA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -225,7 +225,7 @@
               DTS:DataPrecision="10"
               DTS:TextQualified="True"
               DTS:ObjectName="Taxcode"
-              DTS:DTSID="{625B7592-5D35-4A88-8159-F1A805625DCD}"
+              DTS:DTSID="{AD33DF36-895E-4AAD-9B50-1D8FF1E4E5AA}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -234,7 +234,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Description"
-              DTS:DTSID="{01A06A86-91FA-4794-AEA6-A6E3C2E980C0}"
+              DTS:DTSID="{BA519F8F-04FC-4D0B-A4E1-91A5230893CC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -243,7 +243,7 @@
               DTS:DataPrecision="18"
               DTS:TextQualified="True"
               DTS:ObjectName="Amount"
-              DTS:DTSID="{D53C247A-9379-43E5-96CC-E69FC82E24F1}"
+              DTS:DTSID="{723BAD0C-3DFC-4E7B-8169-4E537A951A81}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -252,7 +252,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Currency"
-              DTS:DTSID="{618C45E3-3DFC-4E25-A3BD-102CE0937912}"
+              DTS:DTSID="{216556F2-FE59-44C4-952F-BB4CF9AE14FF}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -261,7 +261,7 @@
               DTS:DataPrecision="18"
               DTS:TextQualified="True"
               DTS:ObjectName="Curamount"
-              DTS:DTSID="{73C7FCF2-B4F0-44CA-9FBC-15232E5FB371}"
+              DTS:DTSID="{870E0C09-A7B1-4FAB-A265-AD65A58EF502}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -270,16 +270,16 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Extinvref"
-              DTS:DTSID="{19C5C85C-CE39-4EB3-91DA-4D722C9DCDE1}"
+              DTS:DTSID="{01CBC311-F0D6-4AE1-BCDB-4A94E3C538A5}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
               DTS:ColumnDelimiter="_x003B_"
-              DTS:DataType="3"
-              DTS:DataPrecision="10"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Aparid"
-              DTS:DTSID="{C6E40116-C376-4B23-97C5-02E88A3647AC}"
+              DTS:DTSID="{C5A5387D-7777-4117-BE84-D175A377F357}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -288,7 +288,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Apartype"
-              DTS:DTSID="{608F3AE5-3BA2-4324-9CE9-91D4350D4099}"
+              DTS:DTSID="{4CF9DAD4-0AE6-4AE0-9E6A-3F3C3AAB131F}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -297,7 +297,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att1id"
-              DTS:DTSID="{55213671-5E45-4258-9B6D-D0B0782537B2}"
+              DTS:DTSID="{074D0E45-081F-4623-AAC8-9229D811FB18}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -306,7 +306,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att2id"
-              DTS:DTSID="{55FB6F91-E483-41F4-9944-B92FB69323BE}"
+              DTS:DTSID="{12AD1013-D751-4D32-9A08-353333672649}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -315,7 +315,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att3id"
-              DTS:DTSID="{6B2469ED-93B2-4BEA-8DA8-093502A96CF8}"
+              DTS:DTSID="{2FABF889-71DF-4E58-B982-F96B0107B924}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -324,7 +324,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att4id"
-              DTS:DTSID="{3AD42065-0BFF-477E-8EDD-D80A53EBED91}"
+              DTS:DTSID="{E15AB86C-E105-40DF-B84E-61398286FD4A}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -333,7 +333,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att5id"
-              DTS:DTSID="{1B0EA64B-75CA-4B81-951E-FEA774CC1371}"
+              DTS:DTSID="{535D4D29-580B-445F-9836-828B4D8E5C5D}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -342,7 +342,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att6id"
-              DTS:DTSID="{1E16DD31-B238-4863-8A19-D02BDCB017E2}"
+              DTS:DTSID="{D30DE0CC-E118-4466-9758-460CE6BB87BC}"
               DTS:CreationName="" />
             <DTS:FlatFileColumn
               DTS:ColumnType="Delimited"
@@ -351,7 +351,7 @@
               DTS:DataType="130"
               DTS:TextQualified="True"
               DTS:ObjectName="Att7id"
-              DTS:DTSID="{5F184E9F-AA65-48F7-BF3D-3A1FB8F970CC}"
+              DTS:DTSID="{ADC37635-F7FD-4AF4-878A-5DFEC0F86CFF}"
               DTS:CreationName="" />
           </DTS:FlatFileColumns>
         </DTS:ConnectionManager>
@@ -364,50 +364,50 @@
       DTS:ConfigurationType="2"
       DTS:ConfigurationVariable="\Package.Connections[DWH_0_Admin].Properties[ConnectionString]"
       DTS:CreationName=""
-      DTS:DTSID="{702F59E0-1332-4E25-AAD1-7AB398832ECF}"
+      DTS:DTSID="{494B9762-A8A7-4FEA-9E49-DE04DBA9CAC5}"
       DTS:ObjectName="J_dwautogen_SSISAdminConfig" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;DWH_1_Raw&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{04A0E216-2A69-4CE1-8529-2400B8208CBF}"
+      DTS:DTSID="{8928670A-CC8E-4581-9B97-0C2A5E779DB6}"
       DTS:ObjectName="DWH_1_Raw" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Agresso_SourceFolderPath&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{E9513209-95FE-4F8D-BD8C-29EF82C23FB6}"
+      DTS:DTSID="{FAD62BB8-9A0B-4305-B986-2C3108E01093}"
       DTS:ObjectName="Agresso_SourceFolderPath" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Agresso_ArchiveFolderPath&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{AFFCF49C-162A-409C-B2D1-7D76F1310CF8}"
+      DTS:DTSID="{2E5BCDB6-ED8F-4098-BBC3-98392DFA8C7A}"
       DTS:ObjectName="Agresso_ArchiveFolderPath" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;Agresso_ErrorFolderPath&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{AEF37511-6D36-4DCF-BE77-5EDC1B25DF84}"
+      DTS:DTSID="{04BD1962-A98A-4E70-8B31-181AA1A830BC}"
       DTS:ObjectName="Agresso_ErrorFolderPath" />
     <DTS:Configuration
       DTS:ConfigurationString="&quot;DWH_0_Admin&quot;;&quot;[dbo].[SSISConfigurations]&quot;;&quot;MoveFileWhenComplete&quot;;"
       DTS:ConfigurationType="7"
       DTS:CreationName=""
-      DTS:DTSID="{AA0A47C3-0BB5-4C20-934A-DDC8AC9E23C3}"
+      DTS:DTSID="{7645A3EE-ECC1-4244-94DD-F33CB6BB8A16}"
       DTS:ObjectName="MoveFileWhenComplete" />
     <DTS:Configuration
       DTS:ConfigurationString="SysExecutionLog_key"
       DTS:ConfigurationVariable="\Package.Variables[User::SysBatchLogExecutionLog_key].Properties[Value]"
       DTS:CreationName=""
-      DTS:DTSID="{AFF815DE-AA51-42FE-832A-5897840644FB}"
+      DTS:DTSID="{F605CC9C-25CF-4567-B7A4-A4462954560B}"
       DTS:ObjectName="SysBatchLogExecutionLog_key" />
   </DTS:Configurations>
   <DTS:LogProviders>
     <DTS:LogProvider
       DTS:ConfigString="DWH_0_Admin"
       DTS:CreationName="Microsoft.LogProviderSQLServer"
-      DTS:DTSID="{6B3F5A31-CBE6-43A7-B98B-C7C5B988C15B}"
+      DTS:DTSID="{95767571-7EAD-4405-B8AE-6D1A115EE64C}"
       DTS:ObjectName="SSIS log provider for SQL Server">
       <DTS:ObjectData>
         <InnerObject />
@@ -417,7 +417,7 @@
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{14BCBFE5-CBB5-478D-9AEC-91DBA56B4915}"
+      DTS:DTSID="{807B44A4-50DE-469A-91E7-B1E8AAE13AE9}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Agresso_ArchiveFolderPath">
@@ -426,7 +426,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{293D0D54-FE94-4355-B1C5-16981746271D}"
+      DTS:DTSID="{CC61CCB4-347A-4C4E-9B2C-94301D2CA799}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Agresso_ErrorFolderPath">
@@ -435,7 +435,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{987DBC4D-E38A-409A-ABC2-F60651208438}"
+      DTS:DTSID="{442AEFD9-E31E-43F1-8FAD-F47E57D03F39}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Agresso_SourceFolderPath">
@@ -444,7 +444,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A7FCF9A2-6F86-484F-AF2D-129CFD62CD21}"
+      DTS:DTSID="{DD295544-980F-49C3-AABB-1EABC359786F}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="DestinationSchemaName">
@@ -453,7 +453,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{5E7D1A21-785E-4C96-BD5A-47917987F44E}"
+      DTS:DTSID="{2EEC2D5B-29FB-4A40-A53D-7382418E15D3}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="DestinationTableCatalog">
@@ -462,7 +462,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A5C2F9E9-4008-42BD-8C8C-1390378D5AEF}"
+      DTS:DTSID="{FAC8A4A2-710D-4995-A2AC-BE163E3E4713}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="DestinationTableName">
@@ -471,7 +471,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C7FAFA4A-B3BB-4787-86B3-EE8320000A49}"
+      DTS:DTSID="{E702D662-291F-4CBF-AAA7-5B051294998C}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="DWID">
@@ -480,18 +480,18 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{3BDF4214-4225-4212-9D12-96E6AEFDB5BB}"
+      DTS:DTSID="{3BC1637D-EA3D-4DB0-98E4-6D57BCF44727}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::Agresso_ArchiveFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::Huvudbok_01_FileName], 1,FINDSTRING(@[User::Huvudbok_01_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.csv&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_ArchiveFullFilePath">
       <DTS:VariableValue
-        DTS:DataType="8">C:\DW\Agresso\Archive\svc_huvudbok_01_201708_20180713162711_20180713_0.csv</DTS:VariableValue>
+        DTS:DataType="8">C:\DW\Agresso\Archive\svc_huvudbok_01_201807_20180714003127_20180714_178_20180714_0.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{DB9C7633-3B66-4B6C-8F04-ADFD8C0D6CF0}"
+      DTS:DTSID="{C336EF9F-9F92-45D5-B69E-B1CEAA61ECA4}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_DateTimePattern">
@@ -500,27 +500,27 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A7444BF9-E1C6-497B-B844-B2EAB16B3987}"
+      DTS:DTSID="{4BBF4B64-12A1-4035-901C-C1A0BE8C5592}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::Agresso_ErrorFolderPath] + &quot;\\&quot; + SUBSTRING(@[User::Huvudbok_01_FileName], 1,FINDSTRING(@[User::Huvudbok_01_FileName], &quot;.&quot;, 1 )-1 ) + &quot;_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate() ) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate() ), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate() ), 2) + &quot;_&quot; + (DT_STR,20,1252)@[User::SysExecutionLog_key] + &quot;.csv&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_ErrorFullFilePath">
       <DTS:VariableValue
-        DTS:DataType="8">C:\DW\Agresso\Error\svc_huvudbok_01_201708_20180713162711_20180713_0.csv</DTS:VariableValue>
+        DTS:DataType="8">C:\DW\Agresso\Error\svc_huvudbok_01_201807_20180714003127_20180714_178_20180714_0.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{E6C9048E-D20B-4F1D-AC05-ABB4EB7D73DD}"
+      DTS:DTSID="{2AED619A-A7FE-4D90-9383-C923F95D7E05}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_FileName">
       <DTS:VariableValue
-        DTS:DataType="8">svc_huvudbok_01_201708_20180713162711.csv</DTS:VariableValue>
+        DTS:DataType="8">svc_huvudbok_01_201807_20180714003127_20180714_178.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2921AAC5-914C-425F-8D61-3FAD4D265597}"
+      DTS:DTSID="{40B1C454-7E31-4DDD-8079-58E3B08AB39F}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_RegEx_DateTime">
@@ -529,18 +529,18 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{5D6F0E11-D186-4FFC-A35B-4F3F9E83A1E3}"
+      DTS:DTSID="{9D4F0402-D450-4C19-BA69-EF991D9492B0}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::Agresso_SourceFolderPath] + &quot;\\&quot; + @[User::Huvudbok_01_FileName]"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="Huvudbok_01_SourceFullFilePath">
       <DTS:VariableValue
-        DTS:DataType="8">C:\DW\Agresso\Data\svc_huvudbok_01_201708_20180713162711.csv</DTS:VariableValue>
+        DTS:DataType="8">C:\DW\Agresso\Data\svc_huvudbok_01_201807_20180714003127_20180714_178.csv</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{32CFC777-D61A-4A4B-BD05-5ECCBEF0CA3F}"
+      DTS:DTSID="{D79CBA6A-4D2B-40BB-B73C-B172A858E2A1}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="MoveFileWhenComplete">
@@ -549,7 +549,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A304550B-3EBD-45FD-B225-BF03810A8493}"
+      DTS:DTSID="{7960CB75-467F-44CC-876C-32650F54ECDA}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="PackageLastExecuted">
@@ -558,7 +558,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{844BBFC2-CE0B-4FF3-AA39-7AFFCD93803A}"
+      DTS:DTSID="{DCD0DFCE-0051-4CDA-B86F-AEB371EF6C62}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="PackageLastExecutedNew">
@@ -567,7 +567,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F49485EA-B0A3-4AF4-8C5B-F401FD766426}"
+      DTS:DTSID="{49C637BE-5178-4D40-A3B2-96114A68F8F0}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="PackageLastExecutedTimeOffset">
@@ -576,7 +576,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{DB20E55F-6019-45C8-92A0-ED9599195407}"
+      DTS:DTSID="{B36521D8-44CA-48F7-A0B5-722CD2F8F7C6}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsDeleted">
@@ -585,7 +585,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{1937C534-6BF2-4938-A456-D48A7343F9BE}"
+      DTS:DTSID="{F6EBC49B-5BC7-465D-9257-F22E254E1F16}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsError">
@@ -594,7 +594,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{5C4E0786-162D-4E2B-8CA4-147801ED7FDD}"
+      DTS:DTSID="{A13F4034-ADF6-4A60-8380-FD9DABF3D5E2}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsIgnore">
@@ -603,7 +603,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{FA7F804F-B0CF-4317-A8B9-9E5228E96D19}"
+      DTS:DTSID="{D7C64C4B-7E8E-49FA-9797-905DCCC52DA9}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::RowsNewVersion]+@[User::RowsNewMember]-(@[User::RowsNewMemberError]+@[User::RowsNewVersionError])"
       DTS:IncludeInDebugDump="6789"
@@ -614,7 +614,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{CE054DE6-240A-48DF-9C3B-795E7A007FC4}"
+      DTS:DTSID="{95C867EF-A91C-4B1B-918B-596F02E5192B}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsNewInferredMemberError">
@@ -623,7 +623,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{D8F3EE94-FD0E-461A-8354-D9878C3FC55B}"
+      DTS:DTSID="{C7E09325-395B-44F8-B6C8-363921EDDD80}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsNewMember">
@@ -632,7 +632,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4350D715-3DF0-43DD-A906-AEE4F0757632}"
+      DTS:DTSID="{7F47D813-BB8B-469D-96C1-345915D3BC92}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsNewMemberError">
@@ -641,7 +641,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F8B47A07-2BDE-492F-843D-7ED7B862F212}"
+      DTS:DTSID="{87813D7F-E691-4603-B555-2952C3DCD1D3}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsNewVersion">
@@ -650,7 +650,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2338267A-8EF6-460B-A743-821EF4551E28}"
+      DTS:DTSID="{431F632A-4908-4F3D-90ED-C880F385E69B}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsNewVersionError">
@@ -659,7 +659,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{ECEA1864-65FF-4783-B229-B7636DE3ADA2}"
+      DTS:DTSID="{6DD40D3B-882E-47BE-B799-AA2A5B42B478}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsRead">
@@ -668,7 +668,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{D5E9EFB1-0FA5-4734-AF5A-C28B830C56FF}"
+      DTS:DTSID="{8FE2F704-4C93-4E40-BB2D-7913309FAA63}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsSourceRead">
@@ -677,7 +677,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2F26B94C-B93A-4F9E-AC07-3AF21F6C9949}"
+      DTS:DTSID="{290CCAFD-47C1-4F13-AC3F-F98B67B0E5BC}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="(@[User::RowsUpdateOld]+@[User::RowsUpdateInferred])-(@[User::RowsUpdateInferredError] + @[User::RowsUpdateOldError])"
       DTS:IncludeInDebugDump="6789"
@@ -688,7 +688,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4F577176-C599-4321-B803-11EF70B3ACD5}"
+      DTS:DTSID="{82940156-8631-4916-AD26-727B665C30DE}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsUpdateInferred">
@@ -697,7 +697,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2E0A64F6-C624-495C-A14D-32CA0CF34572}"
+      DTS:DTSID="{2A4321C5-212B-4666-973E-4ABFE70D3BE0}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsUpdateInferredError">
@@ -706,7 +706,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{99737BB8-452A-4289-9111-18A66276BF22}"
+      DTS:DTSID="{FC9EF747-6092-4961-944B-1C421AF4CA28}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsUpdateOld">
@@ -715,7 +715,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{B8098A02-8774-46A5-9165-F104672533D4}"
+      DTS:DTSID="{3484D4E6-D398-4DA8-A825-92612378EABB}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="RowsUpdateOldError">
@@ -724,7 +724,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{121A1DFE-5346-4EF0-8D94-ED3C7ACDE9C3}"
+      DTS:DTSID="{B2041134-15F7-4243-A5E0-E4F143D3D1D2}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceSchemaName">
@@ -733,7 +733,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A36B51F1-A47A-4D23-AB17-33C0786A3542}"
+      DTS:DTSID="{3CB7345A-5B97-4CB5-AABD-A5E280B4C4C6}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="@[User::Agresso_SourceFolderPath]"
       DTS:IncludeInDebugDump="2345"
@@ -744,7 +744,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{E5EACFBB-7F7B-4AF8-896C-B1EAC36037DD}"
+      DTS:DTSID="{596D1AE9-9E9C-43B8-97DC-F1A128A2523F}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SourceTableName">
@@ -753,7 +753,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C85F15BB-5CE7-484C-B2E8-72DD1F951D2E}"
+      DTS:DTSID="{01E293BE-82AA-4AB7-9EDF-DF051E4A7AFF}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SsisIncrementalLoad">
@@ -762,7 +762,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4AA61446-D4CD-4D04-8CC6-EFC8F449DF30}"
+      DTS:DTSID="{188ECBD6-08CE-4466-97DD-462FCBACC69E}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SsisLoadType">
@@ -771,7 +771,7 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{C626E515-F5E5-4838-80CC-2C1A4B952F78}"
+      DTS:DTSID="{9E977EB7-8940-4B66-BEC6-AAED4A2EDFB7}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="SysBatchLogExecutionLog_key">
@@ -780,40 +780,40 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{8D83113E-A5EC-41C2-BC96-22AC407200E7}"
+      DTS:DTSID="{708B630C-3F7B-4F99-BCC1-AC3FD19D4440}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeDeletedUTC">
       <DTS:VariableValue
-        DTS:DataType="8">2018-07-13 21:37:52.587000000</DTS:VariableValue>
+        DTS:DataType="8">2018-07-14 20:43:35.968000000</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F0844147-2EB4-47F3-8119-4C910BC30D0E}"
+      DTS:DTSID="{6AF03BE4-57A0-468F-B84B-DF4CEA6B4AC1}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeInsertedUTC">
       <DTS:VariableValue
-        DTS:DataType="8">2018-07-13 21:37:52.587000000</DTS:VariableValue>
+        DTS:DataType="8">2018-07-14 20:43:35.968000000</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A865CD95-1A43-4BC5-95A2-EBA362FFC9FF}"
+      DTS:DTSID="{DE87847E-C32E-47AF-B5CA-CB6160214265}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SysDatetimeUpdatedUTC">
       <DTS:VariableValue
-        DTS:DataType="8">2018-07-13 21:37:52.587000000</DTS:VariableValue>
+        DTS:DataType="8">2018-07-14 20:43:35.968000000</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{A0544A99-F2E3-4A20-9421-6C058C8B8FFA}"
+      DTS:DTSID="{10629781-F2CE-4D04-8782-0B446663D2B6}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="SysExecutionLog_key">
@@ -822,18 +822,18 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{2681909B-FAB3-49EB-B9BD-B48524DCEDAF}"
+      DTS:DTSID="{07BEDE8D-43E9-4278-A22A-9D96219C8995}"
       DTS:EvaluateAsExpression="True"
       DTS:Expression="(DT_WSTR, 100)GETUTCDATE()"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SysModifiedUTC">
       <DTS:VariableValue
-        DTS:DataType="8">2018-07-13 21:37:52.587000000</DTS:VariableValue>
+        DTS:DataType="8">2018-07-14 20:43:35.968000000</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{4E07774C-3314-4EED-8A7E-AF48312AEDB8}"
+      DTS:DTSID="{56BE5C39-11F9-4F61-8E77-F9C3346D6099}"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="SysSrcGenerationDateTime">
@@ -846,14 +846,14 @@
     <DTS:Executable
       DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV"
       DTS:CreationName="STOCK:FOREACHLOOP"
-      DTS:DTSID="{AA8E60E8-AC57-441A-928F-2933B5BE862B}"
+      DTS:DTSID="{533C3205-3EB4-4BCE-8D8B-46BD8A365915}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
       DTS:ObjectName="FELC_Huvudbok_01_LoopThroughCSV">
       <DTS:ForEachEnumerator
         DTS:CreationName="Microsoft.ForEachFileEnumerator"
-        DTS:DTSID="{6A38014B-68CF-4106-A2D8-B55B47DE92EE}"
-        DTS:ObjectName="{6A38014B-68CF-4106-A2D8-B55B47DE92EE}">
+        DTS:DTSID="{622CE562-0221-40DF-9E79-E1942D6D5B76}"
+        DTS:ObjectName="{622CE562-0221-40DF-9E79-E1942D6D5B76}">
         <DTS:PropertyExpression
           DTS:Name="Directory">@[User::Agresso_SourceFolderPath]</DTS:PropertyExpression>
         <DTS:ObjectData>
@@ -874,12 +874,12 @@
         <DTS:Executable
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\FSYS_Huvudbok_01_ArchiveFile"
           DTS:CreationName="Microsoft.FileSystemTask"
-          DTS:DTSID="{70E5FD01-1651-44A7-B3AD-CAD358AC1B1F}"
+          DTS:DTSID="{48BD53CA-EE46-49B7-BC2F-98E1C8B99FC6}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="FSYS_Huvudbok_01_ArchiveFile"
           DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <FileSystemData
@@ -893,12 +893,12 @@
         <DTS:Executable
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\FSYS_Huvudbok_01_ErrorFile"
           DTS:CreationName="Microsoft.FileSystemTask"
-          DTS:DTSID="{1127886A-20A5-45C7-AA65-051F48470CD1}"
+          DTS:DTSID="{B9C3358D-965F-4CF6-9420-FCCF6CD01110}"
           DTS:ExecutableType="Microsoft.FileSystemTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="FSYS_Huvudbok_01_ErrorFile"
           DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2014; © 2014 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <FileSystemData
@@ -912,7 +912,7 @@
         <DTS:Executable
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SCR_Huvudbok_01_ParsDateTimeFileName"
           DTS:CreationName="Microsoft.ScriptTask"
-          DTS:DTSID="{A49BA89B-8ADF-49F0-9085-9908B36553A3}"
+          DTS:DTSID="{5AAB75C7-C425-45B8-AE8C-8CF1218F9538}"
           DTS:ExecutableType="Microsoft.ScriptTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="SCR_Huvudbok_01_ParsDateTimeFileName"
@@ -920,7 +920,7 @@
           <DTS:Variables />
           <DTS:ObjectData>
             <ScriptProject
-              Name="sp_fea6f2a444a24450b31071ac103306c9"
+              Name="sp_7517c290da0f48a89ea90b0cd2e938a0"
               VSTAMajorVersion="14"
               VSTAMinorVersion="0"
               Language="CSharp"
@@ -1057,15 +1057,15 @@
     </resheader>
     </root>]]></ProjectItem>
               <ProjectItem
-                Name="sp_fea6f2a444a24450b31071ac103306c9.csproj"
+                Name="sp_7517c290da0f48a89ea90b0cd2e938a0.csproj"
                 Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
 	    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <OutputType>Library</OutputType>
-        <RootNamespace>sp_fea6f2a444a24450b31071ac103306c9.csproj</RootNamespace>
-        <AssemblyName>sp_fea6f2a444a24450b31071ac103306c9.csproj</AssemblyName>
+        <RootNamespace>sp_7517c290da0f48a89ea90b0cd2e938a0.csproj</RootNamespace>
+        <AssemblyName>sp_7517c290da0f48a89ea90b0cd2e938a0.csproj</AssemblyName>
         <ProjectGuid>{C792B577-3187-41B4-A778-35BF1292DEDE}</ProjectGuid>
 		        <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
         <NoStandardLibraries>false</NoStandardLibraries>
@@ -1214,10 +1214,10 @@ namespace ST_a16c9d61c26e4dcda16f7d5026cddc11
 <c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
 	<msb:PropertyGroup>
 		<msb:NoContent>Reference;Import;Folder</msb:NoContent>
-		<msb:ProjectId>{687ba2a5-5107-4b52-8562-460a980f464f}</msb:ProjectId>
-		<msb:CodeName>sp_fea6f2a444a24450b31071ac103306c9</msb:CodeName>
+		<msb:ProjectId>{11c962a2-0a50-4318-bd6a-ee30e5b5a994}</msb:ProjectId>
+		<msb:CodeName>sp_7517c290da0f48a89ea90b0cd2e938a0</msb:CodeName>
 		<msb:Language>msBuild</msb:Language>
-		<msb:DisplayName>sp_fea6f2a444a24450b31071ac103306c9</msb:DisplayName>
+		<msb:DisplayName>sp_7517c290da0f48a89ea90b0cd2e938a0</msb:DisplayName>
 	</msb:PropertyGroup>
 	<msb:ItemGroup>
 		<msb:File Include="Properties\Resources.resx"/>
@@ -1226,7 +1226,7 @@ namespace ST_a16c9d61c26e4dcda16f7d5026cddc11
 		<msb:File Include="Properties\Settings.settings"/>
 		<msb:File Include="Properties\AssemblyInfo.cs"/>
 		<msb:File Include="ScriptMain.cs"/>
-		<msb:Project Include="sp_fea6f2a444a24450b31071ac103306c9.csproj"/>
+		<msb:Project Include="sp_7517c290da0f48a89ea90b0cd2e938a0.csproj"/>
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
@@ -1240,9 +1240,9 @@ namespace ST_a16c9d61c26e4dcda16f7d5026cddc11
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Settings.get_Default():sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Settings")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Settings.get_Default():sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Settings")]
 
-namespace sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties
+namespace sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties
 {
 
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
@@ -1302,11 +1302,11 @@ using System.Runtime.CompilerServices;
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Resources.get_ResourceManager():System.Resources.ResourceManager")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Resources.get_Culture():System.Globalization.CultureInfo")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo):Void")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Resources.get_ResourceManager():System.Resources.ResourceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Resources.get_Culture():System.Globalization.CultureInfo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo):Void")]
 
-namespace sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties {
+namespace sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties {
     using System;
 
 
@@ -1340,7 +1340,7 @@ namespace sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties {
             get {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -1365,9 +1365,9 @@ namespace sp_fea6f2a444a24450b31071ac103306c9.csproj.Properties {
     }
 }]]></ProjectItem>
               <BinaryItem
-                Name="sp_fea6f2a444a24450b31071ac103306c9.csproj.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+                Name="sp_7517c290da0f48a89ea90b0cd2e938a0.csproj.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDADkbSVsAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAAKjIA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAFpgSlsAAAAAAAAAAOAAIiALATAAABQAAAAIAAAAAAAAKjIA
 AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
 ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAANgxAABPAAAAAEAAAJgEAAAAAAAAAAAAAAAAAAAA
 AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1402,7 +1402,7 @@ A1EA8QAlA2QAgQCABmkA4QBABm4AiQBuAFEAKQGbBnQAIQFPA3cA4QBpBgEAcQAIBQYAsQAIBQYA
 MQGVAIAAMQGOBokAuQAIBY8A2QAIBQYACAAUAKkACAAYAK4AKQCDABEBLgALAOkALgATAPIALgAb
 ABEBLgAjABoBLgArAEMBLgAzAEMBLgA7AEMBLgBDABoBLgBLAEkBLgBTAEMBLgBbAGABQwBjAK4A
 SQCDABEBYQB7AK4AYwBrAKgBYwBzAK4AYwB7AK4AIQADAAEABAADAAAAzATaAAAAEgHfAAAAYQbk
-AAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAAcBrspQAAAAAAAGoDAAAEAAAAAAAAAAAA
+AAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAAcRq9nwAAAAAAAGoDAAAEAAAAAAAAAAAA
 AACXAFUAAAAAAA0AAAAAAAAAAAAAAKAAlQMAAAAABAAAAAAAAAAAAAAAlwA9BAAAAAANAAAAAAAA
 AAAAAACgAC4AAAAAAAAAAAABAAAAWQUAAAUAAgAAAAAAAFNUX2ExNmM5ZDYxYzI2ZTRkY2RhMTZm
 N2Q1MDI2Y2RkYzExADxNb2R1bGU+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERUUwB2YWx1
@@ -1419,18 +1419,18 @@ c3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1
 dGUAQXNzZW1ibHlQcm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNT
 SVNTY3JpcHRUYXNrRW50cnlQb2ludEF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUA
 UnVudGltZUNvbXBhdGliaWxpdHlBdHRyaWJ1dGUAZ2V0X1ZhbHVlAHNldF9WYWx1ZQB2YWx1ZQBT
-eXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAEZpcmVXYXJuaW5nAFRvU3RyaW5nAE1hdGNoAHNwX2Zl
-YTZmMmE0NDRhMjQ0NTBiMzEwNzFhYzEwMzMwNmM5LmNzcHJvagBNaWNyb3NvZnQuU3FsU2VydmVy
+eXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAEZpcmVXYXJuaW5nAFRvU3RyaW5nAE1hdGNoAHNwXzc1
+MTdjMjkwZGEwZjQ4YTg5ZWE5MGIwY2QyZTkzOGEwLmNzcHJvagBNaWNyb3NvZnQuU3FsU2VydmVy
 LlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0VGFzawBTY3Jp
-cHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAc3BfZmVhNmYyYTQ0NGEyNDQ1MGIz
-MTA3MWFjMTAzMzA2YzkuY3Nwcm9qLmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNvdXJjZU1h
+cHRPYmplY3RNb2RlbABTeXN0ZW0uQ29tcG9uZW50TW9kZWwAc3BfNzUxN2MyOTBkYTBmNDhhODll
+YTkwYjBjZDJlOTM4YTAuY3Nwcm9qLmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNvdXJjZU1h
 bgBTY3JpcHRNYWluAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5
 c3RlbS5SZWZsZWN0aW9uAEV4Y2VwdGlvbgBDdWx0dXJlSW5mbwBHcm91cABJRm9ybWF0UHJvdmlk
 ZXIAZ2V0X1Jlc291cmNlTWFuYWdlcgBTeXN0ZW0uQ29kZURvbS5Db21waWxlcgBFdmVudHNPYmpl
 Y3RXcmFwcGVyAC5jdG9yAC5jY3RvcgBTeXN0ZW0uRGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUu
-Q29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAHNwX2ZlYTZmMmE0NDRhMjQ0NTBiMzEw
-NzFhYzEwMzMwNmM5LmNzcHJvai5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdn
-aW5nTW9kZXMAc3BfZmVhNmYyYTQ0NGEyNDQ1MGIzMTA3MWFjMTAzMzA2YzkuY3Nwcm9qLlByb3Bl
+Q29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAHNwXzc1MTdjMjkwZGEwZjQ4YTg5ZWE5
+MGIwY2QyZTkzOGEwLmNzcHJvai5Qcm9wZXJ0aWVzLlJlc291cmNlcy5yZXNvdXJjZXMARGVidWdn
+aW5nTW9kZXMAc3BfNzUxN2MyOTBkYTBmNDhhODllYTkwYjBjZDJlOTM4YTAuY3Nwcm9qLlByb3Bl
 cnRpZXMAZ2V0X1ZhcmlhYmxlcwBTZXR0aW5ncwBTeXN0ZW0uVGV4dC5SZWd1bGFyRXhwcmVzc2lv
 bnMAZ2V0X1N1Y2Nlc3MAZ2V0X0R0cwBTY3JpcHRSZXN1bHRzAGdldF9FdmVudHMAUGFyc2VFeGFj
 dABPYmplY3QAZ2V0X0RlZmF1bHQAc2V0X1Rhc2tSZXN1bHQAQ29udmVydABnZXRfTm93AFJlZ2V4
@@ -1439,10 +1439,10 @@ MQBfAEYAaQBsAGUATgBhAG0AZQAAQVUAcwBlAHIAOgA6AEgAdQB2AHUAZABiAG8AawBfADAAMQBf
 AFIAZQBnAEUAeABfAEQAYQB0AGUAVABpAG0AZQAAQ1UAcwBlAHIAOgA6AEgAdQB2AHUAZABiAG8A
 awBfADAAMQBfAEQAYQB0AGUAVABpAG0AZQBQAGEAdAB0AGUAcgBuAAA9VQBzAGUAcgA6ADoAUwB5
 AHMAUwByAGMARwBlAG4AZQByAGEAdABpAG8AbgBEAGEAdABlAFQAaQBtAGUAADNQAGEAcgBzACAA
-RABhAHQAZQB0AGkAbQBlACAAaQBuACAAZgBpAGwAZQBuAGEAbQBlAAB/cwBwAF8AZgBlAGEANgBm
-ADIAYQA0ADQANABhADIANAA0ADUAMABiADMAMQAwADcAMQBhAGMAMQAwADMAMwAwADYAYwA5AC4A
-YwBzAHAAcgBvAGoALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAAAk
-hOR58U5WSIiYjmey3YsyAAQgAQEIAyAAAQUgAQEREQQgAQEOBSACAQ4OBSABARFlDAcGDg4SPRFB
+RABhAHQAZQB0AGkAbQBlACAAaQBuACAAZgBpAGwAZQBuAGEAbQBlAAB/cwBwAF8ANwA1ADEANwBj
+ADIAOQAwAGQAYQAwAGYANAA4AGEAOAA5AGUAYQA5ADAAYgAwAGMAZAAyAGUAOQAzADgAYQAwAC4A
+YwBzAHAAcgBvAGoALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAACG
+Oq8Yx2uSTYJso/pUTg+kAAQgAQEIAyAAAQUgAQEREQQgAQEOBSACAQ4OBSABARFlDAcGDg4SPRFB
 EUESRQQgABJxBCAAEnUFIAESeRwDIAAcBAABDhwFIAESPQ4DIAACAyAADgQAABJhCQADEUEODhKA
 jQQgAQEcBAAAEUEFIAASgJECBg4IIAUBCA4ODggIAAESgJkRgJ0FIAASgKEHIAIBDhKAoQi3elxW
 GTTgiQiJhF3NgIDMkQQAAAAABAEAAAADBhJdAwYSYQMGEhACBggDBhEUBAAAEl0FAAEBEmEEAAAS
@@ -1466,25 +1466,25 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
 SAAAAFhAAAA6BAAAAAAAAAAAAAA6BDQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
-AAAAvQTv/gAAAQAAAAEA7KVwGgAAAQDspXAaPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
+AAAAvQTv/gAAAQAAAAEAvZ9xGgAAAQC9n3EaPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
 AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
 AAAAAAAAALAEmgMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAdgMAAAEAMAAwADAA
 MAAwADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBu
 AHkATgBhAG0AZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAA
 AABTAFQAXwBhADEANgBjADkAZAA2ADEAYwAyADYAZQA0AGQAYwBkAGEAMQA2AGYANwBkADUAMAAy
 ADYAYwBkAGQAYwAxADEAAAA+AA8AAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4A
-NgA3ADYAOAAuADQAMgA0ADcANgAAAAAAfgAvAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABz
-AHAAXwBmAGUAYQA2AGYAMgBhADQANAA0AGEAMgA0ADQANQAwAGIAMwAxADAANwAxAGEAYwAxADAA
-MwAzADAANgBjADkALgBjAHMAcAByAG8AagAuAGQAbABsAAAAAABIABIAAQBMAGUAZwBhAGwAQwBv
+NgA3ADYAOQAuADQAMAA4ADkAMwAAAAAAfgAvAAEASQBuAHQAZQByAG4AYQBsAE4AYQBtAGUAAABz
+AHAAXwA3ADUAMQA3AGMAMgA5ADAAZABhADAAZgA0ADgAYQA4ADkAZQBhADkAMABiADAAYwBkADIA
+ZQA5ADMAOABhADAALgBjAHMAcAByAG8AagAuAGQAbABsAAAAAABIABIAAQBMAGUAZwBhAGwAQwBv
 AHAAeQByAGkAZwBoAHQAAABDAG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADgAAAAqAAEA
 AQBMAGUAZwBhAGwAVAByAGEAZABlAG0AYQByAGsAcwAAAAAAAAAAAIYALwABAE8AcgBpAGcAaQBu
-AGEAbABGAGkAbABlAG4AYQBtAGUAAABzAHAAXwBmAGUAYQA2AGYAMgBhADQANAA0AGEAMgA0ADQA
-NQAwAGIAMwAxADAANwAxAGEAYwAxADAAMwAzADAANgBjADkALgBjAHMAcAByAG8AagAuAGQAbABs
+AGEAbABGAGkAbABlAG4AYQBtAGUAAABzAHAAXwA3ADUAMQA3AGMAMgA5ADAAZABhADAAZgA0ADgA
+YQA4ADkAZQBhADkAMABiADAAYwBkADIAZQA5ADMAOABhADAALgBjAHMAcAByAG8AagAuAGQAbABs
 AAAAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAVABfAGEAMQA2AGMAOQBkADYA
 MQBjADIANgBlADQAZABjAGQAYQAxADYAZgA3AGQANQAwADIANgBjAGQAZABjADEAMQAAAEIADwAB
-AFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgA3ADYAOAAuADQAMgA0ADcA
-NgAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgA3
-ADYAOAAuADQAMgA0ADcANgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgA3ADYAOQAuADQAMAA4ADkA
+MwAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgA3
+ADYAOQAuADQAMAA4ADkAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1506,7 +1506,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
         <DTS:Executable
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile"
           DTS:CreationName="STOCK:SEQUENCE"
-          DTS:DTSID="{8A0541BC-8733-4334-9AD7-087CFE4FAA15}"
+          DTS:DTSID="{FDBA8161-1B0E-485B-8594-8E44A54EED13}"
           DTS:ExecutableType="STOCK:SEQUENCE"
           DTS:LocaleID="-1"
           DTS:ObjectName="SEQC_Huvudbok_01_LoadFile">
@@ -1515,7 +1515,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
             <DTS:Executable
               DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles"
               DTS:CreationName="Microsoft.Pipeline"
-              DTS:DTSID="{05B69E0B-3A97-49D8-A0C5-F2FCB5BA3124}"
+              DTS:DTSID="{A1F18759-F3F3-40C0-AED6-0B0B9BDE8646}"
               DTS:ExecutableType="Microsoft.Pipeline"
               DTS:LocaleID="-1"
               DTS:ObjectName="DFP_Huvudbok_01_LoadAllFiles"
@@ -1791,13 +1791,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                                   containsID="true"
                                   dataType="System.String"
                                   description="Derived Column Expression"
-                                  name="Expression">(DT_WSTR,255) (#{Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\SRT_Huvudbok_01_EliminateDuplicates.Outputs[Output].Columns[ErrorColumnDescription]} + " | " +#{Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\SRT_Huvudbok_01_EliminateDuplicates.Outputs[Output].Columns[ErrorCodeDescription]})</property>
+                                  name="Expression">(DT_WSTR,255) (#{Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\SRT_Huvudbok_01_EliminateDuplicates.Outputs[Output].Columns[ErrorColumnDescription]} + " | " +#{Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\SRT_Huvudbok_01_EliminateDuplicates.Outputs[Output].Columns[ErrorCodeDescription]} + " | " + @[User::Huvudbok_01_FileName])</property>
                                 <property
                                   containsID="true"
                                   dataType="System.String"
                                   description="Derived Column Friendly Expression"
                                   expressionType="Notify"
-                                  name="FriendlyExpression">(DT_WSTR,255) ([ErrorColumnDescription] + " | " +[ErrorCodeDescription])</property>
+                                  name="FriendlyExpression">(DT_WSTR,255) ([ErrorColumnDescription] + " | " +[ErrorCodeDescription] + " | " + @[User::Huvudbok_01_FileName])</property>
                               </properties>
                             </outputColumn>
                           </outputColumns>
@@ -2503,10 +2503,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                             </outputColumn>
                             <outputColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].Columns[Aparid]"
-                              dataType="i4"
+                              dataType="wstr"
                               errorOrTruncationOperation="Conversion"
                               errorRowDisposition="RedirectRow"
                               externalMetadataColumnId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].ExternalColumns[Aparid]"
+                              length="50"
                               lineageId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].Columns[Aparid]"
                               name="Aparid"
                               truncationRowDisposition="RedirectRow">
@@ -2806,7 +2807,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                               name="Extinvref" />
                             <externalMetadataColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].ExternalColumns[Aparid]"
-                              dataType="i4"
+                              dataType="wstr"
+                              length="50"
                               name="Aparid" />
                             <externalMetadataColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].ExternalColumns[Apartype]"
@@ -2964,7 +2966,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
     &lt;referenceColumn name="Currency" dataType="DT_WSTR" length="20" precision="-1" scale="-1" codePage="0" /&gt;
     &lt;referenceColumn name="Curamount" dataType="DT_NUMERIC" length="0" precision="18" scale="0" codePage="0" /&gt;
     &lt;referenceColumn name="Extinvref" dataType="DT_WSTR" length="250" precision="-1" scale="-1" codePage="0" /&gt;
-    &lt;referenceColumn name="Aparid" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0" /&gt;
+    &lt;referenceColumn name="Aparid" dataType="DT_WSTR" length="50" precision="-1" scale="-1" codePage="0" /&gt;
     &lt;referenceColumn name="Apartype" dataType="DT_WSTR" length="10" precision="-1" scale="-1" codePage="0" /&gt;
     &lt;referenceColumn name="Att1id" dataType="DT_WSTR" length="100" precision="-1" scale="-1" codePage="0" /&gt;
     &lt;referenceColumn name="Att2id" dataType="DT_WSTR" length="100" precision="-1" scale="-1" codePage="0" /&gt;
@@ -3404,7 +3406,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                             </inputColumn>
                             <inputColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\LKP_Huvudbok_01_CheckIfExists.Inputs[DER_Huvudbok_01_sysFilename_Output_LKP_Huvudbok_01_CheckIfExists].Columns[Aparid]"
-                              cachedDataType="i4"
+                              cachedDataType="wstr"
+                              cachedLength="50"
                               cachedName="Aparid"
                               lineageId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].Columns[Aparid]">
                               <properties>
@@ -3862,7 +3865,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                               lineageId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].Columns[Extinvref]" />
                             <inputColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\OLE_DST_Huvudbok_01.Inputs[CNT_NewMembers_Output_OLE_DST_Huvudbok_01].Columns[Aparid]"
-                              cachedDataType="i4"
+                              cachedDataType="wstr"
+                              cachedLength="50"
                               cachedName="Aparid"
                               externalMetadataColumnId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\OLE_DST_Huvudbok_01.Inputs[CNT_NewMembers_Output_OLE_DST_Huvudbok_01].ExternalColumns[Aparid]"
                               lineageId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\FF_SRC_Huvudbok_01.Outputs[Output].Columns[Aparid]" />
@@ -4068,7 +4072,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</BinaryItem>
                               name="Extinvref" />
                             <externalMetadataColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\OLE_DST_Huvudbok_01.Inputs[CNT_NewMembers_Output_OLE_DST_Huvudbok_01].ExternalColumns[Aparid]"
-                              dataType="i4"
+                              dataType="wstr"
+                              length="50"
                               name="Aparid" />
                             <externalMetadataColumn
                               refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles\OLE_DST_Huvudbok_01.Inputs[CNT_NewMembers_Output_OLE_DST_Huvudbok_01].ExternalColumns[Apartype]"
@@ -4668,7 +4673,89 @@ public class Variables
 }
 </arrayElement>
                             <arrayElement
-                              dataType="System.String">sp_99d30ff78d364089b21f722e1a66726a.csproj</arrayElement>
+                              dataType="System.String">AssemblyInfo.cs</arrayElement>
+                            <arrayElement
+                              dataType="System.String">UTF8</arrayElement>
+                            <arrayElement
+                              dataType="System.String">
+using System.Reflection;
+using System.Runtime.CompilerServices;
+
+[assembly: AssemblyTitle("SC_b53532d4cf87412181ad404f6447acbb")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_b53532d4cf87412181ad404f6447acbb")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+
+                           </arrayElement>
+                            <arrayElement
+                              dataType="System.String">Project</arrayElement>
+                            <arrayElement
+                              dataType="System.String">UTF16LE</arrayElement>
+                            <arrayElement
+                              dataType="System.String">&lt;?xml version="1.0" encoding="UTF-16" standalone="yes"?&gt;
+&lt;c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0"&gt;
+	&lt;msb:PropertyGroup&gt;
+		&lt;msb:ProjectId&gt;{652f5619-a0c8-492d-a5c0-f7f836a48678}&lt;/msb:ProjectId&gt;
+		&lt;msb:NoContent&gt;Reference;Import;Folder&lt;/msb:NoContent&gt;
+		&lt;msb:Language&gt;msBuild&lt;/msb:Language&gt;
+		&lt;msb:CodeName&gt;sp_be2b655cfe4c4e9b8ac346099471c340&lt;/msb:CodeName&gt;
+		&lt;msb:DisplayName&gt;sp_be2b655cfe4c4e9b8ac346099471c340&lt;/msb:DisplayName&gt;
+	&lt;/msb:PropertyGroup&gt;
+	&lt;msb:ItemGroup&gt;
+		&lt;msb:File Include="ComponentWrapper.cs"/&gt;
+		&lt;msb:File Include="Properties\Resources.resx"/&gt;
+		&lt;msb:File Include="AssemblyInfo.cs"/&gt;
+		&lt;msb:File Include="Properties\Settings.Designer.cs"/&gt;
+		&lt;msb:File Include="BufferWrapper.cs"/&gt;
+		&lt;msb:File Include="main.cs"/&gt;
+		&lt;msb:File Include="Properties\Resources.Designer.cs"/&gt;
+		&lt;msb:File Include="Properties\Settings.settings"/&gt;
+		&lt;msb:Project Include="sp_be2b655cfe4c4e9b8ac346099471c340.csproj"/&gt;
+	&lt;/msb:ItemGroup&gt;
+&lt;/c:Project&gt;</arrayElement>
+                            <arrayElement
+                              dataType="System.String">Properties\Settings.Designer.cs</arrayElement>
+                            <arrayElement
+                              dataType="System.String">UTF8</arrayElement>
+                            <arrayElement
+                              dataType="System.String">//------------------------------------------------------------------------------
+// &lt;auto-generated&gt;
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// &lt;/auto-generated&gt;
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Settings.get_Default():sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Settings")]
+
+namespace sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties
+{
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+
+    }
+}</arrayElement>
+                            <arrayElement
+                              dataType="System.String">sp_be2b655cfe4c4e9b8ac346099471c340.csproj</arrayElement>
                             <arrayElement
                               dataType="System.String">UTF16LE</arrayElement>
                             <arrayElement
@@ -4678,8 +4765,8 @@ public class Variables
 	    &lt;Configuration Condition=" '$(Configuration)' == '' "&gt;Debug&lt;/Configuration&gt;
         &lt;Platform Condition=" '$(Platform)' == '' "&gt;AnyCPU&lt;/Platform&gt;
         &lt;OutputType&gt;Library&lt;/OutputType&gt;
-        &lt;RootNamespace&gt;sp_99d30ff78d364089b21f722e1a66726a.csproj&lt;/RootNamespace&gt;
-        &lt;AssemblyName&gt;sp_99d30ff78d364089b21f722e1a66726a.csproj&lt;/AssemblyName&gt;
+        &lt;RootNamespace&gt;sp_be2b655cfe4c4e9b8ac346099471c340.csproj&lt;/RootNamespace&gt;
+        &lt;AssemblyName&gt;sp_be2b655cfe4c4e9b8ac346099471c340.csproj&lt;/AssemblyName&gt;
         &lt;ProjectGuid&gt;{C792B577-3187-41B4-A778-35BF1292DEDE}&lt;/ProjectGuid&gt;
 		        &lt;ProjectTypeGuids&gt;{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}&lt;/ProjectTypeGuids&gt;
         &lt;NoStandardLibraries&gt;false&lt;/NoStandardLibraries&gt;
@@ -4777,88 +4864,6 @@ public class Variables
     &lt;/PropertyGroup&gt;&lt;/Project&gt;
 </arrayElement>
                             <arrayElement
-                              dataType="System.String">AssemblyInfo.cs</arrayElement>
-                            <arrayElement
-                              dataType="System.String">UTF8</arrayElement>
-                            <arrayElement
-                              dataType="System.String">
-using System.Reflection;
-using System.Runtime.CompilerServices;
-
-[assembly: AssemblyTitle("SC_b53532d4cf87412181ad404f6447acbb")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SC_b53532d4cf87412181ad404f6447acbb")]
-[assembly: AssemblyCopyright("Copyright @  2018")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-
-[assembly: AssemblyVersion("1.0.0.0")]
-
-                           </arrayElement>
-                            <arrayElement
-                              dataType="System.String">Project</arrayElement>
-                            <arrayElement
-                              dataType="System.String">UTF16LE</arrayElement>
-                            <arrayElement
-                              dataType="System.String">&lt;?xml version="1.0" encoding="UTF-16" standalone="yes"?&gt;
-&lt;c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0"&gt;
-	&lt;msb:PropertyGroup&gt;
-		&lt;msb:ProjectId&gt;{4f412321-1120-41fd-b298-b2d48dfc0edf}&lt;/msb:ProjectId&gt;
-		&lt;msb:NoContent&gt;Reference;Import;Folder&lt;/msb:NoContent&gt;
-		&lt;msb:Language&gt;msBuild&lt;/msb:Language&gt;
-		&lt;msb:CodeName&gt;sp_99d30ff78d364089b21f722e1a66726a&lt;/msb:CodeName&gt;
-		&lt;msb:DisplayName&gt;sp_99d30ff78d364089b21f722e1a66726a&lt;/msb:DisplayName&gt;
-	&lt;/msb:PropertyGroup&gt;
-	&lt;msb:ItemGroup&gt;
-		&lt;msb:File Include="ComponentWrapper.cs"/&gt;
-		&lt;msb:File Include="Properties\Resources.resx"/&gt;
-		&lt;msb:File Include="AssemblyInfo.cs"/&gt;
-		&lt;msb:File Include="Properties\Settings.Designer.cs"/&gt;
-		&lt;msb:File Include="BufferWrapper.cs"/&gt;
-		&lt;msb:File Include="main.cs"/&gt;
-		&lt;msb:File Include="Properties\Resources.Designer.cs"/&gt;
-		&lt;msb:File Include="Properties\Settings.settings"/&gt;
-		&lt;msb:Project Include="sp_99d30ff78d364089b21f722e1a66726a.csproj"/&gt;
-	&lt;/msb:ItemGroup&gt;
-&lt;/c:Project&gt;</arrayElement>
-                            <arrayElement
-                              dataType="System.String">Properties\Settings.Designer.cs</arrayElement>
-                            <arrayElement
-                              dataType="System.String">UTF8</arrayElement>
-                            <arrayElement
-                              dataType="System.String">//------------------------------------------------------------------------------
-// &lt;auto-generated&gt;
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// &lt;/auto-generated&gt;
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Settings.get_Default():sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Settings")]
-
-namespace sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties
-{
-
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-
-        public static Settings Default
-        {
-            get
-            {
-                return defaultInstance;
-            }
-        }
-
-    }
-}</arrayElement>
-                            <arrayElement
                               dataType="System.String">Properties\Settings.settings</arrayElement>
                             <arrayElement
                               dataType="System.String">UTF8</arrayElement>
@@ -4884,11 +4889,11 @@ namespace sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties
 // &lt;/auto-generated&gt;
 //------------------------------------------------------------------------------
 
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Resources.get_ResourceManager():System.Resources.ResourceManager")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Resources.get_Culture():System.Globalization.CultureInfo")]
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo):Void")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Resources.get_ResourceManager():System.Resources.ResourceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Resources.get_Culture():System.Globalization.CultureInfo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo):Void")]
 
-namespace sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties {
+namespace sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties {
     using System;
 
 
@@ -4922,7 +4927,7 @@ namespace sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties {
             get {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("sp_be2b655cfe4c4e9b8ac346099471c340.csproj.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -4956,11 +4961,11 @@ namespace sp_99d30ff78d364089b21f722e1a66726a.csproj.Properties {
                           <arrayElements
                             arrayElementCount="2">
                             <arrayElement
-                              dataType="System.String">sp_99d30ff78d364089b21f722e1a66726a.csproj.dll</arrayElement>
+                              dataType="System.String">sp_be2b655cfe4c4e9b8ac346099471c340.csproj.dll</arrayElement>
                             <arrayElement
                               dataType="System.String">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
-ZGUuDQ0KJAAAAAAAAABQRQAATAEDADobSVsAAAAAAAAAAOAAIiALATAAABYAAAAIAAAAAAAAtjQA
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAFtgSlsAAAAAAAAAAOAAIiALATAAABYAAAAIAAAAAAAAtjQA
 AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
 ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAGQ0AABPAAAAAEAAAGgEAAAAAAAAAAAAAAAAAAAA
 AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -5020,9 +5025,9 @@ aXB0aW9uQXR0cmlidXRlAENvbXBpbGF0aW9uUmVsYXhhdGlvbnNBdHRyaWJ1dGUAQXNzZW1ibHlQ
 cm9kdWN0QXR0cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAFNTSVNTY3JpcHRDb21w
 b25lbnRFbnRyeVBvaW50QXR0cmlidXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1l
 Q29tcGF0aWJpbGl0eUF0dHJpYnV0ZQBQcmVFeGVjdXRlAFBvc3RFeGVjdXRlAHZhbHVlAFN5c3Rl
-bS5SdW50aW1lLlZlcnNpb25pbmcAU3RyaW5nAHNwXzk5ZDMwZmY3OGQzNjQwODliMjFmNzIyZTFh
-NjY3MjZhLmNzcHJvagBTeXN0ZW0uQ29tcG9uZW50TW9kZWwAc3BfOTlkMzBmZjc4ZDM2NDA4OWIy
-MWY3MjJlMWE2NjcyNmEuY3Nwcm9qLmRsbABnZXRfRXJyb3JDb2RlX0lzTnVsbABnZXRfRXJyb3JD
+bS5SdW50aW1lLlZlcnNpb25pbmcAU3RyaW5nAHNwX2JlMmI2NTVjZmU0YzRlOWI4YWMzNDYwOTk0
+NzFjMzQwLmNzcHJvagBTeXN0ZW0uQ29tcG9uZW50TW9kZWwAc3BfYmUyYjY1NWNmZTRjNGU5Yjhh
+YzM0NjA5OTQ3MWMzNDAuY3Nwcm9qLmRsbABnZXRfRXJyb3JDb2RlX0lzTnVsbABnZXRfRXJyb3JD
 b2x1bW5fSXNOdWxsAHNldF9FcnJvckNvZGVEZXNjcmlwdGlvbl9Jc051bGwAc2V0X0Vycm9yQ29s
 dW1uRGVzY3JpcHRpb25fSXNOdWxsAFNldE51bGwAc2V0X0l0ZW0AU3lzdGVtAHJlc291cmNlTWFu
 AFNjcmlwdE1haW4AZ2V0X0Vycm9yQ29sdW1uAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5H
@@ -5033,9 +5038,9 @@ AE91dHB1dE1hcABNaWNyb3NvZnQuU3FsU2VydmVyLkRUU1BpcGVsaW5lV3JhcABJbnB1dDBCdWZm
 ZXIAUGlwZWxpbmVCdWZmZXIAU2NyaXB0QnVmZmVyAGdldF9SZXNvdXJjZU1hbmFnZXIAU3lzdGVt
 LkNvZGVEb20uQ29tcGlsZXIATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuUGlwZWxpbmUuV3JhcHBl
 cgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0aWNzAFN5c3RlbS5SdW50aW1lLkNvbXBpbGVy
-U2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBzcF85OWQzMGZmNzhkMzY0MDg5YjIxZjcyMmUxYTY2
-NzI2YS5jc3Byb2ouUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVz
-AHNwXzk5ZDMwZmY3OGQzNjQwODliMjFmNzIyZTFhNjY3MjZhLmNzcHJvai5Qcm9wZXJ0aWVzAFZh
+U2VydmljZXMAU3lzdGVtLlJlc291cmNlcwBzcF9iZTJiNjU1Y2ZlNGM0ZTliOGFjMzQ2MDk5NDcx
+YzM0MC5jc3Byb2ouUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVz
+AHNwX2JlMmI2NTVjZmU0YzRlOWI4YWMzNDYwOTk0NzFjMzQwLmNzcHJvai5Qcm9wZXJ0aWVzAFZh
 cmlhYmxlcwBCdWZmZXJDb2x1bW5JbmRleGVzAEdldENvbHVtbkluZGV4ZXMAU2V0dGluZ3MARXF1
 YWxzAENvbm5lY3Rpb25zAE9iamVjdABFbmRPZlJvd3NldABnZXRfRGVmYXVsdABVc2VyQ29tcG9u
 ZW50AFBhcmVudENvbXBvbmVudABTY3JpcHRDb21wb25lbnQATWljcm9zb2Z0LlNxbFNlcnZlci5U
@@ -5044,9 +5049,9 @@ cHV0AElucHV0MF9Qcm9jZXNzSW5wdXRSb3cATmV4dFJvdwBnZXRfQXNzZW1ibHkAAAAAgJtJAHMA
 TgB1AGwAbAAgAHAAcgBvAHAAZQByAHQAeQAgAGMAYQBuAG4AbwB0ACAAYgBlACAAcwBlAHQAIAB0
 AG8AIABGAGEAbABzAGUALgAgAEEAcwBzAGkAZwBuACAAYQAgAHYAYQBsAHUAZQAgAHQAbwAgAHQA
 aABlACAAYwBvAGwAdQBtAG4AIABpAG4AcwB0AGUAYQBkAC4AAA1JAG4AcAB1AHQAMAAAf3MAcABf
-ADkAOQBkADMAMABmAGYANwA4AGQAMwA2ADQAMAA4ADkAYgAyADEAZgA3ADIAMgBlADEAYQA2ADYA
-NwAyADYAYQAuAGMAcwBwAHIAbwBqAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQBy
-AGMAZQBzAADz65T6C98uTrjZwW+YQ1dQAAQgAQEIAyAAAQUgAQEREQQgAQEOBSACAQ4OBSABARFl
+AGIAZQAyAGIANgA1ADUAYwBmAGUANABjADQAZQA5AGIAOABhAGMAMwA0ADYAMAA5ADkANAA3ADEA
+YwAzADQAMAAuAGMAcwBwAHIAbwBqAC4AUAByAG8AcABlAHIAdABpAGUAcwAuAFIAZQBzAG8AdQBy
+AGMAZQBzAAAX4pKYi6uaTYcC6SyigUEDAAQgAQEIAyAAAQUgAQEREQQgAQEOBSACAQ4OBSABARFl
 BAcBEjkEIAAScQQgAQ4ICSADARJBHQgSRQMGEkEDBh0IBCABCAgEIAECCAUgAgEIHAMgAAIGIAIC
 DhF9BSABHQgICAABEoCBEYCFBSAAEoCJByACAQ4SgIkIt3pcVhk04IkIiYRdzYCAzJEDBhIUAwYS
 GAMGEkkDBhJdAwYSYQMGEiAFIAEBEgwDIAAIBCABAQIJIAQBCA4SQRJFBSABARJJBAAAEl0EAAAS
@@ -5075,13 +5080,13 @@ ADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABhAG4A
 eQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAA
 AFMAQwBfAGIANQAzADUAMwAyAGQANABjAGYAOAA3ADQAMQAyADEAOAAxAGEAZAA0ADAANABmADYA
 NAA0ADcAYQBjAGIAYgAAADAACAABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAALgAw
-AC4AMAAAAH4ALwABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAcwBwAF8AOQA5AGQAMwAwAGYA
-ZgA3ADgAZAAzADYANAAwADgAOQBiADIAMQBmADcAMgAyAGUAMQBhADYANgA3ADIANgBhAC4AYwBz
+AC4AMAAAAH4ALwABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAcwBwAF8AYgBlADIAYgA2ADUA
+NQBjAGYAZQA0AGMANABlADkAYgA4AGEAYwAzADQANgAwADkAOQA0ADcAMQBjADMANAAwAC4AYwBz
 AHAAcgBvAGoALgBkAGwAbAAAAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAA
 QwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMQA4AAAAKgABAAEATABlAGcAYQBsAFQAcgBh
 AGQAZQBtAGEAcgBrAHMAAAAAAAAAAACGAC8AAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEA
-bQBlAAAAcwBwAF8AOQA5AGQAMwAwAGYAZgA3ADgAZAAzADYANAAwADgAOQBiADIAMQBmADcAMgAy
-AGUAMQBhADYANgA3ADIANgBhAC4AYwBzAHAAcgBvAGoALgBkAGwAbAAAAAAAaAAkAAEAUAByAG8A
+bQBlAAAAcwBwAF8AYgBlADIAYgA2ADUANQBjAGYAZQA0AGMANABlADkAYgA4AGEAYwAzADQANgAw
+ADkAOQA0ADcAMQBjADMANAAwAC4AYwBzAHAAcgBvAGoALgBkAGwAbAAAAAAAaAAkAAEAUAByAG8A
 ZAB1AGMAdABOAGEAbQBlAAAAAABTAEMAXwBiADUAMwA1ADMAMgBkADQAYwBmADgANwA0ADEAMgAx
 ADgAMQBhAGQANAAwADQAZgA2ADQANAA3AGEAYwBiAGIAAAA0AAgAAQBQAHIAbwBkAHUAYwB0AFYA
 ZQByAHMAaQBvAG4AAAAxAC4AMAAuADAALgAwAAAAOAAIAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBl
@@ -5108,7 +5113,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
                           dataType="System.String"
                           description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
                           name="VSTAProjectName"
-                          typeConverter="NOTBROWSABLE">sp_99d30ff78d364089b21f722e1a66726a</property>
+                          typeConverter="NOTBROWSABLE">sp_be2b655cfe4c4e9b8ac346099471c340</property>
                         <property
                           dataType="System.String"
                           description="Specifies the programming language used by the script."
@@ -5447,7 +5452,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             <DTS:Executable
               DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\SQL_Huvudbok_01_DeleteExistingFileNames"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
-              DTS:DTSID="{5FF86764-4D4E-42D0-87A3-A6F5C8AD8CAB}"
+              DTS:DTSID="{F51B1D05-BBB1-4A69-AB26-4C946000A5BB}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="SQL_Huvudbok_01_DeleteExistingFileNames"
@@ -5456,7 +5461,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{F5F2C27F-7387-41FC-8FE0-F4F02936E07B}"
+                  SQLTask:Connection="{EDD16C8E-6E1C-4E0B-828E-AE1CBE18483B}"
                   SQLTask:SqlStatementSource="DELETE [Agresso_RawTyped].[rt_Huvudbok_01] WHERE sysFileName = ? SELECT @@ROWCOUNT"
                   SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ResultBinding
@@ -5474,7 +5479,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             <DTS:Executable
               DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\SQL_Huvudbok_01_LogPackageFileExecutionEnd"
               DTS:CreationName="Microsoft.ExecuteSQLTask"
-              DTS:DTSID="{A0A85312-7316-41E9-B10A-1FA7F0AD1820}"
+              DTS:DTSID="{7249356B-ED55-455E-8103-79CE6F9B0476}"
               DTS:ExecutableType="Microsoft.ExecuteSQLTask"
               DTS:LocaleID="-1"
               DTS:ObjectName="SQL_Huvudbok_01_LogPackageFileExecutionEnd"
@@ -5483,7 +5488,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
               <DTS:Variables />
               <DTS:ObjectData>
                 <SQLTask:SqlTaskData
-                  SQLTask:Connection="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+                  SQLTask:Connection="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
                   SQLTask:SqlStatementSource=" EXEC Logging.LogPackageFileExecutionEnd @PackageID = ?&#xA;          , @ExecutionID = ?&#xA;          , @RowsRead = ?&#xA;          , @RowsInserted = ?&#xA;          , @RowsUpdated = ?&#xA;          , @RowsDeleted = ?&#xA;          , @RowsIgnored = ?&#xA;          , @RowsError = ?&#xA;          , @SysFileName = ?&#xA;          , @SysExecutionLog_key = ?&#xA;          , @PackageVersionId = ?&#xA;                             " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
                   <SQLTask:ParameterBinding
                     SQLTask:ParameterName="0"
@@ -5559,7 +5564,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             <DTS:PrecedenceConstraint
               DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile.PrecedenceConstraints[Constraint_DFP_Huvudbok_01_LoadAllFiles_To_SQL_Huvudbok_01_LogPackageFileExecutionEnd]"
               DTS:CreationName=""
-              DTS:DTSID="{8DEB6DBB-D122-4AC3-B90C-6CFF33DBCE81}"
+              DTS:DTSID="{E7FF0823-0C16-44CF-BD22-508B7AED0379}"
               DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\DFP_Huvudbok_01_LoadAllFiles"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint_DFP_Huvudbok_01_LoadAllFiles_To_SQL_Huvudbok_01_LogPackageFileExecutionEnd"
@@ -5568,7 +5573,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             <DTS:PrecedenceConstraint
               DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile.PrecedenceConstraints[Constraint_SQL_Huvudbok_01_DeleteExistingFileNames_To_DFP_Huvudbok_01_LoadAllFiles]"
               DTS:CreationName=""
-              DTS:DTSID="{0420F21A-D336-4769-8643-D3510232E747}"
+              DTS:DTSID="{7BF419CD-4BAC-4B68-9F9F-0E3EE21CC24D}"
               DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile\SQL_Huvudbok_01_DeleteExistingFileNames"
               DTS:LogicalAnd="True"
               DTS:ObjectName="Constraint_SQL_Huvudbok_01_DeleteExistingFileNames_To_DFP_Huvudbok_01_LoadAllFiles"
@@ -5580,7 +5585,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV.PrecedenceConstraints[Constraint_SCR_Huvudbok_01_ParsDateTimeFileName_To_SEQC_Huvudbok_01_LoadFile]"
           DTS:CreationName=""
-          DTS:DTSID="{9515CF3F-F4D0-4A24-B6B7-340AA709C679}"
+          DTS:DTSID="{1E921540-4932-4A1C-8178-F7E9791BF3D6}"
           DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV\SCR_Huvudbok_01_ParsDateTimeFileName"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint_SCR_Huvudbok_01_ParsDateTimeFileName_To_SEQC_Huvudbok_01_LoadFile"
@@ -5588,7 +5593,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_Huvudbok_01_LoadFile_To_FSYS_Huvudbok_01_ArchiveFile]"
           DTS:CreationName=""
-          DTS:DTSID="{5DA5A389-BE1C-48BA-BF1F-757E74E6096F}"
+          DTS:DTSID="{476A6AA2-9A38-4CC2-BDEB-1C7D467CE04F}"
           DTS:EvalOp="3"
           DTS:Expression="@[User::MoveFileWhenComplete]"
           DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile"
@@ -5598,7 +5603,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:PrecedenceConstraint
           DTS:refId="Package\FELC_Huvudbok_01_LoopThroughCSV.PrecedenceConstraints[Constraint_SEQC_Huvudbok_01_LoadFile_To_FSYS_Huvudbok_01_ErrorFile]"
           DTS:CreationName=""
-          DTS:DTSID="{411D30FF-0CD5-4CBA-8997-2D6BF7577F96}"
+          DTS:DTSID="{F077E1E9-CA30-4270-8D04-7BDC3E5A9B22}"
           DTS:EvalOp="3"
           DTS:Expression="@[User::MoveFileWhenComplete]"
           DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV\SEQC_Huvudbok_01_LoadFile"
@@ -5610,8 +5615,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{7E911AC1-3923-4BBF-B3B7-CDDE69F6BC25}"
-          DTS:ObjectName="{7E911AC1-3923-4BBF-B3B7-CDDE69F6BC25}"
+          DTS:DTSID="{479FCE72-91FC-454E-9593-EE7D00E920C5}"
+          DTS:ObjectName="{479FCE72-91FC-454E-9593-EE7D00E920C5}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::Huvudbok_01_FileName" />
       </DTS:ForEachVariableMappings>
@@ -5619,7 +5624,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:Executable
       DTS:refId="Package\SEQC_Huvudbok_01_PackageEndLog"
       DTS:CreationName="STOCK:SEQUENCE"
-      DTS:DTSID="{07E25367-4F34-4F2F-A25F-7CE7AA7B61D0}"
+      DTS:DTSID="{596B2E7D-2ADB-4DB6-A895-EEC7DF950735}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="SEQC_Huvudbok_01_PackageEndLog">
@@ -5628,7 +5633,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Executable
           DTS:refId="Package\SEQC_Huvudbok_01_PackageEndLog\SQL_Huvudbok_01_LogPackageEnd"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:DTSID="{911EE04B-7941-4B2D-A988-6029CDCC6D42}"
+          DTS:DTSID="{4524B799-C392-4244-8BD6-8099E6BC4D82}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="SQL_Huvudbok_01_LogPackageEnd"
@@ -5637,7 +5642,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+              SQLTask:Connection="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
               SQLTask:SqlStatementSource="exec Logging.LogPackageEnd&#xA;                  @PackageID = ?,&#xA;                  @ExecutionID = ?,&#xA;                  @ExecutionEndTime = ?,&#xA;                  @RowsRead = ?,&#xA;                  @RowsInserted = ?,&#xA;                  @RowsUpdated = ?,&#xA;                  @RowsDeleted = ?,&#xA;                  @RowsIgnored = ?,&#xA;                  @RowsError = ?&#xA;                 " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -5701,7 +5706,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:Executable
       DTS:refId="Package\SEQC_Huvudbok_01_PackageStartLog"
       DTS:CreationName="STOCK:SEQUENCE"
-      DTS:DTSID="{21612B5F-5E10-4B95-AD1A-F06F79414E43}"
+      DTS:DTSID="{1C984F32-C490-4F41-BC5A-4DBF5B3B09A1}"
       DTS:ExecutableType="STOCK:SEQUENCE"
       DTS:LocaleID="-1"
       DTS:ObjectName="SEQC_Huvudbok_01_PackageStartLog">
@@ -5710,7 +5715,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Executable
           DTS:refId="Package\SEQC_Huvudbok_01_PackageStartLog\EPT Package Start Log"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:DTSID="{21EE568D-D3E6-410F-839F-0784235FC7E3}"
+          DTS:DTSID="{57A5BEC7-BA08-4D36-BC50-622636A11E8D}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="EPT Package Start Log"
@@ -5719,7 +5724,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+              SQLTask:Connection="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
               SQLTask:SqlStatementSource="&#xA;  exec Logging.LogPackageStart&#xA;  @PackageID = ?,&#xA;  @PackageName = ?,&#xA;  @VersionID = ?,&#xA;  @VersionMajor = ?,&#xA;  @VersionMinor = ?,&#xA;  @VersionBuild = ?,&#xA;  @VersionComments = ?,&#xA;  @CreationDate = ?,&#xA;  @CreatorName = ?,&#xA;  @CreatorComputerName = ?,&#xA;  @LocaleID = ?,&#xA;  @ExecutionID = ?,&#xA;  @ExecutionStartTime = ?,&#xA;  @ExecutionUserName = ?,&#xA;  @ExecutionMachineName = ?,&#xA;  @ProductVersion = ?,&#xA;  @InteractiveMode = ?,&#xA;  @SysBatchLogExecutionLog_key = ?,&#xA;  @SysExecutionLog_key = ? output,&#xA;        @SourceTableCatalog = ?,&#xA;        @SourceSchemaName = ?,&#xA;        @SourceTableName = ?,&#xA;        @DestinationTableCatalog = ?,&#xA;        @DestinationSchemaName = ?,&#xA;        @DestinationTableName = ?,&#xA;        @SsisIncrementalLoad = ?,&#xA;        @SsisLoadType  = ?&#xA; " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -5893,7 +5898,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_FELC_Huvudbok_01_LoopThroughCSV_To_SEQC_Huvudbok_01_PackageEndLog]"
       DTS:CreationName=""
-      DTS:DTSID="{488FDE92-1CD8-4F9B-A960-7599A4A6DA79}"
+      DTS:DTSID="{E49E5773-762D-4D53-9671-E35EB655136C}"
       DTS:From="Package\FELC_Huvudbok_01_LoopThroughCSV"
       DTS:ObjectName="Constraint_FELC_Huvudbok_01_LoopThroughCSV_To_SEQC_Huvudbok_01_PackageEndLog"
       DTS:To="Package\SEQC_Huvudbok_01_PackageEndLog"
@@ -5901,7 +5906,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_Huvudbok_01_PackageStartLog_To_FELC_Huvudbok_01_LoopThroughCSV]"
       DTS:CreationName=""
-      DTS:DTSID="{10B221FA-B826-4621-9A73-ECF919ED7962}"
+      DTS:DTSID="{DBB44137-D4A6-444A-9201-1C8BCFF820C4}"
       DTS:From="Package\SEQC_Huvudbok_01_PackageStartLog"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint_SEQC_Huvudbok_01_PackageStartLog_To_FELC_Huvudbok_01_LoopThroughCSV"
@@ -5909,7 +5914,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint_SEQC_Huvudbok_01_PackageStartLog_To_SEQC_Huvudbok_01_PackageEndLog]"
       DTS:CreationName=""
-      DTS:DTSID="{24AAE768-ADDA-4DF0-ADD0-DC53B3C6D5F3}"
+      DTS:DTSID="{D3FD33AD-00EB-4D08-B9C8-A01965727CD4}"
       DTS:From="Package\SEQC_Huvudbok_01_PackageStartLog"
       DTS:ObjectName="Constraint_SEQC_Huvudbok_01_PackageStartLog_To_SEQC_Huvudbok_01_PackageEndLog"
       DTS:To="Package\SEQC_Huvudbok_01_PackageEndLog"
@@ -5919,7 +5924,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:EventHandler
       DTS:refId="Package.EventHandlers[OnError]"
       DTS:CreationName="OnError"
-      DTS:DTSID="{B80A3B19-E25B-4217-A6E9-A0F7C5ED04A4}"
+      DTS:DTSID="{D10044AB-D4D9-43FD-BB6F-5B34D6AB1453}"
       DTS:EventID="0"
       DTS:EventName="OnError"
       DTS:LocaleID="-1">
@@ -5927,7 +5932,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Variable
           DTS:CreationName=""
           DTS:Description="The propagate property of the event&#xA;The propagate property of the event"
-          DTS:DTSID="{F631866F-1637-40DC-8DF9-2CD8C1B6792C}"
+          DTS:DTSID="{F29F8899-B325-4D57-A481-0642B38C5383}"
           DTS:IncludeInDebugDump="6789"
           DTS:Namespace="System"
           DTS:ObjectName="Propagate">
@@ -5939,7 +5944,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Executable
           DTS:refId="Package.EventHandlers[OnError]\EST Log Package Error"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:DTSID="{0D350D50-0F2B-48B5-9F1F-9531C525038F}"
+          DTS:DTSID="{26D23F58-E5E1-444B-BF3A-2DEF9C198A04}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="EST Log Package Error"
@@ -5947,7 +5952,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           <DTS:Variables>
             <DTS:Variable
               DTS:CreationName=""
-              DTS:DTSID="{62B48572-E795-412E-B827-EBD40B624266}"
+              DTS:DTSID="{3192A23A-2286-4C6A-AE17-7832CC8D4ADB}"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="EventType"
@@ -5958,7 +5963,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           </DTS:Variables>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+              SQLTask:Connection="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
               SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -6010,7 +6015,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
     <DTS:EventHandler
       DTS:refId="Package.EventHandlers[OnTaskFailed]"
       DTS:CreationName="OnTaskFailed"
-      DTS:DTSID="{F93895B4-EA6D-452A-9908-22D40D62A045}"
+      DTS:DTSID="{81BDD01B-F491-4145-8EEC-116EF65E6131}"
       DTS:EventID="0"
       DTS:EventName="OnTaskFailed"
       DTS:LocaleID="-1">
@@ -6018,7 +6023,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Variable
           DTS:CreationName=""
           DTS:Description="The propagate property of the event&#xA;The propagate property of the event"
-          DTS:DTSID="{830E91FF-E684-4993-8548-B9C95E7AF97F}"
+          DTS:DTSID="{1B5A3061-DED1-4FAC-BDCD-1195D00EA1AE}"
           DTS:IncludeInDebugDump="6789"
           DTS:Namespace="System"
           DTS:ObjectName="Propagate">
@@ -6030,7 +6035,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
         <DTS:Executable
           DTS:refId="Package.EventHandlers[OnTaskFailed]\EST Log Task Failed"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
-          DTS:DTSID="{A9B042FF-1FC0-45B8-AFB3-1ED06615C33F}"
+          DTS:DTSID="{D5EB0A9D-7FAB-4689-A61C-05636E7F3606}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:ObjectName="EST Log Task Failed"
@@ -6038,7 +6043,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           <DTS:Variables>
             <DTS:Variable
               DTS:CreationName=""
-              DTS:DTSID="{C88944AB-EA98-4A79-A1A4-277470D86E8A}"
+              DTS:DTSID="{3C1B1DF0-7E64-4636-A4A6-5D6123266A76}"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="ErrorCode"
@@ -6049,7 +6054,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             </DTS:Variable>
             <DTS:Variable
               DTS:CreationName=""
-              DTS:DTSID="{277A9CA0-4EA6-421F-B74D-15D718F93B0E}"
+              DTS:DTSID="{C2BB6658-8666-41D0-8806-433CD4E7216C}"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="ErrorDescription"
@@ -6059,7 +6064,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             </DTS:Variable>
             <DTS:Variable
               DTS:CreationName=""
-              DTS:DTSID="{8ED1A709-C35F-4CFE-96E5-6CD2FEC2001A}"
+              DTS:DTSID="{8EA69A92-573C-4DE6-8B63-4BC2638D5722}"
               DTS:IncludeInDebugDump="2345"
               DTS:Namespace="User"
               DTS:ObjectName="EventType"
@@ -6070,7 +6075,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
           </DTS:Variables>
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
-              SQLTask:Connection="{F74C36CB-BD82-4279-AB30-C2D0EFDB6DA6}"
+              SQLTask:Connection="{7721BEC2-989B-4368-8E29-6C77AE43E06D}"
               SQLTask:SqlStatementSource="&#xA;    EXECUTE [Logging].[LogExecutionEvent]&#xA;    @ExecutionID = ?&#xA;    ,@EventDateTime = ?&#xA;    ,@EventType = ?&#xA;    ,@EventCode = ?&#xA;    ,@EventDescription = ?&#xA;    ,@SourceID = ?&#xA;    ,@SourceName = ?&#xA;   " xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
               <SQLTask:ParameterBinding
                 SQLTask:ParameterName="0"
@@ -6619,9 +6624,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</arrayElement>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-8,18.25,16,16"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout

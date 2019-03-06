@@ -26,10 +26,15 @@ UNION SELECT 	'MoveFileWhenComplete',	'true',	'\Package.Variables[User::MoveFile
 UNION SELECT 	'Agresso_SourceFolderPath',		'C:\DW\Agresso\Data',		'\Package.Variables[User::Agresso_SourceFolderPath].Properties[Value]',	'String'
 UNION SELECT 	'Agresso_ArchiveFolderPath',	'C:\DW\Agresso\Archive',	'\Package.Variables[User::Agresso_ArchiveFolderPath].Properties[Value]',	'String'
 UNION SELECT 	'Agresso_ErrorFolderPath',		'C:\DW\Agresso\Error',	'\Package.Variables[User::Agresso_ErrorFolderPath].Properties[Value]',	'String'
-UNION SELECT 	'Agresso_ExecFilePath',			'C:\Users\pedram.birounvand\Source\Repos\Datawarehouse\AgressoAPI\AgressoAPI\bin\Debug\AgressoAPI.exe',	'\Package.Variables[User::Agresso_ExecFilePath].Properties[Value]',	'String'
+UNION SELECT 	'Agresso_ExecFilePath',			'C:\Source\Repos\Datawarehouse\AgressoAPI\AgressoAPI\bin\Debug\AgressoAPI.exe',	'\Package.Variables[User::Agresso_ExecFilePath].Properties[Value]',	'String'
 UNION SELECT 	'Agresso_NoOfPeriods',			'3',	'\Package.Variables[User::Agresso_NoOfPeriods].Properties[Value]',	'String'
 UNION SELECT 	'Agresso_LastUpdateDaysOffset',	'',	'\Package.Variables[User::Agresso_LastUpdateDaysOffset].Properties[Value]',	'String'
 
 UNION SELECT 	'Manual_ArchiveFolderPath',	'C:\DW\Manual\Archive',	'\Package.Variables[User::Manual_ArchiveFolderPath].Properties[Value]',	'String'
 UNION SELECT 	'Manual_SourceFolderPath',	'C:\DW\Manual\Data',	'\Package.Variables[User::Manual_SourceFolderPath].Properties[Value]',	'String'
 UNION SELECT 	'Manual_ErrorFolderPath',	'C:\DW\Manual\Error',	'\Package.Variables[User::Manual_ErrorFolderPath].Properties[Value]',	'String'
+
+UNION SELECT 	'BamsNo',	'Provider=SQLNCLI11;Server=STO-DB-05;Initial Catalog=BAMS2NO;Integrated Security=SSPI;',	'\Package.Connections[BamsNo].Properties[ConnectionString]',	'String'
+UNION SELECT 	'BamsSe',	'Provider=SQLNCLI11;Server=STO-DB-05;Initial Catalog=BAMS2SE;Integrated Security=SSPI;',	'\Package.Connections[BamsSe].Properties[ConnectionString]',	'String'
+UNION SELECT 	'UCAP',	'Data Source=STO-DB-04;Initial Catalog=DW_UcapPL_Staging;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;',	'\Package.Connections[UCAP].Properties[ConnectionString]',	'String'
+UNION SELECT 	'MDS',	'Data Source=STO-BIT-01;Initial Catalog=MDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;',	'\Package.Connections[MDS].Properties[ConnectionString]',	'String'

@@ -8,7 +8,38 @@
  Example:      :setvar TableName MyTable							
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
+
 */
 
---TRUNCATE TABLE [Manual_RawTyped].[rt_ReportStructure_01]
+
+CREATE TABLE #temp(sqlStatement nvarchar(max), rowNo int)
+INSERT INTO #temp
+SELECT sqlStatement = 'TRUNCATE TABLE ' + t.TABLE_CATALOG + '.[' + t.TABLE_SCHEMA + '].[' + t.TABLE_NAME + ']'
+       , rowNo = ROW_NUMBER() OVER (ORDER BY t.TABLE_NAME)
+FROM   INFORMATION_SCHEMA.TABLES t
+WHERE t.TABLE_TYPE = 'BASE TABLE' AND (t.TABLE_SCHEMA LIKE 'Bams%' OR t.TABLE_NAME = 'rt_DimRelationer_01')
+
+DECLARE @LastRowNo int = 1, @sqlStatement NVARCHAR(max)
+
+WHILE (@LastRowNo IS NOT NULL)
+BEGIN 
+	
+	SET @sqlStatement = (SELECT TOP 1 t.sqlStatement FROM #temp t WHERE t.rowNo = @LastRowNo)
+
+	PRINT @sqlStatement
+	
+	EXEC (@sqlStatement)
+
+	set @LastRowNo= (select top 1 rowNo from #temp where rowNo > @LastRowNo order by rowNo)
+END
+
+DROP TABLE #temp
+
+
+
+
+IF HOST_NAME() = 'dwbuildsrv01'
+BEGIN 
+:r .\Script.CreateMdsTables.sql
+END
 

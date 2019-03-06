@@ -15,24 +15,41 @@ namespace AgressoAPI
         private static WSCredentials _credentials;
         private static QueryEngineV200606DotNetSoapClient _service;
         private static AgressoQueryParameterList _agressoQueryParameterList;
+        private static string _outputFileName;
 
 
-        public AgressoQuery(AgressoQueryParameterList agressoQueryParameterList, WSCredentials credentials)
+        public AgressoQuery(AgressoQueryParameterList agressoQueryParameterList, WSCredentials credentials, string outputFileName)
         {
             _credentials = credentials;
             _service = new QueryEngineV200606DotNetSoapClient();
             _agressoQueryParameterList = agressoQueryParameterList;
+            _outputFileName = outputFileName;
         }
         public void ExportAgressoQueryToCsv()
         {
             DataSet ds = GetDataSetByAgressoQueryParameterList();
-            string data = DataTableToCSV(ds.Tables[0], ";");
 
+            if (ds.Tables[0].Rows.Count == 0)            
+                return;            
+
+            DataTable tblFiltered = ds.Tables[0].AsEnumerable()
+                             .Where(r => r.Field<string>("_section") == "D")
+                             .CopyToDataTable();
+
+            string data = DataTableToCSV(tblFiltered, ";");
             if (ds.Tables[0].Rows.Count > 0)
             {
-                string fullFilePath = FullfilePath(RemoveSpecialCharacters(_agressoQueryParameterList.TemplatefullDescription), GetPeriodFromParameterList(), RootDirectory, FileVersion);
+                string filename = _outputFileName.Length > 0 ? _outputFileName : _agressoQueryParameterList.TemplatefullDescription;
+                string fullFilePath = FullfilePath(RemoveSpecialCharacters(filename), GetPeriodFromParameterList(), RootDirectory, FileVersion);
                 writeToFile(data, fullFilePath);
             }
+        }
+
+        public void test()
+        {
+            TemplateList templates = _service.GetTemplateList(null, null, _credentials);
+
+            
         }
 
         public long GetTemplateId(string fullDescription)
@@ -101,7 +118,7 @@ namespace AgressoAPI
                         sb.Append(dr[i].ToString().Replace(",", "."));
                     }
                     else
-                        sb.Append(RemoveLineBreaks("\"" + dr[i].ToString() + "\""));
+                        sb.Append(RemoveLineBreaks("\"" + dr[i].ToString().Replace("\"","") + "\""));
 
                     if (i < datatable.Columns.Count - 1)
                         sb.Append(seperator);
@@ -146,7 +163,7 @@ namespace AgressoAPI
 
         private string GetPeriodFromParameterList()
         {
-            string period = "";
+            string period = DateTime.Now.ToString("yyyyMM");
             AgressoQueryParameter periodValue;
             if (_agressoQueryParameterList.QueryParameterList.TryGetValue("period", out periodValue))
             {

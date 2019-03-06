@@ -3,16 +3,36 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "SSAS", "SSAS\SSAS.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "Finance", "SSAS\Finance.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
+EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "Sales", "SSAS_Sales\Sales.smproj", "{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}"
+EndProject
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "Marketing", "Marketing\Marketing.smproj", "{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|x86 = Development|x86
+		UAT|x86 = UAT|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
 		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.UAT|x86.ActiveCfg = UAT|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.UAT|x86.Build.0 = UAT|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.UAT|x86.Deploy.0 = UAT|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.Development|x86.ActiveCfg = Development|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.Development|x86.Build.0 = Development|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.Development|x86.Deploy.0 = Development|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.UAT|x86.ActiveCfg = UAT|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.UAT|x86.Build.0 = UAT|x86
+		{F5B51F52-FCA8-482C-B9BD-E159F509E3CE}.UAT|x86.Deploy.0 = UAT|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.Development|x86.ActiveCfg = Development|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.Development|x86.Build.0 = Development|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.Development|x86.Deploy.0 = Development|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.UAT|x86.ActiveCfg = Development|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.UAT|x86.Build.0 = Development|x86
+		{01C8DFEF-E931-43DF-AAAC-F329A3BD4560}.UAT|x86.Deploy.0 = Development|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

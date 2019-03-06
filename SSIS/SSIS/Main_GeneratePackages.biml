@@ -6,9 +6,9 @@
       string sMetaConnectionString ="Provider=SQLNCLI11.1;Server=localhost;Initial Catalog=DevelopmentFrameworkConfig;Integrated Security=SSPI;";
       // Package Variables
       string sMetaData_GetPackageInfo = "Exec ssis.GetPackageInfo " +
-      " @DESTINATION_TABLE_CATALOG = 'DWH_3_Fact'" +
-      " ,@DESTINATION_SCHEMA_NAMES = 'Fact'" +
-      " ,@SOURCE_TABLE_NAME = 'f_MLLoanApplicationMilestone'  ";
+      " @DESTINATION_TABLE_CATALOG = 'DWH_2_Norm'" +
+      " ,@DESTINATION_SCHEMA_NAMES = 'Norm'" +
+      " ,@SOURCE_TABLE_NAME = 'GeneralLedgerAllocation'  ";
     
       DataTable dtPackages = ExternalDataAccess.GetDataTable(sMetaConnectionString,sMetaData_GetPackageInfo);
       foreach(DataRow pkg in dtPackages.Rows)

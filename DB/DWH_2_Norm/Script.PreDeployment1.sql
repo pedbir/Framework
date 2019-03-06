@@ -11,10 +11,9 @@
 */
 
 
-/*
 CREATE TABLE #temp(sqlStatement nvarchar(max), rowNo int)
 INSERT INTO #temp
-SELECT sqlStatement = 'TRUNCATE TABLE ' + t.TABLE_CATALOG + '.' + t.TABLE_SCHEMA + '.' + t.TABLE_NAME
+SELECT sqlStatement = 'TRUNCATE TABLE ' + t.TABLE_CATALOG + '.[' + t.TABLE_SCHEMA + '].[' + t.TABLE_NAME + ']'
        , rowNo = ROW_NUMBER() OVER (ORDER BY t.TABLE_NAME)
 FROM   INFORMATION_SCHEMA.TABLES t
 WHERE t.TABLE_TYPE = 'BASE TABLE'
@@ -33,5 +32,4 @@ BEGIN
 	set @LastRowNo= (select top 1 rowNo from #temp where rowNo > @LastRowNo order by rowNo)
 END
 
-
-*/
+DROP TABLE #temp

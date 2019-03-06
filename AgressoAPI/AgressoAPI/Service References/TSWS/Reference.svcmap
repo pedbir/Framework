@@ -20,10 +20,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://csportal01.u4a.se/P665900-agresso-webservices/service.svc?QueryEngineService/QueryEngineV200606DotNet" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://csportal27.u4a.se/P665900-webservices/service.svc?QueryEngineService/QueryEngineV200606DotNet" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="QueryEngineV200606DotNet1.wsdl" MetadataType="Wsdl" ID="3369a4d3-45fb-4024-913c-55bdaa97225d" SourceId="1" SourceUrl="https://csportal01.u4a.se/P665900-agresso-webservices/service.svc?QueryEngineService/QueryEngineV200606DotNet" />
+    <MetadataFile FileName="QueryEngineV200606DotNet.wsdl" MetadataType="Wsdl" ID="59800475-d6fa-4c8c-bfc3-0330240cf33a" SourceId="1" SourceUrl="https://csportal27.u4a.se/P665900-webservices/service.svc?QueryEngineService/QueryEngineV200606DotNet" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -14,7 +14,7 @@
     </RootPath>
     <RootNamespace>DWH_4_UnitTest</RootNamespace>
     <AssemblyName>DWH_4_UnitTest</AssemblyName>
-    <ModelCollation>1033, CI</ModelCollation>
+    <ModelCollation>1035,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -25,6 +25,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <Trustworthy>True</Trustworthy>
     <RecursiveTriggersEnabled>True</RecursiveTriggersEnabled>
+    <DefaultCollation>Finnish_Swedish_CI_AS</DefaultCollation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -61,18 +62,16 @@
     <Folder Include="Properties" />
     <Folder Include="tSQLt\" />
     <Folder Include="tSQLt\Tables\" />
-    <Folder Include="Accelerator\" />
-    <Folder Include="Accelerator\Tables\" />
     <Folder Include="tSQLt\Views\" />
     <Folder Include="tSQLt\Functions\" />
-    <Folder Include="Accelerator\Functions\" />
     <Folder Include="tSQLt\Stored Procedures\" />
-    <Folder Include="AcceleratorTests\" />
-    <Folder Include="AcceleratorTests\Stored Procedures\" />
-    <Folder Include="Accelerator\Stored Procedures\" />
     <Folder Include="tSQLt\User Defined Types\" />
     <Folder Include="Assemblies\" />
     <Folder Include="Security\" />
+    <Folder Include="SalesML\" />
+    <Folder Include="SalesML\Stored Procedures\" />
+    <Folder Include="Finance\" />
+    <Folder Include="Finance\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tSQLt\Tables\Private_RenamedObjectLog.sql" />
@@ -86,8 +85,6 @@
     <Build Include="tSQLt\Tables\TestResult.sql" />
     <Build Include="tSQLt\Tables\Private_NewTestClassList.sql" />
     <Build Include="tSQLt\Tables\Private_NullCellTable.sql" />
-    <Build Include="Accelerator\Tables\Color.sql" />
-    <Build Include="Accelerator\Tables\Particle.sql" />
     <Build Include="tSQLt\Views\Tests.sql" />
     <Build Include="tSQLt\Views\TestClasses.sql" />
     <Build Include="tSQLt\Views\Private_SysTypes.sql" />
@@ -103,8 +100,6 @@
     <Build Include="tSQLt\Functions\Private_QuoteClassNameForNewTestClass.sql" />
     <Build Include="tSQLt\Functions\Private_SqlVariantFormatter.sql" />
     <Build Include="tSQLt\Functions\Private_GetCommaSeparatedColumnList.sql" />
-    <Build Include="Accelerator\Functions\GetStatusMessage.sql" />
-    <Build Include="Accelerator\Functions\IsExperimentReady.sql" />
     <Build Include="tSQLt\Functions\Private_GetConfiguration.sql" />
     <Build Include="tSQLt\Functions\Private_GetExternalAccessKeyBytes.sql" />
     <Build Include="tSQLt\Functions\Private_ResolveName.sql" />
@@ -130,7 +125,6 @@
     <Build Include="tSQLt\Functions\Private_ScriptIndex.sql" />
     <Build Include="tSQLt\Functions\Info.sql" />
     <Build Include="tSQLt\Functions\Private_SqlVersion.sql" />
-    <Build Include="Accelerator\Functions\GetParticlesInRectangle.sql" />
     <Build Include="tSQLt\Stored Procedures\SuppressOutput.sql" />
     <Build Include="tSQLt\Stored Procedures\CaptureOutput.sql" />
     <Build Include="tSQLt\Stored Procedures\NewConnection.sql" />
@@ -225,25 +219,42 @@
     <Build Include="tSQLt\Stored Procedures\ExpectException.sql" />
     <Build Include="tSQLt\Stored Procedures\RunTestClass.sql" />
     <Build Include="tSQLt\Stored Procedures\NullTestResultFormatter.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\Test tSQLt.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test foreign key is not violated if Particle color is in Color table.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test foreign key violated if Particle color is not in Color table.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test status message includes the number of particles.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test email is not sent if we detected something other than higgs-boson.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test email is sent if we detected a higgs-boson.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test a particle is included only if it fits inside the boundaries of the rectangle.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test a particle within the rectangle is returned with an Id, Point Location and Value.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test a particle within the rectangle is returned.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test no particles are in a rectangle when there are no particles in the table.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test we are not ready for experimentation if there is only 1 particle.sql" />
-    <Build Include="AcceleratorTests\Stored Procedures\test ready for experimentation if 2 particles.sql" />
-    <Build Include="Accelerator\Stored Procedures\AlertParticleDiscovered.sql" />
-    <Build Include="Accelerator\Stored Procedures\SendHiggsBosonDiscoveryEmail.sql" />
     <Build Include="tSQLt\User Defined Types\Private.sql" />
     <Build Include="tSQLt\User Defined Types\AssertStringTable.sql" />
     <Build Include="Security\tSQLt.sql" />
     <Build Include="Security\AcceleratorTests.sql" />
     <Build Include="Security\Accelerator.sql" />
+    <Build Include="SalesML\Stored Procedures\test that all rows in f_LoanApplicationMetrics has a connection to FinanceSegment_key.sql" />
+    <Build Include="SalesML\Stored Procedures\test that historical Number of loans stay persistent both in SE and NO.sql" />
+    <Build Include="SalesML\Stored Procedures\test that historical PayoutAmount stay persistent both in SE and NO.sql" />
+    <Build Include="Security\SalesML.sql" />
+    <Build Include="SalesML\Stored Procedures\test that no errors in the SSIS ETL Log.sql" />
+    <Build Include="Finance\Stored Procedures\test that no errors in the SSIS ETL Log.sql" />
+    <Build Include="Security\Finance.sql" />
+    <Build Include="SalesML\Stored Procedures\test if budget numbers are missing for SalesTicket.sql" />
+    <Build Include="Finance\Stored Procedures\test compare GL table in UAT with PROD.sql" />
+    <Build Include="Finance\Stored Procedures\Test that historical Local Currency Amount in General Ledger stay persistent.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Vendor stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Segment stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per ReportStructureItem stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Project stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Product stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per LegalEntity stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Counterparty stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per CostCenter stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Analysis stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per AllocationPrinciple stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that Local Currency Amount in General Ledger per Account stay persistent after new changes.sql" />
+    <Build Include="Finance\Stored Procedures\Test that FTE numbers have been booked last month.sql" />
+    <Build Include="SalesML\Stored Procedures\test payout has not been double counted per application.sql" />
+    <Build Include="SalesML\Stored Procedures\test decline has not been double counted per application.sql" />
+    <Build Include="Finance\Stored Procedures\Test that the daily expected file has arrived.sql" />
+    <Build Include="Finance\Stored Procedures\Test GLAccountCode and GLAccountName are the same between LegalEntity.sql" />
+    <Build Include="Finance\Stored Procedures\Test CostCenterCode and CostCenterName are the same between LegalEntity.sql" />
+    <Build Include="SalesML\Stored Procedures\test that all applications has a Customer.sql" />
+    <Build Include="SalesML\Stored Procedures\test that all applications has at least one assigned employee.sql" />
+    <Build Include="SalesML\Stored Procedures\test no of cases stay persistant per campaign code.sql" />
+    <Build Include="SalesML\Stored Procedures\test only one active milestone per application is allowed.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assemblies\tSQLtCLR.dll" />
@@ -268,5 +279,8 @@
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Script.PreDeployment1.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

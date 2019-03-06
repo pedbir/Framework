@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="JqRrP7RYO7wl71A5VZidA7+ve30=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="LyKd1sIWf8HOEDHmAVfoTtiK6ng=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="QueryEngineV200606DotNetSoap1">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="QueryEngineV200606DotNetSoap1" contract="TSWS.QueryEngineV200606DotNetSoap" bindingType="basicHttpBinding" address="http://webi57-1.esv_agresso.se/P665900-agresso-webservices/service.svc" bindingConfiguration="QueryEngineV200606DotNetSoap1">
+    <endpoint name="QueryEngineV200606DotNetSoap1" contract="TSWS.QueryEngineV200606DotNetSoap" bindingType="basicHttpBinding" address="http://pw-ubwm7-01.esv_agresso.se/P665900-webservices/service.svc" bindingConfiguration="QueryEngineV200606DotNetSoap1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://webi57-1.esv_agresso.se/P665900-agresso-webservices/service.svc</serializedValue>
+          <serializedValue>http://pw-ubwm7-01.esv_agresso.se/P665900-webservices/service.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

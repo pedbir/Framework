@@ -13,6 +13,7 @@ SET NUMERIC_ROUNDABORT OFF;
 
 
 GO
+:setvar DWH_2_Norm "DWH_2_Norm"
 :setvar DatabaseName "DWH_1_Raw"
 :setvar DefaultFilePrefix "DWH_1_Raw"
 :setvar DefaultDataPath "C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\DATA\"
@@ -50,107 +51,63 @@ GO
  Example:      :setvar TableName MyTable							
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
+
+CREATE TABLE #temp(sqlStatement nvarchar(max), rowNo int)
+INSERT INTO #temp
+SELECT sqlStatement = 'TRUNCATE TABLE ' + t.TABLE_CATALOG + '.[' + t.TABLE_SCHEMA + '].[' + t.TABLE_NAME + ']'
+       , rowNo = ROW_NUMBER() OVER (ORDER BY t.TABLE_NAME)
+FROM   INFORMATION_SCHEMA.TABLES t
+WHERE t.TABLE_TYPE = 'BASE TABLE' AND (t.TABLE_SCHEMA LIKE 'Bams%' OR t.TABLE_NAME = 'rt_DimRelationer_01')
+
+DECLARE @LastRowNo int = 1, @sqlStatement NVARCHAR(max)
+
+WHILE (@LastRowNo IS NOT NULL)
+BEGIN 
+	
+	SET @sqlStatement = (SELECT TOP 1 t.sqlStatement FROM #temp t WHERE t.rowNo = @LastRowNo)
+
+	PRINT @sqlStatement
+	
+	EXEC (@sqlStatement)
+
+	set @LastRowNo= (select top 1 rowNo from #temp where rowNo > @LastRowNo order by rowNo)
+END
+
+DROP TABLE #temp
+
 */
 
---TRUNCATE TABLE [Manual_RawTyped].[rt_ReportStructure_01]
+
+IF HOST_NAME() = 'dwbuildsrv01'
+BEGIN 
+IF (EXISTS (SELECT * FROM MDS.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MDM' AND  TABLE_NAME = 'SegmentLeaf'))
+BEGIN    
+	DROP TABLE MDS.mdm.SegmentLeaf 
+END
+
+CREATE TABLE #temptable ( [ID] int, [MUID] uniqueidentifier, [VersionName] nvarchar(50), [VersionNumber] int, [Version_ID] int, [VersionFlag] nvarchar(50), [Name] nvarchar(250), [Code] nvarchar(250), [ChangeTrackingMask] int, [SourceSystem_Code] nvarchar(250), [SourceSystem_Name] nvarchar(250), [SourceSystem_ID] int, [CategoryCode] nvarchar(100), [SegmentGolden_Code] nvarchar(250), [SegmentGolden_Name] nvarchar(250), [SegmentGolden_ID] int, [Category] nvarchar(100), [EnterDateTime] datetime2(3), [EnterUserName] nvarchar(100), [EnterVersionNumber] int, [LastChgDateTime] datetime2(3), [LastChgUserName] nvarchar(100), [LastChgVersionNumber] int, [ValidationStatus] nvarchar(250), [State] nvarchar(250) )
+SELECT * 
+INTO MDS.mdm.SegmentLeaf 
+FROM #temptable 
+
+DROP TABLE #temptable 
+
+
+IF (EXISTS (SELECT * FROM MDS.INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'MDM' AND  TABLE_NAME = 'SegmentGolden'))
+BEGIN    
+	DROP TABLE MDS.mdm.SegmentGolden 
+END
+
+CREATE TABLE #temptable1 ( [ID] int, [MUID] uniqueidentifier, [VersionName] nvarchar(50), [VersionNumber] int, [Version_ID] int, [VersionFlag] nvarchar(50), [Name] nvarchar(250), [Code] nvarchar(250), [ChangeTrackingMask] int, [CategoryCode] nvarchar(100), [Category] nvarchar(100), [EnterDateTime] datetime2(3), [EnterUserName] nvarchar(100), [EnterVersionNumber] int, [LastChgDateTime] datetime2(3), [LastChgUserName] nvarchar(100), [LastChgVersionNumber] int, [ValidationStatus] nvarchar(250), [State] nvarchar(250) )
+SELECT * 
+INTO MDS.mdm.SegmentGolden 
+FROM #temptable1
+
+DROP TABLE #temptable1 
+END
 
 GO
 
-GO
-/*
-The column [Manual_RawTyped].[rt_Package_01].[No] is being dropped, data loss could occur.
-
-The type for column PackageID in table [Manual_RawTyped].[rt_Package_01] is currently  INT NOT NULL but is being changed to  SMALLINT NULL. Data loss could occur.
-*/
-
-IF EXISTS (select top 1 1 from [Manual_RawTyped].[rt_Package_01])
-    RAISERROR (N'Rows were detected. The schema update is terminating because data loss might occur.', 16, 127) WITH NOWAIT
-
-GO
-PRINT N'Dropping [Manual_RawTyped].[rt_Package_01].[NCIDX_SysFileName_ManualPackage_01]...';
-
-
-GO
-DROP INDEX [NCIDX_SysFileName_ManualPackage_01]
-    ON [Manual_RawTyped].[rt_Package_01];
-
-
-GO
-PRINT N'Dropping [Manual_RawTyped].[rt_Package_01].[NCIDX_SysModifiedUTC_ManualPackage_01]...';
-
-
-GO
-DROP INDEX [NCIDX_SysModifiedUTC_ManualPackage_01]
-    ON [Manual_RawTyped].[rt_Package_01];
-
-
-GO
-PRINT N'Starting rebuilding table [Manual_RawTyped].[rt_Package_01]...';
-
-
-GO
-BEGIN TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-SET XACT_ABORT ON;
-
-CREATE TABLE [Manual_RawTyped].[tmp_ms_xx_rt_Package_01] (
-    [SysFileName]              NVARCHAR (250) NOT NULL,
-    [SysDatetimeInsertedUTC]   DATETIME2 (0)  NOT NULL,
-    [SysDatetimeUpdatedUTC]    DATETIME2 (0)  NULL,
-    [SysDatetimeDeletedUTC]    DATETIME2 (0)  NULL,
-    [SysSrcGenerationDateTime] DATETIME2 (0)  NULL,
-    [SysModifiedUTC]           DATETIME2 (0)  NOT NULL,
-    [SysExecutionLog_key]      INT            NOT NULL,
-    [PackageID]                SMALLINT       NULL,
-    [PackageGUID]              VARCHAR (36)   NULL,
-    [PackageName]              VARCHAR (49)   NULL,
-    [Amount]                   MONEY          NULL
-);
-
-IF EXISTS (SELECT TOP 1 1 
-           FROM   [Manual_RawTyped].[rt_Package_01])
-    BEGIN
-        INSERT INTO [Manual_RawTyped].[tmp_ms_xx_rt_Package_01] ([SysFileName], [SysDatetimeInsertedUTC], [SysDatetimeUpdatedUTC], [SysDatetimeDeletedUTC], [SysSrcGenerationDateTime], [SysModifiedUTC], [SysExecutionLog_key], [PackageID], [PackageGUID], [PackageName], [Amount])
-        SELECT [SysFileName],
-               [SysDatetimeInsertedUTC],
-               [SysDatetimeUpdatedUTC],
-               [SysDatetimeDeletedUTC],
-               [SysSrcGenerationDateTime],
-               [SysModifiedUTC],
-               [SysExecutionLog_key],
-               [PackageID],
-               [PackageGUID],
-               [PackageName],
-               [Amount]
-        FROM   [Manual_RawTyped].[rt_Package_01];
-    END
-
-DROP TABLE [Manual_RawTyped].[rt_Package_01];
-
-EXECUTE sp_rename N'[Manual_RawTyped].[tmp_ms_xx_rt_Package_01]', N'rt_Package_01';
-
-COMMIT TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
-
-
-GO
-PRINT N'Creating [Manual_RawTyped].[rt_Package_01].[IX_SysFileName]...';
-
-
-GO
-CREATE NONCLUSTERED INDEX [IX_SysFileName]
-    ON [Manual_RawTyped].[rt_Package_01]([SysFileName] ASC);
-
-
-GO
-PRINT N'Altering [Manual_RawTyped].[vrt_Package_01]...';
-
-
-GO
-ALTER VIEW [Manual_RawTyped].[vrt_Package_01]ASSELECT * FROM [Manual_RawTyped].[rt_Package_01]
 GO
 /*
 Post-Deployment Script Template							
@@ -163,6 +120,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+
+
 GO
 
 GO

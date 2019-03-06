@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AgressoAPI.TSWS;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace AgressoAPI
 {
@@ -25,19 +26,26 @@ namespace AgressoAPI
         {
             try
             {
+                /*
+                 arg0 = destination file path
+                 arg1 = booked period
+                 arg2 = lastUpdate
+                 */
+                Program p = new Program(args[0]);
+                DateTime fromDate = DateTime.Now.AddMonths(-int.Parse(args[1])).Date;
+                DateTime? lastUpdate = null;
 
-                string strRegEx = "(\\d{14})";
-                
-                Regex r = new Regex(strRegEx);
-                Match m = r.Match("svc_huvudbok_01_201708_20180713165219.csv");
-                DateTime dt = DateTime.ParseExact(m.Value, "yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture);
-                
-                //Program p = new Program(args[0]);DateTime fromDate = DateTime.Now.AddMonths(-int.Parse(args[1]));
-                //string[] dateFormat = new string[] { "yyyy-MM-dd HH:mm:ss.fff", "yyyy-MM-dd"};
-                //DateTime lastUpdate = DateTime.ParseExact(args[2], dateFormat, System.lobalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None);                
-                //p.RunApi(null, null, "svc_dimensioner");
-                //p.RunApi(fromDate, lastUpdate, "svc_huvudbok");
+                if (args.Length > 2) lastUpdate = DateTime.Now.AddDays(-int.Parse(args[2])).Date;
 
+                p.RunMeasureApi("svc_huvudbok", fromDate, lastUpdate);
+                p.RunDimensionApi("svc_dimensioner", new string[] { "C1", "N11", "N12", "GN", "XX01", "A11", "B0", "A11", "GN" }, new string[] { }, lastUpdate, "svc_dimensioner_costcenter"); // CostCenter                                                    
+                p.RunDimensionApi("svc_dimrelationer", new string[] { }, new string[] { "KST", "LEVNR", "SEGDET" }, lastUpdate);
+                p.RunDimensionApi("svc_dimensioner", new string[] { "RA11", "RA12", "RA13", "RA14", "RA15", "RA16", "RA17" }, new string[] { }, lastUpdate, "svc_dimensioner_reportstructure"); //ReportStructure
+                p.RunDimensionApi("svc_kontoplan_v1", new string[] { }, new string[] { }, lastUpdate);
+                p.RunDimensionApi("svc_dimensioner", new string[] { "F0", "N6", "ZZPR", "ZZSE", "A3", "A4", "A5", "ZZSE", "ZZSF" }, new string[] { }, lastUpdate, "svc_dimensioner_miscellaneous"); //Miscellaneous                
+                p.RunDimensionApi("svc_rapportstruktur", new string[] { }, new string[] { }, lastUpdate);
+                p.RunDimensionApi("svc_dimensioner", new string[] { "RS10", "RS11", "RS12"}, new string[] { }, lastUpdate, "svc_dimensioner_konto"); //ReportStructure
+                p.RunDimensionApi("svc_dimrelationer", new string[] { }, new string[] { "KONTO", "RAPSEG1", "RAPSEG2" }, lastUpdate, "svc_dimrelationer_konto");
             }
             catch (Exception e)
             {
@@ -46,27 +54,45 @@ namespace AgressoAPI
                 Console.Write(message);
                 Environment.Exit(1);
             }
-            
+
         }
 
-        private void RunApi(DateTime? fromDate, DateTime? lastUpdate, string templateFullDescription)
+        private void RunMeasureApi(string templateFullDescription, DateTime? fromDate, DateTime? lastUpdate)
         {
-            DateTime toDate = DateTime.Now;                        
+            DateTime toDate = DateTime.Now;
             foreach (DateTime i in GetAllMonths(toDate, fromDate ?? toDate))
             {
                 AgressoQueryParameterList agressoQueryParameterList = new AgressoQueryParameterList(templateFullDescription);
+                if (fromDate.HasValue) agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "period", ParameterType = "=", ParameterFromValue = i.ToString("yyyyMM") });
+                if (lastUpdate.HasValue) agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "last_update", ParameterType = ">", ParameterFromValue = (lastUpdate ?? DateTime.MinValue).ToString("MMddyyyy") }); // MMddyyyy               
 
-                if(fromDate.HasValue)
-                    agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "period", ParameterType = "=", ParameterFromValue = i.ToString("yyyyMM") });
-                if(lastUpdate.HasValue)
-                    agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "last_update", ParameterType = ">", ParameterFromValue = (lastUpdate ?? DateTime.MinValue).ToString("MMddyyyy") }); // MMddyyyy               
-                
-                AgressoQuery aq = new AgressoQuery(agressoQueryParameterList, _credentials);
+                AgressoQuery aq = new AgressoQuery(agressoQueryParameterList, _credentials, "");
                 aq.RootDirectory = _rootDirectory;
                 aq.ExportAgressoQueryToCsv();
             }
 
         }
+
+        private void RunDimensionApi(string templateFullDescription, string[] attributeIdList, string[] attributeNameList, DateTime? lastUpdate)
+        {
+            RunDimensionApi(templateFullDescription, attributeIdList, attributeNameList, lastUpdate, "");
+        }
+
+        private void RunDimensionApi(string templateFullDescription, string[] attributeIdList, string[] attributeNameList, DateTime? lastUpdate, string outputFileName)
+        {
+            DateTime toDate = DateTime.Now;
+            AgressoQueryParameterList agressoQueryParameterList = new AgressoQueryParameterList(templateFullDescription);
+            if (lastUpdate.HasValue) agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "last_update", ParameterType = ">", ParameterFromValue = (lastUpdate ?? DateTime.MinValue).ToString("MMddyyyy") }); // MMddyyyy               
+            if (attributeIdList.Length > 0) agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "attribute_id", ParameterType = "()", ParameterFromValue = string.Join(",", attributeIdList) });
+            if (attributeNameList.Length > 0) agressoQueryParameterList.AddAgressoQueryParameter(new AgressoQueryParameter { ParameterName = "att_name", ParameterType = "()", ParameterFromValue = string.Join(",", attributeNameList) });
+
+            AgressoQuery aq = new AgressoQuery(agressoQueryParameterList, _credentials, outputFileName);
+            aq.RootDirectory = _rootDirectory;
+            aq.ExportAgressoQueryToCsv();
+
+        }
+
+     
 
 
 
@@ -75,8 +101,8 @@ namespace AgressoAPI
         private WSCredentials GetUserCredentials()
         {
             WSCredentials cred = new WSCredentials();
-            cred.Username = "";
-            cred.Password = "";
+            cred.Username = "WEBSERVICE";
+            cred.Password = "Webservice2018!";
             cred.Client = "BFAB";
             return cred;
         }

@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "DW_Monitoring", "DW_Monitoring\DW_Monitoring.rptproj", "{1F168343-67D5-418A-A1C3-D6980587D3A6}"
 EndProject
+Project("{F14B399A-7131-4C87-9E4B-1186C45EF12D}") = "Finance", "Finance\Finance.rptproj", "{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -34,6 +36,24 @@ Global
 		{1F168343-67D5-418A-A1C3-D6980587D3A6}.UAT|Default.ActiveCfg = UAT
 		{1F168343-67D5-418A-A1C3-D6980587D3A6}.UAT|Default.Build.0 = UAT
 		{1F168343-67D5-418A-A1C3-D6980587D3A6}.UAT|Default.Deploy.0 = UAT
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Debug|Default.ActiveCfg = Debug
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Debug|Default.Build.0 = Debug
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Debug|Default.Deploy.0 = Debug
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.DebugLocal|Default.ActiveCfg = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.DebugLocal|Default.Build.0 = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Development|Default.ActiveCfg = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Development|Default.Build.0 = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Local|Default.ActiveCfg = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Local|Default.Build.0 = DebugLocal
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.PROD|Default.ActiveCfg = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.PROD|Default.Build.0 = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.PROD|Default.Deploy.0 = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Release|Default.ActiveCfg = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Release|Default.Build.0 = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.Release|Default.Deploy.0 = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.UAT|Default.ActiveCfg = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.UAT|Default.Build.0 = Release
+		{26C7B636-D1CF-4C0B-A317-DD6B3CE6EAA6}.UAT|Default.Deploy.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
